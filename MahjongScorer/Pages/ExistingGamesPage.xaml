@@ -1,0 +1,114 @@
+﻿<Page
+    x:Class="MahjongScorer.Pages.ExistingGamesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MahjongScorer.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource MahjongBackgroundBrush}">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Width="400">
+
+                <StackPanel>
+                    <TextBlock Text="GAMES IN PROGRESS" Style="{ThemeResource ScoresViewHeaderStyle}" />
+                    <Grid>
+                        <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
+                        <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                            <BitmapIcon.RenderTransform>
+                                <ScaleTransform ScaleX="-1"/>
+                            </BitmapIcon.RenderTransform>
+                        </BitmapIcon>
+                    </Grid>
+
+                    <ListView x:Name="gamesInProgressListView" Margin="0,15" SelectionChanged="GamesInProgressListView_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="0,5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text=" - started on" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding DateCreated}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Round:" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="Dealer:" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding CurrentDealerName}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <StackPanel x:Name="gamesInProgressButtons" Visibility="Collapsed" Orientation="Horizontal">
+                        <Button x:Name="loadGameInProgressButton" Click="LoadGameButton_Click" Content="Load" Margin="0,0,15,0" />
+                        <Button x:Name="deleteGameInProgressButton" Click="DeleteGameButton_Click" Content="Delete" />
+                    </StackPanel>
+                </StackPanel>
+
+
+                <StackPanel>
+                    <TextBlock Text="COMPLETED GAMES" Style="{ThemeResource ScoresViewHeaderStyle}" />
+                    <Grid>
+                        <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
+                        <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                            <BitmapIcon.RenderTransform>
+                                <ScaleTransform ScaleX="-1"/>
+                            </BitmapIcon.RenderTransform>
+                        </BitmapIcon>
+                    </Grid>
+
+                    <ListView x:Name="gamesCompletedListView" Margin="0,15" SelectionChanged="GamesCompletedListView_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="0,5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Game Winner:" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding WinnerName}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="Total Rounds" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongHeaderBrush}" />                                      
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text=" - started on" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding DateCreated}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <StackPanel x:Name="gamesCompletedButtons" Visibility="Collapsed" Orientation="Horizontal">
+                        <Button x:Name="loadGameCompletedButton" Click="LoadGameButton_Click"  Content="Load" Margin="0,0,15,0" />
+                        <Button x:Name="deleteGameCompletedButton" Click="DeleteGameButton_Click"  Content="Delete" />
+                    </StackPanel>
+                </StackPanel>
+
+                <Button x:Name="backButton" Content="Back" Margin="0,20" Click="BackButton_Click"/>
+
+            </StackPanel>
+
+        </ScrollViewer>
+    </Grid>
+</Page>

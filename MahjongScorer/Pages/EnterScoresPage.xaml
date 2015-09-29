@@ -1,0 +1,203 @@
+﻿<Page
+    x:Class="MahjongScorer.Pages.EnterScoresPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MahjongScorer.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,15,0,0" />
+            <Setter Property="Width" Value="400" />
+        </Style>
+    </Page.Resources>
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Background="{ThemeResource MahjongBackgroundBrush}">
+
+        <ScrollViewer x:Name="winConditionsScrollViewer" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,20,0,20">
+
+                <StackPanel x:Name="basicScoringStackPanel"  >
+
+                    <Grid Width="400" Margin="0,15,0,0" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Dealer:" Margin="0,0,5,0"/>
+                            <TextBlock x:Name="dealerTextBlock" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Grid.Row="1">
+                            <TextBlock Text="Prevailing Wind:" Margin="0,0,5,0"/>
+                            <TextBlock x:Name="prevailingWindTextBlock" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                        </StackPanel>
+                        
+                        
+                    </Grid>
+
+                    <Grid Width="400" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="BASICS" Style="{ThemeResource ScoresViewHeaderStyle}" />
+                            <Grid>
+                                <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
+                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                                    <BitmapIcon.RenderTransform>
+                                        <ScaleTransform ScaleX="-1"/>
+                                    </BitmapIcon.RenderTransform>
+                                </BitmapIcon>
+
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+
+                    <ComboBox x:Name="dealerComboBox"
+                              Visibility="Collapsed"
+                              SelectionChanged="DealerComboBox_SelectionChanged"
+                              Header="Who dealt this round?" />
+
+                    <ComboBox x:Name="winnerComboBox" 
+                              Visibility="Collapsed"
+                              SelectionChanged="WinnerComboBox_SelectionChanged"
+                              Header="Who won this round?" />
+
+                    <ComboBox x:Name="drawnFromComboBox"
+                              Visibility="Collapsed"
+                              SelectionChanged="DrawnFromComboBox_SelectionChanged"
+                              Header="Who was the winning tile drawn from?" />
+                </StackPanel>
+
+                <StackPanel x:Name="setsScoringStackPanel" 
+                            Visibility="Collapsed" >
+
+                    <Grid Width="400" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="SETS" Style="{ThemeResource ScoresViewHeaderStyle}" />
+                            <Grid>
+                                <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
+                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                                    <BitmapIcon.RenderTransform>
+                                        <ScaleTransform ScaleX="-1"/>
+                                    </BitmapIcon.RenderTransform>
+                                </BitmapIcon>
+
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+
+                    <ComboBox x:Name="pungCountComboBox"
+                          SelectionChanged="pungCountComboBox_SelectionChanged"
+                          Header="How many pungs (sets of three)?">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Index}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Grid x:Name="pungCountGrid" Visibility="Collapsed" Width="400" Margin="25,10,0,0" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="185" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <ComboBox x:Name="kongCountComboBox"
+                          SelectionChanged="kongCountComboBox_SelectionChanged"
+                          Visibility="Collapsed"
+                          Header=" How many kongs (sets of four)?">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Index}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Grid x:Name="kongCountGrid" Visibility="Collapsed" Width="400" Margin="25,10,0,0" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="185" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                </StackPanel>
+
+                <StackPanel x:Name="pointsDoublesStackPanel" 
+                            Visibility="Collapsed">
+
+                    <Grid Width="400" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="EXTRA POINTS AND DOUBLES" Style="{ThemeResource ScoresViewHeaderStyle}" />
+                            <Grid>
+                                <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
+                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                                    <BitmapIcon.RenderTransform>
+                                        <ScaleTransform ScaleX="-1"/>
+                                    </BitmapIcon.RenderTransform>
+                                </BitmapIcon>
+
+                            </Grid>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <ListView x:Name="winConditionsListView" 
+                              Margin="0,20,0,0" 
+                              IsMultiSelectCheckBoxEnabled="False"
+                              Width="400" 
+                              SelectionMode="Multiple" 
+                              IsItemClickEnabled="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock Text="{Binding Description}" 
+                                                   FontSize="12" 
+                                                   Foreground="{ThemeResource MahjongGrayBrush}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </StackPanel>
+
+                <Button x:Name="doneScoringButton" HorizontalAlignment="Center" 
+                        Visibility="Collapsed"
+                        Margin="0,10"
+                        Click="DoneScoringButton_Click" 
+                        Content="Done!" />
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+</Page>
