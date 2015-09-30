@@ -16,13 +16,7 @@
                        FontSize="26" 
                        HorizontalAlignment="Center"
                        Foreground="{ThemeResource MahjongHeaderBrush}" 
-                       Margin="5" />
-            <TextBlock Text="v0.3 (Alpha)" 
-                       FontFamily="{ThemeResource ContentControlThemeFontFamily}" 
-                       FontSize="14" 
-                       HorizontalAlignment="Center" 
-                       Foreground="LightGray" 
-                       Margin="0,0,0,35" />
+                       Margin="35" />
             
             <Button x:Name="newGameButton" 
                     Click="NewGameButton_Click" 

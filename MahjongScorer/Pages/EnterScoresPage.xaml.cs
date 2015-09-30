@@ -383,7 +383,12 @@ namespace MahjongScorer.Pages
             // ENFORCE LIMIT
             // Mahjong hands have a max or "limit" value. Enforce that here
             if (_currentBaseScore > ScoreValues.MAX_ROUND_SCORE)
+            {
                 _currentBaseScore = ScoreValues.MAX_ROUND_SCORE;
+                game.CurrentRoundSummary.AppendLine().AppendLine("This is a limit hand--meaning the winner's score was so high, it maxes out at " + 
+                    ScoreValues.MAX_ROUND_SCORE + ".");
+            }
+                
 
             // SET WINNER. DEALER, AND PLAYER GONE OUT FROM
             for (var i = 0; i < game.Players.Count; i++)

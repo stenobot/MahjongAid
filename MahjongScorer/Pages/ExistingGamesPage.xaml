@@ -77,10 +77,10 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="0,5">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Game Winner:" Margin="0,0,5,0" />
+                                        <TextBlock Text="Winner:" Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding WinnerName}" Foreground="{ThemeResource MahjongHeaderBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
-                                        <TextBlock Text="Total Rounds" Margin="0,0,5,0" />
+                                        <TextBlock Text="Total Rounds:" Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongHeaderBrush}" />                                      
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">

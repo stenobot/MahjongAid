@@ -185,6 +185,9 @@ namespace MahjongScorer.Pages
                 // so, calculating 16 rounds plus times dealer won to know when the game is over
                 if (game.CurrentRound >= (16 + game.TimesDealerWon))
                 {
+                    // the game is over
+                    game.InProgress = false;
+
                     // don't show the score next round button
                     scoreRoundButton.Visibility = Visibility.Collapsed;
 

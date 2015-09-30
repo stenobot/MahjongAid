@@ -146,6 +146,7 @@
                                TextWrapping="WrapWholeWords" />
                     <Button x:Name="roundSummariesButton"
                             Grid.Row="3"
+                            Margin="0,10"
                             Click="RoundSummariesButton_Click"
                             Content="All round summaries" />
                 </Grid>
