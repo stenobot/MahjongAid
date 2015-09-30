@@ -761,25 +761,26 @@ namespace MahjongScorer.Pages
                 // shift Winds and dealer counterclockwise around the table
                 foreach (Player player in game.Players)
                 {
-                    // if winds/dealer are shifting, we know that South becomes East/dealer
-                    if (player.CurrentWind != Wind.South)
+                    switch (player.CurrentWind)
                     {
-                        // we know that North becomes West, while East and West increment
-                        // TODO there must be a better way to do this >:-S... actually this is just totally broken
-                        if (player.CurrentWind != Wind.North)
-                            player.CurrentWind++;
-                        else
+                        case Wind.East:
+                            player.CurrentWind = Wind.South;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.South:
                             player.CurrentWind = Wind.West;
-
-                        player.IsDealer = false;
-                    }
-                    else
-                    {
-                        player.CurrentWind = Wind.East;
-                        player.IsDealer = true;
-
-                        // set name for save data display
-                        game.CurrentDealerName = player.Name;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.West:
+                            player.CurrentWind = Wind.North;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.North:
+                            player.CurrentWind = Wind.East;
+                            player.IsDealer = true;
+                            // set name for save data display
+                            game.CurrentDealerName = player.Name;
+                            break;
                     }
                 }
 

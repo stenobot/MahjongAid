@@ -175,67 +175,57 @@ namespace MahjongScorer.Pages
 
             SetPlayerNames();
 
-            await SaveGameAsync();
-
-            // if we haven't completed a round, we know it's a brand new game 
-            // hide the summary; otherwise show them
+            // if we haven't completed a round, we know it's a brand new game, so hide the summary
             if (game.CurrentRound == 0)
                 roundSummaryGrid.Visibility = Visibility.Collapsed;
             else
             {
+                // a game is over only after it goes around the table 4 times
+                // when the dealer wins, though, it doesn't advance
+                // so, calculating 16 rounds plus times dealer won to know when the game is over
+                if (game.CurrentRound >= (16 + game.TimesDealerWon))
+                {
+                    // don't show the score next round button
+                    scoreRoundButton.Visibility = Visibility.Collapsed;
+
+                    // show game over UI
+                    gameOverStackPanel.Visibility = Visibility.Visible;
+
+                    // calculate the winner
+                    foreach (Player player in game.Players)
+                    {
+                        if (player.TotalScore == Math.Max(Math.Max(game.Players[0].TotalScore, game.Players[1].TotalScore),
+                        Math.Max(game.Players[2].TotalScore, game.Players[3].TotalScore)))
+                        {
+                            // set winner property
+                            player.IsGameWinner = true;
+                            // set winner name (so we can show it in save data)
+                            game.WinnerName = player.Name;
+                            // set text in new UI declaring the winner
+                            gameOverTextBlock.Text = "The game is over. " + player.Name + " wins with a total score of " + player.TotalScore + "!";
+                        }
+                        else
+                            player.IsGameWinner = false;
+                    }
+                }
+                else
+                {
+                    // the game is still in progress, set the "Score next round" button tex
+                    scoreRoundButton.Content = "Score round " + (game.CurrentRound + 1);
+                }
+
+                // we don't show the round summary before the game has begun, but we do when it's in progress or over
                 roundSummaryGrid.Visibility = Visibility.Visible;
                 RenderRoundSummary(game.RoundSummaries[game.CurrentRound - 1]);
             }
 
-            // a game ends after it goes around the table 4 times
-            // when the dealer wins, though, it doesn't advance
-            // so, calculating 16 rounds plus times dealer won to know when the game is over
-            if (game.CurrentRound >= (16 + game.TimesDealerWon))
-            {
-                // don't show the score next round button
-                scoreRoundButton.Visibility = Visibility.Collapsed;
+            // save the game so it's state is set if the user leaves and reloads the save data later
+            await SaveGameAsync();
 
-                // show some text instead
-                gameOverStackPanel.Visibility = Visibility.Visible;
-                
-                // set the game winner by checking all players' total scores against each other
-                // and assigning the gameWinner
-                //Player gameWinner = new Player();
-                for (var i = 0; i < game.Players.Count; i++)
-                {
-                    game.Players[0].IsGameWinner = true;
-                    if (i == 0)
-                        continue;
-
-                    if (game.Players[i].TotalScore > game.Players[i - 1].TotalScore)
-                    {
-                        // set winner
-                        game.Players[i].IsGameWinner = true;
-
-                        // set winner name for completed games save data
-                        game.WinnerName = game.Players[i].Name;
-
-                        // set text declaring the winner
-                        gameOverTextBlock.Text = "The game is over. " + game.Players[i].Name + " wins with a total score of " + game.Players[i].TotalScore + "!";
-
-                        // lastly, we save the game data once more so it's permanently over
-                        await SaveGameAsync();
-                    }
-                }
-
-
-                // TODO we should show a start new game button, and a message telling them that the game is over
-            }
-            else
-            {
-                // set the "Score next round" button text
-                scoreRoundButton.Content = "Score round " + (game.CurrentRound + 1);
-            }
-
+            // show the scores
             RenderRoundScores();
 
             base.OnNavigatedTo(e);
-
         }
 
         /// <summary>
