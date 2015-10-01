@@ -38,18 +38,20 @@ namespace MahjongScorer.Pages
         {
             this.InitializeComponent();
 
-        //    NavigationCacheMode = NavigationCacheMode.Enabled;
+            //    NavigationCacheMode = NavigationCacheMode.Enabled;
 
-            // show system back button, handle back
+            // show the system back button
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
-            {
-                if (Frame.CanGoBack)
-                {
-                    Frame.GoBack();
-                    a.Handled = true;
-                }
-            };
+            //// show system back button, handle back
+            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            //SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
+            //{
+            //    if (Frame.CanGoBack)
+            //    {
+            //        Frame.GoBack();
+            //        a.Handled = true;
+            //    }
+            //};
         }
 
         /// <summary>

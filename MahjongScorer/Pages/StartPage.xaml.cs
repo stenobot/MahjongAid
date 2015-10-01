@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -154,6 +155,14 @@ namespace MahjongScorer.Pages
         private void learnToPlayButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(LearnToPlayPage));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // This page is always at the top of our in-app back stack.
+            // Once it is reached there is no further back so we can always disable the title bar back UI when navigated here.
+            // If you want to you can always to the Frame.CanGoBack check for all your pages and act accordingly.
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
     }
 }

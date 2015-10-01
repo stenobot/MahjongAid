@@ -9,11 +9,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot>
-            
-            <Pivot.LeftHeader>
-                <AppBarButton Icon="Back" Click="BackButton_Click" />
-            </Pivot.LeftHeader>
-            
+
             <PivotItem Header="Welcome to Mahjong!">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
@@ -390,10 +386,10 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
                         <TextBlock TextWrapping="WrapWholeWords">
-                            About 12 years ago, my soon-to-be wife's parents sized me up for the first time over a friendly game of Majhong. I've been hooked ever since. But after 12 years of playing, I wondered why more Americans don't play this great game. I decided that it might be because Mahjong is really, really hard to score. Learning to play is easy, but scoring a hand almost takes a different mindset altogether.
+                            About 12 years ago, I learned to play Majhong. I've been hooked ever since. But I've long wondered: Why don't more Americans play this great game? It's not so different from a game like Rummy, and you get to use cool tiles instead of boring old playing cards. There is one big difference between Mahjong and most American card games, though: It's really, really hard to score. Playing is easy, but scoring a hand can be very complicated, with lots of little caveats that change depending on where you're playing and who you're playing with.
                             <LineBreak />
                             <LineBreak />
-                            In addition to complicated scoring, Mahjong games tend to go on for a long time. One game goes on for many rounds. At my wife's family gatherings, we bring out a notebook with games dating back years, and try to find a match with whichever four people we happen to have together at that time.
+                            In addition to complicated scoring, Mahjong games tend to go on for a long time. One game goes on for many rounds. At family gatherings, we bring out a notebook with games dating back years, and try to find a match with whichever four people we happen to have together at that time.
                             <LineBreak />
                             <LineBreak />
                             I built this app to do two things: 1.) Calculate scores quickly and easily, and 2.) Keep track of ongoing games. 

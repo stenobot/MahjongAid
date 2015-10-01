@@ -74,17 +74,17 @@ namespace MahjongScorer.Pages
         {
             this.InitializeComponent();
 
-            
-            // show system back button, handle back
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
-            {
-                if (Frame.CanGoBack)
-                {
-                    Frame.GoBack();
-                    a.Handled = true;
-                }
-            };
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            //// show system back button, handle back
+            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            //SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
+            //{
+            //    if (Frame.CanGoBack)
+            //    {
+            //        Frame.GoBack();
+            //        a.Handled = true;
+            //    }
+            //};
         }
 
 

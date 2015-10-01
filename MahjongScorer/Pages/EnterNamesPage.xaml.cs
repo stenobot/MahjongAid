@@ -46,17 +46,18 @@ namespace MahjongScorer.Pages
         public EnterNamesPage()
         {
             this.InitializeComponent();
-
-            // show system back button, handle back
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
-            {
-                if (Frame.CanGoBack)
-                {
-                    Frame.GoBack();
-                    a.Handled = true;
-                }
-            };
+
+            //// show system back button, handle back
+            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            //SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
+            //{
+            //    if (Frame.CanGoBack)
+            //    {
+            //        Frame.GoBack();
+            //        a.Handled = true;
+            //    }
+            //};
 
         }
 
@@ -138,7 +139,7 @@ namespace MahjongScorer.Pages
 
         private void PlayerNameTextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
             {
-            // set each player's name
+            // set each player's name based on what was typed in the text box
             if (sender == PlayerOneNameTextBox)
                 _playerOne.Name = sender.Text.ToUpper();
             else if (sender == PlayerTwoNameTextBox)
@@ -146,6 +147,15 @@ namespace MahjongScorer.Pages
             else if (sender == PlayerThreeNameTextBox)
                 _playerThree.Name = sender.Text.ToUpper();
             else _playerFour.Name = sender.Text.ToUpper();
+
+            // don't show the start game button unless each textbox has at least one character
+            if ((PlayerOneNameTextBox.Text.Count<char>() > 0) &&
+                (PlayerTwoNameTextBox.Text.Count<char>() > 0) &&
+                (PlayerThreeNameTextBox.Text.Count<char>() > 0) &&
+                (PlayerFourNameTextBox.Text.Count<char>() > 0))
+                startGameButton.Visibility = Visibility.Visible;
+            else
+                startGameButton.Visibility = Visibility.Collapsed;
         }
 
 
