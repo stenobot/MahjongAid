@@ -104,7 +104,7 @@ namespace MahjongScorer.Pages
             else
                 game = GamesCompletedList[gamesCompletedListView.SelectedIndex];
 
-            Frame.Navigate(typeof(GameResultsPage), game);
+            Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
         }
 
 

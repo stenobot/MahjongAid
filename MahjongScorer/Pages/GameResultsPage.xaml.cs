@@ -38,20 +38,13 @@ namespace MahjongScorer.Pages
         {
             this.InitializeComponent();
 
-            //    NavigationCacheMode = NavigationCacheMode.Enabled;
+            // we cache this page, in case user comes Back from AllRoundSummaries page
+            NavigationCacheMode = NavigationCacheMode.Enabled;
 
             // show the system back button
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            //// show system back button, handle back
-            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            //SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
-            //{
-            //    if (Frame.CanGoBack)
-            //    {
-            //        Frame.GoBack();
-            //        a.Handled = true;
-            //    }
-            //};
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
+          
         }
 
         /// <summary>
@@ -134,7 +127,7 @@ namespace MahjongScorer.Pages
             // save the game, replacing the existing matching Game object unless it's a brand new game
             await SaveGameAsync();
 
-            Frame.Navigate(typeof(EnterScoresPage), game);
+            Frame.Navigate(typeof(EnterScoresPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
             // initialize the first 2 combo boxes (which are not dependent on one another)
             // the 3rd combo box will be initialized when the selection changes on the 2nd one
          //   InitializeComboBoxWithNames(DealerComboBoxStrings, dealerComboBox);
@@ -163,7 +156,6 @@ namespace MahjongScorer.Pages
             playerFourWindTextBlock.Text = "(" + game.Players[3].CurrentWind.ToString() + ")";
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -173,10 +165,29 @@ namespace MahjongScorer.Pages
             if (e.Parameter is Game)
             {
                 game = e.Parameter as Game;
-            }
+
+                // check whether game is in progress, or over, and change UI based on that
+                DetermineInProgressStatus();
+            }   
 
             SetPlayerNames();
 
+
+            if (e.NavigationMode != NavigationMode.Back)
+            {
+                // save the game so it's state is set if the user leaves and reloads the save data later
+                await SaveGameAsync();
+
+                // show the scores
+                RenderRoundScores();
+            }
+          
+
+            base.OnNavigatedTo(e);
+        }
+
+        private void DetermineInProgressStatus()
+        {
             // if we haven't completed a round, we know it's a brand new game, so hide the summary
             if (game.CurrentRound == 0)
                 roundSummaryGrid.Visibility = Visibility.Collapsed;
@@ -223,14 +234,6 @@ namespace MahjongScorer.Pages
                 roundSummaryGrid.Visibility = Visibility.Visible;
                 RenderRoundSummary(game.RoundSummaries[game.CurrentRound - 1]);
             }
-
-            // save the game so it's state is set if the user leaves and reloads the save data later
-            await SaveGameAsync();
-
-            // show the scores
-            RenderRoundScores();
-
-            base.OnNavigatedTo(e);
         }
 
         /// <summary>
@@ -288,7 +291,7 @@ namespace MahjongScorer.Pages
 
         private void RoundSummariesButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(RoundSummariesPage), game);
+            Frame.Navigate(typeof(RoundSummariesPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
         }
 
         private void StartNewGame_Click(object sender, RoutedEventArgs e)

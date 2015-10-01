@@ -74,17 +74,9 @@ namespace MahjongScorer.Pages
         {
             this.InitializeComponent();
 
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            //// show system back button, handle back
-            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            //SystemNavigationManager.GetForCurrentView().BackRequested += (s, a) =>
-            //{
-            //    if (Frame.CanGoBack)
-            //    {
-            //        Frame.GoBack();
-            //        a.Handled = true;
-            //    }
-            //};
+            // hiding the back button on this page
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
         }
 
 
@@ -743,17 +735,13 @@ namespace MahjongScorer.Pages
         }
 
 
-
-
         private void DoneScoringButton_Click(object sender, RoutedEventArgs e)
         {
             DetermineWinnerAndSetScores();
 
-            EndRound();
+            EndRound();          
 
-            
-
-            Frame.Navigate(typeof(GameResultsPage), game);
+            Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
         }
 
         private void EndRound()

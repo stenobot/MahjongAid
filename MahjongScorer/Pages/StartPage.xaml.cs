@@ -143,18 +143,18 @@ namespace MahjongScorer.Pages
             
 
             // pass game object to the next page
-            Frame.Navigate(typeof(EnterNamesPage), game);
+            Frame.Navigate(typeof(EnterNamesPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
         }
 
 
         private void PreviousGamesButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ExistingGamesPage), game);
+            Frame.Navigate(typeof(ExistingGamesPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
         }
 
         private void learnToPlayButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(LearnToPlayPage));
+            Frame.Navigate(typeof(LearnToPlayPage), new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

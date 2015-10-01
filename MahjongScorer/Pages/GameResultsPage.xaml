@@ -9,7 +9,11 @@
 
     <Page.Transitions>
         <TransitionCollection>
-            <NavigationThemeTransition />
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <EntranceNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
 
