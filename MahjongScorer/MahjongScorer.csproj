@@ -96,6 +96,45 @@
     <Content Include="Assets\divider-line-edge.png" />
     <Content Include="Assets\divider-line-middle.png" />
     <Content Include="Assets\dividerline.png" />
+    <Content Include="Assets\splash.scale-100.png" />
+    <Content Include="Assets\splash.scale-125.png" />
+    <Content Include="Assets\splash.scale-150.png" />
+    <Content Include="Assets\splash.scale-200.png" />
+    <Content Include="Assets\splash.scale-400.png" />
+    <Content Include="Assets\square150x150.scale-100.png" />
+    <Content Include="Assets\square150x150.scale-125.png" />
+    <Content Include="Assets\square150x150.scale-150.png" />
+    <Content Include="Assets\square150x150.scale-200.png" />
+    <Content Include="Assets\square150x150.scale-400.png" />
+    <Content Include="Assets\square310x310.scale-100.png" />
+    <Content Include="Assets\square310x310.scale-125.png" />
+    <Content Include="Assets\square310x310.scale-150.png" />
+    <Content Include="Assets\square310x310.scale-200.png" />
+    <Content Include="Assets\square310x310.scale-400.png" />
+    <Content Include="Assets\square44x44.scale-100.png" />
+    <Content Include="Assets\square44x44.scale-125.png" />
+    <Content Include="Assets\square44x44.scale-150.png" />
+    <Content Include="Assets\square44x44.scale-200.png" />
+    <Content Include="Assets\square44x44.scale-400.png" />
+    <Content Include="Assets\square44x44.targetsize-16_altform-unplated.png" />
+    <Content Include="Assets\square44x44.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\square44x44.targetsize-256_altform-unplated.png" />
+    <Content Include="Assets\square44x44.targetsize-48_altform-unplated.png" />
+    <Content Include="Assets\square71x71.scale-100.png" />
+    <Content Include="Assets\square71x71.scale-125.png" />
+    <Content Include="Assets\square71x71.scale-150.png" />
+    <Content Include="Assets\square71x71.scale-200.png" />
+    <Content Include="Assets\square71x71.scale-400.png" />
+    <Content Include="Assets\store.scale-100.png" />
+    <Content Include="Assets\store.scale-125.png" />
+    <Content Include="Assets\store.scale-150.png" />
+    <Content Include="Assets\store.scale-200.png" />
+    <Content Include="Assets\store.scale-400.png" />
+    <Content Include="Assets\wide310x150.scale-100.png" />
+    <Content Include="Assets\wide310x150.scale-125.png" />
+    <Content Include="Assets\wide310x150.scale-150.png" />
+    <Content Include="Assets\wide310x150.scale-200.png" />
+    <Content Include="Assets\wide310x150.scale-400.png" />
     <Content Include="Fonts\FONTSHUI.TTF" />
     <None Include="project.json" />
   </ItemGroup>
@@ -143,11 +182,6 @@
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
