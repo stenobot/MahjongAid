@@ -39,6 +39,7 @@
     <x:Double x:Key="TestFontSize">26</x:Double>
     <FontFamily x:Key="ShuiFont">/Fonts/FONTSHUI.TTF#FONT SHUI</FontFamily>
     <GridLength x:Key="ScoresColumnWidth">88</GridLength>
+    <GridLength x:Key="RoundSummariesTitleHeight">20</GridLength>
 
 
     <Style x:Name="ScoresViewHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">

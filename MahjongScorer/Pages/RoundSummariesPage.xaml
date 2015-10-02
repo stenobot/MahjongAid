@@ -17,12 +17,13 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+                  Margin="0,25" 
+                  VerticalScrollBarVisibility="Auto">
 
-        <Pivot x:Name="roundSummariesPivot">
-            <Pivot.LeftHeader>
-                <AppBarButton Icon="Back" Click="BackButton_Click" />
-            </Pivot.LeftHeader>
-        </Pivot>
-    </Grid>
+        <Grid x:Name="roundSummariesGrid" 
+              HorizontalAlignment="Center" 
+              Width="500" />
+        
+    </ScrollViewer>
 </Page>
