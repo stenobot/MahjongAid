@@ -115,8 +115,6 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Button x:Name="backButton" Content="Back" Margin="0,20" Click="BackButton_Click"/>
-
             </StackPanel>
 
         </ScrollViewer>

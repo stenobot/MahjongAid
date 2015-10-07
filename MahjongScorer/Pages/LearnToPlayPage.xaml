@@ -17,7 +17,7 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource MahjongBackgroundBrush}">
         <Pivot>
 
             <PivotItem Header="Welcome to Mahjong!">

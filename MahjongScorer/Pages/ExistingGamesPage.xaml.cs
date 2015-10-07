@@ -42,12 +42,6 @@ namespace MahjongScorer.Pages
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(StartPage));
-        }
-
-
 
         private async Task GetSavedGamesAsync()
         {

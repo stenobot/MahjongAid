@@ -17,7 +17,7 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+    <ScrollViewer Background="{ThemeResource MahjongBackgroundBrush}" 
                   Margin="0,25" 
                   VerticalScrollBarVisibility="Auto">
 

@@ -54,6 +54,7 @@ namespace MahjongScorer
 
             Frame rootFrame = Window.Current.Content as Frame;
 
+
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -82,6 +83,32 @@ namespace MahjongScorer
 
             // register global back event handler
             SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+
+
+            var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+
+            // set up our brushes
+            SolidColorBrush bkgColor = Current.Resources["MahjongBackgroundBrush"] as SolidColorBrush;
+            SolidColorBrush btnHoverColor = Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
+            SolidColorBrush btnPressedColor = Current.Resources["MahjongHeaderBrush"] as SolidColorBrush;
+
+
+            // override colors!
+            titleBar.BackgroundColor = bkgColor.Color;
+            titleBar.ForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonBackgroundColor = bkgColor.Color;
+            titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonHoverBackgroundColor = btnHoverColor.Color;
+            titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonPressedBackgroundColor = btnPressedColor.Color;
+            titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.White;
+            titleBar.InactiveBackgroundColor = bkgColor.Color;
+            titleBar.InactiveForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonInactiveBackgroundColor = bkgColor.Color;
+            titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.White;
+
+            // set the frame background to match our titlebar
+            rootFrame.Background = bkgColor;
 
             // Ensure the current window is active
             Window.Current.Activate();

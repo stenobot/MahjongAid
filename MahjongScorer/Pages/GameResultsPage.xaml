@@ -23,7 +23,7 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource MahjongBackgroundBrush}">
         <VisualStateManager.VisualStateGroups>
 
             <VisualStateGroup>
