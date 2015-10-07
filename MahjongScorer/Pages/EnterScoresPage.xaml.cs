@@ -50,7 +50,7 @@ namespace MahjongScorer.Pages
         private int _ineligableDrawnFromPlayerIndex;
 
         // holders for combo box lists
-        private List<string> DealerComboBoxStrings;
+        //private List<string> DealerComboBoxStrings;
         private List<string> WinComboBoxStrings;
         private List<string> DrawnComboBoxStrings;
 
@@ -82,21 +82,20 @@ namespace MahjongScorer.Pages
 
 
         /// <summary>
-        /// Initialize a normal combo box
-        /// takes a List of strings and a comboBox as parameters
+        /// Initialize the winner combo box
         /// </summary>
-        private void InitializeComboBoxWithNames(List<string> ComboBoxNames, ComboBox comboBox)
+        private void InitializeWinnerComboBox()
         {
-            ComboBoxNames = new List<string>();
+            WinComboBoxStrings = new List<string>();
 
             // populate combobox lists with names
             foreach (Player player in game.Players)
             {
-                ComboBoxNames.Add(player.Name);
+                WinComboBoxStrings.Add(player.Name);
             }
 
             // set the list as the Items Source for the combo box
-            comboBox.ItemsSource = ComboBoxNames;
+            winnerComboBox.ItemsSource = WinComboBoxStrings;
         }
 
 
@@ -250,6 +249,36 @@ namespace MahjongScorer.Pages
             }
         }
 
+        /// <summary>
+        /// Calculates scores for the different sets. We'll run this method twice: Once for Pungs, once for Kongs
+        /// </summary>
+        /// <param name="TerminalsHonorsSetCheckBoxes"></param>
+        /// <param name="ConcealedSetCheckBoxes"></param>
+        /// <param name="baseValue"></param>
+        private void CalculateSetScores(List<SetCheckBox> TerminalsHonorsSetCheckBoxes, List<SetCheckBox> ConcealedSetCheckBoxes, int baseValue)
+        {
+            foreach (SetCheckBox terminalsHonorsCheckBox in TerminalsHonorsSetCheckBoxes)
+            {
+                int currentValue;
+                // set the base value for this type of set
+                currentValue = baseValue;
+
+                // if it's terminal or honors, double it
+                if (terminalsHonorsCheckBox.IsChecked == true)
+                {
+                    currentValue *= 2;
+                    _terminalsHonorsPungsKongsCount++;
+                }
+
+                // if it's concealed, double it
+                if (ConcealedSetCheckBoxes[TerminalsHonorsSetCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
+                    currentValue *= 2;
+
+                // add the final value to the total round base score
+                _currentBaseScore += currentValue;
+            }
+        }
+
 
         /// <summary>
         /// A method that determines the winner, who dealt the winning tile (if anyone),
@@ -260,53 +289,19 @@ namespace MahjongScorer.Pages
             // create a StringBuilder instance to store the summary in
             game.CurrentRoundSummary = new StringBuilder();
 
-            // initialize the current round score to the base score
+            // set the current round score to the base score
             _currentBaseScore = ScoreValues.BASE_ROUND_SCORE;
 
             // PUNGS AND KONGS
+
+            // initialize the total pungs and kongs counter to zero
             _terminalsHonorsPungsKongsCount = 0;
-            foreach (SetCheckBox terminalsHonorsCheckbox in PungTerminalsHonorsCheckBoxes)
-            {
-                // create a temp int at the base score
-                _currentPungValue = ScoreValues.BASE_PUNG_VALUE;
 
-                // if it's terminal or honors, double it
-                if (terminalsHonorsCheckbox.IsChecked == true)
-                {
-                    _currentPungValue *= 2;
-                    _terminalsHonorsPungsKongsCount++;
-                }
-                    
-                // if it's concealed, double it again
-                if (PungConcealedCheckBoxes[PungTerminalsHonorsCheckBoxes.IndexOf(terminalsHonorsCheckbox)].IsChecked == true)
-                    _currentPungValue *= 2;
+            // check which pung check boxes are checked, and adjust the score
+            CalculateSetScores(PungTerminalsHonorsCheckBoxes, PungConcealedCheckBoxes, ScoreValues.BASE_PUNG_VALUE);
 
-                // add the pung value to the round score
-                _currentBaseScore += _currentPungValue;
-
-                // reset the current pung value int so we can use it again
-                _currentPungValue = 0;
-            }
-
-            // same rules as above except for Kongs (lazy :P)
-            foreach (SetCheckBox terminalsHonorsCheckBox in KongTerminalsHonorsCheckBoxes)
-            {
-                _currentKongValue = ScoreValues.BASE_KONG_VALUE;
-
-                if (terminalsHonorsCheckBox.IsChecked == true)
-                {
-                    _currentKongValue *= 2;
-                    _terminalsHonorsPungsKongsCount++;
-                }
-                   
-                if (KongConcealedCheckBoxes[KongTerminalsHonorsCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
-                    _currentKongValue *= 2;
-
-                _currentBaseScore += _currentKongValue;
-
-                _currentKongValue = 0;
-            }
-
+            // check which kong check boxes are checked, and adjust the score
+            CalculateSetScores(KongTerminalsHonorsCheckBoxes, KongConcealedCheckBoxes, ScoreValues.BASE_KONG_VALUE);
 
             // need to check whether it was self drawn, and set concealed here, 
             // as a special case, because it can be points or a double
@@ -656,7 +651,7 @@ namespace MahjongScorer.Pages
 
         private void DealerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            InitializeComboBoxWithNames(WinComboBoxStrings, winnerComboBox);
+            InitializeWinnerComboBox();
             winnerComboBox.Visibility = Visibility.Visible;
         }
 
@@ -804,7 +799,7 @@ namespace MahjongScorer.Pages
 
             prevailingWindTextBlock.Text = game.PrevailingWind.ToString();
             
-            InitializeComboBoxWithNames(WinComboBoxStrings, winnerComboBox);
+            InitializeWinnerComboBox();
             winnerComboBox.Visibility = Visibility.Visible;
 
             base.OnNavigatedTo(e);
