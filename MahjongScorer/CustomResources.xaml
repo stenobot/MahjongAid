@@ -176,7 +176,7 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Grid x:Name="LeftSquiggleGrid" >
                                 <Line Stroke="{ThemeResource MahjongHeaderBrush}" StrokeThickness="1" VerticalAlignment="Center" X2="50"/>
-                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Height="12" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Height="14" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
                             </Grid>
 
                             <ContentPresenter x:Name="ContentPresenter"

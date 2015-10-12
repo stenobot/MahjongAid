@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MahjongScorer
 {
-    public class WinCondition
+    public class Rule
     {
         private string _name;
         private string _description;
         private int? _score;
-        private bool _isDouble;
-
+        private int _double;
+        private bool _showInList;
 
         public string Name
         {
@@ -44,13 +44,23 @@ namespace MahjongScorer
             }
         }
 
-        public bool IsDouble
+        public int Double
         {
-            get { return _isDouble; }
+            get { return _double; }
             set
             {
-                if (_isDouble != value)
-                    _isDouble = value;
+                if (_double != value)
+                    _double = value;
+            }
+        }
+
+        public bool ShowInList
+        {
+            get { return _showInList; }
+            set
+            {
+                if (_showInList != value)
+                    _showInList = value;
             }
         }
     }

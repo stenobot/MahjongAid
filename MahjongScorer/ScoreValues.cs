@@ -14,6 +14,7 @@ namespace MahjongScorer
 
         public const int STARTING_SCORE = 2000;
 
+        public const int SELF_DRAWN_SCORE = 2;
         public const int ONE_CHANCE_SCORE = 2;
         public const int LUCKY_PAIR_SCORE = 2;
         public const int CONCEALED_SCORE = 10;

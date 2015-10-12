@@ -28,17 +28,13 @@ namespace MahjongScorer.Pages
         // holder for local Game object
         private Game game;
 
-    //    private List<string> RoundSummaries;
-
         private int _currentBaseScore;
-        private int _currentPungValue;
-        private int _currentKongValue;
         
         // keep track of concealed pungs or kongs for "three concealed sets"
-        private int _concealedPungsKongsCount;
+        //private int _concealedPungsKongsCount;
 
         // keep track of terminals or honors pungs kongs for "all terminals or honors"
-        private int _terminalsHonorsPungsKongsCount;
+       // private int _terminalsHonorsPungsKongsCount;
 
         // keep track of whether winning tile was self drawn
         private bool _selfDrawn;
@@ -48,6 +44,12 @@ namespace MahjongScorer.Pages
 
         // keep track of which player we removed from the drawn from combo box each round
         private int _ineligableDrawnFromPlayerIndex;
+
+
+
+        private StringBuilder _specialRulesSummary = new StringBuilder();
+        
+
 
         // holders for combo box lists
         //private List<string> DealerComboBoxStrings;
@@ -63,7 +65,7 @@ namespace MahjongScorer.Pages
         // lists of possible sets, and Set objects (we start with 4 and there can only ever be 4 total)
         List<Set> PossiblePungs;
         List<Set> PossibleKongs;
-        List<WinCondition> PossibleWinConditions;
+        List<Rule> PossibleRules;
         Set noSets;
         Set set1;
         Set set2;
@@ -267,7 +269,7 @@ namespace MahjongScorer.Pages
                 if (terminalsHonorsCheckBox.IsChecked == true)
                 {
                     currentValue *= 2;
-                    _terminalsHonorsPungsKongsCount++;
+                    //_terminalsHonorsPungsKongsCount++;
                 }
 
                 // if it's concealed, double it
@@ -277,6 +279,17 @@ namespace MahjongScorer.Pages
                 // add the final value to the total round base score
                 _currentBaseScore += currentValue;
             }
+        }
+
+
+        private void AddToSpecialRulesSummary(string summary)
+        {
+            // if summary already has text, add a space between sentences
+            if (_specialRulesSummary.Length > 0)
+                _specialRulesSummary.Insert(_specialRulesSummary.Length, " ");
+
+            // add the next sentence of summary text
+            _specialRulesSummary.Insert(_specialRulesSummary.Length, summary);
         }
 
 
@@ -292,10 +305,11 @@ namespace MahjongScorer.Pages
             // set the current round score to the base score
             _currentBaseScore = ScoreValues.BASE_ROUND_SCORE;
 
+
             // PUNGS AND KONGS
 
             // initialize the total pungs and kongs counter to zero
-            _terminalsHonorsPungsKongsCount = 0;
+            //_terminalsHonorsPungsKongsCount = 0;
 
             // check which pung check boxes are checked, and adjust the score
             CalculateSetScores(PungTerminalsHonorsCheckBoxes, PungConcealedCheckBoxes, ScoreValues.BASE_PUNG_VALUE);
@@ -303,69 +317,92 @@ namespace MahjongScorer.Pages
             // check which kong check boxes are checked, and adjust the score
             CalculateSetScores(KongTerminalsHonorsCheckBoxes, KongConcealedCheckBoxes, ScoreValues.BASE_KONG_VALUE);
 
+
+
+
+
             // need to check whether it was self drawn, and set concealed here, 
             // as a special case, because it can be points or a double
             // set it based on whether or not tile was self drawn this round
             // self drawn is always the last item in the combo box
-            if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
-                game.WinConditions[2].IsDouble = true;
-            else
-                game.WinConditions[2].Score = ScoreValues.CONCEALED_SCORE;
+            //if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
+            //    game.Rules[2].IsDouble = true;
+            //else
+            //    game.Rules[2].Score = ScoreValues.CONCEALED_SCORE;
 
 
-            // SCORE VALUES
-            foreach (WinCondition winCondition in winConditionsListView.SelectedItems)
+
+
+            // APPLY RULES WITH SCORE VALUES
+            foreach (Rule rule in rulesListView.SelectedItems)
             {
-                if (winCondition.Score != null)
-                    _currentBaseScore += winCondition.Score.Value;
+                if (rule.Score != null) // if a rule is selected and has a Score value
+                {
+                    // add points
+                    _currentBaseScore += rule.Score.Value;
+
+                    // add descrpition to the summary
+                    AddToSpecialRulesSummary(rule.Score + " is added to the base score because " + rule.Description + ".");
+                }
             }
 
 
-            // ROUND SCORE TO NEAREST 10 BEFORE APPLYING DOUBLES
+            // APPLY RULE DOUBLES
+            foreach (Rule rule in rulesListView.SelectedItems)
+            {
+                // for all selected rules, current score gets pow'd by the double value +1
+                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+
+                switch (rule.Double)
+                {
+                    case 1:
+                        AddToSpecialRulesSummary("Score was doubled because " + rule.Description + ".");
+                        break;
+                    case 2:
+                        AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
+                        break;
+                    case 4:
+                        AddToSpecialRulesSummary("Score was doubled four times because " + rule.Description + ".");
+                        break;
+                }          
+            }
+
+
+            // RULE SPECIAL CASES
+
+            // check for "Three concealed pungs" rule, which is 2 doubles
+            // special casing this because we can detect automatically 
+            // no need for player to select from list so we leave it out
+            //_concealedPungsKongsCount = 0;
+            //foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
+            //{
+            //    if (concealedPungs.IsChecked == true)
+            //        _concealedPungsKongsCount++;
+            //}
+
+            //foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
+            //{
+            //    if (concealedKongs.IsChecked == true)
+            //        _concealedPungsKongsCount++;
+            //}
+
+            //if (_concealedPungsKongsCount >= 3)
+            //{
+            //    _currentBaseScore = _currentBaseScore * (game.Rules[8].Double + 1);
+            //}
+                
+
+
+            
+
+
+
+
+            // ROUND SCORE TO NEAREST 10 AFTER APPLYING DOUBLES
             if (_currentBaseScore % 10 != 0)
                 _currentBaseScore = ((int)Math.Round(_currentBaseScore / 10.0)) * 10;
 
 
-            // APPLY DOUBLES TO SCORE
-            foreach (WinCondition winCondition in winConditionsListView.SelectedItems)
-            {
-                if (winCondition.IsDouble)
-                {
-                    if (winConditionsListView.SelectedIndex == 6) // all one suit, 2 doubles
-                        _currentBaseScore = ((_currentBaseScore * 2) * 2);
-                    else if (winConditionsListView.SelectedIndex == 7) // one suit no honors, 4 doubles
-                        _currentBaseScore = (((_currentBaseScore * 2) * 2) * 2);
-                    else // all regular doubles
-                        _currentBaseScore = _currentBaseScore * 2;
-                }                  
-            }
-
-            // check for 3 concealed pungs or kongs, which is a double
-            // special casing this because we can detect automatically (no need for player to select from list)
-            _concealedPungsKongsCount = 0;
-            foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
-            {
-                if (concealedPungs.IsChecked == true)
-                    _concealedPungsKongsCount++;
-            }
-
-            foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
-            {
-                if (concealedKongs.IsChecked == true)
-                    _concealedPungsKongsCount++;
-            }
-
-            if (_concealedPungsKongsCount >= 3)
-            {
-                _currentBaseScore = _currentBaseScore * 2;
-            }
-                
-            // check for 4 terminals or honors sets, which is 2 doubles
-            // special casing because we can detect automatically
-            if (_terminalsHonorsPungsKongsCount == 4)
-            {
-                _currentBaseScore = (_currentBaseScore * 2) * 2;
-            }
 
             // ENFORCE LIMIT
             // Mahjong hands have a max or "limit" value. Enforce that here
@@ -461,6 +498,10 @@ namespace MahjongScorer.Pages
                         " pung(s) and " + 
                         kongCountComboBox.SelectedIndex + 
                         " kong(s).");
+
+                    // add text about additional win conditions
+                    if (_specialRulesSummary != null)
+                        game.CurrentRoundSummary.AppendLine().AppendLine(_specialRulesSummary.ToString());
                 }
                 else // TAKE FROM LOSERS
                 {
@@ -516,6 +557,10 @@ namespace MahjongScorer.Pages
                         " pung(s) and " + 
                         kongCountComboBox.SelectedIndex + 
                         " kong(s).");
+
+                    // add text about additional win conditions
+                    if (_specialRulesSummary != null)
+                        game.CurrentRoundSummary.AppendLine().AppendLine(_specialRulesSummary.ToString());
                 }
                 else // TAKE FROM LOSERS
                 {
@@ -570,82 +615,190 @@ namespace MahjongScorer.Pages
             player.TotalScore += player.RoundScores[game.CurrentRound - 1];
         }
 
+
+        /// <summary>
+        /// Returns the count of concealed pungs and kongs, based on selected check boxes
+        /// </summary>
+        /// <returns></returns>
+        private int ConcealedPungsKongs()
+        {
+            int concealedPungsKongsCount = 0;
+            foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
+            {
+                if (concealedPungs.IsChecked == true)
+                    concealedPungsKongsCount++;
+            }
+
+            foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
+            {
+                if (concealedKongs.IsChecked == true)
+                    concealedPungsKongsCount++;
+            }
+
+            return concealedPungsKongsCount;
+        }
+
+        /// <summary>
+        /// Returns the count of terminals/honors pungs and kongs, based on selected check boxes
+        /// </summary>
+        /// <returns></returns>
+        private int TerminalsHonorsPungsKongs()
+        {
+            int terminalsHonorsPungsKongsCount = 0;
+            foreach (SetCheckBox terminalsHonorsPungs in PungTerminalsHonorsCheckBoxes)
+            {
+                if (terminalsHonorsPungs.IsChecked == true)
+                    terminalsHonorsPungsKongsCount++;
+            }
+
+            foreach (SetCheckBox terminalsHonorsKongs in KongTerminalsHonorsCheckBoxes)
+            {
+                if (terminalsHonorsKongs.IsChecked == true)
+                    terminalsHonorsPungsKongsCount++;
+            }
+
+            return terminalsHonorsPungsKongsCount;
+        }
+
         /// <summary>
         /// Called whenever we need to set up (or reset) the Win Conditions ListView
         /// Shows or hides certain items in the ListView, depending on checked boxes or ComboBox selections
         /// </summary>
-        private void InitializeWinConditions()
+        private void InitializeRules()
         {
-            PossibleWinConditions = new List<WinCondition>();
-            bool showAllSimples = true;
+            // set up list of possible rules
+            PossibleRules = new List<Rule>();
 
-            foreach (WinCondition winCondition in game.WinConditions)
+            foreach (Rule rule in game.Rules)
             {
-                switch (game.WinConditions.IndexOf(winCondition))
+                // switch statement checks all rules that are "sometimes" shown, and determines whether they should be shown
+                switch (game.Rules.IndexOf(rule))
                 {
-                    // change "lucky pair" description based on prevailing wind
-                    case 1:
-                        winCondition.Description = "Winning pair is the prevailing wind (" + game.PrevailingWind + ") or the winner's lucky wind";
-                        PossibleWinConditions.Add(winCondition);
+                    // "Lucky pair" - change description based on prevailing wind
+                    case 2:
+                        rule.Description = "the winning pair is the prevailing wind (" + game.PrevailingWind + "), lucky wind, or dragons";
+
                         break;
 
-                    // only show "worthless" option if there are no pungs or kongs
+                    // "Concealed" (partial) - show if all pungs/kongs are concealed and winning tile is NOT self drawn
                     case 3:
-                        if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
-                            PossibleWinConditions.Add(winCondition);
+                        if (((pungCountComboBox.SelectedIndex +
+                            kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
+                            ConcealedPungsKongs() > 0 &&
+                            drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        
                         break;
 
-                    // Only show "all simples" win condition if we know there aren't any terminal/honor sets
+                    // "Concealed" (fully) - show if all pungs/kongs are concealed and winning tile IS self drawn
                     case 4:
-                        if (pungCountGrid.Visibility == Visibility.Visible)
-                        {
-                            foreach (SetCheckBox setCheckBox in PungTerminalsHonorsCheckBoxes)
-                            {
-                                if (setCheckBox.IsChecked == true)
-                                {
-                                    showAllSimples = false;
-                                    break;
-                                }
-                            };
-                        }
-
-                        if (kongCountGrid.Visibility == Visibility.Visible)
-                        {
-                            foreach (SetCheckBox setCheckBox in KongTerminalsHonorsCheckBoxes)
-                            {
-                                if (setCheckBox.IsChecked == true)
-                                {
-                                    showAllSimples = false;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (showAllSimples)
-                            PossibleWinConditions.Add(winCondition);
+                        if (((pungCountComboBox.SelectedIndex +
+                            kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
+                            ConcealedPungsKongs() > 0 &&
+                            drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
 
                         break;
 
-                    // only show "1-9 run" win condition if there are 1 or less sets
+                    // "Worthless" - show if there are no pungs or kongs
                     case 5:
+                        if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
+
+                    // "All simples" - show if there are no terminals/honors pungs or kongs
+                    case 6:
+                        if (TerminalsHonorsPungsKongs() == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
+
+                    // 1-9 run - show if there are 1 or less sets
+                    case 7:
                         if (!((pungCountComboBox.SelectedIndex > 1) ||
                             (kongCountComboBox.SelectedIndex > 1) ||
                             pungCountComboBox.SelectedIndex == 1 && kongCountComboBox.SelectedIndex == 1))
-                        {
-                            PossibleWinConditions.Add(winCondition);
-                        }
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
                         break;
 
-                    default:
-                        PossibleWinConditions.Add(winCondition);
+                    // one suit no honors - show if there are no terminals/honors pungs or kongs
+                    case 10:
+                        if (TerminalsHonorsPungsKongs() == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
+
+                    // all honors - show if every set has a terminal or honor
+                    case 11:
+                        if ((pungCountComboBox.SelectedIndex +
+                            kongCountComboBox.SelectedIndex) == TerminalsHonorsPungsKongs())
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // lucky set - show if if at least one pung or kong has terminals/honors checked
+                    case 12:
+                        if (TerminalsHonorsPungsKongs() > 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // double lucky set - show if if at least one pung or kong has terminals/honors checked
+                    case 13:
+                        if (TerminalsHonorsPungsKongs() > 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // off the dead wall - show if there's at least one kong
+                    case 14:
+                        if (kongCountComboBox.SelectedIndex > 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // all pairs - show if there are no pungs or kongs
+                    case 18:
+                        if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // little three dragons - show if there are at least 2 pungs or kongs that are terminals/honors
+                    case 21:
+                        if (TerminalsHonorsPungsKongs() >= 2)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
                         break;
                 };
 
-
+                // add all eligible rules to the list
+                if (rule.ShowInList == true)
+                    PossibleRules.Add(rule);
             }
 
             // set the item source of the listview to this Win Conditions List in the Game object
-            winConditionsListView.ItemsSource = PossibleWinConditions;
+            rulesListView.ItemsSource = PossibleRules;
         }
 
 
@@ -683,7 +836,6 @@ namespace MahjongScorer.Pages
         {
             setsScoringStackPanel.Visibility = Visibility.Visible;
 
-
             InitializePossiblePungs();
         }
 
@@ -710,7 +862,7 @@ namespace MahjongScorer.Pages
             InitializeSetCheckBoxes(cb, kongCountGrid, "kong");
             kongCountGrid.Visibility = Visibility.Visible;
 
-            InitializeWinConditions();
+            InitializeRules();
 
             pointsDoublesStackPanel.Visibility = Visibility.Visible;
             doneScoringButton.Visibility = Visibility.Visible;
@@ -720,13 +872,13 @@ namespace MahjongScorer.Pages
         private void SetCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             // reset the win conditions list view, based on changes to the check boxes
-            InitializeWinConditions();
+            InitializeRules();
         }
 
         private void SetCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             // reset the win conditions list view, based on changes to the check boxes
-            InitializeWinConditions();
+            InitializeRules();
         }
 
 
@@ -805,7 +957,5 @@ namespace MahjongScorer.Pages
             base.OnNavigatedTo(e);
 
         }
-
-
     }
 }

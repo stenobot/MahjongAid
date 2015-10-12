@@ -170,7 +170,7 @@
     <Compile Include="ScoreValues.cs" />
     <Compile Include="DataModel\Set.cs" />
     <Compile Include="DataModel\SetCheckBox.cs" />
-    <Compile Include="DataModel\WinCondition.cs" />
+    <Compile Include="DataModel\Rule.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

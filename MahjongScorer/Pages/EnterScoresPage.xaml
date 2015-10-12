@@ -172,7 +172,7 @@
 
                     </Grid>
 
-                    <ListView x:Name="winConditionsListView" 
+                    <ListView x:Name="rulesListView" 
                               Margin="0,20,0,0" 
                               IsMultiSelectCheckBoxEnabled="False"
                               Width="400" 

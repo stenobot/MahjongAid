@@ -24,7 +24,7 @@ namespace MahjongScorer
         
         private List<Player> _players;
 
-        private List<WinCondition> _winConditions;
+        private List<Rule> _rules;
 
         // using these only for save data lists
         private string _currentDealerName;
@@ -142,13 +142,13 @@ namespace MahjongScorer
             }
         }
 
-        public List<WinCondition> WinConditions
+        public List<Rule> Rules
         {
-            get { return _winConditions; }
+            get { return _rules; }
             set
             {
-                if (_winConditions != value)
-                    _winConditions = value;
+                if (_rules != value)
+                    _rules = value;
             }
         }
 
