@@ -42,7 +42,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="roundSummaryGrid.(RelativePanel.RightOf)" Value="scoresStackPanel" />
-                        <Setter Target="roundSummaryGrid.Margin" Value="35,0,0,0" />
+                        <Setter Target="roundSummaryGrid.Margin" Value="65,0,0,0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -156,7 +156,7 @@
                 </Grid>
 
 
-                <TextBlock x:Name="savedMessageTextBlock" FontSize="15" HorizontalAlignment="Center" Foreground="{ThemeResource MahjongGrayBrush}" />
+                <TextBlock x:Name="savedMessageTextBlock" FontSize="15" HorizontalAlignment="Center" Foreground="{ThemeResource MahjongHeaderBrush}" />
 
             </RelativePanel>
             
