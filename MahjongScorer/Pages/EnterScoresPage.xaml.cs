@@ -347,13 +347,30 @@ namespace MahjongScorer.Pages
             }
 
 
-            // APPLY RULE DOUBLES
+            // SET SELF-DRAWN AND APPLY RULE POINTS
+
+            // if last item in the combo box is selected, add self drawn rule score value
+            // self drawn is index 0
+            if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
+            {
+                _currentBaseScore += game.Rules[0].Score.Value;
+                AddToSpecialRulesSummary(game.Rules[0].Score + " is added to the base score because " + game.Rules[0].Description + ".");
+                _selfDrawn = true;
+            }
+            else
+            {
+                _selfDrawn = false;
+            }
+                
+
+
+            // APPLY SELECTED RULE DOUBLES (SELECTED IN LISTVIEW)
             foreach (Rule rule in rulesListView.SelectedItems)
             {
                 // for all selected rules, current score gets pow'd by the double value +1
                 _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
 
-                switch (rule.Double)
+                switch (game.Rules.IndexOf(rule))
                 {
                     case 1:
                         AddToSpecialRulesSummary("Score was doubled because " + rule.Description + ".");
@@ -368,32 +385,44 @@ namespace MahjongScorer.Pages
             }
 
 
-            // RULE SPECIAL CASES
+            // APPLY AUTOMATIC RULE DOUBLES (NOT VISIBLE TO USER)
 
-            // check for "Three concealed pungs" rule, which is 2 doubles
-            // special casing this because we can detect automatically 
-            // no need for player to select from list so we leave it out
-            //_concealedPungsKongsCount = 0;
-            //foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
-            //{
-            //    if (concealedPungs.IsChecked == true)
-            //        _concealedPungsKongsCount++;
-            //}
+            foreach (Rule rule in game.Rules)
+            {
+                if (!rule.ShowInList)
+                {
+                    switch (game.Rules.IndexOf(rule))
+                    {
+                        // Three concealed pungs - apply double if there are 3 or more concealed pungs or kongs
+                        case 8:
+                            if (ConcealedPungsKongs() >= 3)
+                            {
+                                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
+                            }
+                            break;
 
-            //foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
-            //{
-            //    if (concealedKongs.IsChecked == true)
-            //        _concealedPungsKongsCount++;
-            //}
+                        // all pungs - apply double if there are a total of 4 pungs/kongs
+                        case 20:
+                            if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex == 4)
+                            {
+                                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
+                            }
+                            break;
 
-            //if (_concealedPungsKongsCount >= 3)
-            //{
-            //    _currentBaseScore = _currentBaseScore * (game.Rules[8].Double + 1);
-            //}
-                
+                        // three kongs - apply double if there are 3 or more kongs
+                        case 22:
+                            if (kongCountComboBox.SelectedIndex >= 3)
+                            {
+                                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
+                            }
+                            break;
+                    }
+                }
+            }
 
-
-            
 
 
 
@@ -433,13 +462,10 @@ namespace MahjongScorer.Pages
                 if (game.Players[i].IsRoundWinner && game.Players[i].IsDealer)
                     _dealerWon = true;
 
-                // check and set which person was drawn from (if any)
-                // since drawn from combo box is dynamic, need to find the last item in the combo box
-                if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1 && _selfDrawn == false)
-                    _selfDrawn = true;
-                else
+                
+                if (!_selfDrawn)
                 {
-                    // combo box is dynamic, and we know one item has been removed at "_ineligableDrawnFromPlayerIndex
+                    // since self drawn is false, we know one item has been removed at _ineligableDrawnFromPlayerIndex
                     // if the selected index is <, we know it will match i
                     if (drawnFromComboBox.SelectedIndex < _ineligableDrawnFromPlayerIndex)
                     {
@@ -778,6 +804,14 @@ namespace MahjongScorer.Pages
                     // all pairs - show if there are no pungs or kongs
                     case 18:
                         if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // triple pung - show if there are 3 or more pungs or kongs
+                    case 19:
+                        if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex >= 3)
                             rule.ShowInList = true;
                         else
                             rule.ShowInList = false;

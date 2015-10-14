@@ -50,7 +50,7 @@ namespace MahjongScorer.Pages
         private Rule bottomOfTheSea; //16, always show, double
         private Rule riichi; //17, always show, double
         private Rule allPairs; //18, sometimes show, 2 doubles
-        private Rule triplePung; //19, never show, 2 doubles
+        private Rule triplePung; //19, sometimes show, 2 doubles
         private Rule allPungs; //20, never show, 2 doubles
         private Rule littleThreeDragons; //21, sometimes show, 2 doubles
         private Rule threeKongs; //22, never show, 2 doubles
@@ -221,11 +221,10 @@ namespace MahjongScorer.Pages
 
             // TRIPLE PUNG - 2 DOUBLES
             game.Rules.Add(triplePung = new Rule());
-            // never show in the list
-            triplePung.ShowInList = false;
+            // only show in the list if there are at least 3 pungs
             triplePung.Double = 2;
             triplePung.Name = "Triple pung (2 doubles)";
-            triplePung.Description = "there are three pungs or kongs";
+            triplePung.Description = "there are three pungs or kongs of the same number in different suits";
 
             // ALL PUNGS - 2 DOUBLES
             game.Rules.Add(allPungs = new Rule());
