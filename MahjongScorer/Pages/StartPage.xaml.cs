@@ -217,7 +217,7 @@ namespace MahjongScorer.Pages
             // only show in the list if there are no pungs or kongs
             allPairs.Double = 2;
             allPairs.Name = "All pairs (2 doubles)";
-            allPairs.Description = "the winning hand consists of 7 pairs";
+            allPairs.Description = "the winning hand consists of 7 different pairs";
 
             // TRIPLE PUNG - 2 DOUBLES
             game.Rules.Add(triplePung = new Rule());

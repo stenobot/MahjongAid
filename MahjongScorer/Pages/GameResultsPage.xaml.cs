@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Runtime.Serialization.Json;
 using Windows.Storage;
+using Windows.UI.Text;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -58,27 +59,36 @@ namespace MahjongScorer.Pages
                 RowDefinition rd = new RowDefinition();
                 scoresGrid.RowDefinitions.Insert(roundRow, rd);
 
+
                 for (var playerColumn = 0; playerColumn < game.Players.Count; playerColumn++)
                 {
                     // create textblocks for the player's round total and the amount their score was adjusted by
                     TextBlock roundTotalTextBlock = new TextBlock();
                     TextBlock roundAdjustmentTextBlock = new TextBlock();
+                    StackPanel stackPanel = new StackPanel();
 
                     // set alignment and other styles
-                    roundTotalTextBlock.HorizontalAlignment = HorizontalAlignment.Left;
-                    roundAdjustmentTextBlock.HorizontalAlignment = HorizontalAlignment.Right;
+                    stackPanel.Orientation = Orientation.Horizontal;
+                    stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+                    roundTotalTextBlock.FontSize = 20;
                     roundAdjustmentTextBlock.FontSize = 10;
+                    roundTotalTextBlock.FontWeight = FontWeights.SemiBold;
+                    roundAdjustmentTextBlock.FontWeight = FontWeights.SemiBold;
                     roundAdjustmentTextBlock.Foreground = roundAdjustmentTextBrush;
 
-                    // add textblocks as a children of scoresgrid
-                    scoresGrid.Children.Add(roundTotalTextBlock);
-                    scoresGrid.Children.Add(roundAdjustmentTextBlock);
+                    // set margin for one text block (to give them some breathing room)
+                    Thickness margin = roundTotalTextBlock.Margin;
+                    margin.Right = 6;
+                    roundTotalTextBlock.Margin = margin;
 
-                    // set row and column for textblocks
-                    Grid.SetRow(roundTotalTextBlock, roundRow);
-                    Grid.SetColumn(roundTotalTextBlock, playerColumn);
-                    Grid.SetRow(roundAdjustmentTextBlock, roundRow);
-                    Grid.SetColumn(roundAdjustmentTextBlock, playerColumn);
+                    // add sp to grid, set row and column
+                    scoresGrid.Children.Add(stackPanel);
+                    Grid.SetRow(stackPanel, roundRow);
+                    Grid.SetColumn(stackPanel, playerColumn);
+
+                    // add textblocks as a children of stackPanel
+                    stackPanel.Children.Add(roundTotalTextBlock);
+                    stackPanel.Children.Add(roundAdjustmentTextBlock);
 
                     // calculate the round score for each round, for each player
                     // in a temporary int, start with starting score
