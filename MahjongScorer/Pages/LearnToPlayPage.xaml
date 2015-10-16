@@ -23,13 +23,29 @@
             <PivotItem Header="Welcome to Mahjong!">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10" Text="Mahjong is a 4-player game that originated in China in the 19th century, but has since spread to Japan, America, and many other countries. It's closest American relative is probably Rummy. But rather than using a set of cards, Mahjong is played with a set of tiles, set up around a table like so:" />
-                        <Image Source="Assets/StoreLogo.png" Margin="0,0,0,10"/>
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10" Text="Mahjong's rules can be complicated--particularly in how a winning hand is scored--and rule sets can vary from region to region. This app generally follows the standard Japanese rules, though I plan to update the app to support other common rule sets in the future." />
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10" Text="Swipe over to learn more about how to play the game of Mahjong, and how to use this app to help keep track of games and calculate scores for each round." />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
+                            Mahjong is a 4-player game that originated in China, but has since spread to Japan, America, and many other countries. 
+                            One of the things I love about Mahjong is that everyone plays differently. 
+                            The rules vary greatly from country to country, region to region, even family to family.
+                        </TextBlock>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10"> 
+                            Even without the rule variations, Mahjong's rules can be a bit complicated. 
+                            This app is meant to help with that. 
+                            It calculates scores for each round, keeps track of everyone's scores, and hopefully teaches you how to play the game. 
+                            The app uses a custom rule set that my family has used for years. 
+                            It's similar to the standard Japanese rules, and it's a lot of fun. 
+                            I've done my best to document them here.
+                            I've also tried to make this app flexible enough to accommodate mild rule variations.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10">
+                            Swipe over to learn more about how to play this version of Mahjong, and how to use this app to keep track of games and calculate scores.
+                        </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </PivotItem> 
+            
+            
             
             <PivotItem Header="Tile Glossary">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -368,7 +384,477 @@
             <PivotItem Header="The Basics">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
-                        <TextBlock Text="Mahjong's basic rules coming soon" />
+                        
+                        <TextBlock Text="Getting Set Up" 
+                                   Margin="0,10,0,5" 
+                                   Foreground="{ThemeResource MahjongHeaderBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+                        
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            First, we need to choose each player's starting position. 
+                            Find the East, South, West, and North tiles and place them upside down:
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <FontIcon FontFamily="Segoe UI Emoji" 
+                                      Margin="5,0"
+                                      FontSize="40"
+                                      Glyph="&#x1F000;" />
+                            <FontIcon FontFamily="Segoe UI Emoji" 
+                                      Margin="5,0"
+                                      FontSize="40"
+                                      Glyph="&#x1F001;" />
+                            <FontIcon FontFamily="Segoe UI Emoji" 
+                                      Margin="5,0"
+                                      FontSize="40"
+                                      Glyph="&#x1F002;" />
+                            <FontIcon FontFamily="Segoe UI Emoji" 
+                                      Margin="5,0"
+                                      FontSize="40"
+                                      Glyph="&#x1F003;" />                           
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Each player chooses a tile. 
+                            East is the starting dealer, and the other players' winds are their starting lucky winds. 
+                            Have each player sit around the table like so:                         
+                        </TextBlock>
+
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="115"/>
+                                <RowDefinition Height="115"/>
+                                <RowDefinition Height="115"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="115" />
+                                <ColumnDefinition Width="115" />
+                                <ColumnDefinition Width="115" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="5" 
+                                        Grid.Row="1" 
+                                        Grid.Column="2">
+
+                                <FontIcon FontFamily="Segoe UI Emoji"
+                                          Glyph="&#x1F000;" 
+                                          FontSize="30" />
+
+                                <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+                                           Text="East Player" />
+                            </StackPanel>
+
+                            <StackPanel Margin="5" 
+                                        Grid.Row="0" 
+                                        Grid.Column="1">
+
+                                <FontIcon FontFamily="Segoe UI Emoji"
+                                          Glyph="&#x1F001;" 
+                                          FontSize="30" />
+
+                                <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+                                           Text="South Player" />
+                            </StackPanel>
+
+                            <StackPanel Margin="5" 
+                            Grid.Row="1" 
+                            Grid.Column="0">
+
+                                <FontIcon FontFamily="Segoe UI Emoji"
+                                          Glyph="&#x1F002;" 
+                                          FontSize="30" />
+
+                                <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+                                           Text="West Player" />
+
+                            </StackPanel>
+
+                            <StackPanel Margin="5" 
+                                        Grid.Row="2" 
+                                        Grid.Column="1">
+
+                                <FontIcon FontFamily="Segoe UI Emoji"
+                                          Glyph="&#x1F003;" 
+                                          FontSize="30" />
+
+                                <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+                                           Text="North Player" />
+
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Shuffle (or stir) the wind tiles back into  the pile, then stack the tiles in 4 walls (17 tiles long, 2 tiles high) around the table, like so:
+                        </TextBlock>
+                        <StackPanel HorizontalAlignment="Center">
+
+                            <!--TOP ROW-->
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <!--LEFT ROW-->
+                                <StackPanel HorizontalAlignment="Left">
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                </StackPanel>
+
+                                <!--RIGHT ROW-->
+                                <StackPanel Margin="350,0,0,0" HorizontalAlignment="Right">
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                    <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="-1"
+                                      Glyph="&#x1F02B;">
+                                        <FontIcon.RenderTransform>
+                                            <RotateTransform Angle="90"/>
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                            <!--BOTTOM ROW-->
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                                <FontIcon FontFamily="Segoe UI Emoji" 
+                                      FontSize="16" Margin="2"
+                                      Glyph="&#x1F02B;" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
+                            Every round begins by stirring the tiles on the table, setting up the four walls, and the East player dealing 11 tiles to the other 3 players and 12 tiles to themself.
+                            
+                        </TextBlock>
 
                     </StackPanel>
                 </ScrollViewer>

@@ -438,7 +438,7 @@ namespace MahjongScorer.Pages
             if (_currentBaseScore > ScoreValues.MAX_ROUND_SCORE)
             {
                 _currentBaseScore = ScoreValues.MAX_ROUND_SCORE;
-                game.CurrentRoundSummary.AppendLine().AppendLine("This is a limit hand--meaning the winner's score was so high, it maxes out at " + 
+                game.CurrentRoundSummary.AppendLine().AppendLine("This hand has reached the max limit of " + 
                     ScoreValues.MAX_ROUND_SCORE + ".");
             }
                 
@@ -495,6 +495,29 @@ namespace MahjongScorer.Pages
         }
 
 
+        private void AddPungKongSummaryText(Player player)
+        {
+            if (pungCountComboBox.SelectedIndex > 0)
+            {
+                if (kongCountComboBox.SelectedIndex > 0)
+                {
+                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name +
+                        "'s hand included " +
+                        pungCountComboBox.SelectedIndex +
+                        " pung(s) and " +
+                        kongCountComboBox.SelectedIndex +
+                        " kong(s).");
+                }
+                else
+                {
+                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name +
+                        "'s hand included " +
+                        pungCountComboBox.SelectedIndex +
+                        " pung(s).");
+                }
+            }
+        }
+
         /// <summary>
         /// Called in the DetermineWinnerAndSetScores method
         /// Processes scores per player based on selected conditions
@@ -518,12 +541,8 @@ namespace MahjongScorer.Pages
                         " multiplied by 6.");
 
                     // add text about pungs and kongs
-                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name + 
-                        "'s hand included " + 
-                        pungCountComboBox.SelectedIndex + 
-                        " pung(s) and " + 
-                        kongCountComboBox.SelectedIndex + 
-                        " kong(s).");
+                    AddPungKongSummaryText(player);
+                   
 
                     // add text about additional win conditions
                     if (_specialRulesSummary != null)
@@ -577,12 +596,7 @@ namespace MahjongScorer.Pages
                         " multiplied by 4.");
 
                     // add text about pungs and kongs
-                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name + 
-                        "'s hand included " + 
-                        pungCountComboBox.SelectedIndex + 
-                        " pung(s) and " + 
-                        kongCountComboBox.SelectedIndex + 
-                        " kong(s).");
+                    AddPungKongSummaryText(player);
 
                     // add text about additional win conditions
                     if (_specialRulesSummary != null)

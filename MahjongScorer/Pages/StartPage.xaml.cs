@@ -194,7 +194,7 @@ namespace MahjongScorer.Pages
             robbingAKong.ShowInList = true;
             robbingAKong.Double = 1;
             robbingAKong.Name = "Robbing a kong (double)";
-            robbingAKong.Description = "the winning tile was drawn by someone else and would have created a kong";
+            robbingAKong.Description = "the winning tile would have completed someone else's kong";
 
             // BOTTOM OF THE SEA - DOUBLE
             game.Rules.Add(bottomOfTheSea = new Rule());
