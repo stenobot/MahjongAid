@@ -10,6 +10,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -119,22 +120,59 @@ namespace MahjongScorer.Pages
                 currListView = gamesCompletedListView;
             }
 
-            // first, find the selected game in the master list, then remove it
-            foreach (Game game in MasterSavedGamesList)
+
+            // Show a confirmation dialog, to double check since we're permanently deleting save data
+            var confirmDialog = new MessageDialog("The save data for the game created on " + 
+                currList[currListView.SelectedIndex].DateCreated + ", currently on round " + 
+                currList[currListView.SelectedIndex].CurrentRound + 
+                ", will be permanently deleted.", "Are you sure?");
+
+            // Add command and callback for moving forward with the deletion
+            confirmDialog.Commands.Add(new UICommand("Delete it", async (command) =>
             {
-                if (game == currList[currListView.SelectedIndex])
+                // first, find the selected game in the master list, then remove it
+                foreach (Game game in MasterSavedGamesList)
                 {
-                    MasterSavedGamesList.Remove(game);
-                    break;
+                    if (game == currList[currListView.SelectedIndex])
+                    {
+                        MasterSavedGamesList.Remove(game);
+                        break;
+                    }
                 }
-            }
 
-            // then rewrite the save data
-            await WriteSavedGamesAsync();
+                // then rewrite the save data
+                await WriteSavedGamesAsync();
 
-            // lastly, remove selected item from the itemssource
-            currList.RemoveAt(currListView.SelectedIndex);
+                // lastly, remove selected item from the itemssource
+                currList.RemoveAt(currListView.SelectedIndex);
+
+                // Show then fade out message
+                deletedMessageTextBlock.Opacity = 1;
+                deletedMessageTextBlock.Text = "Save data was deleted.";
+                FadeOutMessage.Begin();
+            }));
+
+            // Add command and callback for canceling the deletion
+            confirmDialog.Commands.Add(new UICommand("Nevermind", (command) =>
+            {
+                // Show then fade out message
+                deletedMessageTextBlock.Opacity = 1;
+                deletedMessageTextBlock.Text = "Canceled. Nothing was deleted.";
+                FadeOutMessage.Begin();
+            }));
+
+
+            // Set the default
+            confirmDialog.DefaultCommandIndex = 1;
+
+            // Set the command to be invoked when escape is pressed
+            confirmDialog.CancelCommandIndex = 1;
+
+            // Show the message dialog
+            await confirmDialog.ShowAsync();      
         }
+
+
 
         private void GamesInProgressListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

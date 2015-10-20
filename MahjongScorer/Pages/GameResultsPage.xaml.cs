@@ -214,6 +214,9 @@ namespace MahjongScorer.Pages
                     // don't show the score next round button
                     scoreRoundButton.Visibility = Visibility.Collapsed;
 
+                    // don't show the re-score button
+                    rescoreRoundButton.Visibility = Visibility.Collapsed;
+
                     // show game over UI
                     gameOverStackPanel.Visibility = Visibility.Visible;
 
@@ -234,10 +237,21 @@ namespace MahjongScorer.Pages
                             player.IsGameWinner = false;
                     }
                 }
-                else
+                else // the game is in progress
                 {
-                    // the game is still in progress, set the "Score next round" button tex
+                    //set the "Score next round" button text
                     scoreRoundButton.Content = "Score round " + (game.CurrentRound + 1);
+
+                    // if we haven't scored any rounds yet, hide the re-score button
+                    // otherwise, show it
+                    if (game.CurrentRound == 0)
+                        rescoreRoundButton.Visibility = Visibility.Collapsed;
+                    else
+                    {
+                        rescoreRoundButton.Visibility = Visibility.Visible;
+                        rescoreRoundButton.Content = "Re-score round " + game.CurrentRound;
+                    }
+
                 }
 
                 // we don't show the round summary before the game has begun, but we do when it's in progress or over
@@ -307,6 +321,28 @@ namespace MahjongScorer.Pages
         private void StartNewGame_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(StartPage));
+        }
+
+
+
+
+        private async void RescoreRoundButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+           foreach (Player player in game.Players)
+            {
+                player.RoundScores.RemoveAt(game.CurrentRound - 1);
+            }
+
+            game.CurrentRound--;
+
+            // TODO: if we do this, we'll need to keep track of a bunch of previous property values on this page
+
+            //await SaveGameAsync();
+
+            //Frame.Navigate(typeof(EnterScoresPage));
+
         }
     }
 }

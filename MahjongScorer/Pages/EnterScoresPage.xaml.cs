@@ -282,6 +282,10 @@ namespace MahjongScorer.Pages
         }
 
 
+        /// <summary>
+        /// Adds text to the special rules summary, which is later added to the current round summary
+        /// </summary>
+        /// <param name="summary"></param>
         private void AddToSpecialRulesSummary(string summary)
         {
             // if summary already has text, add a space between sentences
@@ -290,6 +294,34 @@ namespace MahjongScorer.Pages
 
             // add the next sentence of summary text
             _specialRulesSummary.Insert(_specialRulesSummary.Length, summary);
+        }
+
+
+        /// <summary>
+        /// Adds text about the winner's pungs and kongs to the current round summary
+        /// </summary>
+        /// <param name="player"></param>
+        private void AddPungKongSummary(Player player)
+        {
+            if (pungCountComboBox.SelectedIndex > 0)
+            {
+                if (kongCountComboBox.SelectedIndex > 0)
+                {
+                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name +
+                        "'s hand included " +
+                        pungCountComboBox.SelectedIndex +
+                        " pung(s) and " +
+                        kongCountComboBox.SelectedIndex +
+                        " kong(s).");
+                }
+                else
+                {
+                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name +
+                        "'s hand included " +
+                        pungCountComboBox.SelectedIndex +
+                        " pung(s).");
+                }
+            }
         }
 
 
@@ -307,10 +339,6 @@ namespace MahjongScorer.Pages
 
 
             // PUNGS AND KONGS
-
-            // initialize the total pungs and kongs counter to zero
-            //_terminalsHonorsPungsKongsCount = 0;
-
             // check which pung check boxes are checked, and adjust the score
             CalculateSetScores(PungTerminalsHonorsCheckBoxes, PungConcealedCheckBoxes, ScoreValues.BASE_PUNG_VALUE);
 
@@ -318,22 +346,86 @@ namespace MahjongScorer.Pages
             CalculateSetScores(KongTerminalsHonorsCheckBoxes, KongConcealedCheckBoxes, ScoreValues.BASE_KONG_VALUE);
 
 
+            // APPLY SCORE VALUES AND DOUBLES
+            ApplySelectedRuleValues();
+
+            ApplySelfDrawnPoints();
+
+            ApplySelectedRuleDoubles();
+
+            ApplyAutomaticRuleDoubles();
+
+
+            // ROUND SCORE TO NEAREST 10 AFTER APPLYING DOUBLES
+            if (_currentBaseScore % 10 != 0)
+                _currentBaseScore = ((int)Math.Round(_currentBaseScore / 10.0)) * 10;
 
 
 
-            // need to check whether it was self drawn, and set concealed here, 
-            // as a special case, because it can be points or a double
-            // set it based on whether or not tile was self drawn this round
-            // self drawn is always the last item in the combo box
-            //if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
-            //    game.Rules[2].IsDouble = true;
-            //else
-            //    game.Rules[2].Score = ScoreValues.CONCEALED_SCORE;
+            // ENFORCE LIMIT
+            // Mahjong hands have a max or "limit" value. Enforce that here
+            if (_currentBaseScore > ScoreValues.MAX_ROUND_SCORE)
+            {
+                _currentBaseScore = ScoreValues.MAX_ROUND_SCORE;
+                game.CurrentRoundSummary.AppendLine().AppendLine("This hand has reached the max limit of " +
+                    ScoreValues.MAX_ROUND_SCORE + ".");
+            }
 
 
+            // SET WINNER. DEALER, AND PLAYER GONE OUT FROM
+            for (var i = 0; i < game.Players.Count; i++)
+            {
+                // check if player is Round Winner and set their property
+                if (winnerComboBox.SelectedIndex == i)
+                    game.Players[i].IsRoundWinner = true;
+                else
+                    game.Players[i].IsRoundWinner = false;
+
+                // check of the round winner was also the dealer this round
+                if (game.Players[i].IsRoundWinner && game.Players[i].IsDealer)
+                    _dealerWon = true;
 
 
-            // APPLY RULES WITH SCORE VALUES
+                if (!_selfDrawn)
+                {
+                    // since self drawn is false, we know one item has been removed at _ineligableDrawnFromPlayerIndex
+                    // if the selected index is <, we know it will match i
+                    if (drawnFromComboBox.SelectedIndex < _ineligableDrawnFromPlayerIndex)
+                    {
+                        if (drawnFromComboBox.SelectedIndex == i)
+                            game.Players[i].DrawnFromThisRound = true;
+                        else
+                            game.Players[i].DrawnFromThisRound = false;
+                    }
+                    else
+                    // if selected index >=, we know we need to subtract 1 to get i to match
+                    {
+                        if (drawnFromComboBox.SelectedIndex == i - 1)
+                            game.Players[i].DrawnFromThisRound = true;
+                        else
+                            game.Players[i].DrawnFromThisRound = false;
+                    }
+                }
+            }
+
+
+            // PROCESS EACH PLAYER'S SCORE
+            foreach (Player player in game.Players)
+            {
+                SetPlayerScore(player);
+            }
+
+
+            // SET THE CURRENT ROUND SUMMARY
+            game.RoundSummaries.Add(game.CurrentRoundSummary.ToString());
+        }
+
+
+        /// <summary>
+        /// Go through selected Rules and apply point values
+        /// </summary>
+        private void ApplySelectedRuleValues()
+        {
             foreach (Rule rule in rulesListView.SelectedItems)
             {
                 if (rule.Score != null) // if a rule is selected and has a Score value
@@ -345,12 +437,16 @@ namespace MahjongScorer.Pages
                     AddToSpecialRulesSummary(rule.Score + " is added to the base score because " + rule.Description + ".");
                 }
             }
+        }
 
 
-            // SET SELF-DRAWN AND APPLY RULE POINTS
-
-            // if last item in the combo box is selected, add self drawn rule score value
-            // self drawn is index 0
+        /// <summary>
+        /// Set if winning tile was selfdrawn, and apply points
+        /// self drawn is index 0 in the game.Rules list
+        ///  if last item in the combo box is selected, the user has selected "self drawn" option
+        /// </summary>
+        private void ApplySelfDrawnPoints()
+        {
             if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
             {
                 _currentBaseScore += game.Rules[0].Score.Value;
@@ -361,10 +457,14 @@ namespace MahjongScorer.Pages
             {
                 _selfDrawn = false;
             }
-                
+        }
 
 
-            // APPLY SELECTED RULE DOUBLES (SELECTED IN LISTVIEW)
+        /// <summary>
+        /// Go through selected Rules and apply doubles
+        /// </summary>
+        private void ApplySelectedRuleDoubles()
+        {
             foreach (Rule rule in rulesListView.SelectedItems)
             {
                 // for all selected rules, current score gets pow'd by the double value +1
@@ -381,12 +481,17 @@ namespace MahjongScorer.Pages
                     case 4:
                         AddToSpecialRulesSummary("Score was doubled four times because " + rule.Description + ".");
                         break;
-                }          
+                }
             }
+        }
 
 
-            // APPLY AUTOMATIC RULE DOUBLES (NOT VISIBLE TO USER)
-
+        /// <summary>
+        /// Go through all Rules and apply doubles for special cases
+       ///  where we can detect automatically, without asking the user
+        /// </summary>
+        private void ApplyAutomaticRuleDoubles()
+        {
             foreach (Rule rule in game.Rules)
             {
                 if (!rule.ShowInList)
@@ -422,101 +527,9 @@ namespace MahjongScorer.Pages
                     }
                 }
             }
-
-
-
-
-
-            // ROUND SCORE TO NEAREST 10 AFTER APPLYING DOUBLES
-            if (_currentBaseScore % 10 != 0)
-                _currentBaseScore = ((int)Math.Round(_currentBaseScore / 10.0)) * 10;
-
-
-
-            // ENFORCE LIMIT
-            // Mahjong hands have a max or "limit" value. Enforce that here
-            if (_currentBaseScore > ScoreValues.MAX_ROUND_SCORE)
-            {
-                _currentBaseScore = ScoreValues.MAX_ROUND_SCORE;
-                game.CurrentRoundSummary.AppendLine().AppendLine("This hand has reached the max limit of " + 
-                    ScoreValues.MAX_ROUND_SCORE + ".");
-            }
-                
-
-            // SET WINNER. DEALER, AND PLAYER GONE OUT FROM
-            for (var i = 0; i < game.Players.Count; i++)
-            {
-                // check if player is Dealer and set their property
-                //if (dealerComboBox.SelectedIndex == i)
-                //    game.Players[i].IsDealer = true;
-                //else
-                //    game.Players[i].IsDealer = false;
-
-                // check if player is Round Winner and set their property
-                if (winnerComboBox.SelectedIndex == i)
-                    game.Players[i].IsRoundWinner = true;
-                else
-                    game.Players[i].IsRoundWinner = false;
-
-                // check of the round winner was also the dealer this round
-                if (game.Players[i].IsRoundWinner && game.Players[i].IsDealer)
-                    _dealerWon = true;
-
-                
-                if (!_selfDrawn)
-                {
-                    // since self drawn is false, we know one item has been removed at _ineligableDrawnFromPlayerIndex
-                    // if the selected index is <, we know it will match i
-                    if (drawnFromComboBox.SelectedIndex < _ineligableDrawnFromPlayerIndex)
-                    {
-                        if (drawnFromComboBox.SelectedIndex == i)
-                            game.Players[i].DrawnFromThisRound = true;
-                        else
-                            game.Players[i].DrawnFromThisRound = false;
-                    }
-                    else
-                    // if selected index >=, we know we need to subtract 1 to get i to match
-                    {
-                        if (drawnFromComboBox.SelectedIndex == i - 1)
-                            game.Players[i].DrawnFromThisRound = true;
-                        else
-                            game.Players[i].DrawnFromThisRound = false;
-                    }
-                }
-            }
-
-            // based on the above, process the win conditions
-            foreach (Player player in game.Players)
-            {
-                SetPlayerScore(player);
-            }
-
-            game.RoundSummaries.Add(game.CurrentRoundSummary.ToString());
         }
 
 
-        private void AddPungKongSummaryText(Player player)
-        {
-            if (pungCountComboBox.SelectedIndex > 0)
-            {
-                if (kongCountComboBox.SelectedIndex > 0)
-                {
-                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name +
-                        "'s hand included " +
-                        pungCountComboBox.SelectedIndex +
-                        " pung(s) and " +
-                        kongCountComboBox.SelectedIndex +
-                        " kong(s).");
-                }
-                else
-                {
-                    game.CurrentRoundSummary.AppendLine().AppendLine(player.Name +
-                        "'s hand included " +
-                        pungCountComboBox.SelectedIndex +
-                        " pung(s).");
-                }
-            }
-        }
 
         /// <summary>
         /// Called in the DetermineWinnerAndSetScores method
@@ -541,7 +554,7 @@ namespace MahjongScorer.Pages
                         " multiplied by 6.");
 
                     // add text about pungs and kongs
-                    AddPungKongSummaryText(player);
+                    AddPungKongSummary(player);
                    
 
                     // add text about additional win conditions
@@ -596,7 +609,7 @@ namespace MahjongScorer.Pages
                         " multiplied by 4.");
 
                     // add text about pungs and kongs
-                    AddPungKongSummaryText(player);
+                    AddPungKongSummary(player);
 
                     // add text about additional win conditions
                     if (_specialRulesSummary != null)

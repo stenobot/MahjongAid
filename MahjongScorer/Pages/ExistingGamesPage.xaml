@@ -17,10 +17,17 @@
         </TransitionCollection>
     </Page.Transitions>
 
+    <Page.Resources>
+        <Storyboard x:Name="FadeOutMessage" >
+            <DoubleAnimation From="1" To="0" BeginTime="0:0:1.5" Duration="0:0:.5" Storyboard.TargetName="deletedMessageTextBlock" Storyboard.TargetProperty="Opacity" />
+        </Storyboard>
+    </Page.Resources>
+
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Width="400">
+                <TextBlock x:Name="deletedMessageTextBlock" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,10" Opacity="0" Foreground="{ThemeResource MahjongHeaderBrush}" />
 
                 <StackPanel>
                     <TextBlock Text="GAMES IN PROGRESS" Style="{ThemeResource ScoresViewHeaderStyle}" />

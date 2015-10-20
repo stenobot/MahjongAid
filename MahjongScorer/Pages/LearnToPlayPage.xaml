@@ -32,10 +32,11 @@
                             Even without the rule variations, Mahjong's rules can be a bit complicated. 
                             This app is meant to help with that. 
                             It calculates scores for each round, keeps track of everyone's scores, and hopefully teaches you how to play the game. 
-                            The app uses a custom rule set that my family has used for years. 
-                            It's similar to the standard Japanese rules, and it's a lot of fun. 
-                            I've done my best to document them here.
-                            I've also tried to make this app flexible enough to accommodate mild rule variations.
+                            The app uses custom Mahjong rules that my family has used for a long time. 
+                            They're based on a book from the 1960s called A Mahjong Handbook, similar to standard Japanese Mahjong Rules circa 1965. 
+                            But like most Mahjong rule sets, it's evolved in our family over the years. 
+                            They're fun, and I've done my best to document them here. 
+                            I've also tried to make this app flexible enough to accommodate rule variations.
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10">

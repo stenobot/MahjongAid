@@ -100,10 +100,10 @@
                     </Grid>
 
                     <Button x:Name="scoreRoundButton"
-                    Content="Score first round"
-                    Click="ScoreButton_Click"
-                    HorizontalAlignment="Center"
-                    Margin="0,20" />
+                            Content="Score first round"
+                            Click="ScoreButton_Click"
+                            HorizontalAlignment="Center"
+                            Margin="0,20" />
                    
                 </StackPanel>
 
@@ -138,11 +138,23 @@
                     <TextBlock x:Name="roundSummaryTextBlock" 
                                Grid.Row="2" 
                                TextWrapping="WrapWholeWords" />
-                    <Button x:Name="roundSummariesButton"
-                            Grid.Row="3"
-                            Margin="0,10"
-                            Click="RoundSummariesButton_Click"
-                            Content="All round summaries" />
+
+                    <StackPanel x:Name="bottomButtonsStackPanel" 
+                                Margin="0,10" 
+                                Grid.Row="3">
+                        
+                        <Button x:Name="roundSummariesButton"                          
+                                Click="RoundSummariesButton_Click"
+                                Content="All round summaries" />
+                        
+                        <Button x:Name="rescoreRoundButton"
+                                Visibility="Collapsed"
+                                Margin="0,10"
+                                Click="RescoreRoundButton_Click"
+                                Content="Re-score this round" />
+
+                    </StackPanel>
+
                 </Grid>
 
 
