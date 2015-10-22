@@ -23,7 +23,7 @@
 
         <Grid x:Name="roundSummariesGrid" 
               HorizontalAlignment="Center" 
-              Width="500" />
+              Width="470" />
         
     </ScrollViewer>
 </Page>

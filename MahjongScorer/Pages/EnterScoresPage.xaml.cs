@@ -714,7 +714,7 @@ namespace MahjongScorer.Pages
         }
 
         /// <summary>
-        /// Called whenever we need to set up (or reset) the Win Conditions ListView
+        /// Called whenever we need to set up (or reset) the Rules ListView
         /// Shows or hides certain items in the ListView, depending on checked boxes or ComboBox selections
         /// </summary>
         private void InitializeRules()
@@ -988,6 +988,8 @@ namespace MahjongScorer.Pages
                 // if we've gone around the table once, prevailing wind changes
                 if ((game.CurrentRound - game.TimesDealerWon) % 4 == 0)
                     game.PrevailingWind++;
+
+                game.LoadedFromSave = false;
             }
         }
 

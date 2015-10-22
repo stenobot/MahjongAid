@@ -2,21 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -74,7 +66,6 @@ namespace MahjongScorer.Pages
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Game>));
 
-
             using (Stream stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("mahjong-data.json", CreationCollisionOption.ReplaceExisting))
             {
                 // pass game list into the serializer
@@ -98,6 +89,8 @@ namespace MahjongScorer.Pages
                 game = GamesInProgressList[gamesInProgressListView.SelectedIndex];
             else
                 game = GamesCompletedList[gamesCompletedListView.SelectedIndex];
+
+            game.LoadedFromSave = true;
 
             Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
         }
@@ -123,9 +116,9 @@ namespace MahjongScorer.Pages
 
             // Show a confirmation dialog, to double check since we're permanently deleting save data
             var confirmDialog = new MessageDialog("The save data for the game created on " + 
-                currList[currListView.SelectedIndex].DateCreated + ", currently on round " + 
+                currList[currListView.SelectedIndex].DateCreated + " (currently on round " + 
                 currList[currListView.SelectedIndex].CurrentRound + 
-                ", will be permanently deleted.", "Are you sure?");
+                ") will be permanently deleted.", "Are you sure?");
 
             // Add command and callback for moving forward with the deletion
             confirmDialog.Commands.Add(new UICommand("Delete it", async (command) =>
@@ -161,7 +154,6 @@ namespace MahjongScorer.Pages
                 FadeOutMessage.Begin();
             }));
 
-
             // Set the default
             confirmDialog.DefaultCommandIndex = 1;
 
@@ -185,6 +177,7 @@ namespace MahjongScorer.Pages
             gamesCompletedListView.SelectedIndex = -1;
         }
 
+
         private void GamesCompletedListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (gamesCompletedButtons.Visibility == Visibility.Collapsed)
@@ -194,8 +187,6 @@ namespace MahjongScorer.Pages
                 gamesCompletedButtons.Visibility = Visibility.Collapsed;
 
             gamesInProgressListView.SelectedIndex = -1;
-        }
-
-       
+        }       
     }
 }

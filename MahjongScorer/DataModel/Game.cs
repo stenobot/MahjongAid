@@ -30,6 +30,8 @@ namespace MahjongScorer
         private string _currentDealerName;
         private string _winnerName;
 
+        private bool _loadedFromSave;
+
 
         public DateTime DateCreated
         {
@@ -169,6 +171,16 @@ namespace MahjongScorer
             {
                 if (_winnerName != value)
                     _winnerName = value;
+            }
+        }
+
+        public bool LoadedFromSave
+        {
+            get { return _loadedFromSave; }
+            set
+            {
+                if (_loadedFromSave != value)
+                    _loadedFromSave = value;
             }
         }
     }

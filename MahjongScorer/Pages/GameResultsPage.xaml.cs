@@ -198,9 +198,14 @@ namespace MahjongScorer.Pages
 
         private void DetermineInProgressStatus()
         {
-            // if we haven't completed a round, we know it's a brand new game, so hide the summary
+            // if we haven't completed a round, we know it's a brand new game
             if (game.CurrentRound == 0)
+            {
+                // hide the summary
                 roundSummaryGrid.Visibility = Visibility.Collapsed;
+                // hide the app bar button
+                roundSummariesAppBarButton.Visibility = Visibility.Visible;
+            }
             else
             {
                 // a game is over only after it goes around the table 4 times
@@ -215,7 +220,7 @@ namespace MahjongScorer.Pages
                     scoreRoundButton.Visibility = Visibility.Collapsed;
 
                     // don't show the re-score button
-                    rescoreRoundButton.Visibility = Visibility.Collapsed;
+                    rescoreRoundAppBarButton.Visibility = Visibility.Collapsed;
 
                     // show game over UI
                     gameOverStackPanel.Visibility = Visibility.Visible;
@@ -240,16 +245,16 @@ namespace MahjongScorer.Pages
                 else // the game is in progress
                 {
                     //set the "Score next round" button text
-                    scoreRoundButton.Content = "Score round " + (game.CurrentRound + 1);
+                    scoreRoundButton.Content = "Score Round " + (game.CurrentRound + 1);
 
                     // if we haven't scored any rounds yet, hide the re-score button
                     // otherwise, show it
                     if (game.CurrentRound == 0)
-                        rescoreRoundButton.Visibility = Visibility.Collapsed;
+                        rescoreRoundAppBarButton.Visibility = Visibility.Collapsed;
                     else
                     {
-                        rescoreRoundButton.Visibility = Visibility.Visible;
-                        rescoreRoundButton.Content = "Re-score round " + game.CurrentRound;
+                        rescoreRoundAppBarButton.Visibility = Visibility.Visible;
+                        rescoreRoundAppBarButton.Label = "Reset Round " + game.CurrentRound;
                     }
 
                 }
@@ -257,6 +262,9 @@ namespace MahjongScorer.Pages
                 // we don't show the round summary before the game has begun, but we do when it's in progress or over
                 roundSummaryGrid.Visibility = Visibility.Visible;
                 RenderRoundSummary(game.RoundSummaries[game.CurrentRound - 1]);
+
+                // show the Round Summaries app bar button
+                roundSummariesAppBarButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -302,15 +310,22 @@ namespace MahjongScorer.Pages
                 // pass game list into the serializer
                 serializer.WriteObject(stream, SavedGamesList);
 
-                if (game.CurrentRound == 0)
-                    savedMessageTextBlock.Text = "New game created";
+                // show a quick confirmation message about the saved game, then fade out
+                if (!game.LoadedFromSave)
+                {
+                    if (game.CurrentRound == 0)
+                        savedMessageTextBlock.Text = "New game created";
+                    else
+                        savedMessageTextBlock.Text = "Round " + game.CurrentRound + " info saved";
+                }
                 else
-                    savedMessageTextBlock.Text = "Round " + game.CurrentRound + " info saved";
+                {
+                    savedMessageTextBlock.Text = "Saved game loaded";
+                }
 
+                savedMessageTextBlock.Opacity = 1;
                 FadeOutMessage.Begin();
             }
-
-            
         }
 
         private void RoundSummariesButton_Click(object sender, RoutedEventArgs e)
@@ -342,6 +357,12 @@ namespace MahjongScorer.Pages
             //await SaveGameAsync();
 
             //Frame.Navigate(typeof(EnterScoresPage));
+
+        }
+
+        private void LearnToPlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LearnToPlayPage), new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
 
         }
     }
