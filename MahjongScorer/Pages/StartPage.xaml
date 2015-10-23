@@ -15,24 +15,24 @@
                        FontFamily="{ThemeResource ShuiFont}" 
                        FontSize="26" 
                        HorizontalAlignment="Center"
-                       Foreground="{ThemeResource MahjongHeaderBrush}" 
+                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
                        Margin="35" />
             
             <Button x:Name="newGameButton" 
                     Click="NewGameButton_Click" 
                     Content="New game"
-                    Style="{ThemeResource StartPageButtonStyle}" />
+                    Style="{ThemeResource FancyButtonStyle}" />
 
 
             <Button x:Name="previousGamesButton" 
                     Click="PreviousGamesButton_Click" 
                     Content="Previous games"
-                    Style="{ThemeResource StartPageButtonStyle}" />
+                    Style="{ThemeResource FancyButtonStyle}" />
 
             <Button x:Name="learnToPlayButton" 
                     Click="learnToPlayButton_Click" 
                     Content="Learn to play"
-                    Style="{ThemeResource StartPageButtonStyle}" />
+                    Style="{ThemeResource FancyButtonStyle}" />
         </StackPanel>
         
 

@@ -38,12 +38,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Dealer:" Margin="0,0,5,0"/>
-                            <TextBlock x:Name="dealerTextBlock" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                            <TextBlock x:Name="dealerTextBlock" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Grid.Row="1">
                             <TextBlock Text="Prevailing Wind:" Margin="0,0,5,0"/>
-                            <TextBlock x:Name="prevailingWindTextBlock" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                            <TextBlock x:Name="prevailingWindTextBlock" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                         </StackPanel>
                         
                         
@@ -58,9 +58,9 @@
                             <TextBlock Text="BASICS" Style="{ThemeResource ScoresViewHeaderStyle}" />
                             <Grid>
                                 <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
-                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
-                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
-                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
+                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
                                     <BitmapIcon.RenderTransform>
                                         <ScaleTransform ScaleX="-1"/>
                                     </BitmapIcon.RenderTransform>
@@ -98,9 +98,9 @@
                             <TextBlock Text="SETS" Style="{ThemeResource ScoresViewHeaderStyle}" />
                             <Grid>
                                 <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
-                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
-                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
-                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
+                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
                                     <BitmapIcon.RenderTransform>
                                         <ScaleTransform ScaleX="-1"/>
                                     </BitmapIcon.RenderTransform>
@@ -159,9 +159,9 @@
                             <TextBlock Text="EXTRA POINTS AND DOUBLES" Style="{ThemeResource ScoresViewHeaderStyle}" />
                             <Grid>
                                 <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
-                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
-                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
-                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
+                                <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
+                                <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
                                     <BitmapIcon.RenderTransform>
                                         <ScaleTransform ScaleX="-1"/>
                                     </BitmapIcon.RenderTransform>
@@ -194,7 +194,8 @@
 
                 </StackPanel>
 
-                <Button x:Name="doneScoringButton" HorizontalAlignment="Center" 
+                <Button x:Name="doneScoringButton" 
+                        Style="{ThemeResource AccentColorButtonStyle}"
                         Visibility="Collapsed"
                         Margin="0,10"
                         Click="DoneScoringButton_Click" 

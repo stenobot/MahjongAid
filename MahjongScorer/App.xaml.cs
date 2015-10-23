@@ -90,7 +90,7 @@ namespace MahjongScorer
             // set up our brushes
             SolidColorBrush bkgColor = Current.Resources["MahjongBackgroundBrush"] as SolidColorBrush;
             SolidColorBrush btnHoverColor = Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
-            SolidColorBrush btnPressedColor = Current.Resources["MahjongHeaderBrush"] as SolidColorBrush;
+            SolidColorBrush btnPressedColor = Current.Resources["MahjongAccentColorBrush"] as SolidColorBrush;
 
 
             // override colors!

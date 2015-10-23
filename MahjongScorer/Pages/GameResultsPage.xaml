@@ -51,14 +51,14 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <RelativePanel HorizontalAlignment="Center">
+            <RelativePanel HorizontalAlignment="Center" Margin="0,0,0,35">
 
                 <StackPanel x:Name="scoresStackPanel"
                     HorizontalAlignment="Center" >
                     <TextBlock x:Name="savedMessageTextBlock" 
                                FontSize="15" 
                                HorizontalAlignment="Left" 
-                               Foreground="{ThemeResource MahjongHeaderBrush}" />
+                               Foreground="{ThemeResource MahjongAccentColorBrush}" />
 
                     <Grid Margin="0,20,0,10">
                         <Grid.ColumnDefinitions>
@@ -90,7 +90,7 @@
 
                     </Grid>
 
-                    <Line Stroke="{ThemeResource MahjongHeaderBrush}" X2="320" HorizontalAlignment="Center" StrokeThickness="1" />
+                    <Line Stroke="{ThemeResource MahjongAccentColorBrush}" X2="320" HorizontalAlignment="Center" StrokeThickness="1" />
 
                     <Grid x:Name="scoresGrid" Margin="0,5,0,0" >
 
@@ -104,10 +104,9 @@
                     </Grid>
 
                     <Button x:Name="scoreRoundButton"
-                            Background="{ThemeResource MahjongHeaderBrush}"
+                            Style="{ThemeResource AccentColorButtonStyle}"
                             Content="Score first round"
                             Click="ScoreButton_Click"
-                            HorizontalAlignment="Center"
                             Margin="0,20" />
                    
                 </StackPanel>
@@ -126,7 +125,7 @@
                                 Margin="0,10,0,0" 
                                 Visibility="Collapsed">
                         <TextBlock x:Name="gameOverTextBlock"
-                               Foreground="{StaticResource MahjongHeaderBrush}"
+                               Foreground="{StaticResource MahjongAccentColorBrush}"
                                TextWrapping="WrapWholeWords"
                                Text="The game has ended!" />
                         <Button Content="Start New Game" 
@@ -156,11 +155,6 @@
                           Label="See all Summaries"
                           Icon="List"
                           Click="RoundSummariesButton_Click" />
-            <AppBarButton x:Name="rescoreRoundAppBarButton" 
-                          Visibility="Collapsed" 
-                          Label="Reset this Round" 
-                          Icon="ClearSelection" 
-                          Click="RescoreRoundButton_Click" />
             <AppBarButton Label="Learn to Play" 
                           Icon="Help" Click="LearnToPlayButton_Click" />
         </CommandBar>

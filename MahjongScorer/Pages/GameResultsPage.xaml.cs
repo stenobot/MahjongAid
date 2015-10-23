@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Runtime.Serialization.Json;
@@ -24,7 +15,7 @@ using Windows.UI.Text;
 
 namespace MahjongScorer.Pages
 
-    
+
 {
     public sealed partial class GameResultsPage : Page
     {
@@ -32,7 +23,7 @@ namespace MahjongScorer.Pages
         private Game game;
 
         // color resource for winning cell in displayed scores
-        SolidColorBrush roundWinnerTextBrush = Application.Current.Resources["MahjongHeaderBrush"] as SolidColorBrush;
+        SolidColorBrush roundWinnerTextBrush = Application.Current.Resources["MahjongAccentColorBrush"] as SolidColorBrush;
         SolidColorBrush roundAdjustmentTextBrush = Application.Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
 
         public GameResultsPage()
@@ -138,20 +129,6 @@ namespace MahjongScorer.Pages
             await SaveGameAsync();
 
             Frame.Navigate(typeof(EnterScoresPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
-            // initialize the first 2 combo boxes (which are not dependent on one another)
-            // the 3rd combo box will be initialized when the selection changes on the 2nd one
-         //   InitializeComboBoxWithNames(DealerComboBoxStrings, dealerComboBox);
-
-
-
-
-            // make the first section of Scoring View visible
-     //       basicScoringStackPanel.Visibility = Visibility.Visible;
-
-            // this fixes a bug 
-      //      winnerComboBox.Visibility = Visibility.Collapsed;
-            // TEST
-      //      testBlock.Text = "";
         }
 
         private void SetPlayerNames()
@@ -219,9 +196,6 @@ namespace MahjongScorer.Pages
                     // don't show the score next round button
                     scoreRoundButton.Visibility = Visibility.Collapsed;
 
-                    // don't show the re-score button
-                    rescoreRoundAppBarButton.Visibility = Visibility.Collapsed;
-
                     // show game over UI
                     gameOverStackPanel.Visibility = Visibility.Visible;
 
@@ -246,17 +220,6 @@ namespace MahjongScorer.Pages
                 {
                     //set the "Score next round" button text
                     scoreRoundButton.Content = "Score Round " + (game.CurrentRound + 1);
-
-                    // if we haven't scored any rounds yet, hide the re-score button
-                    // otherwise, show it
-                    if (game.CurrentRound == 0)
-                        rescoreRoundAppBarButton.Visibility = Visibility.Collapsed;
-                    else
-                    {
-                        rescoreRoundAppBarButton.Visibility = Visibility.Visible;
-                        rescoreRoundAppBarButton.Label = "Reset Round " + game.CurrentRound;
-                    }
-
                 }
 
                 // we don't show the round summary before the game has begun, but we do when it's in progress or over
@@ -338,27 +301,6 @@ namespace MahjongScorer.Pages
             Frame.Navigate(typeof(StartPage));
         }
 
-
-
-
-        private async void RescoreRoundButton_Click(object sender, RoutedEventArgs e)
-        {
-
-
-           foreach (Player player in game.Players)
-            {
-                player.RoundScores.RemoveAt(game.CurrentRound - 1);
-            }
-
-            game.CurrentRound--;
-
-            // TODO: if we do this, we'll need to keep track of a bunch of previous property values on this page
-
-            //await SaveGameAsync();
-
-            //Frame.Navigate(typeof(EnterScoresPage));
-
-        }
 
         private void LearnToPlayButton_Click(object sender, RoutedEventArgs e)
         {

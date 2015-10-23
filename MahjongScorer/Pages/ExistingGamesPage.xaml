@@ -27,15 +27,15 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Width="400">
-                <TextBlock x:Name="deletedMessageTextBlock" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,10" Opacity="0" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                <TextBlock x:Name="deletedMessageTextBlock" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,10" Opacity="0" Foreground="{ThemeResource MahjongAccentColorBrush}" />
 
                 <StackPanel>
                     <TextBlock Text="GAMES IN PROGRESS" Style="{ThemeResource ScoresViewHeaderStyle}" />
                     <Grid>
                         <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
-                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
-                        <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
-                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
+                        <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
                             <BitmapIcon.RenderTransform>
                                 <ScaleTransform ScaleX="-1"/>
                             </BitmapIcon.RenderTransform>
@@ -47,22 +47,22 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="0,5">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text=" - started on" Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding DateCreated}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Round:" Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
                                         <TextBlock Text="Dealer:" Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding CurrentDealerName}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding CurrentDealerName}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -80,9 +80,9 @@
                     <TextBlock Text="COMPLETED GAMES" Style="{ThemeResource ScoresViewHeaderStyle}" />
                     <Grid>
                         <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
-                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Left" />
-                        <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" HorizontalAlignment="Center" />
-                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongHeaderBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
+                        <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
                             <BitmapIcon.RenderTransform>
                                 <ScaleTransform ScaleX="-1"/>
                             </BitmapIcon.RenderTransform>
@@ -95,19 +95,19 @@
                                 <StackPanel Orientation="Vertical" Margin="0,5">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Winner:" Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding WinnerName}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding WinnerName}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
                                         <TextBlock Text="Total Rounds:" Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongHeaderBrush}" />                                      
+                                        <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongAccentColorBrush}" />                                      
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongHeaderBrush}" />
+                                        <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text=" - started on" Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding DateCreated}" />
                                     </StackPanel>
