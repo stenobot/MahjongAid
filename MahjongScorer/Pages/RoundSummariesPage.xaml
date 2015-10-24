@@ -18,11 +18,11 @@
     </Page.Transitions>
 
     <ScrollViewer Background="{ThemeResource MahjongBackgroundBrush}" 
-                  Margin="0,25" 
                   VerticalScrollBarVisibility="Auto">
 
         <Grid x:Name="roundSummariesGrid" 
               HorizontalAlignment="Center" 
+              Margin="0,25" 
               Width="470" />
         
     </ScrollViewer>

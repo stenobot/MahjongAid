@@ -152,11 +152,13 @@
         <CommandBar VerticalAlignment="Bottom">
             <AppBarButton x:Name="roundSummariesAppBarButton" 
                           Visibility="Collapsed" 
-                          Label="See all Summaries"
+                          Label="Summaries"
                           Icon="List"
                           Click="RoundSummariesButton_Click" />
-            <AppBarButton Label="Learn to Play" 
+            <AppBarButton Label="How to Play" 
                           Icon="Help" Click="LearnToPlayButton_Click" />
+            <AppBarButton Label="Home"
+                          Icon="Home" Click="HomeButton_Click" />
         </CommandBar>
     </Grid>
 </Page>

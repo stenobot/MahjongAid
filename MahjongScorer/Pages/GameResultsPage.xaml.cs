@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Runtime.Serialization.Json;
 using Windows.Storage;
 using Windows.UI.Text;
+using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,12 +32,7 @@ namespace MahjongScorer.Pages
             this.InitializeComponent();
 
             // we cache this page, in case user comes Back from AllRoundSummaries page
-            NavigationCacheMode = NavigationCacheMode.Enabled;
-
-            // show the system back button
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-
-          
+            NavigationCacheMode = NavigationCacheMode.Enabled;     
         }
 
         /// <summary>
@@ -128,7 +124,7 @@ namespace MahjongScorer.Pages
             // save the game, replacing the existing matching Game object unless it's a brand new game
             await SaveGameAsync();
 
-            Frame.Navigate(typeof(EnterScoresPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(EnterScoresPage), game, new DrillInNavigationTransitionInfo());
         }
 
         private void SetPlayerNames()
@@ -149,6 +145,9 @@ namespace MahjongScorer.Pages
         /// <param name="e"></param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            // always hide the back button on this page
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
             if (e.Parameter is Game)
             {
                 game = e.Parameter as Game;
@@ -293,7 +292,7 @@ namespace MahjongScorer.Pages
 
         private void RoundSummariesButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(RoundSummariesPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(RoundSummariesPage), game, new DrillInNavigationTransitionInfo());
         }
 
         private void StartNewGame_Click(object sender, RoutedEventArgs e)
@@ -304,8 +303,13 @@ namespace MahjongScorer.Pages
 
         private void LearnToPlayButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(LearnToPlayPage), new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(LearnToPlayPage), new DrillInNavigationTransitionInfo());
 
+        }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(StartPage), new DrillInNavigationTransitionInfo());
         }
     }
 }

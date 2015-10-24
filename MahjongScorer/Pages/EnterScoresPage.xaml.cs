@@ -75,10 +75,6 @@ namespace MahjongScorer.Pages
         public EnterScoresPage()
         {
             this.InitializeComponent();
-
-            // hiding the back button on this page
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-
         }
 
 
@@ -582,7 +578,7 @@ namespace MahjongScorer.Pages
                             player.RoundScores.Add(_currentBaseScore * ScoreValues.X_ISLOSER_ISDRAWNFROM_DEALERWON); // x6, negative
 
                             // add text info to the round summary
-                            game.CurrentRoundSummary.AppendLine().AppendLine(player.Name + 
+                            game.CurrentRoundSummary.AppendLine(player.Name + 
                                 " pays for everybody because they coughed up the winning tile. They pay the winner the base score of " + 
                                 _currentBaseScore + 
                                 " multiplied by 6, because the winner was the dealer.");
@@ -650,7 +646,7 @@ namespace MahjongScorer.Pages
                             player.RoundScores.Add(_currentBaseScore * ScoreValues.X_ISLOSER_ISDRAWNFROM); // x4, negative
 
                             // add text info to the round summary
-                            game.CurrentRoundSummary.AppendLine().AppendLine(player.Name + 
+                            game.CurrentRoundSummary.AppendLine(player.Name + 
                                 " pays for everybody because they coughed up the winning tile. They pay the winner the base score of " 
                                 + _currentBaseScore + 
                                 " multiplied by 4.");
@@ -995,6 +991,9 @@ namespace MahjongScorer.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // always hide the back button on this page
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
             if (e.Parameter is Game)
             {
                 game = e.Parameter as Game;
@@ -1003,9 +1002,7 @@ namespace MahjongScorer.Pages
             // increment round (starts at index 0, so 1st round = 1)
             game.CurrentRound++;
 
-            // set up the first combobox (dealer)
-            //dealerComboBox.Visibility = Visibility.Visible;
-            //InitializeComboBoxWithNames(DealerComboBoxStrings, dealerComboBox);
+
             foreach (Player player in game.Players)
             {
                 if (player.IsDealer)
