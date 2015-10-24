@@ -57,8 +57,12 @@ namespace MahjongScorer.Pages
                     // set alignment and other styles
                     stackPanel.Orientation = Orientation.Horizontal;
                     stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
-                    roundTotalTextBlock.FontSize = 20;
+                    roundTotalTextBlock.FontSize = 20;                    
                     roundAdjustmentTextBlock.FontSize = 10;
+                    roundTotalTextBlock.Width = 54;
+                    roundAdjustmentTextBlock.Width = 34;
+                    roundTotalTextBlock.TextAlignment = TextAlignment.Right;
+                    roundAdjustmentTextBlock.TextAlignment = TextAlignment.Left;
                     roundTotalTextBlock.FontWeight = FontWeights.SemiBold;
                     roundAdjustmentTextBlock.FontWeight = FontWeights.SemiBold;
                     roundAdjustmentTextBlock.Foreground = roundAdjustmentTextBrush;
