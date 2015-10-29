@@ -463,10 +463,11 @@ namespace MahjongScorer.Pages
         {
             foreach (Rule rule in rulesListView.SelectedItems)
             {
-                // for all selected rules, current score gets pow'd by the double value +1
-                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+                // for all selected rules, current score gets doubled as many times per it's Double value
+                _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
 
-                switch (game.Rules.IndexOf(rule))
+                // add to summary based on Double value
+                switch (rule.Double)
                 {
                     case 1:
                         AddToSpecialRulesSummary("Score was doubled because " + rule.Description + ".");
@@ -480,6 +481,7 @@ namespace MahjongScorer.Pages
                 }
             }
         }
+
 
 
         /// <summary>
@@ -498,7 +500,7 @@ namespace MahjongScorer.Pages
                         case 8:
                             if (ConcealedPungsKongs() >= 3)
                             {
-                                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+                                _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
                                 AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
                             }
                             break;
@@ -507,7 +509,7 @@ namespace MahjongScorer.Pages
                         case 20:
                             if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex == 4)
                             {
-                                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+                                _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
                                 AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
                             }
                             break;
@@ -516,13 +518,23 @@ namespace MahjongScorer.Pages
                         case 22:
                             if (kongCountComboBox.SelectedIndex >= 3)
                             {
-                                _currentBaseScore = (int)Math.Pow(_currentBaseScore, (rule.Double + 1));
+                                _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
                                 AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
                             }
                             break;
                     }
                 }
             }
+        }
+
+
+        private int DoubleScore(int score, int timesDoubled)
+        {
+            for (int i = 0; i < timesDoubled; i++)
+            {
+                score *= 2;
+            }
+            return score;
         }
 
 

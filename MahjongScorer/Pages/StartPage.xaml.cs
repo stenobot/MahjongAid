@@ -138,7 +138,7 @@ namespace MahjongScorer.Pages
             // always show in list
             oneSuitWithHonors.ShowInList = true;
             oneSuitWithHonors.Double = 1;
-            oneSuitWithHonors.Name = "One suit with honors (2 doubles)";           
+            oneSuitWithHonors.Name = "One suit with honors (double)";           
             oneSuitWithHonors.Description = "all tiles are winds, dragons, and just one suit";
 
             // ONE SUIT NO HONORS - 4 DOUBLES

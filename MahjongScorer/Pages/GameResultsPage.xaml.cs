@@ -92,8 +92,13 @@ namespace MahjongScorer.Pages
                         roundScore += game.Players[playerColumn].RoundScores[roundScoreCounter];
                     }
 
-                    // set the text for the round total
-                    roundTotalTextBlock.Text = roundScore.ToString();
+                    // set the text for the round total; if it's less than zero, just show zero
+                    if (roundScore < 0)
+                        roundTotalTextBlock.Text = 0.ToString();
+                    else
+                        roundTotalTextBlock.Text = roundScore.ToString();
+
+                    // set text for the adjustment; we'll show negative or positive here
                     roundAdjustmentTextBlock.Text = game.Players[playerColumn].RoundScores[roundRow].ToString();
 
                     // if the player's round adjustment is positive (not negative, or zero)
