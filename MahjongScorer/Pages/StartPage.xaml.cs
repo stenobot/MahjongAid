@@ -93,6 +93,9 @@ namespace MahjongScorer.Pages
             game.Rules.Add(partConcealed = new Rule());
             // only show in list if all pungs/kongs are concealed and winning tile was NOT self drawn
             partConcealed.Double = 0;
+
+            partConcealed.ShowInList = true;
+
             partConcealed.Score = ScoreValues.CONCEALED_SCORE;
             partConcealed.Name = "Concealed hand (" + partConcealed.Score.ToString() + " points)";
             partConcealed.Description = "the entire hand is concealed except for the winning tile";

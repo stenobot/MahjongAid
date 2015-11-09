@@ -742,16 +742,16 @@ namespace MahjongScorer.Pages
                         break;
 
                     // "Concealed" (partial) - show if all pungs/kongs are concealed and winning tile is NOT self drawn
-                    case 3:
-                        if (((pungCountComboBox.SelectedIndex +
-                            kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
-                            ConcealedPungsKongs() > 0 &&
-                            drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
+                    //case 3:
+                    //    if (((pungCountComboBox.SelectedIndex +
+                    //        kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
+                    //        ConcealedPungsKongs() > 0 &&
+                    //        drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
+                    //        rule.ShowInList = true;
+                    //    else
+                    //        rule.ShowInList = false;
                         
-                        break;
+                    //    break;
 
                     // "Concealed" (fully) - show if all pungs/kongs are concealed and winning tile IS self drawn
                     case 4:
@@ -973,18 +973,18 @@ namespace MahjongScorer.Pages
                     switch (player.CurrentWind)
                     {
                         case Wind.East:
-                            player.CurrentWind = Wind.South;
-                            player.IsDealer = false;
-                            break;
-                        case Wind.South:
-                            player.CurrentWind = Wind.West;
-                            player.IsDealer = false;
-                            break;
-                        case Wind.West:
                             player.CurrentWind = Wind.North;
                             player.IsDealer = false;
                             break;
                         case Wind.North:
+                            player.CurrentWind = Wind.West;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.West:
+                            player.CurrentWind = Wind.South;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.South:
                             player.CurrentWind = Wind.East;
                             player.IsDealer = true;
                             // set name for save data display
