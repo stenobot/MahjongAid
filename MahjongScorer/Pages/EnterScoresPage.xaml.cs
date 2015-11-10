@@ -591,9 +591,9 @@ namespace MahjongScorer.Pages
 
                             // add text info to the round summary
                             game.CurrentRoundSummary.AppendLine(player.Name + 
-                                " pays for everybody because they coughed up the winning tile. They pay the winner the base score of " + 
+                                " pays for everybody because they coughed up the winning tile. They pay the winner " + (_currentBaseScore * 6).ToString() + "--the base score of " + 
                                 _currentBaseScore + 
-                                " multiplied by 6, because the winner was the dealer.");
+                                " multiplied by 6--because the winner was the dealer.");
                         }
                         else
                         {
@@ -635,7 +635,7 @@ namespace MahjongScorer.Pages
 
                             // add text info to the round summary
                             game.CurrentRoundSummary.AppendLine().AppendLine(player.Name + 
-                                " pays the winner the base score of " + 
+                                " pays the winner " + (_currentBaseScore * 2).ToString() + "--the base score of " + 
                                 _currentBaseScore + 
                                 " multiplied by 2. They were the dealer and the winning tile was self-drawn, so they have to pay double.");
                         }
@@ -659,7 +659,7 @@ namespace MahjongScorer.Pages
 
                             // add text info to the round summary
                             game.CurrentRoundSummary.AppendLine(player.Name + 
-                                " pays for everybody because they coughed up the winning tile. They pay the winner the base score of " 
+                                " pays for everybody because they coughed up the winning tile. They pay the winner " + (_currentBaseScore * 4).ToString() + "--the base score of " 
                                 + _currentBaseScore + 
                                 " multiplied by 4.");
                         }
@@ -741,17 +741,16 @@ namespace MahjongScorer.Pages
 
                         break;
 
-                    // "Concealed" (partial) - show if all pungs/kongs are concealed and winning tile is NOT self drawn
-                    //case 3:
-                    //    if (((pungCountComboBox.SelectedIndex +
-                    //        kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
-                    //        ConcealedPungsKongs() > 0 &&
-                    //        drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
-                    //        rule.ShowInList = true;
-                    //    else
-                    //        rule.ShowInList = false;
-                        
-                    //    break;
+                    // "Semi-concealed" (partial) - show if there are less than 2 unconcealed sets, and winning tile is NOT self drawn
+                    case 3:
+                        if ((pungCountComboBox.SelectedIndex +
+                            kongCountComboBox.SelectedIndex) < (ConcealedPungsKongs() + 2) &&
+                            drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
 
                     // "Concealed" (fully) - show if all pungs/kongs are concealed and winning tile IS self drawn
                     case 4:
