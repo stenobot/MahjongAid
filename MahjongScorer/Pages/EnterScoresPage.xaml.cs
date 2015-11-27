@@ -39,6 +39,8 @@ namespace MahjongScorer.Pages
         // keep track of whether winning tile was self drawn
         private bool _selfDrawn;
 
+        private bool _worthless;
+
         // keep track of whether the dealer won this round
         private bool _dealerWon;
 
@@ -343,6 +345,8 @@ namespace MahjongScorer.Pages
 
 
             // APPLY SCORE VALUES AND DOUBLES
+            CheckForWorthless();
+
             ApplySelectedRuleValues();
 
             ApplySelfDrawnPoints();
@@ -418,6 +422,20 @@ namespace MahjongScorer.Pages
 
 
         /// <summary>
+        /// 
+        /// </summary>
+        private void CheckForWorthless()
+        {
+            if (pungCountComboBox.SelectedIndex == 0 &&
+                kongCountComboBox.SelectedIndex == 0 &&
+                !rulesListView.SelectedItems.Contains(game.Rules[2]))
+                _worthless = true;
+            else
+                _worthless = false;
+        }
+
+
+        /// <summary>
         /// Go through selected Rules and apply point values
         /// </summary>
         private void ApplySelectedRuleValues()
@@ -426,11 +444,19 @@ namespace MahjongScorer.Pages
             {
                 if (rule.Score != null) // if a rule is selected and has a Score value
                 {
-                    // add points
-                    _currentBaseScore += rule.Score.Value;
+                    // as special case, need to first check one chance and worthless
+                    if (_worthless && rule == game.Rules[1])
+                    {
+                        AddToSpecialRulesSummary("Since this hand is worthless, points for " + rule.Name + " are not added to the score.");
+                    }
+                    else
+                    {
+                        // add points
+                        _currentBaseScore += rule.Score.Value;
 
-                    // add descrpition to the summary
-                    AddToSpecialRulesSummary(rule.Score + " is added to the base score because " + rule.Description + ".");
+                        // add descripition to the summary
+                        AddToSpecialRulesSummary(rule.Score + " is added to the base score because " + rule.Description + ".");
+                    }                   
                 }
             }
         }
@@ -445,8 +471,18 @@ namespace MahjongScorer.Pages
         {
             if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
             {
-                _currentBaseScore += game.Rules[0].Score.Value;
-                AddToSpecialRulesSummary(game.Rules[0].Score + " is added to the base score because " + game.Rules[0].Description + ".");
+                // only apply self drawn points if hand isn't worthless
+                if (!_worthless)
+                {
+                    _currentBaseScore += game.Rules[0].Score.Value;
+                    AddToSpecialRulesSummary(game.Rules[0].Score + " is added to the base score because " + game.Rules[0].Description + ".");
+                }
+                else
+                {
+                    AddToSpecialRulesSummary("Even though winning tile was self-drawn, " + game.Rules[0].Score + " points are not added because the hand was worthless.");
+                }
+
+                // keep track of whether hand is self drawn, whether points are applied or not
                 _selfDrawn = true;
             }
             else
@@ -496,6 +532,15 @@ namespace MahjongScorer.Pages
                 {
                     switch (game.Rules.IndexOf(rule))
                     {
+                        // Worthless hand - apply double if there are no pungs or kongs, and no lucky pair
+                        // if this is active, "one chance" and "self drawn" points must be subtracted
+                        case 5:
+                            if (_worthless)
+                            {
+                                _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
+                                AddToSpecialRulesSummary("Because this is a worthless hand, the score is doubled.");
+                            }
+                            break;
                         // Three concealed pungs - apply double if there are 3 or more concealed pungs or kongs
                         case 8:
                             if (ConcealedPungsKongs() >= 3)
@@ -765,13 +810,13 @@ namespace MahjongScorer.Pages
                         break;
 
                     // "Worthless" - show if there are no pungs or kongs
-                    case 5:
-                        if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
+                    //case 5:
+                    //    if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
+                    //        rule.ShowInList = true;
+                    //    else
+                    //        rule.ShowInList = false;
 
-                        break;
+                    //    break;
 
                     // "All simples" - show if there are no terminals/honors pungs or kongs
                     case 6:
@@ -931,8 +976,8 @@ namespace MahjongScorer.Pages
             kongCountGrid.Visibility = Visibility.Visible;
 
             InitializeRules();
-
             pointsDoublesStackPanel.Visibility = Visibility.Visible;
+
             doneScoringButton.Visibility = Visibility.Visible;
         }
 

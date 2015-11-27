@@ -24,7 +24,7 @@ namespace MahjongScorer.Pages
         private Rule luckyPair; //2, always show, 2pts
         private Rule partConcealed; //3, sometimes show, 10pts
         private Rule fullConcealed; //4, sometimes show, double
-        private Rule worthless; //5, sometimes show, double
+        private Rule worthless; //5, never show, double
         private Rule allSimples; //6, sometimes show, double
         private Rule oneToNineRun; //7, sometimes show, double
         private Rule threeConcealedPungs; //8, never show, 2 doubles
@@ -106,7 +106,9 @@ namespace MahjongScorer.Pages
 
             // WORTHLESS - DOUBLE
             game.Rules.Add(worthless = new Rule());
-            // only show in list if no pungs/kongs
+            // never show in list, cuz we know if: no pungs/kongs, no lucky pair
+            // special case: need to discount "one chance" and "self drawn" if this is active
+            worthless.ShowInList = false;
             worthless.Double = 1;
             worthless.Name = "Worthless (double)";           
             worthless.Description = "there are no pungs or kongs, and no lucky pair";

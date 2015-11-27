@@ -17,7 +17,8 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid Background="{ThemeResource MahjongBackgroundBrush}">
+    <ScrollViewer Background="{ThemeResource MahjongBackgroundBrush}"
+                  VerticalScrollBarVisibility="Auto">
 
         <Grid x:Name="enterNamesGrid" Width="400">
             <Grid.RowDefinitions>
@@ -53,9 +54,9 @@
                     <RowDefinition Height="115"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="115" />
-                    <ColumnDefinition Width="115" />
-                    <ColumnDefinition Width="115" />
+                    <ColumnDefinition Width="105" />
+                    <ColumnDefinition Width="105" />
+                    <ColumnDefinition Width="105" />
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Margin="5" 
@@ -130,5 +131,5 @@
           
         </Grid>
 
-    </Grid>
+    </ScrollViewer>
 </Page>

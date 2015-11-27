@@ -46,7 +46,7 @@
 
 
     <Style x:Name="ScoresViewHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
-        <Setter Property="Margin" Value="0,35,0,10" />
+        <Setter Property="Margin" Value="0,25,0,10" />
         <Setter Property="FontFamily" Value="{StaticResource ShuiFont}" />
         <Setter Property="Foreground" Value="{StaticResource MahjongAccentColorBrush}" />
         <Setter Property="FontSize" Value="16" />

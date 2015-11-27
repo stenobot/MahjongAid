@@ -26,7 +26,7 @@
 
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
 
-        <ScrollViewer x:Name="winConditionsScrollViewer" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,20,0,20">
 
                 <StackPanel x:Name="basicScoringStackPanel"  >
@@ -84,6 +84,8 @@
                               Visibility="Collapsed"
                               SelectionChanged="DrawnFromComboBox_SelectionChanged"
                               Header="Who was the winning tile drawn from?" />
+
+                   
                 </StackPanel>
 
                 <StackPanel x:Name="setsScoringStackPanel" 
