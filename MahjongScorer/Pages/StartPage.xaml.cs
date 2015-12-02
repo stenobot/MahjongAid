@@ -66,6 +66,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(selfDrawn = new Rule());
             // never show in list, because this gets explicitly set earlier by user
             selfDrawn.ShowInList = false;
+            selfDrawn.IsUncommon = false;
             selfDrawn.Double = 0;
             selfDrawn.Score = ScoreValues.SELF_DRAWN_SCORE;
             selfDrawn.Name = "Self-Drawn (" + selfDrawn.Score.ToString() + " points)"; 
@@ -75,6 +76,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(oneChance = new Rule());
             // always show in list
             oneChance.ShowInList = true;
+            oneChance.IsUncommon = false;
             oneChance.Double = 0;
             oneChance.Score = ScoreValues.ONE_CHANCE_SCORE;
             oneChance.Name = "One chance (" + oneChance.Score.ToString() + " points)";
@@ -84,6 +86,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(luckyPair = new Rule());
             // always show in list
             luckyPair.ShowInList = true;
+            luckyPair.IsUncommon = false;
             luckyPair.Double = 0;
             luckyPair.Score = ScoreValues.LUCKY_PAIR_SCORE;
             luckyPair.Name = "Lucky pair (" + luckyPair.Score.ToString() + " points)";
@@ -92,6 +95,7 @@ namespace MahjongScorer.Pages
             // PARTIALLY CONCEALED - 10 POINTS
             game.Rules.Add(partConcealed = new Rule());
             // only show in list if all pungs/kongs are concealed and winning tile was NOT self drawn
+            partConcealed.IsUncommon = false;
             partConcealed.Double = 0;
             partConcealed.Score = ScoreValues.CONCEALED_SCORE;
             partConcealed.Name = "Semi-concealed hand (" + partConcealed.Score.ToString() + " points)";
@@ -100,6 +104,7 @@ namespace MahjongScorer.Pages
             // FULLY CONCEALED - DOUBLE
             game.Rules.Add(fullConcealed = new Rule());
             // only show in list if all pungs/kongs are concealed and winning tile WAS self drawn
+            fullConcealed.IsUncommon = false;
             fullConcealed.Double = 1;
             fullConcealed.Name = "Concealed hand (double)";
             fullConcealed.Description = "the entire hand is concealed";
@@ -109,6 +114,7 @@ namespace MahjongScorer.Pages
             // never show in list, cuz we know if: no pungs/kongs, no lucky pair
             // special case: need to discount "one chance" and "self drawn" if this is active
             worthless.ShowInList = false;
+            worthless.IsUncommon = false;
             worthless.Double = 1;
             worthless.Name = "Worthless (double)";           
             worthless.Description = "there are no pungs or kongs, and no lucky pair";
@@ -116,6 +122,7 @@ namespace MahjongScorer.Pages
             // ALL SIMPLES - DOUBLE
             game.Rules.Add(allSimples = new Rule());
             // only show in list if pungs/kongs have no terminals/honors
+            allSimples.IsUncommon = false;
             allSimples.Double = 1;
             allSimples.Name = "All simples (double)";
             allSimples.Description = "there are no winds, terminals, or dragons";
@@ -123,6 +130,7 @@ namespace MahjongScorer.Pages
             // ONE TO NINE RUN - DOUBLE
             game.Rules.Add(oneToNineRun = new Rule());
             // only show in list if there are 1 or less pungs/kongs
+            oneToNineRun.IsUncommon = true;
             oneToNineRun.Double = 1;
             oneToNineRun.Name = "1-9 run (double)";
             oneToNineRun.Description = "there are 3 chows with 1-9 in same suit";
@@ -130,6 +138,7 @@ namespace MahjongScorer.Pages
             // THREE CONCEALED PUNGS - 2 DOUBLES
             game.Rules.Add(threeConcealedPungs = new Rule());
             // never show in list, because we can always calculate this
+            threeConcealedPungs.IsUncommon = true;
             threeConcealedPungs.ShowInList = false;
             threeConcealedPungs.Double = 2;
             threeConcealedPungs.Name = "3 concealed pungs (double)";
@@ -138,6 +147,7 @@ namespace MahjongScorer.Pages
             // ONE SUIT WITH HONORS - DOUBLE
             game.Rules.Add(oneSuitWithHonors = new Rule());
             // always show in list
+            oneSuitWithHonors.IsUncommon = true;
             oneSuitWithHonors.ShowInList = true;
             oneSuitWithHonors.Double = 1;
             oneSuitWithHonors.Name = "One suit with honors (double)";           
@@ -146,6 +156,7 @@ namespace MahjongScorer.Pages
             // ONE SUIT NO HONORS - 4 DOUBLES
             game.Rules.Add(oneSuitNoHonors = new Rule());
             // only show in list if there are no honors pungs/kongs
+            oneSuitNoHonors.IsUncommon = true;
             oneSuitNoHonors.Double = 4;
             oneSuitNoHonors.Name = "One suit, no honors (4 doubles)";
             oneSuitNoHonors.Description = "all sets and the pair are in the same suit";
@@ -153,6 +164,7 @@ namespace MahjongScorer.Pages
             // ALL HONORS - DOUBLE (opposite of all simples)
             game.Rules.Add(allHonors = new Rule());
             // only show in list if every set has a terminal or honor
+            allHonors.IsUncommon = true;
             allHonors.Double = 1;
             allHonors.Name = "All terminals or honors (double)";
             allHonors.Description = "there's a terminal or honor in every set or chow";
@@ -160,6 +172,7 @@ namespace MahjongScorer.Pages
             // LUCKY SET - DOUBLE
             game.Rules.Add(luckySet = new Rule());
             // only show in list if at least one pung or kong has terminals/honors checked
+            luckySet.IsUncommon = false;
             luckySet.Double = 1;
             luckySet.Name = "Lucky set (double)";
             luckySet.Description = "a pung or kong has the prevailing or lucky wind, or dragons";
@@ -167,6 +180,7 @@ namespace MahjongScorer.Pages
             // DOUBLE LUCKY SET - 2 DOUBLES
             game.Rules.Add(doubleLuckySet = new Rule());
             // only show in list if at least one pung or kong has terminals/honors checked
+            doubleLuckySet.IsUncommon = false;
             doubleLuckySet.Double = 2;
             doubleLuckySet.Name = "Double lucky set (2 doubles)";
             doubleLuckySet.Description = "a pung or kong is lucky wind, and the winner's lucky wind is also prevailing";
@@ -174,6 +188,7 @@ namespace MahjongScorer.Pages
             // OFF THE DEAD WALL - DOUBLE
             game.Rules.Add(offTheDeadWall = new Rule());
             // only show in list if there's at least one kong
+            offTheDeadWall.IsUncommon = true;
             offTheDeadWall.Double = 1;
             offTheDeadWall.Name = "Off the dead wall (double)";
             offTheDeadWall.Description = "the winning tile came off the dead wall";
@@ -182,6 +197,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(robbingAKong = new Rule());
             // always show in list
             robbingAKong.ShowInList = true;
+            robbingAKong.IsUncommon = true;
             robbingAKong.Double = 1;
             robbingAKong.Name = "Robbing a kong (double)";
             robbingAKong.Description = "the winning tile would have completed someone else's kong";
@@ -190,6 +206,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(bottomOfTheSea = new Rule());
             // always show in list
             bottomOfTheSea.ShowInList = true;
+            bottomOfTheSea.IsUncommon = true;
             bottomOfTheSea.Double = 1;
             bottomOfTheSea.Name = "Bottom of the sea (double)";
             bottomOfTheSea.Description = "the winning tile was the very last tile before the dead wall";
@@ -198,6 +215,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(riichi = new Rule());
             // always show in list
             riichi.ShowInList = true;
+            riichi.IsUncommon = true;
             riichi.Double = 1;
             riichi.Name = "Riichi (double)";
             riichi.Description = "the winner laid their hand ";
@@ -205,6 +223,7 @@ namespace MahjongScorer.Pages
             // ALL PAIRS - 2 DOUBLES
             game.Rules.Add(allPairs = new Rule());
             // only show in the list if there are no pungs or kongs
+            allPairs.IsUncommon = true;
             allPairs.Double = 2;
             allPairs.Name = "All pairs (2 doubles)";
             allPairs.Description = "the winning hand consists of 7 different pairs";
@@ -212,6 +231,7 @@ namespace MahjongScorer.Pages
             // TRIPLE PUNG - 2 DOUBLES
             game.Rules.Add(triplePung = new Rule());
             // only show in the list if there are at least 3 pungs
+            triplePung.IsUncommon = true;
             triplePung.Double = 2;
             triplePung.Name = "Triple pung (2 doubles)";
             triplePung.Description = "there are three pungs or kongs of the same number in different suits";
@@ -220,6 +240,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(allPungs = new Rule());
             // never show in the list
             allPungs.ShowInList = false;
+            allPungs.IsUncommon = false;
             allPungs.Double = 2;
             allPungs.Name = "All pungs (2 doubles)";
             allPungs.Description = "there are four pungs or kongs";
@@ -227,6 +248,7 @@ namespace MahjongScorer.Pages
             // LITTLE THREE DRAGONS - 2 DOUBLES
             game.Rules.Add(littleThreeDragons = new Rule());
             // only show in list if there are at least 2 pungs or kongs that are terminals/honors
+            littleThreeDragons.IsUncommon = true;
             littleThreeDragons.Double = 2;
             littleThreeDragons.Name = "Little three dragons (2 doubles)";
             littleThreeDragons.Description = "there are 2 sets and one pair of dragons";
@@ -235,6 +257,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(threeKongs = new Rule());
             // never show in the list
             threeKongs.ShowInList = false;
+            threeKongs.IsUncommon = true;
             threeKongs.Double = 2;
             threeKongs.Name = "Three kongs (2 doubles)";
             threeKongs.Description = "there are three kongs";
@@ -243,6 +266,7 @@ namespace MahjongScorer.Pages
             game.Rules.Add(limitHand = new Rule());
             // always show in the list
             limitHand.ShowInList = true;
+            limitHand.IsUncommon = true;
             limitHand.Double = 0;
             limitHand.Score = 500;
             limitHand.Name = "Limit hand (500 points)";

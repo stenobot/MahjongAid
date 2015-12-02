@@ -19,7 +19,11 @@
 
     <Page.Resources>
         <Storyboard x:Name="FadeOutMessage" >
-            <DoubleAnimation From="1" To="0" BeginTime="0:0:1.5" Duration="0:0:.5" Storyboard.TargetName="savedMessageTextBlock" Storyboard.TargetProperty="Opacity" />
+            <DoubleAnimation From="1" To="0" 
+                             BeginTime="0:0:1.5" 
+                             Duration="0:0:.5" 
+                             Storyboard.TargetName="savedMessageTextBlock" 
+                             Storyboard.TargetProperty="Opacity" />
         </Storyboard>
     </Page.Resources>
 
@@ -38,7 +42,7 @@
 
                 <VisualState x:Name="Big">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="820" />
+                        <AdaptiveTrigger MinWindowWidth="{ThemeResource MobileBreakpoint}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="roundSummaryGrid.(RelativePanel.RightOf)" Value="scoresStackPanel" />
@@ -54,7 +58,7 @@
             <RelativePanel HorizontalAlignment="Center" Margin="0,0,0,35">
 
                 <StackPanel x:Name="scoresStackPanel"
-                    HorizontalAlignment="Center" >
+                            HorizontalAlignment="Center" >
                     <TextBlock x:Name="savedMessageTextBlock" 
                                FontSize="15" 
                                HorizontalAlignment="Left" 
@@ -135,7 +139,7 @@
 
                     <TextBlock x:Name="roundSummaryTitleTextBlock" 
                                Text="ROUND SUMMARY" 
-                               Style="{ThemeResource ScoresViewHeaderStyle}" 
+                               Style="{ThemeResource SmallHeaderStyle}" 
                                Grid.Row="1"
                                Margin="0,20,0,0" />
 

@@ -13,6 +13,7 @@ namespace MahjongScorer
         private int? _score;
         private int _double;
         private bool _showInList;
+        private bool _isUncommon;
 
         public string Name
         {
@@ -61,6 +62,16 @@ namespace MahjongScorer
             {
                 if (_showInList != value)
                     _showInList = value;
+            }
+        }
+
+        public bool IsUncommon
+        {
+            get { return _isUncommon; }
+            set
+            {
+                if (_isUncommon != value)
+                    _isUncommon = value;
             }
         }
     }

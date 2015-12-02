@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <TextBlock Text="PLAYER INITIALS" Style="{ThemeResource ScoresViewHeaderStyle}" />
+                <TextBlock Text="PLAYER INITIALS" Style="{ThemeResource LargeHeaderStyle}" />
                 <Grid>
                     <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
                     <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />

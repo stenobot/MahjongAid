@@ -36,20 +36,14 @@ namespace MahjongScorer.Pages
         // keep track of terminals or honors pungs kongs for "all terminals or honors"
        // private int _terminalsHonorsPungsKongsCount;
 
-        // keep track of whether winning tile was self drawn
-        private bool _selfDrawn;
-
-        private bool _worthless;
-
-        // keep track of whether the dealer won this round
-        private bool _dealerWon;
 
         // keep track of which player we removed from the drawn from combo box each round
         private int _ineligableDrawnFromPlayerIndex;
 
 
-
         private StringBuilder _specialRulesSummary = new StringBuilder();
+
+        private StringBuilder _inProgressSummary = new StringBuilder();
         
 
 
@@ -67,7 +61,13 @@ namespace MahjongScorer.Pages
         // lists of possible sets, and Set objects (we start with 4 and there can only ever be 4 total)
         List<Set> PossiblePungs;
         List<Set> PossibleKongs;
-        List<Rule> PossibleRules;
+
+
+        List<Rule> AllPossibleRules;
+
+        List<Rule> PossibleCommonRules;
+        List<Rule> PossibleUncommonRules;
+
         Set noSets;
         Set set1;
         Set set2;
@@ -322,6 +322,68 @@ namespace MahjongScorer.Pages
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reset"></param>
+        private void GenerateInProgressSummary()
+        {
+            inProgressSummaryGrid.Visibility = Visibility.Visible;
+            _inProgressSummary = new StringBuilder();
+
+
+            if (DealerWon())
+                _inProgressSummary.Insert(
+                    _inProgressSummary.Length, 
+                    winnerComboBox.SelectedItem + " won and is also the dealer, so their score will be multiplied by 6."
+                    );
+            else
+                _inProgressSummary.Insert(
+                    _inProgressSummary.Length, 
+                    winnerComboBox.SelectedItem + " won and is not the dealer, so their score will be multiplied by 4."
+                    );
+
+
+            if (SelfDrawn() && !Worthless())
+            {
+                _inProgressSummary.Append(Environment.NewLine);
+                _inProgressSummary.Append(Environment.NewLine);
+
+                _inProgressSummary.Insert(
+                    _inProgressSummary.Length, 
+                    "Winning tile was Self-Drawn, which gives " + 
+                    winnerComboBox.SelectedItem + 
+                    " 2 extra points."
+                    );
+            }
+
+
+            if (Worthless())
+            {
+                _inProgressSummary.Append(Environment.NewLine);
+                _inProgressSummary.Append(Environment.NewLine);
+
+                _inProgressSummary.Insert(
+                    _inProgressSummary.Length,
+                    "This hand is currently Worthless, because there are no sets or Lucky Pair. " +
+                    winnerComboBox.SelectedItem +
+                    " will get a Double for this. "
+                    );
+
+                _inProgressSummary.Append(Environment.NewLine);
+                _inProgressSummary.Append(Environment.NewLine);
+
+                if (SelfDrawn() && OneChance())
+                    _inProgressSummary.Insert(_inProgressSummary.Length, "Self-Drawn and One Chance points will not count, because the hand is Worthless.");
+                else if (SelfDrawn())
+                    _inProgressSummary.Insert(_inProgressSummary.Length, "Self-Drawn points will not count because the hand is Worthless.");
+                else if (OneChance())
+                    _inProgressSummary.Insert(_inProgressSummary.Length, "One Chance points will not count because the hand is Worthless.");
+            }
+
+            inProgressSummaryText.Text = _inProgressSummary.ToString();        
+        }
+
 
         /// <summary>
         /// A method that determines the winner, who dealt the winning tile (if anyone),
@@ -345,7 +407,6 @@ namespace MahjongScorer.Pages
 
 
             // APPLY SCORE VALUES AND DOUBLES
-            CheckForWorthless();
 
             ApplySelectedRuleValues();
 
@@ -372,6 +433,73 @@ namespace MahjongScorer.Pages
             }
 
 
+            // SET WINNER AND PLAYER GONE OUT FROM
+            SetWinner();
+            SetDrawnFromStatus();
+
+
+            // PROCESS EACH PLAYER'S SCORE
+            foreach (Player player in game.Players)
+            {
+                SetPlayerScore(player);
+            }
+
+
+            // SET THE CURRENT ROUND SUMMARY
+            game.RoundSummaries.Add(game.CurrentRoundSummary.ToString());
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool Worthless()
+        {
+            if (pungCountComboBox.SelectedIndex == 0 &&
+                kongCountComboBox.SelectedIndex == 0 &&
+                !commonRulesListView.SelectedItems.Contains(game.Rules[2]))
+                return true;
+            else
+                return false;
+        }
+
+        private bool OneChance()
+        {
+            if (commonRulesListView.SelectedItems.Contains(game.Rules[1]))
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool SelfDrawn()
+        {
+            if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
+                return true;
+            else
+                return false;
+        }
+
+
+        private bool DealerWon()
+        {
+            for (var i = 0; i < game.Players.Count; i++)
+            {
+                // check if the Round Winner is also the round dealer
+                if (winnerComboBox.SelectedIndex == i && game.Players[i].IsDealer)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SetWinner()
+        {
             // SET WINNER. DEALER, AND PLAYER GONE OUT FROM
             for (var i = 0; i < game.Players.Count; i++)
             {
@@ -379,14 +507,16 @@ namespace MahjongScorer.Pages
                 if (winnerComboBox.SelectedIndex == i)
                     game.Players[i].IsRoundWinner = true;
                 else
-                    game.Players[i].IsRoundWinner = false;
-
-                // check of the round winner was also the dealer this round
-                if (game.Players[i].IsRoundWinner && game.Players[i].IsDealer)
-                    _dealerWon = true;
+                    game.Players[i].IsRoundWinner = false;               
+            }
+        }
 
 
-                if (!_selfDrawn)
+        private void SetDrawnFromStatus()
+        {
+            for (var i = 0; i < game.Players.Count; i++)
+            {
+                if (!SelfDrawn())
                 {
                     // since self drawn is false, we know one item has been removed at _ineligableDrawnFromPlayerIndex
                     // if the selected index is <, we know it will match i
@@ -407,45 +537,19 @@ namespace MahjongScorer.Pages
                     }
                 }
             }
-
-
-            // PROCESS EACH PLAYER'S SCORE
-            foreach (Player player in game.Players)
-            {
-                SetPlayerScore(player);
-            }
-
-
-            // SET THE CURRENT ROUND SUMMARY
-            game.RoundSummaries.Add(game.CurrentRoundSummary.ToString());
         }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void CheckForWorthless()
-        {
-            if (pungCountComboBox.SelectedIndex == 0 &&
-                kongCountComboBox.SelectedIndex == 0 &&
-                !rulesListView.SelectedItems.Contains(game.Rules[2]))
-                _worthless = true;
-            else
-                _worthless = false;
-        }
-
 
         /// <summary>
         /// Go through selected Rules and apply point values
         /// </summary>
         private void ApplySelectedRuleValues()
         {
-            foreach (Rule rule in rulesListView.SelectedItems)
+            foreach (Rule rule in commonRulesListView.SelectedItems)
             {
                 if (rule.Score != null) // if a rule is selected and has a Score value
                 {
                     // as special case, need to first check one chance and worthless
-                    if (_worthless && rule == game.Rules[1])
+                    if (Worthless() && rule == game.Rules[1])
                     {
                         AddToSpecialRulesSummary("Since this hand is worthless, points for " + rule.Name + " are not added to the score.");
                     }
@@ -459,6 +563,18 @@ namespace MahjongScorer.Pages
                     }                   
                 }
             }
+
+            foreach (Rule rule in uncommonRulesListView.SelectedItems)
+            {
+                if (rule.Score != null) // if a rule is selected and has a Score value
+                {
+                    // add points
+                    _currentBaseScore += rule.Score.Value;
+
+                    // add descripition to the summary
+                    AddToSpecialRulesSummary(rule.Score + " is added to the base score because " + rule.Description + ".");
+                }
+            }
         }
 
 
@@ -469,10 +585,10 @@ namespace MahjongScorer.Pages
         /// </summary>
         private void ApplySelfDrawnPoints()
         {
-            if (drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
+            if (SelfDrawn())
             {
                 // only apply self drawn points if hand isn't worthless
-                if (!_worthless)
+                if (!Worthless())
                 {
                     _currentBaseScore += game.Rules[0].Score.Value;
                     AddToSpecialRulesSummary(game.Rules[0].Score + " is added to the base score because " + game.Rules[0].Description + ".");
@@ -481,13 +597,6 @@ namespace MahjongScorer.Pages
                 {
                     AddToSpecialRulesSummary("Even though winning tile was self-drawn, " + game.Rules[0].Score + " points are not added because the hand was worthless.");
                 }
-
-                // keep track of whether hand is self drawn, whether points are applied or not
-                _selfDrawn = true;
-            }
-            else
-            {
-                _selfDrawn = false;
             }
         }
 
@@ -497,7 +606,39 @@ namespace MahjongScorer.Pages
         /// </summary>
         private void ApplySelectedRuleDoubles()
         {
-            foreach (Rule rule in rulesListView.SelectedItems)
+            foreach (Rule rule in commonRulesListView.SelectedItems)
+            {
+                // for all selected rules, current score gets doubled as many times per it's Double value
+                _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
+
+                // add to summary based on Double value
+                switch (rule.Double)
+                {
+                    case 1:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled because " + 
+                            rule.Description + 
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                    case 2:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled twice because " + 
+                            rule.Description + 
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                    case 4:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled four times because " + 
+                            rule.Description + 
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                }
+            }
+
+            foreach (Rule rule in uncommonRulesListView.SelectedItems)
             {
                 // for all selected rules, current score gets doubled as many times per it's Double value
                 _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
@@ -535,7 +676,7 @@ namespace MahjongScorer.Pages
                         // Worthless hand - apply double if there are no pungs or kongs, and no lucky pair
                         // if this is active, "one chance" and "self drawn" points must be subtracted
                         case 5:
-                            if (_worthless)
+                            if (Worthless())
                             {
                                 _currentBaseScore = DoubleScore(_currentBaseScore, rule.Double);
                                 AddToSpecialRulesSummary("Because this is a worthless hand, the score is doubled.");
@@ -591,7 +732,7 @@ namespace MahjongScorer.Pages
         /// <param name="player"></param>
         private void SetPlayerScore(Player player)
         {
-            if (_dealerWon) // dealer won so score is multiplied 6x
+            if (DealerWon()) // dealer won so score is multiplied 6x
             {
 
                 if (player.IsRoundWinner) // AWARD THE WINNER
@@ -617,7 +758,7 @@ namespace MahjongScorer.Pages
                 else // TAKE FROM LOSERS
                 {
                     // split up payment based on who winning tile was drawn from
-                    if (_selfDrawn)
+                    if (SelfDrawn())
                     {
                         player.RoundScores.Add(_currentBaseScore * ScoreValues.X_ISLOSER_SELFDRAWN_DEALERWON); // x2, negative
 
@@ -671,7 +812,7 @@ namespace MahjongScorer.Pages
                 else // TAKE FROM LOSERS
                 {
                     // split up payment based on who winning tile was drawn from
-                    if (_selfDrawn)
+                    if (SelfDrawn())
                     {
                         // if self drawn and a losing player was dealer, they pay double
                         if (player.IsDealer)
@@ -773,7 +914,10 @@ namespace MahjongScorer.Pages
         private void InitializeRules()
         {
             // set up list of possible rules
-            PossibleRules = new List<Rule>();
+            AllPossibleRules = new List<Rule>();
+
+            PossibleCommonRules = new List<Rule>();
+            PossibleUncommonRules = new List<Rule>();
 
             foreach (Rule rule in game.Rules)
             {
@@ -907,106 +1051,31 @@ namespace MahjongScorer.Pages
 
                 // add all eligible rules to the list
                 if (rule.ShowInList == true)
-                    PossibleRules.Add(rule);
+                    AllPossibleRules.Add(rule);
+            }
+
+
+            foreach (Rule rule in AllPossibleRules)
+            {
+                if (rule.IsUncommon)
+                    PossibleUncommonRules.Add(rule);
+                else
+                    PossibleCommonRules.Add(rule);
             }
 
             // set the item source of the listview to this Win Conditions List in the Game object
-            rulesListView.ItemsSource = PossibleRules;
+            commonRulesListView.ItemsSource = PossibleCommonRules;
+
+            uncommonRulesListView.ItemsSource = PossibleUncommonRules;
         }
 
 
-        private void DealerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            InitializeWinnerComboBox();
-            winnerComboBox.Visibility = Visibility.Visible;
-        }
-
-        private void WinnerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // reset the drawn from combo box values in case something changes after the first selection
-            InitializeDrawnFromComboBox();
-
-            ComboBox WinnerComboBox = sender as ComboBox;
-
-            // get the selected index of winner combobox, and remove that index from drawn from combobox
-            for (var i = 0; i < WinnerComboBox.Items.Count; i++)
-            {
-                if (WinnerComboBox.SelectedIndex == i)
-                {
-                    DrawnComboBoxStrings.RemoveAt(i);
-                    _ineligableDrawnFromPlayerIndex = i;
-                }
-            }
-
-            // item source of drawn combobox can't be set until above item is removed
-            drawnFromComboBox.ItemsSource = DrawnComboBoxStrings;
-
-            //show drawn from combo box
-            drawnFromComboBox.Visibility = Visibility.Visible;
-        }
-
-        private void DrawnFromComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            setsScoringStackPanel.Visibility = Visibility.Visible;
-
-            InitializePossiblePungs();
-        }
-
-
-        private void pungCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-
-            InitializePossibleKongs(cb);
-
-            InitializeSetCheckBoxes(cb, pungCountGrid, "pung");
-
-            pungCountGrid.Visibility = Visibility.Visible;
-            kongCountComboBox.Visibility = Visibility.Visible;
-
-            // preset kongs combobox to 0, since they are rare
-            kongCountComboBox.SelectedIndex = 0;
-        }
-
-
-        private void kongCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            InitializeSetCheckBoxes(cb, kongCountGrid, "kong");
-            kongCountGrid.Visibility = Visibility.Visible;
-
-            InitializeRules();
-            pointsDoublesStackPanel.Visibility = Visibility.Visible;
-
-            doneScoringButton.Visibility = Visibility.Visible;
-        }
-
-
-        private void SetCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            // reset the win conditions list view, based on changes to the check boxes
-            InitializeRules();
-        }
-
-        private void SetCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            // reset the win conditions list view, based on changes to the check boxes
-            InitializeRules();
-        }
-
-
-        private void DoneScoringButton_Click(object sender, RoutedEventArgs e)
-        {
-            DetermineWinnerAndSetScores();
-
-            EndRound();          
-
-            Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void EndRound()
         {
-            if (_dealerWon)
+            if (DealerWon())
                 // increment property tracking how many times the dealer won
                 game.TimesDealerWon++;
             else // only change dealer and prevailing wind if the dealer didn't win
@@ -1044,6 +1113,113 @@ namespace MahjongScorer.Pages
                 game.LoadedFromSave = false;
             }
         }
+
+
+        //private void DealerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    InitializeWinnerComboBox();
+        //    winnerComboBox.Visibility = Visibility.Visible;
+
+        //    GenerateinProgressSummary();
+        //}
+
+        private void WinnerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // reset the drawn from combo box values in case something changes after the first selection
+            InitializeDrawnFromComboBox();
+
+            ComboBox WinnerComboBox = sender as ComboBox;
+
+            // get the selected index of winner combobox, and remove that index from drawn from combobox
+            for (var i = 0; i < WinnerComboBox.Items.Count; i++)
+            {
+                if (WinnerComboBox.SelectedIndex == i)
+                {
+                    DrawnComboBoxStrings.RemoveAt(i);
+                    _ineligableDrawnFromPlayerIndex = i;
+                }
+            }
+
+            // item source of drawn combobox can't be set until above item is removed
+            drawnFromComboBox.ItemsSource = DrawnComboBoxStrings;
+
+            //show drawn from combo box
+            drawnFromComboBox.Visibility = Visibility.Visible;
+
+            GenerateInProgressSummary();
+        }
+
+        private void DrawnFromComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            setsScoringStackPanel.Visibility = Visibility.Visible;
+
+            InitializePossiblePungs();
+
+            GenerateInProgressSummary();
+        }
+
+
+        private void pungCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+
+            InitializePossibleKongs(cb);
+
+            InitializeSetCheckBoxes(cb, pungCountGrid, "pung");
+
+            pungCountGrid.Visibility = Visibility.Visible;
+            kongCountComboBox.Visibility = Visibility.Visible;
+
+            // preset kongs combobox to 0, since they are rare
+            kongCountComboBox.SelectedIndex = 0;
+
+            GenerateInProgressSummary();
+        }
+
+
+        private void kongCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+            InitializeSetCheckBoxes(cb, kongCountGrid, "kong");
+            kongCountGrid.Visibility = Visibility.Visible;
+
+            InitializeRules();
+            pointsDoublesStackPanel.Visibility = Visibility.Visible;
+
+            doneScoringButton.Visibility = Visibility.Visible;
+
+            GenerateInProgressSummary();
+        }
+
+
+        private void SetCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            // reset the win conditions list view, based on changes to the check boxes
+            InitializeRules();
+        }
+
+        private void SetCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            // reset the win conditions list view, based on changes to the check boxes
+            InitializeRules();
+        }
+
+
+        private void DoneScoringButton_Click(object sender, RoutedEventArgs e)
+        {
+            DetermineWinnerAndSetScores();
+
+            EndRound();          
+
+            Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+        }
+
+        private void RulesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GenerateInProgressSummary();
+        }
+
+        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
