@@ -34,8 +34,8 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="inProgressSummaryGrid.(RelativePanel.Below)" Value="allScoringStackPanel" />
-                        <Setter Target="inProgressSummaryGrid.Margin" Value="0,15,0,0" />
+                        <Setter Target="inProgressTipsGrid.(RelativePanel.Below)" Value="allScoringStackPanel" />
+                        <Setter Target="inProgressTipsGrid.Margin" Value="0,15,0,0" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -44,8 +44,8 @@
                         <AdaptiveTrigger MinWindowWidth="{ThemeResource MobileBreakpoint}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="inProgressSummaryGrid.(RelativePanel.RightOf)" Value="allScoringStackPanel" />
-                        <Setter Target="inProgressSummaryGrid.Margin" Value="65,0,0,0" />
+                        <Setter Target="inProgressTipsGrid.(RelativePanel.RightOf)" Value="allScoringStackPanel" />
+                        <Setter Target="inProgressTipsGrid.Margin" Value="65,0,0,0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -75,8 +75,6 @@
                                 <TextBlock Text="Prevailing Wind:" Margin="0,0,5,0"/>
                                 <TextBlock x:Name="prevailingWindTextBlock" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                             </StackPanel>
-                        
-                        
                         </Grid>
 
                         <Grid Width="400" HorizontalAlignment="Center">
@@ -265,7 +263,7 @@
                             Content="Done!" />
                 </StackPanel>
 
-                <Grid x:Name="inProgressSummaryGrid" 
+                <Grid x:Name="inProgressTipsGrid" 
                       Width="370"
                       Visibility="Collapsed"
                       HorizontalAlignment="Center">
@@ -278,7 +276,7 @@
                                Style="{ThemeResource SmallHeaderStyle}" 
                                Margin="0,20,0,0" />
                     
-                    <TextBlock x:Name="inProgressSummaryText" Grid.Row="1"
+                    <TextBlock x:Name="inProgressTipsText" Grid.Row="1"
                                Margin="0,10,0,20"
                                TextWrapping="WrapWholeWords" />
                 </Grid>

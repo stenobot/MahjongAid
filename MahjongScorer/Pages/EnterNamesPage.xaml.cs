@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -118,7 +111,6 @@ namespace MahjongScorer.Pages
             {
                 player.RoundScores = new List<int>();
                 player.TotalScore = ScoreValues.STARTING_SCORE;
-                player.IsRoundWinner = false;
                 player.IsGameWinner = false;
             }
 
@@ -132,8 +124,6 @@ namespace MahjongScorer.Pages
             _playerFour.CurrentWind = Wind.North;
             _playerFour.IsDealer = false;
 
-            // set game property for save data display
-            game.CurrentDealerName = _playerOne.Name;
         }
 
 
@@ -163,6 +153,9 @@ namespace MahjongScorer.Pages
         {
             startGameButton.Visibility = Visibility.Collapsed;
             startGameProgress.Visibility = Visibility.Visible;
+
+            // set game property for save data display
+            game.CurrentDealerName = _playerOne.Name;
 
             try
             {

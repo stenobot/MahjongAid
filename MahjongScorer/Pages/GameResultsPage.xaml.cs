@@ -148,6 +148,12 @@ namespace MahjongScorer.Pages
             playerFourWindTextBlock.Text = "(" + game.Players[3].CurrentWind.ToString() + ")";
         }
 
+        private void SetNextRoundInfo()
+        {
+            nextDealerTextBlock.Text = game.CurrentDealerName;
+            nextPrevailingWindTextBlock.Text = game.PrevailingWind.ToString();
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -166,7 +172,7 @@ namespace MahjongScorer.Pages
             }   
 
             SetPlayerNames();
-
+            SetNextRoundInfo();
 
             if (e.NavigationMode != NavigationMode.Back)
             {
@@ -203,6 +209,9 @@ namespace MahjongScorer.Pages
 
                     // don't show the score next round button
                     scoreRoundButton.Visibility = Visibility.Collapsed;
+
+                    // don't show next round info
+                    nextDealerWindGrid.Visibility = Visibility.Collapsed;
 
                     // show game over UI
                     gameOverStackPanel.Visibility = Visibility.Visible;

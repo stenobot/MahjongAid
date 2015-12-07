@@ -14,7 +14,6 @@ namespace MahjongScorer
         private bool _isDealer;
         private bool _isRoundWinner;
         private bool _isGameWinner;
-        private bool _drawnFromThisRound;
         private int _totalScore;
         private List<int> _roundScores;
 
@@ -67,16 +66,6 @@ namespace MahjongScorer
             {
                 if (_isGameWinner != value)
                     _isGameWinner = value;
-            }
-        }
-
-        public bool DrawnFromThisRound
-        {
-            get { return _drawnFromThisRound; }
-            set
-            {
-                if (_drawnFromThisRound != value)
-                    _drawnFromThisRound = value;
             }
         }
 
