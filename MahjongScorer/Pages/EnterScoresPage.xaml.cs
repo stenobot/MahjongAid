@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -21,7 +11,7 @@ using Windows.UI.Xaml.Navigation;
 namespace MahjongScorer.Pages
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Page where scores are entered for a round
     /// </summary>
     public sealed partial class EnterScoresPage : Page
     {
@@ -31,15 +21,11 @@ namespace MahjongScorer.Pages
         // keep track of which player we removed from the drawn from combo box each round
         private int _ineligableDrawnFromPlayerIndex;
 
-
+        // summary String Builders
         private StringBuilder _specialRulesSummary = new StringBuilder();
-
         private StringBuilder _inProgressTips = new StringBuilder();
         
-
-
         // holders for combo box lists
-        //private List<string> DealerComboBoxStrings;
         private List<string> WinComboBoxStrings;
         private List<string> DrawnComboBoxStrings;
 
@@ -49,16 +35,16 @@ namespace MahjongScorer.Pages
         private List<SetCheckBox> KongTerminalsHonorsCheckBoxes;
         private List<SetCheckBox> KongConcealedCheckBoxes;
 
-        // lists of possible sets, and Set objects (we start with 4 and there can only ever be 4 total)
+        // Set Lists
         List<Set> PossiblePungs;
         List<Set> PossibleKongs;
 
-
+        // Rule Lists
         List<Rule> AllPossibleRules;
-
         List<Rule> PossibleCommonRules;
         List<Rule> PossibleUncommonRules;
 
+        //Set objects (we start with 4 and there can only ever be 4 total)
         Set noSets;
         Set set1;
         Set set2;
@@ -70,7 +56,7 @@ namespace MahjongScorer.Pages
             this.InitializeComponent();
         }
 
-
+        #region "INITIALIZE" METHODS
 
         /// <summary>
         /// Initialize the winner combo box
@@ -240,41 +226,169 @@ namespace MahjongScorer.Pages
             }
         }
 
+
         /// <summary>
-        /// Calculates scores for the different sets. We'll run this method twice: Once for Pungs, once for Kongs
+        /// Called whenever we need to set up (or reset) the Rules ListView
+        /// Shows or hides certain items in the ListView, depending on checked boxes or ComboBox selections
         /// </summary>
-        /// <param name="TerminalsHonorsSetCheckBoxes"></param>
-        /// <param name="ConcealedSetCheckBoxes"></param>
-        /// <param name="baseValue"></param>
-        private int CalculateSetScores(List<SetCheckBox> TerminalsHonorsSetCheckBoxes, List<SetCheckBox> ConcealedSetCheckBoxes, int baseValue)
+        private void InitializeRules()
         {
-            int finalSetValue = 0;
+            // set up list of possible rules
+            AllPossibleRules = new List<Rule>();
 
-            foreach (SetCheckBox terminalsHonorsCheckBox in TerminalsHonorsSetCheckBoxes)
+            PossibleCommonRules = new List<Rule>();
+            PossibleUncommonRules = new List<Rule>();
+
+            foreach (Rule rule in game.Rules)
             {
-                // set the base value for this type of set
-                int thisSetValue = baseValue;
+                // switch statement checks all rules that are "sometimes" shown, and determines whether they should be shown
+                switch (game.Rules.IndexOf(rule))
+                {
+                    // "Lucky pair" - change description based on prevailing wind
+                    case 2:
+                        rule.Description = "the winning pair is the prevailing wind (" + game.PrevailingWind + "), lucky wind, or dragons";
 
-                // if it's terminal or honors, double it
-                if (terminalsHonorsCheckBox.IsChecked == true)
-                    thisSetValue *= 2;
+                        break;
 
-                // if it's concealed, double it
-                if (ConcealedSetCheckBoxes[TerminalsHonorsSetCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
-                    thisSetValue *= 2;
+                    // "Semi-concealed" (partial) - show if there are less than 2 unconcealed sets, and winning tile is NOT self drawn
+                    case 3:
+                        if ((pungCountComboBox.SelectedIndex +
+                            kongCountComboBox.SelectedIndex) < (ConcealedPungsKongs() + 2) &&
+                            drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
 
-                // add the final value to the total round base score
-                finalSetValue += thisSetValue;
+                        break;
+
+                    // "Concealed" (fully) - show if all pungs/kongs are concealed and winning tile IS self drawn
+                    case 4:
+                        if (((pungCountComboBox.SelectedIndex +
+                            kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
+                            ConcealedPungsKongs() > 0 &&
+                            drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
+
+                    // "All simples" - show if there are no terminals/honors pungs or kongs
+                    case 6:
+                        if (TerminalsHonorsPungsKongs() == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
+
+                    // 1-9 run - show if there are 1 or less sets
+                    case 7:
+                        if (!((pungCountComboBox.SelectedIndex > 1) ||
+                            (kongCountComboBox.SelectedIndex > 1) ||
+                            pungCountComboBox.SelectedIndex == 1 && kongCountComboBox.SelectedIndex == 1))
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
+
+                    // one suit no honors - show if there are no terminals/honors pungs or kongs
+                    case 10:
+                        if (TerminalsHonorsPungsKongs() == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+
+                        break;
+
+                    // all honors - show if every set has a terminal or honor
+                    case 11:
+                        if ((pungCountComboBox.SelectedIndex +
+                            kongCountComboBox.SelectedIndex) == TerminalsHonorsPungsKongs())
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // lucky set - show if if at least one pung or kong has terminals/honors checked
+                    case 12:
+                        if (TerminalsHonorsPungsKongs() > 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // double lucky set - show if if at least one pung or kong has terminals/honors checked
+                    case 13:
+                        if (TerminalsHonorsPungsKongs() > 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // off the dead wall - show if there's at least one kong
+                    case 14:
+                        if (kongCountComboBox.SelectedIndex > 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // all pairs - show if there are no pungs or kongs
+                    case 18:
+                        if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // triple pung - show if there are 3 or more pungs or kongs
+                    case 19:
+                        if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex >= 3)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+
+                    // little three dragons - show if there are at least 2 pungs or kongs that are terminals/honors
+                    case 21:
+                        if (TerminalsHonorsPungsKongs() >= 2)
+                            rule.ShowInList = true;
+                        else
+                            rule.ShowInList = false;
+                        break;
+                };
+
+                // add all eligible rules to the list
+                if (rule.ShowInList == true)
+                    AllPossibleRules.Add(rule);
             }
 
-            return finalSetValue;
+
+            foreach (Rule rule in AllPossibleRules)
+            {
+                if (rule.IsUncommon)
+                    PossibleUncommonRules.Add(rule);
+                else
+                    PossibleCommonRules.Add(rule);
+            }
+
+            // set the item source of the listview to this Win Conditions List in the Game object
+            commonRulesListView.ItemsSource = PossibleCommonRules;
+
+            uncommonRulesListView.ItemsSource = PossibleUncommonRules;
         }
 
+        #endregion
+
+
+        #region "SUMMARY" METHODS
 
         /// <summary>
         /// Adds text to the special rules summary, which is later added to the current round summary
         /// </summary>
-        /// <param name="summary"></param>
+        /// <param name="summary">takes a string to add to the special rules summary</param>
         private void AddToSpecialRulesSummary(string summary)
         {
             // if summary already has text, add a space between sentences
@@ -315,9 +429,8 @@ namespace MahjongScorer.Pages
         }
 
         /// <summary>
-        /// 
+        /// Creates the In Progress Tips summary wholesale each time this method is called
         /// </summary>
-        /// <param name="reset"></param>
         private void GenerateInProgressTips()
         {
             inProgressTipsGrid.Visibility = Visibility.Visible;
@@ -372,7 +485,6 @@ namespace MahjongScorer.Pages
                 }              
             }
 
-
             if (Worthless())
             {
                 _inProgressTips.Append(Environment.NewLine);
@@ -405,19 +517,20 @@ namespace MahjongScorer.Pages
             inProgressTipsText.Text = _inProgressTips.ToString();        
         }
 
-
+        /// <summary>
+        /// Show each player's score dynamically in the In Progress Tips summary
+        /// </summary>
         private void ShowInProgressPlayerScores()
         {
             _inProgressTips.Append(Environment.NewLine);
             _inProgressTips.Append(Environment.NewLine);
-            _inProgressTips.Insert(_inProgressTips.Length, "Current Scores:");
+
+            _inProgressTips.Insert(_inProgressTips.Length, "Current score adjustments:");
             _inProgressTips.Append(Environment.NewLine);
 
             foreach (Player player in game.Players)
             {
-                if (player == RoundWinner())
-                    _inProgressTips.Insert(_inProgressTips.Length, player.Name + ": " + (player.TotalScore + CurrentBaseScore())); 
-
+                _inProgressTips.Insert(_inProgressTips.Length, player.Name + ": " + PlayerRoundScore(player, CurrentBaseScore()));
                 _inProgressTips.Append(Environment.NewLine);
             }
         }
@@ -515,6 +628,7 @@ namespace MahjongScorer.Pages
             game.RoundSummaries.Add(game.CurrentRoundSummary.ToString());
         }
 
+
         /// <summary>
         /// Just add a paragraph break into the CurrentRoundSummary String Builder
         /// </summary>
@@ -524,6 +638,157 @@ namespace MahjongScorer.Pages
             game.CurrentRoundSummary.Append(Environment.NewLine);
         }
 
+        #endregion
+
+
+        #region "SCORE" METHODS
+        /// <summary>
+        /// Calculates scores for the different sets. We'll run this method twice: Once for Pungs, once for Kongs
+        /// </summary>
+        /// <param name="TerminalsHonorsSetCheckBoxes"></param>
+        /// <param name="ConcealedSetCheckBoxes"></param>
+        /// <param name="baseValue"></param>
+        private int CalculateSetScores(List<SetCheckBox> TerminalsHonorsSetCheckBoxes, List<SetCheckBox> ConcealedSetCheckBoxes, int baseValue)
+        {
+            int finalSetValue = 0;
+
+            foreach (SetCheckBox terminalsHonorsCheckBox in TerminalsHonorsSetCheckBoxes)
+            {
+                // set the base value for this type of set
+                int thisSetValue = baseValue;
+
+                // if it's terminal or honors, double it
+                if (terminalsHonorsCheckBox.IsChecked == true)
+                    thisSetValue *= 2;
+
+                // if it's concealed, double it
+                if (ConcealedSetCheckBoxes[TerminalsHonorsSetCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
+                    thisSetValue *= 2;
+
+                // add the final value to the total round base score
+                finalSetValue += thisSetValue;
+            }
+
+            return finalSetValue;
+        }
+
+
+        /// <summary>
+        /// A method that determines the winner, who dealt the winning tile (if anyone),
+        /// and who was the dealer, then uses that info to process scores per player
+        /// </summary>
+        private void SetFinalScores()
+        {
+            // get the final base score
+            int _finalBaseScore = CurrentBaseScore();
+
+            // process the final score for each player
+            foreach (Player player in game.Players)
+            {
+                // process the score for each player and add it to the player's Round Scores list
+                player.RoundScores.Add(PlayerRoundScore(player, _finalBaseScore));
+
+                // set each player's total score, -1 from currentround because the roundscores list indexes at 0
+                player.TotalScore += player.RoundScores[game.CurrentRound - 1];
+            }
+
+            // create the round summary and add it to the round summaries list
+            GenerateRoundSummary();
+        }
+
+
+        /// <summary>
+        /// Takes the current base score an a Player instance and processes that player's score for the round
+        /// </summary>
+        /// <param name="player">The player we want the round score for</param>
+        /// <param name="baseScore">The current base score</param>
+        /// <returns></returns>
+        private int PlayerRoundScore(Player player, int baseScore)
+        {
+            if (DealerWon()) // dealer won so score is multiplied 6x
+            {
+
+                if (player == RoundWinner()) // AWARD THE WINNER
+                {
+                    return (baseScore * ScoreValues.X_ISWINNER_ISDEALER); // x6, positive
+                }
+                else // TAKE FROM LOSERS
+                {
+                    // split up payment based on who winning tile was drawn from
+                    if (SelfDrawn())
+                    {
+                        return (baseScore * ScoreValues.X_ISLOSER_SELFDRAWN_DEALERWON); // x2, negative
+                    }
+                    else
+                    {
+                        if (player == PlayerDrawnFrom())
+                        {
+                            return (baseScore * ScoreValues.X_ISLOSER_ISDRAWNFROM_DEALERWON); // x6, negative
+                        }
+                        else
+                        {
+                            // even though score change is 0, still need to add an entry in the player's RoundScores list
+                           return 0;
+                        }
+                    }
+                }
+            }
+            else // non-dealer won so score is multiplied 4x
+            {
+                if (player == RoundWinner()) // AWARD THE WINNER
+                {
+                    return (baseScore * ScoreValues.X_ISWINNER); // x4, postive
+                }
+                else // TAKE FROM LOSERS
+                {
+                    // split up payment based on who winning tile was drawn from
+                    if (SelfDrawn())
+                    {
+                        // if self drawn and a losing player was dealer, they pay double
+                        if (player.IsDealer)
+                        {
+                            return (baseScore * ScoreValues.X_ISLOSER_ISDEALER_SELFDRAWN); // x2, negative
+                        }
+                        else
+                        {
+                            return (baseScore * ScoreValues.X_ISLOSER_SELFDRAWN); // x1, negative
+                        }
+                    }
+                    else
+                    {
+                        // if a player was drawn from, they pay for everyone
+                        if (player == PlayerDrawnFrom())
+                        {
+                            return (baseScore * ScoreValues.X_ISLOSER_ISDRAWNFROM); // x4, negative
+                        }
+                        else
+                        {
+                            // even though score change is 0, still need to add an entry in the player's RoundScores list
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        private int DoubleScore(int score, int timesDoubled)
+        {
+            for (int i = 0; i < timesDoubled; i++)
+            {
+                score *= 2;
+            }
+            return score;
+        }
+
+        #endregion
+
+
+        #region "GET STATUS" METHODS
+
+        /// <summary>
+        /// Calculates the current base score, based on user selection at the time
+        /// </summary>
+        /// <returns>the current base score for the round</returns>
         private int CurrentBaseScore()
         {   
             // set base value
@@ -556,26 +821,6 @@ namespace MahjongScorer.Pages
             }
 
             return baseScore;
-        }
-
-
-        /// <summary>
-        /// A method that determines the winner, who dealt the winning tile (if anyone),
-        /// and who was the dealer, then uses that info to process scores per player
-        /// </summary>
-        private void SetFinalScores()
-        {
-            // get the final base score
-            int _finalBaseScore = CurrentBaseScore();
-
-            // process each player's score using the round's final base score
-            foreach (Player player in game.Players)
-            {
-                SetPlayerScore(player, _finalBaseScore);
-            }
-
-            // create the round summary and add it to the round summaries list
-            GenerateRoundSummary();
         }
 
 
@@ -689,6 +934,55 @@ namespace MahjongScorer.Pages
             }
             return null;
         }
+
+        /// <summary>
+        /// Returns the count of concealed pungs and kongs, based on selected check boxes
+        /// </summary>
+        /// <returns></returns>
+        private int ConcealedPungsKongs()
+        {
+            int concealedPungsKongsCount = 0;
+            foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
+            {
+                if (concealedPungs.IsChecked == true)
+                    concealedPungsKongsCount++;
+            }
+
+            foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
+            {
+                if (concealedKongs.IsChecked == true)
+                    concealedPungsKongsCount++;
+            }
+
+            return concealedPungsKongsCount;
+        }
+
+        /// <summary>
+        /// Gets the count of terminals/honors pungs and kongs, based on selected check boxes
+        /// </summary>
+        /// <returns>count of pungs/kongs that are checked as terminals/honors</returns>
+        private int TerminalsHonorsPungsKongs()
+        {
+            int terminalsHonorsPungsKongsCount = 0;
+            foreach (SetCheckBox terminalsHonorsPungs in PungTerminalsHonorsCheckBoxes)
+            {
+                if (terminalsHonorsPungs.IsChecked == true)
+                    terminalsHonorsPungsKongsCount++;
+            }
+
+            foreach (SetCheckBox terminalsHonorsKongs in KongTerminalsHonorsCheckBoxes)
+            {
+                if (terminalsHonorsKongs.IsChecked == true)
+                    terminalsHonorsPungsKongsCount++;
+            }
+
+            return terminalsHonorsPungsKongsCount;
+        }
+
+        #endregion
+
+
+        #region "APPLY RULES" METHODS
 
         /// <summary>
         /// Go through selected Rules and apply point values
@@ -872,293 +1166,123 @@ namespace MahjongScorer.Pages
             return baseScore;
         }
 
+        #endregion
 
-        private int DoubleScore(int score, int timesDoubled)
+
+        #region CONTROL EVENTS
+
+        private void WinnerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            for (int i = 0; i < timesDoubled; i++)
-            {
-                score *= 2;
-            }
-            return score;
-        }
+            // reset the drawn from combo box values in case something changes after the first selection
+            InitializeDrawnFromComboBox();
 
-        /// <summary>
-        /// Called in the DetermineWinnerAndSetScores method
-        /// Processes scores per player based on selected conditions
-        /// </summary>
-        /// <param name="player"></param>
-        private void SetPlayerScore(Player player, int finalBaseScore)
-        {
-            if (DealerWon()) // dealer won so score is multiplied 6x
-            {
+            ComboBox WinnerComboBox = sender as ComboBox;
 
-                if (player == RoundWinner()) // AWARD THE WINNER
-                {
-                    player.RoundScores.Add(finalBaseScore * ScoreValues.X_ISWINNER_ISDEALER); // x6, positive
-                }
-                else // TAKE FROM LOSERS
-                {
-                    // split up payment based on who winning tile was drawn from
-                    if (SelfDrawn())
-                    {
-                        player.RoundScores.Add(finalBaseScore * ScoreValues.X_ISLOSER_SELFDRAWN_DEALERWON); // x2, negative
-                    }
-                    else
-                    {
-                        if (player == PlayerDrawnFrom())
-                        {
-                            player.RoundScores.Add(finalBaseScore * ScoreValues.X_ISLOSER_ISDRAWNFROM_DEALERWON); // x6, negative
-                        }
-                        else
-                        {
-                            // even though score change is 0, still need to add an entry in the player's RoundScores list
-                            player.RoundScores.Add(0);
-                        }
-                    }
-                }
-            }
-            else // non-dealer won so score is multiplied 4x
+            // get the selected index of winner combobox, and remove that index from drawn from combobox
+            for (var i = 0; i < WinnerComboBox.Items.Count; i++)
             {
-                if (player == RoundWinner()) // AWARD THE WINNER
+                if (WinnerComboBox.SelectedIndex == i)
                 {
-                    player.RoundScores.Add(finalBaseScore * ScoreValues.X_ISWINNER); // x4, postive
-                }
-                else // TAKE FROM LOSERS
-                {
-                    // split up payment based on who winning tile was drawn from
-                    if (SelfDrawn())
-                    {
-                        // if self drawn and a losing player was dealer, they pay double
-                        if (player.IsDealer)
-                        {
-                            player.RoundScores.Add(finalBaseScore * ScoreValues.X_ISLOSER_ISDEALER_SELFDRAWN); // x2, negative
-                        }
-                        else
-                        {
-                            player.RoundScores.Add(finalBaseScore * ScoreValues.X_ISLOSER_SELFDRAWN); // x1, negative
-                        }                     
-                    }
-                    else
-                    {
-                        // if a player was drawn from, they pay for everyone
-                        if (player == PlayerDrawnFrom())
-                        {
-                            player.RoundScores.Add(finalBaseScore * ScoreValues.X_ISLOSER_ISDRAWNFROM); // x4, negative
-                        }
-                        else
-                        {
-                            // even though score change is 0, still need to add an entry in the player's RoundScores list
-                            player.RoundScores.Add(0);
-                        }
-                    }
+                    DrawnComboBoxStrings.RemoveAt(i);
+                    _ineligableDrawnFromPlayerIndex = i;
                 }
             }
 
-            // set each player's total score, -1 from currentround because the roundscores list indexes at 0
-            player.TotalScore += player.RoundScores[game.CurrentRound - 1];
+            // item source of drawn combobox can't be set until above item is removed
+            drawnFromComboBox.ItemsSource = DrawnComboBoxStrings;
+
+            //show drawn from combo box
+            drawnFromComboBox.Visibility = Visibility.Visible;
+
+            // re-render the in progress text
+            GenerateInProgressTips();
         }
 
-
-        /// <summary>
-        /// Returns the count of concealed pungs and kongs, based on selected check boxes
-        /// </summary>
-        /// <returns></returns>
-        private int ConcealedPungsKongs()
+        private void DrawnFromComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int concealedPungsKongsCount = 0;
-            foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
-            {
-                if (concealedPungs.IsChecked == true)
-                    concealedPungsKongsCount++;
-            }
+            setsScoringStackPanel.Visibility = Visibility.Visible;
 
-            foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
-            {
-                if (concealedKongs.IsChecked == true)
-                    concealedPungsKongsCount++;
-            }
+            InitializePossiblePungs();
 
-            return concealedPungsKongsCount;
+            // re-render the in progress text
+            GenerateInProgressTips();
         }
 
-        /// <summary>
-        /// Returns the count of terminals/honors pungs and kongs, based on selected check boxes
-        /// </summary>
-        /// <returns></returns>
-        private int TerminalsHonorsPungsKongs()
+
+        private void pungCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int terminalsHonorsPungsKongsCount = 0;
-            foreach (SetCheckBox terminalsHonorsPungs in PungTerminalsHonorsCheckBoxes)
-            {
-                if (terminalsHonorsPungs.IsChecked == true)
-                    terminalsHonorsPungsKongsCount++;
-            }
+            ComboBox cb = sender as ComboBox;
 
-            foreach (SetCheckBox terminalsHonorsKongs in KongTerminalsHonorsCheckBoxes)
-            {
-                if (terminalsHonorsKongs.IsChecked == true)
-                    terminalsHonorsPungsKongsCount++;
-            }
+            InitializePossibleKongs(cb);
 
-            return terminalsHonorsPungsKongsCount;
+            InitializeSetCheckBoxes(cb, pungCountGrid, "pung");
+
+            pungCountGrid.Visibility = Visibility.Visible;
+            kongCountComboBox.Visibility = Visibility.Visible;
+
+            // preset kongs combobox to 0, since they are rare
+            kongCountComboBox.SelectedIndex = 0;
+
+            // re-render the in progress text
+            GenerateInProgressTips();
         }
 
-        /// <summary>
-        /// Called whenever we need to set up (or reset) the Rules ListView
-        /// Shows or hides certain items in the ListView, depending on checked boxes or ComboBox selections
-        /// </summary>
-        private void InitializeRules()
+
+        private void kongCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // set up list of possible rules
-            AllPossibleRules = new List<Rule>();
+            ComboBox cb = sender as ComboBox;
+            InitializeSetCheckBoxes(cb, kongCountGrid, "kong");
+            kongCountGrid.Visibility = Visibility.Visible;
 
-            PossibleCommonRules = new List<Rule>();
-            PossibleUncommonRules = new List<Rule>();
+            InitializeRules();
+            pointsDoublesStackPanel.Visibility = Visibility.Visible;
 
-            foreach (Rule rule in game.Rules)
-            {
-                // switch statement checks all rules that are "sometimes" shown, and determines whether they should be shown
-                switch (game.Rules.IndexOf(rule))
-                {
-                    // "Lucky pair" - change description based on prevailing wind
-                    case 2:
-                        rule.Description = "the winning pair is the prevailing wind (" + game.PrevailingWind + "), lucky wind, or dragons";
+            doneScoringButton.Visibility = Visibility.Visible;
 
-                        break;
-
-                    // "Semi-concealed" (partial) - show if there are less than 2 unconcealed sets, and winning tile is NOT self drawn
-                    case 3:
-                        if ((pungCountComboBox.SelectedIndex +
-                            kongCountComboBox.SelectedIndex) < (ConcealedPungsKongs() + 2) &&
-                            drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-
-                        break;
-
-                    // "Concealed" (fully) - show if all pungs/kongs are concealed and winning tile IS self drawn
-                    case 4:
-                        if (((pungCountComboBox.SelectedIndex +
-                            kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
-                            ConcealedPungsKongs() > 0 &&
-                            drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-
-                        break;
-
-                    // "All simples" - show if there are no terminals/honors pungs or kongs
-                    case 6:
-                        if (TerminalsHonorsPungsKongs() == 0)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-
-                        break;
-
-                    // 1-9 run - show if there are 1 or less sets
-                    case 7:
-                        if (!((pungCountComboBox.SelectedIndex > 1) ||
-                            (kongCountComboBox.SelectedIndex > 1) ||
-                            pungCountComboBox.SelectedIndex == 1 && kongCountComboBox.SelectedIndex == 1))
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-
-                        break;
-
-                    // one suit no honors - show if there are no terminals/honors pungs or kongs
-                    case 10:
-                        if (TerminalsHonorsPungsKongs() == 0)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-
-                        break;
-
-                    // all honors - show if every set has a terminal or honor
-                    case 11:
-                        if ((pungCountComboBox.SelectedIndex +
-                            kongCountComboBox.SelectedIndex) == TerminalsHonorsPungsKongs())
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-                        break;
-
-                    // lucky set - show if if at least one pung or kong has terminals/honors checked
-                    case 12:
-                        if (TerminalsHonorsPungsKongs() > 0)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-                        break;
-
-                    // double lucky set - show if if at least one pung or kong has terminals/honors checked
-                    case 13:
-                        if (TerminalsHonorsPungsKongs() > 0)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-                        break;
-
-                    // off the dead wall - show if there's at least one kong
-                    case 14:
-                        if (kongCountComboBox.SelectedIndex > 0)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-                        break;
-
-                    // all pairs - show if there are no pungs or kongs
-                    case 18:
-                        if (pungCountComboBox.SelectedIndex == 0 && kongCountComboBox.SelectedIndex == 0)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-                        break;
-
-                    // triple pung - show if there are 3 or more pungs or kongs
-                    case 19:
-                        if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex >= 3)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-                        break;
-
-                    // little three dragons - show if there are at least 2 pungs or kongs that are terminals/honors
-                    case 21:
-                        if (TerminalsHonorsPungsKongs() >= 2)
-                            rule.ShowInList = true;
-                        else
-                            rule.ShowInList = false;
-                        break;
-                };
-
-                // add all eligible rules to the list
-                if (rule.ShowInList == true)
-                    AllPossibleRules.Add(rule);
-            }
-
-
-            foreach (Rule rule in AllPossibleRules)
-            {
-                if (rule.IsUncommon)
-                    PossibleUncommonRules.Add(rule);
-                else
-                    PossibleCommonRules.Add(rule);
-            }
-
-            // set the item source of the listview to this Win Conditions List in the Game object
-            commonRulesListView.ItemsSource = PossibleCommonRules;
-
-            uncommonRulesListView.ItemsSource = PossibleUncommonRules;
+            // re-render the in progress text
+            GenerateInProgressTips();
         }
 
 
+        private void SetCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            // reset the win conditions list view, based on changes to the check boxes
+            InitializeRules();
+
+            // re-render the in progress text
+            GenerateInProgressTips();
+        }
+
+        private void SetCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            // reset the win conditions list view, based on changes to the check boxes
+            InitializeRules();
+
+            // re-render the in progress text
+            GenerateInProgressTips();
+        }
+
+
+        private void DoneScoringButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetFinalScores();
+
+            EndRound();          
+
+            Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+        }
+
+        private void RulesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // re-render the in progress text
+            GenerateInProgressTips();
+        }
+
+        #endregion
+
+
         /// <summary>
-        /// 
+        /// Change dealer and prevailing wind, other tidying up
         /// </summary>
         private void EndRound()
         {
@@ -1200,113 +1324,6 @@ namespace MahjongScorer.Pages
                 game.LoadedFromSave = false;
             }
         }
-
-
-        //private void DealerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    InitializeWinnerComboBox();
-        //    winnerComboBox.Visibility = Visibility.Visible;
-
-        //    GenerateinProgressSummary();
-        //}
-
-        private void WinnerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // reset the drawn from combo box values in case something changes after the first selection
-            InitializeDrawnFromComboBox();
-
-            ComboBox WinnerComboBox = sender as ComboBox;
-
-            // get the selected index of winner combobox, and remove that index from drawn from combobox
-            for (var i = 0; i < WinnerComboBox.Items.Count; i++)
-            {
-                if (WinnerComboBox.SelectedIndex == i)
-                {
-                    DrawnComboBoxStrings.RemoveAt(i);
-                    _ineligableDrawnFromPlayerIndex = i;
-                }
-            }
-
-            // item source of drawn combobox can't be set until above item is removed
-            drawnFromComboBox.ItemsSource = DrawnComboBoxStrings;
-
-            //show drawn from combo box
-            drawnFromComboBox.Visibility = Visibility.Visible;
-
-            GenerateInProgressTips();
-        }
-
-        private void DrawnFromComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            setsScoringStackPanel.Visibility = Visibility.Visible;
-
-            InitializePossiblePungs();
-
-            GenerateInProgressTips();
-        }
-
-
-        private void pungCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-
-            InitializePossibleKongs(cb);
-
-            InitializeSetCheckBoxes(cb, pungCountGrid, "pung");
-
-            pungCountGrid.Visibility = Visibility.Visible;
-            kongCountComboBox.Visibility = Visibility.Visible;
-
-            // preset kongs combobox to 0, since they are rare
-            kongCountComboBox.SelectedIndex = 0;
-
-            GenerateInProgressTips();
-        }
-
-
-        private void kongCountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            InitializeSetCheckBoxes(cb, kongCountGrid, "kong");
-            kongCountGrid.Visibility = Visibility.Visible;
-
-            InitializeRules();
-            pointsDoublesStackPanel.Visibility = Visibility.Visible;
-
-            doneScoringButton.Visibility = Visibility.Visible;
-
-            GenerateInProgressTips();
-        }
-
-
-        private void SetCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            // reset the win conditions list view, based on changes to the check boxes
-            InitializeRules();
-        }
-
-        private void SetCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            // reset the win conditions list view, based on changes to the check boxes
-            InitializeRules();
-        }
-
-
-        private void DoneScoringButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetFinalScores();
-
-            EndRound();          
-
-            Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
-        }
-
-        private void RulesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            GenerateInProgressTips();
-        }
-
-        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
