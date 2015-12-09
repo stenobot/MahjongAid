@@ -385,6 +385,146 @@ namespace MahjongScorer.Pages
 
         #region "SUMMARY" METHODS
 
+
+        private StringBuilder SpecialRulesSummary()
+        {
+            // Add summary info for selected common rule values and doubles
+
+            foreach (Rule rule in commonRulesListView.SelectedItems)
+            {
+                // make sure it has a score value, add the score info to the summary
+                if (rule.Score != null)
+                {
+                    // as special case, need to first check one chance and worthless
+                    if (Worthless() && rule == game.Rules[1])
+                        AddToSpecialRulesSummary("Since this hand is worthless, points for " + 
+                            rule.Name + 
+                            " are not added to the score.");
+                    else
+                        AddToSpecialRulesSummary(rule.Score + 
+                            " is added to the base score because " + 
+                            rule.Description + ".");
+                }
+
+                // add to summary based on Double value (if 0, do nothing b/c score was not doubled)
+                switch (rule.Double)
+                {
+                    case 1:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled because " +
+                            rule.Description +
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                    case 2:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled twice because " +
+                            rule.Description +
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                    case 4:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled four times because " +
+                            rule.Description +
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                }
+            }
+
+
+            // Add summary info for selected uncommon rule values and doubles
+
+            foreach (Rule rule in uncommonRulesListView.SelectedItems)
+            {
+                // make sure it has a score value, add the score info to the summary
+                if (rule.Score != null)
+                    AddToSpecialRulesSummary(rule.Score + 
+                        " is added to the base score because " + 
+                        rule.Description + ".");
+
+
+                // add to summary based on Double value (if 0, do nothing b/c score was not doubled)
+                switch (rule.Double)
+                {
+                    case 1:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled because " +
+                            rule.Description +
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                    case 2:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled twice because " +
+                            rule.Description +
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                    case 4:
+                        AddToSpecialRulesSummary(
+                            "Score was doubled four times because " +
+                            rule.Description +
+                            " (" + rule.Name + ")."
+                            );
+                        break;
+                }
+            }
+
+            // Add summary info for automatic rules
+
+            foreach (Rule rule in game.Rules)
+            {
+                if (!rule.ShowInList)
+                {
+                    switch (game.Rules.IndexOf(rule))
+                    {
+                        // Worthless hand - "one chance" and "self drawn" points must be subtracted
+                        case 5:
+                            if (Worthless())
+                                AddToSpecialRulesSummary("Because this is a worthless hand, the score is doubled.");
+                            break;
+                        // Three concealed pungs - apply summary if there are 3 or more concealed pungs or kongs
+                        case 8:
+                            if (ConcealedPungsKongs() >= 3)
+                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
+                            break;
+
+                        // All pungs - apply summary if there are a total of 4 pungs/kongs
+                        case 20:
+                            if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex == 4)
+                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
+                            break;
+
+                        // three kongs - apply summary if there are 3 or more kongs
+                        case 22:
+                            if (kongCountComboBox.SelectedIndex >= 3)
+                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
+                            break;
+                    }
+                }
+            }
+
+
+            // Add summary info for Selfdrawn
+
+            if (SelfDrawn())
+            {
+                // only apply self drawn points if hand isn't worthless
+                if (!Worthless())
+                    AddToSpecialRulesSummary(game.Rules[0].Score + 
+                        " is added to the base score because " + 
+                        game.Rules[0].Description + ".");
+                else
+                    AddToSpecialRulesSummary("Even though winning tile was self-drawn, " + 
+                        game.Rules[0].Score + 
+                        " points are not added because the hand was worthless.");
+            }
+
+            return _specialRulesSummary;
+        }
+
         /// <summary>
         /// Adds text to the special rules summary, which is later added to the current round summary
         /// </summary>
@@ -440,7 +580,7 @@ namespace MahjongScorer.Pages
             if (DealerWon())
                 _inProgressTips.Insert(
                     _inProgressTips.Length, 
-                    winnerComboBox.SelectedItem + " wins and is also the dealer, so their score will be multiplied by <span style='color: blue;'6</span>."
+                    winnerComboBox.SelectedItem + " wins and is also the dealer, so their score will be multiplied by 6."
                     );
             else
                 _inProgressTips.Insert(
@@ -451,8 +591,7 @@ namespace MahjongScorer.Pages
 
             if (SelfDrawn() && !Worthless())
             {
-                _inProgressTips.Append(Environment.NewLine);
-                _inProgressTips.Append(Environment.NewLine);
+                InsertLineBreaks(_inProgressTips, 2);
 
                 _inProgressTips.Insert(
                     _inProgressTips.Length, 
@@ -462,8 +601,7 @@ namespace MahjongScorer.Pages
                     );
             } else if (PlayerDrawnFrom() != null)
             {
-                _inProgressTips.Append(Environment.NewLine);
-                _inProgressTips.Append(Environment.NewLine);
+                InsertLineBreaks(_inProgressTips, 2);
 
                 if (DealerWon())
                 {
@@ -487,8 +625,7 @@ namespace MahjongScorer.Pages
 
             if (Worthless())
             {
-                _inProgressTips.Append(Environment.NewLine);
-                _inProgressTips.Append(Environment.NewLine);
+                InsertLineBreaks(_inProgressTips, 2);
 
                 _inProgressTips.Insert(
                     _inProgressTips.Length,
@@ -497,8 +634,7 @@ namespace MahjongScorer.Pages
                     " will get a Double for this. "
                     );
 
-                _inProgressTips.Append(Environment.NewLine);
-                _inProgressTips.Append(Environment.NewLine);
+                InsertLineBreaks(_inProgressTips, 2);
 
                 if (SelfDrawn() && OneChance())
                     _inProgressTips.Insert(_inProgressTips.Length, "Self-Drawn and One Chance points will not count, because the hand is Worthless.");
@@ -522,16 +658,20 @@ namespace MahjongScorer.Pages
         /// </summary>
         private void ShowInProgressPlayerScores()
         {
-            _inProgressTips.Append(Environment.NewLine);
-            _inProgressTips.Append(Environment.NewLine);
+            InsertLineBreaks(_inProgressTips, 2);
 
-            _inProgressTips.Insert(_inProgressTips.Length, "Current score adjustments:");
-            _inProgressTips.Append(Environment.NewLine);
-
+            _inProgressTips.Insert(_inProgressTips.Length, "Score adjustments:");
+            InsertLineBreaks(_inProgressTips, 1);
             foreach (Player player in game.Players)
             {
-                _inProgressTips.Insert(_inProgressTips.Length, player.Name + ": " + PlayerRoundScore(player, CurrentBaseScore()));
-                _inProgressTips.Append(Environment.NewLine);
+                int scoreAdjustment = PlayerRoundScore(player, CurrentBaseScore());
+
+                if (scoreAdjustment > 0)
+                    _inProgressTips.Insert(_inProgressTips.Length, player.Name + ": +" + scoreAdjustment);
+                else
+                    _inProgressTips.Insert(_inProgressTips.Length, player.Name + ": " + scoreAdjustment);
+
+                InsertLineBreaks(_inProgressTips, 1);
             }
         }
 
@@ -552,7 +692,7 @@ namespace MahjongScorer.Pages
                     finalBaseScore +
                     " multiplied by 6.");
 
-                InsertRoundSummaryParaBreak();
+                InsertLineBreaks(game.CurrentRoundSummary, 2);
 
                 // if not self drawn, show drawn from player's score and info
                 if (!SelfDrawn())
@@ -583,7 +723,7 @@ namespace MahjongScorer.Pages
                     ": The base score of " + finalBaseScore +
                     " multiplied by 4.");
 
-                InsertRoundSummaryParaBreak();
+                InsertLineBreaks(game.CurrentRoundSummary, 2);
 
                 // if not self drawn, show drawn from player's score and info
                 if (!SelfDrawn())
@@ -610,19 +750,16 @@ namespace MahjongScorer.Pages
                 }
             }
 
-            InsertRoundSummaryParaBreak();
+            InsertLineBreaks(game.CurrentRoundSummary, 2);
 
             // add round winner's pung/kong info
             AddPungKongSummary(RoundWinner());
 
-            InsertRoundSummaryParaBreak();
+            InsertLineBreaks(game.CurrentRoundSummary, 2);
 
-            // add all special rules summaries TODO: is there a better way to do this?
-            if (_specialRulesSummary != null)
-            {
-                game.CurrentRoundSummary.Insert(game.CurrentRoundSummary.Length, _specialRulesSummary.ToString());
-                InsertRoundSummaryParaBreak();
-            }
+            // add compiled special rules summary to current round summary
+            if (SpecialRulesSummary() != null)
+                game.CurrentRoundSummary.Insert(game.CurrentRoundSummary.Length, SpecialRulesSummary().ToString());
 
             // finalize the current round summary by adding it to the List
             game.RoundSummaries.Add(game.CurrentRoundSummary.ToString());
@@ -630,12 +767,14 @@ namespace MahjongScorer.Pages
 
 
         /// <summary>
-        /// Just add a paragraph break into the CurrentRoundSummary String Builder
+        /// Just add a paragraph break into a String Builder
         /// </summary>
-        private void InsertRoundSummaryParaBreak()
+        private void InsertLineBreaks(StringBuilder sb, int numBreaks)
         {
-            game.CurrentRoundSummary.Append(Environment.NewLine);
-            game.CurrentRoundSummary.Append(Environment.NewLine);
+            for (var i = 0; i < numBreaks; i++)
+            {
+                sb.Append(Environment.NewLine);
+            }
         }
 
         #endregion
@@ -985,40 +1124,28 @@ namespace MahjongScorer.Pages
         #region "APPLY RULES" METHODS
 
         /// <summary>
-        /// Go through selected Rules and apply point values
+        /// Loops through common and uncommon selected rules and applies appropriate points values to the current base score
         /// </summary>
+        /// <param name="baseScore">The current base score</param>
+        /// <returns>int value for the modified base score</returns>
         private int ApplySelectedRuleValues(int baseScore)
         {
             foreach (Rule rule in commonRulesListView.SelectedItems)
             {
                 if (rule.Score != null) // if a rule is selected and has a Score value
                 {
-                    // as special case, need to first check one chance and worthless
+                    // if worthless and one chance is selected, skip the loop for that iteration
                     if (Worthless() && rule == game.Rules[1])
-                    {
-                        AddToSpecialRulesSummary("Since this hand is worthless, points for " + rule.Name + " are not added to the score.");
-                    }
+                        continue;
                     else
-                    {
-                        // add points
-                        baseScore += rule.Score.Value;
-
-                        // add descripition to the summary
-                        AddToSpecialRulesSummary(rule.Score + " is added to the base score because " + rule.Description + ".");
-                    }                   
+                        baseScore += rule.Score.Value;                  
                 }
             }
 
             foreach (Rule rule in uncommonRulesListView.SelectedItems)
             {
-                if (rule.Score != null) // if a rule is selected and has a Score value
-                {
-                    // add points
+                if (rule.Score != null)
                     baseScore += rule.Score.Value;
-
-                    // add descripition to the summary
-                    AddToSpecialRulesSummary(rule.Score + " is added to the base score because " + rule.Description + ".");
-                }
             }
 
             return baseScore;
@@ -1026,24 +1153,17 @@ namespace MahjongScorer.Pages
 
 
         /// <summary>
-        /// Set if winning tile was selfdrawn, and apply points
-        /// self drawn is index 0 in the game.Rules list
-        ///  if last item in the combo box is selected, the user has selected "self drawn" option
+        /// Apply appropriate points to the base score for a self drawn hand
         /// </summary>
+        /// <param name="baseScore">the current base score</param>
+        /// <returns>int value for the modified base score</returns>
         private int ApplySelfDrawnPoints(int baseScore)
         {
             if (SelfDrawn())
             {
                 // only apply self drawn points if hand isn't worthless
                 if (!Worthless())
-                {
                     baseScore += game.Rules[0].Score.Value;
-                    AddToSpecialRulesSummary(game.Rules[0].Score + " is added to the base score because " + game.Rules[0].Description + ".");
-                }
-                else
-                {
-                    AddToSpecialRulesSummary("Even though winning tile was self-drawn, " + game.Rules[0].Score + " points are not added because the hand was worthless.");
-                }
             }
 
             return baseScore;
@@ -1051,71 +1171,34 @@ namespace MahjongScorer.Pages
 
 
         /// <summary>
-        /// Go through selected Rules and apply doubles
+        /// Loops through common and uncommon selected rules and applies appropriate doubles to the base score
         /// </summary>
+        /// <param name="baseScore">the current base score</param>
+        /// <returns>int value for the modified base score</returns>
         private int ApplySelectedRuleDoubles(int baseScore)
         {
             foreach (Rule rule in commonRulesListView.SelectedItems)
             {
                 // for all selected rules, current score gets doubled as many times per it's Double value
                 baseScore = DoubleScore(baseScore, rule.Double);
-
-                // add to summary based on Double value
-                switch (rule.Double)
-                {
-                    case 1:
-                        AddToSpecialRulesSummary(
-                            "Score was doubled because " + 
-                            rule.Description + 
-                            " (" + rule.Name + ")."
-                            );
-                        break;
-                    case 2:
-                        AddToSpecialRulesSummary(
-                            "Score was doubled twice because " + 
-                            rule.Description + 
-                            " (" + rule.Name + ")."
-                            );
-                        break;
-                    case 4:
-                        AddToSpecialRulesSummary(
-                            "Score was doubled four times because " + 
-                            rule.Description + 
-                            " (" + rule.Name + ")."
-                            );
-                        break;
-                }
             }
 
             foreach (Rule rule in uncommonRulesListView.SelectedItems)
             {
                 // for all selected rules, current score gets doubled as many times per it's Double value
                 baseScore = DoubleScore(baseScore, rule.Double);
-
-                // add to summary based on Double value
-                switch (rule.Double)
-                {
-                    case 1:
-                        AddToSpecialRulesSummary("Score was doubled because " + rule.Description + ".");
-                        break;
-                    case 2:
-                        AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
-                        break;
-                    case 4:
-                        AddToSpecialRulesSummary("Score was doubled four times because " + rule.Description + ".");
-                        break;
-                }
             }
 
             return baseScore;
         }
 
 
-
         /// <summary>
         /// Go through all Rules and apply doubles for special cases
-       ///  where we can detect automatically, without asking the user
+        ///  where we can detect automatically, without asking the user
         /// </summary>
+        /// <param name="baseScore">the current base score</param>
+        /// <returns>int value for the modified base score</returns>
         private int ApplyAutomaticRuleDoubles(int baseScore)
         {
             foreach (Rule rule in game.Rules)
@@ -1128,36 +1211,24 @@ namespace MahjongScorer.Pages
                         // if this is active, "one chance" and "self drawn" points must be subtracted
                         case 5:
                             if (Worthless())
-                            {
                                 baseScore = DoubleScore(baseScore, rule.Double);
-                                AddToSpecialRulesSummary("Because this is a worthless hand, the score is doubled.");
-                            }
                             break;
                         // Three concealed pungs - apply double if there are 3 or more concealed pungs or kongs
                         case 8:
                             if (ConcealedPungsKongs() >= 3)
-                            {
                                 baseScore = DoubleScore(baseScore, rule.Double);
-                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
-                            }
                             break;
 
                         // all pungs - apply double if there are a total of 4 pungs/kongs
                         case 20:
                             if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex == 4)
-                            {
                                 baseScore = DoubleScore(baseScore, rule.Double);
-                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
-                            }
                             break;
 
                         // three kongs - apply double if there are 3 or more kongs
                         case 22:
                             if (kongCountComboBox.SelectedIndex >= 3)
-                            {
                                 baseScore = DoubleScore(baseScore, rule.Double);
-                                AddToSpecialRulesSummary("Score was doubled twice because " + rule.Description + ".");
-                            }
                             break;
                     }
                 }
