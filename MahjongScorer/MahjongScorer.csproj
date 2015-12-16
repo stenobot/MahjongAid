@@ -144,6 +144,8 @@
     </Compile>
     <Compile Include="DataModel\Game.cs" />
     <Compile Include="DataModel\Enums.cs" />
+    <Compile Include="Controls\Expander.cs" />
+    <Compile Include="Controls\StringConstants.cs" />
     <Compile Include="Pages\EnterNamesPage.xaml.cs">
       <DependentUpon>EnterNamesPage.xaml</DependentUpon>
     </Compile>

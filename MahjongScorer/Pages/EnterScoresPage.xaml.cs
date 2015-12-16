@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -386,7 +387,7 @@ namespace MahjongScorer.Pages
         #region "SUMMARY" METHODS
 
 
-        private StringBuilder SpecialRulesSummary()
+        private void AppendSpecialRulesSummary()
         {
             // Add summary info for selected common rule values and doubles
 
@@ -522,7 +523,9 @@ namespace MahjongScorer.Pages
                         " points are not added because the hand was worthless.");
             }
 
-            return _specialRulesSummary;
+            // finally, add the special rules summary to the current round summary
+            if (_specialRulesSummary != null)
+                game.CurrentRoundSummary.Insert(game.CurrentRoundSummary.Length, _specialRulesSummary.ToString());
         }
 
         /// <summary>
@@ -544,7 +547,7 @@ namespace MahjongScorer.Pages
         /// Adds text about the winner's pungs and kongs to the current round summary
         /// </summary>
         /// <param name="player">takes an instance of Player as a parameter</param>
-        private void AddPungKongSummary(Player player)
+        private void AppendPungKongSummary(Player player)
         {
             // TODO: add concealed and terminals/honors info to summary
             if (pungCountComboBox.SelectedIndex > 0)
@@ -753,13 +756,12 @@ namespace MahjongScorer.Pages
             InsertLineBreaks(game.CurrentRoundSummary, 2);
 
             // add round winner's pung/kong info
-            AddPungKongSummary(RoundWinner());
+            AppendPungKongSummary(RoundWinner());
 
             InsertLineBreaks(game.CurrentRoundSummary, 2);
 
             // add compiled special rules summary to current round summary
-            if (SpecialRulesSummary() != null)
-                game.CurrentRoundSummary.Insert(game.CurrentRoundSummary.Length, SpecialRulesSummary().ToString());
+            AppendSpecialRulesSummary();
 
             // finalize the current round summary by adding it to the List
             game.RoundSummaries.Add(game.CurrentRoundSummary.ToString());
@@ -836,6 +838,22 @@ namespace MahjongScorer.Pages
         }
 
 
+
+        private int DoubleScore(int score, int timesDoubled)
+        {
+            for (int i = 0; i < timesDoubled; i++)
+            {
+                score *= 2;
+            }
+            return score;
+        }
+
+        #endregion
+
+
+        #region "STATUS" METHODS
+
+
         /// <summary>
         /// Takes the current base score an a Player instance and processes that player's score for the round
         /// </summary>
@@ -867,7 +885,7 @@ namespace MahjongScorer.Pages
                         else
                         {
                             // even though score change is 0, still need to add an entry in the player's RoundScores list
-                           return 0;
+                            return 0;
                         }
                     }
                 }
@@ -910,19 +928,6 @@ namespace MahjongScorer.Pages
             }
         }
 
-        private int DoubleScore(int score, int timesDoubled)
-        {
-            for (int i = 0; i < timesDoubled; i++)
-            {
-                score *= 2;
-            }
-            return score;
-        }
-
-        #endregion
-
-
-        #region "GET STATUS" METHODS
 
         /// <summary>
         /// Calculates the current base score, based on user selection at the time
@@ -1121,7 +1126,7 @@ namespace MahjongScorer.Pages
         #endregion
 
 
-        #region "APPLY RULES" METHODS
+        #region "RULES" METHODS
 
         /// <summary>
         /// Loops through common and uncommon selected rules and applies appropriate points values to the current base score
@@ -1334,13 +1339,42 @@ namespace MahjongScorer.Pages
         }
 
 
-        private void DoneScoringButton_Click(object sender, RoutedEventArgs e)
+        private async void DoneScoringButton_Click(object sender, RoutedEventArgs e)
         {
-            SetFinalScores();
+            // Show a confirmation dialog, to double check since we're permanently committing round scores
+            var confirmDialog = new MessageDialog("End this round with "+ 
+                RoundWinner().Name + 
+                " as the winner, earning " + 
+                PlayerRoundScore(RoundWinner(), CurrentBaseScore()) 
+                + " points?");
 
-            EndRound();          
+            // Add command and callback for moving forward with the deletion
+            confirmDialog.Commands.Add(new UICommand("Yes", (command) =>
+            {
+                SetFinalScores();
 
-            Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+                EndRound();
+
+                Frame.Navigate(typeof(GameResultsPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+            }));
+
+            // Add command and callback for canceling
+            confirmDialog.Commands.Add(new UICommand("Not yet"));
+
+            // Set the default
+            confirmDialog.DefaultCommandIndex = 1;
+
+            // Set the command to be invoked when escape is pressed
+            confirmDialog.CancelCommandIndex = 1;
+
+            // Show the message dialog
+            await confirmDialog.ShowAsync();
+
+
+
+
+
+            
         }
 
         private void RulesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
