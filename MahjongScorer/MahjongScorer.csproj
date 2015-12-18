@@ -96,6 +96,12 @@
     <Content Include="Assets\divider-line-edge.png" />
     <Content Include="Assets\divider-line-middle.png" />
     <Content Include="Assets\dividerline.png" />
+    <Content Include="Assets\learn-to-play\dead-wall.png" />
+    <Content Include="Assets\learn-to-play\four-walls-dice-roll.png" />
+    <Content Include="Assets\learn-to-play\four-walls-start.png" />
+    <Content Include="Assets\learn-to-play\four-walls-tiles-dealt.png" />
+    <Content Include="Assets\learn-to-play\game-in-progress.png" />
+    <Content Include="Assets\learn-to-play\wind-rotation.png" />
     <Content Include="Assets\splash.scale-100.png" />
     <Content Include="Assets\splash.scale-125.png" />
     <Content Include="Assets\splash.scale-150.png" />

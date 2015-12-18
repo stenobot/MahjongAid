@@ -1348,7 +1348,7 @@ namespace MahjongScorer.Pages
                 PlayerRoundScore(RoundWinner(), CurrentBaseScore()) 
                 + " points?");
 
-            // Add command and callback for moving forward with the deletion
+            // Add command and callback for finalizing the round scores and ending the round
             confirmDialog.Commands.Add(new UICommand("Yes", (command) =>
             {
                 SetFinalScores();
@@ -1368,13 +1368,7 @@ namespace MahjongScorer.Pages
             confirmDialog.CancelCommandIndex = 1;
 
             // Show the message dialog
-            await confirmDialog.ShowAsync();
-
-
-
-
-
-            
+            await confirmDialog.ShowAsync();    
         }
 
         private void RulesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

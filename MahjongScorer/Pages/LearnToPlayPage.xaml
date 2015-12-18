@@ -24,19 +24,16 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
-                            Mahjong is a 4-player game that originated in China, but has since spread to Japan, America, and many other countries. 
-                            One of the things I love about Mahjong is that everyone plays differently. 
+                            Mahjong is a 4-player game that originated in China, and is now played around the world. 
                             The rules vary greatly from country to country, region to region, even family to family.
                         </TextBlock>
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10"> 
-                            Even without the rule variations, Mahjong's rules can be a bit complicated. 
+                            Mahjong's rules can be a bit complicated. 
                             This app is meant to help with that. 
                             It calculates scores for each round, keeps track of everyone's scores, and hopefully teaches you how to play the game. 
-                            The app uses custom Mahjong rules that my family has used for a long time. 
-                            They're based on a book from the 1960s called A Mahjong Handbook, similar to standard Japanese Mahjong Rules circa 1965. 
-                            But like most Mahjong rule sets, it's evolved in our family over the years. 
-                            They're fun, and I've done my best to document them here. 
-                            I've also tried to make this app flexible enough to accommodate rule variations.
+                            It follows a scoring rule set that my family uses, which is described in this app.
+                            The rules are based on a book from the 1960s called A Mahjong Handbook, and are similar to standard Japanese Mahjong Rules circa 1965.  
+                            I've tried to make this app flexible enough to accommodate some rule variations.
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10">
@@ -45,13 +42,16 @@
                     </StackPanel>
                 </ScrollViewer>
             </PivotItem> 
-            
-            
-            
+                       
             <PivotItem Header="Tile Glossary">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                     <StackPanel Margin="0,10" MaxWidth="460">
+
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            There are 44 tiles in this version of Mahjong, with 4 of each for a total of 176 tiles.
+                        </TextBlock>
 
                         <TextBlock Text="WINDS" Style="{ThemeResource LargeHeaderStyle}" Margin="10,20,10,10" />
                         <Grid>
@@ -382,18 +382,12 @@
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem Header="The Basics">
+            <PivotItem Header="Setting Up">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
-                        
-                        <TextBlock Text="Getting Set Up" 
-                                   Margin="0,10,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                   FontWeight="SemiBold" 
-                                   FontSize="22" />
-                        
+
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            First, we need to choose each player's starting position. 
+                           To begin a game, you first need to choose each player's starting position. 
                             Find the East, South, West, and North tiles and place them upside down:
                         </TextBlock>
 
@@ -418,8 +412,8 @@
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             Each player chooses a tile. 
-                            East is the starting dealer, and the other players' winds are their starting lucky winds. 
-                            Have each player sit around the table like so:                         
+                            The player who picks East is the starting dealer, and the other players' winds are their starting lucky winds. 
+                            Players sit around the table like so:                         
                         </TextBlock>
 
                         <Grid HorizontalAlignment="Center">
@@ -486,394 +480,1078 @@
                         </Grid>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            Shuffle (or stir) the wind tiles back into  the pile, then stack the tiles in 4 walls (17 tiles long, 2 tiles high) around the table, like so:
+                            Shuffle the wind tiles back into the pile, then stack the tiles in 4 walls (17 tiles long, 2 tiles high) around the table, like so:
                         </TextBlock>
-                        <StackPanel HorizontalAlignment="Center">
+                        
+                        <Image Source="/Assets/learn-to-play/four-walls-start.png" />
 
-                            <!--TOP ROW-->
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                            </StackPanel>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
+                            Every round begins by stirring the tiles on the table and setting up the four walls. 
+                            The East player then rolls the two dice. 
+                            Starting on the right side of the East wall, the dealer counts tiles the number rolled on the dice, counter-clockwise. 
+                            For example, if they rolled a 7, they count 7 tiles along the top of the wall, and take the stack of 2 tiles, like so:
+                        </TextBlock>
 
-                            <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/learn-to-play/four-walls-dice-roll.png" />
 
-                                <!--LEFT ROW-->
-                                <StackPanel HorizontalAlignment="Left">
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                </StackPanel>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
+                            This space marks where the dealing will begin (to the left), and where the Dead Wall is (to the right).
+                            The dealer places the 2 tiles upside-down on top of the Dead Wall.
+                        </TextBlock>
 
-                                <!--RIGHT ROW-->
-                                <StackPanel Margin="350,0,0,0" HorizontalAlignment="Right">
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                    <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="-1"
-                                      Glyph="&#x1F02B;">
-                                        <FontIcon.RenderTransform>
-                                            <RotateTransform Angle="90"/>
-                                        </FontIcon.RenderTransform>
-                                    </FontIcon>
-                                </StackPanel>
+                        <Image Source="/Assets/learn-to-play/dead-wall.png" />
 
-                            </StackPanel>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
+                            Then, they deal tiles in in groups of 4 around the table, starting with themself. 
+                            They continue until each player has 12 tiles. 
+                            Lastly, they take 2 more tiles for themself, and deal 1 additional tile to each other player. 
+                            (The dealer begins the game with an extra tile, which is their draw tile.)
+                        </TextBlock>
 
-                            <!--BOTTOM ROW-->
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                                <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="16" Margin="2"
-                                      Glyph="&#x1F02B;" />
-                            </StackPanel>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
+                            The table should look something like this:
+                        </TextBlock>
+
+                        <Image Source="/Assets/learn-to-play/four-walls-tiles-dealt.png" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
+                            That's it! Each player has 13 tiles, and the dealer has 13 tiles plus their first draw tile.
+                            You're ready to play a round.
+                        </TextBlock>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+
+            <PivotItem Header="Playing a Round">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel MaxWidth="460">
+
+                        <TextBlock Text="Round Flow" 
+                                   Margin="0,10,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Game play for each round goes around the table counter-clockwise, starting with the dealer. 
+                            Since the dealer took an extra tile during setup, they don't need to draw a tile. 
+                            Instead, they just choose a tile to discard. 
+                            For the rest of the round, players draw a tile from the wall, then choose a tile to discard.
+                            Tiles are always discarded face up, and players always end a round with 13 tiles.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Here's a game in progress:
+                        </TextBlock>
+
+                        <Image Source="/Assets/learn-to-play/game-in-progress.png" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            This game is on it's 3rd time around the table, so the dealer has just discarded their 3rd tile. 
+                        </TextBlock>
+
+                        <TextBlock Text="Sets and Pairs" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            The first player to "go out" says "Mahjong!", and wins the round. 
+                            A winning Mahjong hand usually consists of four sets and one pair. 
+                            Pairs are simple: They consist of two of the same tile.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            An example of a Pair:
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      FontSize="30" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Pairs, on the other hand, are varied. 
+                            There are three types of pairs: A Chow (run of 3 tiles), a Pung (3 of the same tile), and a Kong (4 of the same tile).
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            An example of a Chow:
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00A;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00B;" 
+                                      FontSize="30" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            An example of a Pung:
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F011;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F011;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F011;" 
+                                      FontSize="30" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            An example of a Kong:
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      FontSize="30" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Here's an example of a normal winning hand. This one has 2 pungs, 2 chows, and 1 pair.
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01B;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F013;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F014;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F015;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00C;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00D;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Notice there are 14 tiles. 
+                            A winning hand always gets it's last tile as it's draw tile (self-drawn), or by stealing another player's discard.
+                        </TextBlock>
+
+
+                        <TextBlock Text="Stealing a Discard" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            If someone discards a tile at the end of their turn, and that tile completes a set or is the winning tile for another player's hand, they might be able to steal the tile. 
+                            Discards that complete a Pung (set of three of a kind) or Kong (set of four of a kind) can be stolen by anyone at the table. 
+                            When a tile is stolen, the player who stole must lay down their set face up and discard a tile. 
+                            Play then continues from that player. This often results in someone being skipped.) 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Discards that complete a Chow (run of three) can only be stolen by the player to the right of the discarder. 
+                            Basically, the stolen tile just replaces their draw tile. 
+                            They must lay the Chow down face up, then play continues normally. 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            When a player steals to complete a Kong, they must lay the Kong down face up, then draw a tile from the Dead Wall, then discard.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            When a player is ready to go out and win the round, they can steal their final Mahjong tile from anyone's discard.
+                        </TextBlock>
+
+                        <TextBlock Text="Concealed Tiles" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            At the beginning of a round, a player's whole hand is concealed (hidden from everyone else). 
+                            Here are some reasons why parts of it might be revealed throughout the game. 
+                            This is important, mostly because a concealed or partially-concealed hand earns points at the end of the round for the winner. 
+                        </TextBlock>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            If a player steals a discard to complete a pung, chow, or kong, that set must remain revealed for the rest of the round. 
+                        </TextBlock>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            If a player completes a Kong by drawing the tile, the Kong is technically concealed for scoring purposes, but they must reveal it to the other players. 
+                            This is done by laying the Kong out with other revealed sets, but keeping the first and last tile concealed. 
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F02B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="30" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F02B;" 
+                                      FontSize="30" />
+                        </StackPanel>
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            If a winning player's hand is concealed, but their final Mahjong tile is stolen from another player's discard, then the winning hand is partially-concealed earning them 10 points. 
+                            If they draw the winning tile from the wall, then the hand is fully concealed earning them a double.
+                        </TextBlock>
+
+
+                        <TextBlock Text="Other Ways to Win" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Collecting sets and a pair is the normal way to go out and win a Mahjong round. 
+                            But there are other, weirder ways to win. 
+                            There is often risk involved here, since you'd have to change which tiles you're collecting. 
+                            But they result in big points. 
+                            Here are some examples. 
+                        </TextBlock>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Kokushi musou (国士無双), aka Thirteen Orphans" />
+                        <TextBlock TextWrapping="WrapWholeWords" 
+                                   Margin="0,5,0,10"> 
+                            This hand consists of one of each terminal and honor tile, plus one extra to make any pair. 
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F010;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F019;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F021;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F021;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Daisangen (大三元), aka Big Three Dragons" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of sets of all three dragons. (These can be Pungs or Kongs.)
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
 
                         </StackPanel>
 
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
-                            Every round begins by stirring the tiles on the table, setting up the four walls, and the East player dealing 11 tiles to the other 3 players and 12 tiles to themself.
-                            
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Shousuushii (小四喜), aka Little Four Winds" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of three Pungs of Winds, and a pair of Winds.
                         </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Dai Suushii (大四喜), aka Big Four Winds" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of four Pungs or Kongs of Winds.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Chuuren poutou (九蓮宝燈), aka Nine Gates" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of a set of ones, a set of nines, and one of every other tile in the same suit. 
+                            It must be fully concealed.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F008;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00A;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00C;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00D;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00E;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Suu ankou (四暗刻), aka Four Concealed Triplets" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of four concealed sets and a pair.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F020;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F020;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F020;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F013;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F013;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Ryuuiisou (緑一色), aka All Green" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of green dragons and the 2, 3, 4, 6, and 8 of bamboo (souzu).
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F011;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F012;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F013;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F015;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F015;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F015;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F017;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F017;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F017;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F011;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F011;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F011;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Suu kantsu (四槓子), aka Four Kongs" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of any four Kongs plus a pair.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F012;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F012;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F012;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F012;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F009;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Tsuu iisou (字一色), aka All Honors" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of all honor tiles. 
+                            (It can also be collected as only pairs, no sets.)
+                        </TextBlock>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+
+                        </StackPanel>
+
+                        <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                   Margin="0,10,0,0"
+                                   Text="Chinroutou (清老頭), aka All Terminals" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,5,0,10"> 
+                            This hand consists of all terminal tiles.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F010;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F010;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F010;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F019;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F019;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+
+                        </StackPanel>
+
+                        <TextBlock Text="Ending a Round" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            A round ends when a player either steals their winning tile or draws it, and calls "Mahjong!" 
+                            If two players both call Mahjong on the same discard tile, the one closest to the discarder wins the tie-breaker. 
+                            The winning hand is scored, the losers pay the winner, and then the tiles are stirred and another round begins.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            If the dealer wins, they get to deal again. 
+                            If they did not win, the dealer rotates counter-clockwise. 
+                            Since the dealer's Lucky Wind is always East, all the players' Lucky Winds rotate as well. 
+                            East player becomes North, South becomes East, West becomes South, and North becomes West.
+                        </TextBlock>
+                        <Image Source="/Assets/learn-to-play/wind-rotation.png" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,30"> 
+                            there's also the Prevailing Wind to keep track of. 
+                            The game always begins with East as the Prevailing Wind, and it stays that way until dealer duty has made it around the table and the original dealer deals again. 
+                            At that point, Prevailing Wind changes from East to South (then West, then North). 
+                            For example: If the dealer doesn't win any of the first four rounds, Prevailing Wind would shift from East to South on the fifth round. 
+                            But if the dealer won the second round, the Prevailing Wind wouldn't change until the sixth round.
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+
+          
+            <PivotItem Header="Scoring">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel MaxWidth="460">
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Scoring a round is where things can get complicated. 
+                            It's also where this app can help the most. 
+                            I'll explain how it works here, but if you just enter your round info into this app's scoring calculator, it will do the hard work for you. 
+                        </TextBlock>
+
+                        <TextBlock Text="General Rules" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Each round ends with a base winning score of 20 points. 
+                            Points are added to that score if certain conditions are met. 
+                            Then "doubles" are calculated. Special conditions, such as the winner's pair being comprised of their Lucky Wind tile, count as doubles. 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            After the final score is tallied, it's time to pay the winner. 
+                            If the winner is the dealer, 
+                        </TextBlock>
+
+                        <TextBlock Text="Pungs and Kongs" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Pungs (three of a kind) are worth 
+                        </TextBlock>
+
+                        <TextBlock Text="Terminals and Honors" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Terminal tiles are the ones and nines of numbered tiles. 
+                            Honor tiles are the Winds and Dragons. 
+                        </TextBlock>
+
+                        <TextBlock Text="Points and Doubles" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+
+                        <TextBlock Text="Scoring an Example Hand" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock Text="Limit Hands" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
 
                     </StackPanel>
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem Header="How to Win">
+            <PivotItem Header="Winning the Game">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
                         <TextBlock Text="A bit about winning, coming soon" />
-
-                    </StackPanel>
-                </ScrollViewer>
-            </PivotItem>
-
-            <PivotItem Header="Scoring a Hand">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
-                        <TextBlock Text="A bit about scoring, coming soon" />
 
                     </StackPanel>
                 </ScrollViewer>
@@ -883,16 +1561,24 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
                         <TextBlock TextWrapping="WrapWholeWords">
-                            About 12 years ago, I learned to play Majhong. I've been hooked ever since. But I've long wondered: Why don't more Americans play this great game? It's not so different from a game like Rummy, and you get to use cool tiles instead of boring old playing cards. There is one big difference between Mahjong and most American card games, though: It's really, really hard to score. Playing is easy, but scoring a hand can be very complicated, with lots of little caveats that change depending on where you're playing and who you're playing with.
+                            Mahjong is an awesome game. It's also complicated. 
+                            I've been playing for about 12 years, and I still get confused, especially when it comes time to score a hand.
                             <LineBreak />
                             <LineBreak />
-                            In addition to complicated scoring, Mahjong games tend to go on for a long time. One game goes on for many rounds. At family gatherings, we bring out a notebook with games dating back years, and try to find a match with whichever four people we happen to have together at that time.
+                            Also, Mahjong games tend to go on for a long time. 
+                            One game goes on for many rounds. 
+                            At family gatherings, we bring out a notebook with games dating back years, and try to find a match with whichever four people we happen to have together at that time.
                             <LineBreak />
                             <LineBreak />
-                            I built this app to do two things: 1.) Calculate scores quickly and easily, and 2.) Keep track of ongoing games. 
+                            I built this app to do two things: 
+                            <LineBreak />
+                            1.) Calculate scores quickly and easily
+                            <LineBreak />
+                            2.) Keep track of ongoing games. 
                             <LineBreak />
                             <LineBreak />
-                            One thing I should note: The scoring system used in this app is based on the standard Japanese rules for Mahjong. Even though the game originated in China, it is very popular in Japan. Those are the rules I learned on, but I hope to update this app in the future to support additional rule sets.
+                            The scoring system used in this app is based on the rule system that my family uses. 
+                            It's one of many rule sets out there, but I tried to build this app to be flexible to rule variations.
                             <LineBreak />
                             <LineBreak />
                             I really built this app for myself and my family, but I hope that you will find it useful as well. Enjoy!
