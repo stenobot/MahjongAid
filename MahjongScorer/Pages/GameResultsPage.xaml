@@ -122,7 +122,7 @@
 
                     <Line Stroke="{ThemeResource MahjongAccentColorBrush}" X2="320" HorizontalAlignment="Center" StrokeThickness="1" />
 
-                    <Grid x:Name="scoresGrid" Margin="0,5,0,0" >
+                    <Grid x:Name="scoresGrid" Margin="12,5,0,0" >
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
@@ -137,6 +137,7 @@
                             Style="{ThemeResource AccentColorButtonStyle}"
                             Width="320"
                             Content="Score first round"
+                            HorizontalAlignment="Center"
                             Click="ScoreButton_Click"
                             Margin="0,25" />
                    

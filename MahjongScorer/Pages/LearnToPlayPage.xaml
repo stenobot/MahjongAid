@@ -1494,8 +1494,9 @@
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             Each round ends with a base winning score of 20 points. 
-                            Points are added to that score if certain conditions are met. 
-                            Then "doubles" are calculated. Special conditions, such as the winner's pair being comprised of their Lucky Wind tile, count as doubles. 
+                            Points are then added to that score based on certain conditions. 
+                            Once the base score is set, the score may get doubled one or more times. 
+                            For example, if the winner's pair is comprised of their Lucky Wind tile, that counts as one double. 
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
