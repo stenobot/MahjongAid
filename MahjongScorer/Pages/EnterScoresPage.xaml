@@ -148,7 +148,7 @@
                         <Grid x:Name="pungCountGrid" Visibility="Collapsed" Width="400" Margin="25,10,0,0" HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="185" />
+                                <ColumnDefinition Width="195" />
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
                         </Grid>
@@ -233,11 +233,11 @@
                         <controls:Expander VerticalAlignment="Top" 
                                            IsExpanded="False"
                                            Margin="10,10,10,0">
-                            
+
                             <controls:Expander.HeaderButtonContent>
                                 <TextBlock Text="UNCOMMON" />
                             </controls:Expander.HeaderButtonContent>
-                            
+
                             <ListView x:Name="uncommonRulesListView" 
                                       Margin="0,10,0,0" 
                                       IsMultiSelectCheckBoxEnabled="False"
@@ -245,7 +245,7 @@
                                       SelectionMode="Multiple" 
                                       SelectionChanged="RulesListView_SelectionChanged"
                                       IsItemClickEnabled="False">
-                                
+
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -261,60 +261,6 @@
                             </ListView>
 
                         </controls:Expander>
-
-                        <!--<TextBlock Text="COMMON" 
-                               Style="{ThemeResource SmallHeaderStyle}" 
-                               Margin="23,30,0,0" />
-
-                        <ListView x:Name="commonRulesListView" 
-                                  Margin="0,10,0,0" 
-                                  IsMultiSelectCheckBoxEnabled="False"
-                                  Width="400" 
-                                  SelectionMode="Multiple" 
-                                  SelectionChanged="RulesListView_SelectionChanged"
-                                  IsItemClickEnabled="False">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Name}" />
-                                            <TextBlock Text="{Binding Description}" 
-                                                       FontSize="12" 
-                                                       Foreground="{ThemeResource MahjongGrayBrush}" />
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>-->
-
-
-                        <!--<TextBlock Text="UNCOMMON" 
-                               Style="{ThemeResource SmallHeaderStyle}" 
-                               Margin="23,30,0,0" />
-
-
-                        <ListView x:Name="uncommonRulesListView" 
-                                  Margin="0,10,0,0" 
-                                  IsMultiSelectCheckBoxEnabled="False"
-                                  Width="400" 
-                                  SelectionMode="Multiple" 
-                                  SelectionChanged="RulesListView_SelectionChanged"
-                                  IsItemClickEnabled="False">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Name}" />
-                                            <TextBlock Text="{Binding Description}" 
-                                                       FontSize="12" 
-                                                       Foreground="{ThemeResource MahjongGrayBrush}" />
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>-->
-
-
                     </StackPanel>
 
 

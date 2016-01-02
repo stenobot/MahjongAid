@@ -135,12 +135,12 @@ namespace MahjongScorer.Pages
             oneToNineRun.Name = "1-9 run (double)";
             oneToNineRun.Description = "there are 3 chows with 1-9 in same suit";
 
-            // THREE CONCEALED PUNGS - 2 DOUBLES
+            // THREE CONCEALED PUNGS - 1 DOUBLES
             game.Rules.Add(threeConcealedPungs = new Rule());
             // never show in list, because we can always calculate this
             threeConcealedPungs.IsUncommon = true;
             threeConcealedPungs.ShowInList = false;
-            threeConcealedPungs.Double = 2;
+            threeConcealedPungs.Double = 1;
             threeConcealedPungs.Name = "3 concealed pungs (double)";
             threeConcealedPungs.Description = "there are three concealed pungs";
 
@@ -183,7 +183,7 @@ namespace MahjongScorer.Pages
             doubleLuckySet.IsUncommon = false;
             doubleLuckySet.Double = 2;
             doubleLuckySet.Name = "Double lucky set (2 doubles)";
-            doubleLuckySet.Description = "a pung or kong is lucky wind, and the winner's lucky wind is also prevailing";
+            doubleLuckySet.Description = "a pung or kong is lucky wind and prevailing wind";
 
             // OFF THE DEAD WALL - DOUBLE
             game.Rules.Add(offTheDeadWall = new Rule());
@@ -236,13 +236,13 @@ namespace MahjongScorer.Pages
             triplePung.Name = "Triple pung (2 doubles)";
             triplePung.Description = "there are three pungs or kongs of the same number in different suits";
 
-            // ALL PUNGS - 2 DOUBLES
+            // ALL PUNGS - 1 DOUBLE
             game.Rules.Add(allPungs = new Rule());
             // never show in the list
             allPungs.ShowInList = false;
             allPungs.IsUncommon = false;
-            allPungs.Double = 2;
-            allPungs.Name = "All pungs (2 doubles)";
+            allPungs.Double = 1;
+            allPungs.Name = "All pungs (double)";
             allPungs.Description = "there are four pungs or kongs";
 
             // LITTLE THREE DRAGONS - 2 DOUBLES

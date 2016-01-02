@@ -17,8 +17,10 @@
                              Opacity=".6"/>
             <SolidColorBrush x:Key="MahjongGrayBrush"
                              Color="Gray" />
+            <SolidColorBrush x:Key="MahjongRedBrush"
+                             Color="DarkSalmon" />
             <SolidColorBrush x:Key="MahjongBackgroundBrush"
-                         Color="#FF161616" />
+                             Color="#FF161616" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">
@@ -26,8 +28,10 @@
                              Color="#FF1a651d" />
             <SolidColorBrush x:Key="MahjongGrayBrush"
                              Color="Gray" />
+            <SolidColorBrush x:Key="MahjongRedBrush"
+                             Color="DarkSalmon" />
             <SolidColorBrush x:Key="MahjongBackgroundBrush"
-                         Color="#FF161616" />
+                             Color="#FF161616" />
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
@@ -35,8 +39,10 @@
                              Color="#FF1a651d" />
             <SolidColorBrush x:Key="MahjongGrayBrush"
                              Color="Gray" />
+            <SolidColorBrush x:Key="MahjongRedBrush"
+                             Color="DarkSalmon" />
             <SolidColorBrush x:Key="MahjongBackgroundBrush"
-                         Color="#FF161616" />
+                             Color="#FF161616" />
         </ResourceDictionary>
         
     </ResourceDictionary.ThemeDictionaries>

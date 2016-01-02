@@ -185,8 +185,8 @@ namespace MahjongScorer.Pages
                 concealedCheckBox.SetType = setType;
 
                 // not sure we need this property at all yet, JUST IN CASE!!!
-                terminalsHonorsCheckBox.CheckBoxType = "terminalsHonors";
-                concealedCheckBox.CheckBoxType = "concealed";
+                //terminalsHonorsCheckBox.CheckBoxType = "terminalsHonors";
+                //concealedCheckBox.CheckBoxType = "concealed";
 
                 terminalsHonorsCheckBox.Checked += SetCheckBox_Checked;
                 concealedCheckBox.Checked += SetCheckBox_Checked;
@@ -253,8 +253,8 @@ namespace MahjongScorer.Pages
 
                     // "Semi-concealed" (partial) - show if there are less than 2 unconcealed sets, and winning tile is NOT self drawn
                     case 3:
-                        if ((pungCountComboBox.SelectedIndex +
-                            kongCountComboBox.SelectedIndex) < (ConcealedPungsKongs() + 2) &&
+                        if ((pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex) < 
+                            (ConcealedPungsKongs() + 2) &&
                             drawnFromComboBox.SelectedIndex != drawnFromComboBox.Items.Count - 1)
                             rule.ShowInList = true;
                         else
@@ -264,11 +264,10 @@ namespace MahjongScorer.Pages
 
                     // "Concealed" (fully) - show if all pungs/kongs are concealed and winning tile IS self drawn
                     case 4:
-                        if (((pungCountComboBox.SelectedIndex +
-                            kongCountComboBox.SelectedIndex) == ConcealedPungsKongs()) &&
-                            ConcealedPungsKongs() > 0 &&
+                        if (pungCountComboBox.SelectedIndex + kongCountComboBox.SelectedIndex == ConcealedPungsKongs() && 
                             drawnFromComboBox.SelectedIndex == drawnFromComboBox.Items.Count - 1)
                             rule.ShowInList = true;
+                            
                         else
                             rule.ShowInList = false;
 
@@ -379,6 +378,22 @@ namespace MahjongScorer.Pages
             commonRulesListView.ItemsSource = PossibleCommonRules;
 
             uncommonRulesListView.ItemsSource = PossibleUncommonRules;
+        }
+
+        private void ResetRulesListViews()
+        {
+            if (pointsDoublesStackPanel.Visibility == Visibility.Visible)
+                pointsDoublesStackPanel.Visibility = Visibility.Collapsed;
+
+            foreach (ListViewItem lvi in commonRulesListView.SelectedItems)
+            {
+                lvi.IsSelected = false;
+            }
+
+            foreach (ListViewItem lvi in uncommonRulesListView.SelectedItems)
+            {
+                lvi.IsSelected = false;
+            }
         }
 
         #endregion
@@ -598,7 +613,7 @@ namespace MahjongScorer.Pages
 
                 _inProgressTips.Insert(
                     _inProgressTips.Length, 
-                    "The winning tile is Self-Drawn, which will give " + 
+                    "The winning tile is self-drawn, which will give " + 
                     winnerComboBox.SelectedItem + 
                     " 2 extra points."
                     );
@@ -619,11 +634,23 @@ namespace MahjongScorer.Pages
                 {
                     _inProgressTips.Insert(
                         _inProgressTips.Length,
-                        "The winning tile was drawn from " +
+                        "The winning tile is drawn from " +
                         PlayerDrawnFrom().Name +
                         ". They will pay the winning score multiplied by 4."
                         );
                 }              
+            }
+
+            if (OneChance() && !Worthless())
+            {
+                InsertLineBreaks(_inProgressTips, 2);
+
+                _inProgressTips.Insert(
+                    _inProgressTips.Length,
+                    "The winning tile is a one chance draw, which will give " +
+                    winnerComboBox.SelectedItem +
+                    " 2 extra points."
+                    );
             }
 
             if (Worthless())
@@ -639,12 +666,61 @@ namespace MahjongScorer.Pages
 
                 InsertLineBreaks(_inProgressTips, 2);
 
+                // in case of worthless, add tip about self drawn and/or one chance points not counting
                 if (SelfDrawn() && OneChance())
                     _inProgressTips.Insert(_inProgressTips.Length, "Self-Drawn and One Chance points will not count, because the hand is Worthless.");
                 else if (SelfDrawn())
                     _inProgressTips.Insert(_inProgressTips.Length, "Self-Drawn points will not count because the hand is Worthless.");
                 else if (OneChance())
                     _inProgressTips.Insert(_inProgressTips.Length, "One Chance points will not count because the hand is Worthless.");
+            }
+
+            if (PartiallyConcealed() && !SelfDrawn())
+            {
+                InsertLineBreaks(_inProgressTips, 2);
+
+                _inProgressTips.Insert(
+                    _inProgressTips.Length,
+                    "The winning hand is semi-concealed (not fully concealed, since the winning tile was drawn from someone else). This will give " +
+                    winnerComboBox.SelectedItem +
+                    " 10 extra points."
+                    );
+            }
+
+            if (FullyConcealed() && SelfDrawn())
+            {
+                InsertLineBreaks(_inProgressTips, 2);
+
+                _inProgressTips.Insert(
+                    _inProgressTips.Length,
+                    "The winning hand is completely concealed, including the winning draw tile. This will double " +
+                    winnerComboBox.SelectedItem +
+                    "'s score."
+                    );
+            }
+
+            if (LuckyPair())
+            {
+                InsertLineBreaks(_inProgressTips, 2);
+
+                _inProgressTips.Insert(
+                    _inProgressTips.Length,
+                    "The winning hand contains a pair of lucky winds, which will give " +
+                    winnerComboBox.SelectedItem +
+                    " 2 extra points."
+                    );
+            }
+
+            if (AllSimples())
+            {
+                InsertLineBreaks(_inProgressTips, 2);
+
+                _inProgressTips.Insert(
+                    _inProgressTips.Length,
+                    "The winning tile is comprised of all simple tiles, which will double " +
+                    winnerComboBox.SelectedItem +
+                    "'s score."
+                    );
             }
 
             if (pungCountComboBox.SelectedItem != null)
@@ -684,6 +760,16 @@ namespace MahjongScorer.Pages
 
             // create a StringBuilder instance to store the summary in
             game.CurrentRoundSummary = new StringBuilder();
+
+            // Mahjong hands have a max or "limit" value. Enforce that here
+            if (finalBaseScore >= ScoreValues.MAX_ROUND_SCORE)
+            {
+                game.CurrentRoundSummary.Insert(game.CurrentRoundSummary.Length,
+                    "This hand has reached the max limit of " +
+                    ScoreValues.MAX_ROUND_SCORE + ".");
+
+                InsertLineBreaks(game.CurrentRoundSummary, 2);
+            }
 
             // show winner's score and info, based on whether they're dealer or not
             if (DealerWon())
@@ -793,22 +879,26 @@ namespace MahjongScorer.Pages
         {
             int finalSetValue = 0;
 
-            foreach (SetCheckBox terminalsHonorsCheckBox in TerminalsHonorsSetCheckBoxes)
+            if (TerminalsHonorsSetCheckBoxes != null)
             {
-                // set the base value for this type of set
-                int thisSetValue = baseValue;
+                foreach (SetCheckBox terminalsHonorsCheckBox in TerminalsHonorsSetCheckBoxes)
+                {
+                    // set the base value for this type of set
+                    int thisSetValue = baseValue;
 
-                // if it's terminal or honors, double it
-                if (terminalsHonorsCheckBox.IsChecked == true)
-                    thisSetValue *= 2;
+                    // if it's terminal or honors, double it
+                    if (terminalsHonorsCheckBox.IsChecked == true)
+                        thisSetValue *= 2;
 
-                // if it's concealed, double it
-                if (ConcealedSetCheckBoxes[TerminalsHonorsSetCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
-                    thisSetValue *= 2;
+                    // if it's concealed, double it
+                    if (ConcealedSetCheckBoxes[TerminalsHonorsSetCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
+                        thisSetValue *= 2;
 
-                // add the final value to the total round base score
-                finalSetValue += thisSetValue;
+                    // add the final value to the total round base score
+                    finalSetValue += thisSetValue;
+                }
             }
+            
 
             return finalSetValue;
         }
@@ -940,7 +1030,7 @@ namespace MahjongScorer.Pages
 
             // PUNGS AND KONGS
             // check which pung check boxes are checked, and adjust the score
-             baseScore += CalculateSetScores(PungTerminalsHonorsCheckBoxes, PungConcealedCheckBoxes, ScoreValues.BASE_PUNG_VALUE);
+            baseScore += CalculateSetScores(PungTerminalsHonorsCheckBoxes, PungConcealedCheckBoxes, ScoreValues.BASE_PUNG_VALUE);
 
             // check which kong check boxes are checked, and adjust the score
             baseScore += CalculateSetScores(KongTerminalsHonorsCheckBoxes, KongConcealedCheckBoxes, ScoreValues.BASE_KONG_VALUE);
@@ -958,11 +1048,7 @@ namespace MahjongScorer.Pages
             // ENFORCE LIMIT
             // Mahjong hands have a max or "limit" value. Enforce that here
             if (baseScore > ScoreValues.MAX_ROUND_SCORE)
-            {
                 baseScore = ScoreValues.MAX_ROUND_SCORE;
-                game.CurrentRoundSummary.AppendLine().AppendLine("This hand has reached the max limit of " +
-                    ScoreValues.MAX_ROUND_SCORE + ".");
-            }
 
             return baseScore;
         }
@@ -982,9 +1068,65 @@ namespace MahjongScorer.Pages
                 return false;
         }
 
+
+        /// <summary>
+        /// Calculate whether or not winning tile was a One Chance draw
+        /// </summary>
+        /// <returns>true if One Chance, false if not</returns>
         private bool OneChance()
         {
             if (commonRulesListView.SelectedItems.Contains(game.Rules[1]))
+                return true;
+            else
+                return false;
+        }
+
+
+        /// <summary>
+        /// Calculate whether or not Lucky Pair is selected
+        /// </summary>
+        /// <returns>true if Lucky Pair, false if not</returns>
+        private bool LuckyPair()
+        {
+            if (commonRulesListView.SelectedItems.Contains(game.Rules[2]))
+                return true;
+            else
+                return false;
+        }
+
+
+        /// <summary>
+        /// Checks whether semi concealed is selected
+        /// </summary>
+        /// <returns>true if semi concealed, false if not</returns>
+        private bool PartiallyConcealed()
+        {
+            if (commonRulesListView.SelectedItems.Contains(game.Rules[3]))
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Checks whether fully concealed is selected
+        /// </summary>
+        /// <returns>true if fully concealed, false if not</returns>
+        private bool FullyConcealed()
+        {
+            if (commonRulesListView.SelectedItems.Contains(game.Rules[4]))
+                return true;
+            else
+                return false;
+        }
+
+
+        /// <summary>
+        /// Calculate whether or not winning hand is all simples
+        /// </summary>
+        /// <returns>true if all simples hand, false if not</returns>
+        private bool AllSimples()
+        {
+            if (commonRulesListView.SelectedItems.Contains(game.Rules[6]))
                 return true;
             else
                 return false;
@@ -1086,16 +1228,23 @@ namespace MahjongScorer.Pages
         private int ConcealedPungsKongs()
         {
             int concealedPungsKongsCount = 0;
-            foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
-            {
-                if (concealedPungs.IsChecked == true)
-                    concealedPungsKongsCount++;
-            }
 
-            foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
+            if (PungConcealedCheckBoxes != null)
             {
-                if (concealedKongs.IsChecked == true)
-                    concealedPungsKongsCount++;
+                foreach (SetCheckBox concealedPungs in PungConcealedCheckBoxes)
+                {
+                    if (concealedPungs.IsChecked == true)
+                        concealedPungsKongsCount++;
+                }
+            }
+            
+            if (KongConcealedCheckBoxes != null)
+            {
+                foreach (SetCheckBox concealedKongs in KongConcealedCheckBoxes)
+                {
+                    if (concealedKongs.IsChecked == true)
+                        concealedPungsKongsCount++;
+                }
             }
 
             return concealedPungsKongsCount;
@@ -1108,18 +1257,25 @@ namespace MahjongScorer.Pages
         private int TerminalsHonorsPungsKongs()
         {
             int terminalsHonorsPungsKongsCount = 0;
-            foreach (SetCheckBox terminalsHonorsPungs in PungTerminalsHonorsCheckBoxes)
-            {
-                if (terminalsHonorsPungs.IsChecked == true)
-                    terminalsHonorsPungsKongsCount++;
-            }
 
-            foreach (SetCheckBox terminalsHonorsKongs in KongTerminalsHonorsCheckBoxes)
+            if (PungTerminalsHonorsCheckBoxes != null)
             {
-                if (terminalsHonorsKongs.IsChecked == true)
-                    terminalsHonorsPungsKongsCount++;
+                foreach (SetCheckBox terminalsHonorsPungs in PungTerminalsHonorsCheckBoxes)
+                {
+                    if (terminalsHonorsPungs.IsChecked == true)
+                        terminalsHonorsPungsKongsCount++;
+                }
             }
-
+           
+            if (KongTerminalsHonorsCheckBoxes != null)
+            {
+                foreach (SetCheckBox terminalsHonorsKongs in KongTerminalsHonorsCheckBoxes)
+                {
+                    if (terminalsHonorsKongs.IsChecked == true)
+                        terminalsHonorsPungsKongsCount++;
+                }
+            }
+            
             return terminalsHonorsPungsKongsCount;
         }
 
@@ -1267,8 +1423,19 @@ namespace MahjongScorer.Pages
             // item source of drawn combobox can't be set until above item is removed
             drawnFromComboBox.ItemsSource = DrawnComboBoxStrings;
 
-            //show drawn from combo box
-            drawnFromComboBox.Visibility = Visibility.Visible;
+            // show drawn from combo box
+            if (drawnFromComboBox.Visibility == Visibility.Collapsed)
+                drawnFromComboBox.Visibility = Visibility.Visible;
+
+            // hide Sets UI
+            if (setsScoringStackPanel.Visibility == Visibility.Visible)
+                setsScoringStackPanel.Visibility = Visibility.Collapsed;
+
+            // hide score button
+            if (doneScoringButton.Visibility == Visibility.Visible)
+                doneScoringButton.Visibility = Visibility.Collapsed;
+
+            ResetRulesListViews();
 
             // re-render the in progress text
             GenerateInProgressTips();
@@ -1276,9 +1443,19 @@ namespace MahjongScorer.Pages
 
         private void DrawnFromComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            setsScoringStackPanel.Visibility = Visibility.Visible;
+            // show Sets UI
+            if (setsScoringStackPanel.Visibility == Visibility.Collapsed)
+                setsScoringStackPanel.Visibility = Visibility.Visible;
+
+            // hide score button
+            if (doneScoringButton.Visibility == Visibility.Visible)
+                doneScoringButton.Visibility = Visibility.Collapsed;
+
+            ResetRulesListViews();
 
             InitializePossiblePungs();
+
+            InitializeRules();
 
             // re-render the in progress text
             GenerateInProgressTips();
@@ -1294,10 +1471,17 @@ namespace MahjongScorer.Pages
             InitializeSetCheckBoxes(cb, pungCountGrid, "pung");
 
             pungCountGrid.Visibility = Visibility.Visible;
-            kongCountComboBox.Visibility = Visibility.Visible;
 
-            // preset kongs combobox to 0, since they are rare
-            kongCountComboBox.SelectedIndex = 0;
+            if (kongCountComboBox.Visibility == Visibility.Collapsed)
+                kongCountComboBox.Visibility = Visibility.Visible;
+
+            // hide score button
+            if (doneScoringButton.Visibility == Visibility.Visible)
+                doneScoringButton.Visibility = Visibility.Collapsed;
+
+            // if there are 4 pungs, preset kongs combobox to 0
+            if (cb.SelectedIndex == 4)
+                kongCountComboBox.SelectedIndex = 0;
 
             // re-render the in progress text
             GenerateInProgressTips();
@@ -1311,9 +1495,14 @@ namespace MahjongScorer.Pages
             kongCountGrid.Visibility = Visibility.Visible;
 
             InitializeRules();
-            pointsDoublesStackPanel.Visibility = Visibility.Visible;
 
-            doneScoringButton.Visibility = Visibility.Visible;
+            // show Rules 
+            if (pointsDoublesStackPanel.Visibility == Visibility.Collapsed)
+                pointsDoublesStackPanel.Visibility = Visibility.Visible;
+
+            // show score button
+            if (doneScoringButton.Visibility == Visibility.Collapsed)
+                doneScoringButton.Visibility = Visibility.Visible;
 
             // re-render the in progress text
             GenerateInProgressTips();

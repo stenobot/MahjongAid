@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Json;
 using Windows.Storage;
 using Windows.UI.Text;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,6 +27,7 @@ namespace MahjongScorer.Pages
         // color resource for winning cell in displayed scores
         SolidColorBrush roundWinnerTextBrush = Application.Current.Resources["MahjongAccentColorBrush"] as SolidColorBrush;
         SolidColorBrush roundAdjustmentTextBrush = Application.Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
+        SolidColorBrush roundScoreNegative = Application.Current.Resources["MahjongRedBrush"] as SolidColorBrush;
 
         public GameResultsPage()
         {
@@ -45,7 +47,6 @@ namespace MahjongScorer.Pages
                 // create a grid row for each round
                 RowDefinition rd = new RowDefinition();
                 scoresGrid.RowDefinitions.Insert(roundRow, rd);
-
 
                 for (var playerColumn = 0; playerColumn < game.Players.Count; playerColumn++)
                 {
@@ -94,9 +95,9 @@ namespace MahjongScorer.Pages
 
                     // set the text for the round total; if it's less than zero, just show zero
                     if (roundScore < 0)
-                        roundTotalTextBlock.Text = 0.ToString();
-                    else
-                        roundTotalTextBlock.Text = roundScore.ToString();
+                        roundTotalTextBlock.Foreground = roundScoreNegative;
+                    
+                    roundTotalTextBlock.Text = roundScore.ToString();
 
                     // set text for the adjustment; we'll show negative or positive here
                     roundAdjustmentTextBlock.Text = game.Players[playerColumn].RoundScores[roundRow].ToString();
@@ -108,9 +109,23 @@ namespace MahjongScorer.Pages
                         roundTotalTextBlock.Foreground = roundWinnerTextBrush;
                         // add a plus sign to the beginning of their round adjustment text
                         roundAdjustmentTextBlock.Text = "+" + roundAdjustmentTextBlock.Text;
-                    }
-                                       
+                    }                                       
                 }
+
+                //// create line separator when prevailing wind changes
+                //if (game.PrevailingWind == Wind.East)
+                //{
+                //    // create a grid row for line
+                //    scoresGrid.RowDefinitions.Insert(roundRow + 1, rd);
+
+                //    // create line
+                //    Line line = new Line();
+                //    line.Stroke = roundWinnerTextBrush;
+                //    line.X2 = 320;
+                //    line.HorizontalAlignment = HorizontalAlignment.Center;
+                //    line.StrokeThickness = 1;
+                //}
+
             }
         }
 
