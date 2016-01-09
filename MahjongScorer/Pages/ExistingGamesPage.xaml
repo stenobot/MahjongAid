@@ -25,6 +25,9 @@
 
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
 
+        <Image Source="/Assets/mahjong-parchment.jpg" 
+               Stretch="UniformToFill" />
+        
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Width="400">
                 <TextBlock x:Name="deletedMessageTextBlock" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,10" Opacity="0" Foreground="{ThemeResource MahjongAccentColorBrush}" />

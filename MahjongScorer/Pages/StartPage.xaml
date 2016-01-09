@@ -19,6 +19,9 @@
 
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
 
+        <Image Source="/Assets/mahjong-parchment.jpg" 
+               Stretch="UniformToFill" />
+        
         <StackPanel VerticalAlignment="Center">
            
             <TextBlock Text="Mahjong Aid" 

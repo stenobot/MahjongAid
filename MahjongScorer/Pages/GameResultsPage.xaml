@@ -53,6 +53,9 @@
 
         </VisualStateManager.VisualStateGroups>
 
+        <Image Source="/Assets/mahjong-parchment.jpg" 
+               Stretch="UniformToFill" />
+        
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
             <RelativePanel HorizontalAlignment="Center" Margin="0,0,0,35">
@@ -92,39 +95,45 @@
 
                     <Grid Margin="0,20,0,10">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="45" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0">
-                            <TextBlock x:Name="playerOneNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerOneWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource MahjongGrayBrush}"/>
-                        </StackPanel>
-
                         <StackPanel Grid.Column="1">
-                            <TextBlock x:Name="playerTwoNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerTwoWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                            <TextBlock x:Name="playerOneNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
+                            <TextBlock x:Name="playerOneWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
-                            <TextBlock x:Name="playerThreeNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerThreeWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                            <TextBlock x:Name="playerTwoNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
+                            <TextBlock x:Name="playerTwoWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
+                            <TextBlock x:Name="playerThreeNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
+                            <TextBlock x:Name="playerThreeWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
                             <TextBlock x:Name="playerFourNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerFourWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="14" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                            <TextBlock x:Name="playerFourWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
                         </StackPanel>
 
                     </Grid>
 
-                    <Line Stroke="{ThemeResource MahjongAccentColorBrush}" X2="320" HorizontalAlignment="Center" StrokeThickness="1" />
+                    <Line Stroke="{ThemeResource MahjongAccentColorBrush}" 
+                          Margin="12,2,0,0" 
+                          X2="365" 
+                          HorizontalAlignment="Center" 
+                          StrokeThickness="1" />
 
                     <Grid x:Name="scoresGrid" Margin="12,5,0,0" >
 
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="45" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />

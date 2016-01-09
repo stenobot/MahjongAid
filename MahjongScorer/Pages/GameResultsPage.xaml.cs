@@ -25,9 +25,10 @@ namespace MahjongScorer.Pages
         private Game game;
 
         // color resource for winning cell in displayed scores
-        SolidColorBrush roundWinnerTextBrush = Application.Current.Resources["MahjongAccentColorBrush"] as SolidColorBrush;
-        SolidColorBrush roundAdjustmentTextBrush = Application.Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
-        SolidColorBrush roundScoreNegative = Application.Current.Resources["MahjongRedBrush"] as SolidColorBrush;
+        SolidColorBrush accentColorBrush = Application.Current.Resources["MahjongAccentColorBrush"] as SolidColorBrush;
+        SolidColorBrush grayBrush = Application.Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
+        SolidColorBrush redBrush = Application.Current.Resources["MahjongRedBrush"] as SolidColorBrush;
+        Thickness lineMargin = new Thickness(0, 10, 0, 5);
 
         public GameResultsPage()
         {
@@ -42,17 +43,69 @@ namespace MahjongScorer.Pages
         /// </summary>
         private void RenderRoundScores()
         {
-            for (var roundRow = 0; roundRow < game.CurrentRound; roundRow++)
-            {
-                // create a grid row for each round
-                RowDefinition rd = new RowDefinition();
-                scoresGrid.RowDefinitions.Insert(roundRow, rd);
+            // always clear grid first to avoid conflicts when loading a different game
+            scoresGrid.Children.Clear();
 
-                for (var playerColumn = 0; playerColumn < game.Players.Count; playerColumn++)
+            // keep track of extra rows added for separator lines
+            int lineRowsAdded = 0;
+
+            // keep track of rounds per prevailing wind change, and reset to 1 when the wind changes
+            int roundPerPrevWind = 1;
+
+            for (var round = 0; round < game.CurrentRound; round++)
+            {
+                // create one grid row for each round
+                RowDefinition scoresRd = new RowDefinition();
+                scoresGrid.RowDefinitions.Insert(round + lineRowsAdded, scoresRd);
+
+                // if the prevailing wind changes, we need to add a row for a separator line
+                // this can't happen before round 5
+                if (round > 3)
                 {
-                    // create textblocks for the player's round total and the amount their score was adjusted by
+                    if (game.PrevailingWinds[round] != game.PrevailingWinds[round - 1])
+                    {
+                        lineRowsAdded++;
+                        roundPerPrevWind = 1;
+
+                        // create an extra row for the separator line
+                        RowDefinition lineRd = new RowDefinition();
+                        scoresGrid.RowDefinitions.Add(lineRd);
+
+                        // create the line, set it's properties
+                        Line line = new Line();
+                        line.X2 = 365;
+                        line.StrokeThickness = 1;
+                        line.Stroke = accentColorBrush;
+                        line.HorizontalAlignment = HorizontalAlignment.Center;
+                        line.Margin = lineMargin;
+                        scoresGrid.Children.Add(line);
+                        Grid.SetRow(line, round + lineRowsAdded - 1);
+                        Grid.SetColumnSpan(line, 5);
+                    }
+                }
+
+                // create textblock for the prevailing wind
+                TextBlock prevailingWindTextBlock = new TextBlock();
+
+                prevailingWindTextBlock.Text = game.PrevailingWinds[round].ToString() + " " + roundPerPrevWind + ":";
+                prevailingWindTextBlock.Foreground = grayBrush;
+                prevailingWindTextBlock.HorizontalAlignment = HorizontalAlignment.Right;
+                prevailingWindTextBlock.FontSize = 12;
+                prevailingWindTextBlock.VerticalAlignment = VerticalAlignment.Center;
+
+                scoresGrid.Children.Add(prevailingWindTextBlock);
+                Grid.SetRow(prevailingWindTextBlock, round + lineRowsAdded);
+
+                roundPerPrevWind++;
+
+
+                for (var player = 0; player < game.Players.Count; player++)
+                {
+                    // create textblocks for the player's round total, and the amount their score was adjusted by
                     TextBlock roundTotalTextBlock = new TextBlock();
                     TextBlock roundAdjustmentTextBlock = new TextBlock();
+
+                    // create a horizontal stack panel to hold the round score and adjustment
                     StackPanel stackPanel = new StackPanel();
 
                     // set alignment and other styles
@@ -66,7 +119,7 @@ namespace MahjongScorer.Pages
                     roundAdjustmentTextBlock.TextAlignment = TextAlignment.Left;
                     roundTotalTextBlock.FontWeight = FontWeights.SemiBold;
                     roundAdjustmentTextBlock.FontWeight = FontWeights.SemiBold;
-                    roundAdjustmentTextBlock.Foreground = roundAdjustmentTextBrush;
+                    roundAdjustmentTextBlock.Foreground = grayBrush;
 
                     // set margin for one text block (to give them some breathing room)
                     Thickness margin = roundTotalTextBlock.Margin;
@@ -75,8 +128,8 @@ namespace MahjongScorer.Pages
 
                     // add sp to grid, set row and column
                     scoresGrid.Children.Add(stackPanel);
-                    Grid.SetRow(stackPanel, roundRow);
-                    Grid.SetColumn(stackPanel, playerColumn);
+                    Grid.SetRow(stackPanel, round + lineRowsAdded);
+                    Grid.SetColumn(stackPanel, player + 1);
 
                     // add textblocks as a children of stackPanel
                     stackPanel.Children.Add(roundTotalTextBlock);
@@ -88,25 +141,25 @@ namespace MahjongScorer.Pages
 
                     // calculate the round score by adding successive values in round scores list, 
                     // depending on which row we're rendering in
-                    for (var roundScoreCounter = 0; roundScoreCounter < (roundRow + 1); roundScoreCounter++)
+                    for (var roundScoreCounter = 0; roundScoreCounter < (round + 1); roundScoreCounter++)
                     {
-                        roundScore += game.Players[playerColumn].RoundScores[roundScoreCounter];
+                        roundScore += game.Players[player].RoundScores[roundScoreCounter];
                     }
 
                     // set the text for the round total; if it's less than zero, just show zero
                     if (roundScore < 0)
-                        roundTotalTextBlock.Foreground = roundScoreNegative;
+                        roundTotalTextBlock.Foreground = redBrush;
                     
                     roundTotalTextBlock.Text = roundScore.ToString();
 
                     // set text for the adjustment; we'll show negative or positive here
-                    roundAdjustmentTextBlock.Text = game.Players[playerColumn].RoundScores[roundRow].ToString();
+                    roundAdjustmentTextBlock.Text = game.Players[player].RoundScores[round].ToString();
 
                     // if the player's round adjustment is positive (not negative, or zero)
-                    if (Math.Sign(game.Players[playerColumn].RoundScores[roundRow]) == 1)
+                    if (Math.Sign(game.Players[player].RoundScores[round]) == 1)
                     {
                         // change the color of their round score
-                        roundTotalTextBlock.Foreground = roundWinnerTextBrush;
+                        roundTotalTextBlock.Foreground = accentColorBrush;
                         // add a plus sign to the beginning of their round adjustment text
                         roundAdjustmentTextBlock.Text = "+" + roundAdjustmentTextBlock.Text;
                     }                                       
@@ -154,13 +207,13 @@ namespace MahjongScorer.Pages
         private void SetPlayerNames()
         {
             playerOneNameTextBlock.Text = game.Players[0].Name;
-            playerOneWindTextBlock.Text = "(" + game.Players[0].CurrentWind.ToString() + ")";
+            playerOneWindTextBlock.Text = game.Players[0].CurrentWind.ToString();
             playerTwoNameTextBlock.Text = game.Players[1].Name;
-            playerTwoWindTextBlock.Text = "(" + game.Players[1].CurrentWind.ToString() + ")";
+            playerTwoWindTextBlock.Text = game.Players[1].CurrentWind.ToString();
             playerThreeNameTextBlock.Text = game.Players[2].Name;
-            playerThreeWindTextBlock.Text = "(" + game.Players[2].CurrentWind.ToString() + ")";
+            playerThreeWindTextBlock.Text = game.Players[2].CurrentWind.ToString();
             playerFourNameTextBlock.Text = game.Players[3].Name;
-            playerFourWindTextBlock.Text = "(" + game.Players[3].CurrentWind.ToString() + ")";
+            playerFourWindTextBlock.Text = game.Players[3].CurrentWind.ToString();
         }
 
         private void SetNextRoundInfo()

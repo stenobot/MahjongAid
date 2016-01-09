@@ -174,6 +174,10 @@ namespace MahjongScorer.Pages
             game.PrevailingWind = Wind.East;
             game.CurrentRound = 0;
 
+            // create List of prevailing winds to store in game instance
+            game.PrevailingWinds = new List<Wind>();
+            game.PrevailingWinds.Add(game.PrevailingWind);
+
             // go to Game Results page and pass it the game object
             Frame.Navigate(typeof(GameResultsPage), game);
         }

@@ -102,6 +102,7 @@
     <Content Include="Assets\learn-to-play\four-walls-tiles-dealt.png" />
     <Content Include="Assets\learn-to-play\game-in-progress.png" />
     <Content Include="Assets\learn-to-play\wind-rotation.png" />
+    <Content Include="Assets\mahjong-parchment.jpg" />
     <Content Include="Assets\splash.scale-100.png" />
     <Content Include="Assets\splash.scale-125.png" />
     <Content Include="Assets\splash.scale-150.png" />
@@ -148,6 +149,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="DataModel\Game.cs" />
     <Compile Include="DataModel\Enums.cs" />
     <Compile Include="Controls\Expander.cs" />

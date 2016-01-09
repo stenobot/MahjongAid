@@ -17,119 +17,124 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <ScrollViewer Background="{ThemeResource MahjongBackgroundBrush}"
-                  VerticalScrollBarVisibility="Auto">
+    <Grid Background="{ThemeResource MahjongBackgroundBrush}">
+        <Image Source="/Assets/mahjong-parchment.jpg" 
+               Stretch="UniformToFill" />
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-        <Grid x:Name="enterNamesGrid" Width="400">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
+            <Grid x:Name="enterNamesGrid" Width="400">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
 
-            <StackPanel>
-                <TextBlock Text="PLAYER INITIALS" Style="{ThemeResource LargeHeaderStyle}" />
-                <Grid>
-                    <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
-                    <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
-                    <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
-                    <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
-                        <BitmapIcon.RenderTransform>
-                            <ScaleTransform ScaleX="-1"/>
-                        </BitmapIcon.RenderTransform>
-                    </BitmapIcon>
+                <StackPanel>
+                    <TextBlock Text="PLAYER INITIALS" Style="{ThemeResource LargeHeaderStyle}" />
+                    <Grid>
+                        <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
+                        <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
+                        <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
+                            <BitmapIcon.RenderTransform>
+                                <ScaleTransform ScaleX="-1"/>
+                            </BitmapIcon.RenderTransform>
+                        </BitmapIcon>
 
-                </Grid>
-                <TextBlock Text="Enter each player's initials according to their starting winds. East Player is the first dealer." 
+                    </Grid>
+                    <TextBlock Text="Enter each player's initials according to their starting winds. East Player is the first dealer." 
                            Margin="10"
                            TextWrapping="WrapWholeWords" />
-            </StackPanel>
+                </StackPanel>
 
-            <Grid HorizontalAlignment="Center"
+                <Grid HorizontalAlignment="Center"
                   Margin="10"
                   Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="115"/>
-                    <RowDefinition Height="115"/>
-                    <RowDefinition Height="115"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="105" />
-                    <ColumnDefinition Width="105" />
-                    <ColumnDefinition Width="105" />
-                </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="115"/>
+                        <RowDefinition Height="115"/>
+                        <RowDefinition Height="115"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="105" />
+                        <ColumnDefinition Width="105" />
+                        <ColumnDefinition Width="105" />
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Margin="5" 
+                    <StackPanel Margin="5" 
                             Grid.Row="1" 
                             Grid.Column="2">
 
-                    <FontIcon FontFamily="Segoe UI Emoji"
+                        <FontIcon FontFamily="Segoe UI Emoji"
                                Glyph="&#x1F000;" FontSize="30" />
-                    
-                    <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+
+                        <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
                                Text="East Player" />
-                    
-                    <TextBox x:Name="PlayerOneNameTextBox" 
+
+                        <TextBox x:Name="PlayerOneNameTextBox" 
                              TextChanging="PlayerNameTextBox_TextChanging"                     
                              Style="{ThemeResource PlayerNameTextBoxStyle}" />
-                </StackPanel>
-                
-                <StackPanel Margin="5" 
+                    </StackPanel>
+
+                    <StackPanel Margin="5" 
                             Grid.Row="0" 
                             Grid.Column="1">
 
-                    <FontIcon FontFamily="Segoe UI Emoji"
+                        <FontIcon FontFamily="Segoe UI Emoji"
                                Glyph="&#x1F001;" FontSize="30" />
-                    
-                    <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+
+                        <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
                                Text="South Player" />
-                    
-                    <TextBox x:Name="PlayerTwoNameTextBox" 
+
+                        <TextBox x:Name="PlayerTwoNameTextBox" 
                              TextChanging="PlayerNameTextBox_TextChanging" 
                              Style="{ThemeResource PlayerNameTextBoxStyle}" />
-                </StackPanel>
-                
-                <StackPanel Margin="5" 
+                    </StackPanel>
+
+                    <StackPanel Margin="5" 
                             Grid.Row="1" 
                             Grid.Column="0">
 
-                    <FontIcon FontFamily="Segoe UI Emoji"
+                        <FontIcon FontFamily="Segoe UI Emoji"
                                Glyph="&#x1F002;" FontSize="30" />
-                    
-                    <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+
+                        <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
                                Text="West Player" />
-                    
-                    <TextBox x:Name="PlayerThreeNameTextBox" 
+
+                        <TextBox x:Name="PlayerThreeNameTextBox" 
                              TextChanging="PlayerNameTextBox_TextChanging"                                
                              Style="{ThemeResource PlayerNameTextBoxStyle}" />
-                </StackPanel>
-                
-                <StackPanel Margin="5" 
+                    </StackPanel>
+
+                    <StackPanel Margin="5" 
                             Grid.Row="2" 
                             Grid.Column="1">
-                    
-                    <FontIcon FontFamily="Segoe UI Emoji"
+
+                        <FontIcon FontFamily="Segoe UI Emoji"
                                Glyph="&#x1F003;" FontSize="30" />
-                    
-                    <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
+
+                        <TextBlock Style="{ThemeResource PlayerNameTextBlockStyle}"
                                Text="North Player" />
-                    
-                    <TextBox x:Name="PlayerFourNameTextBox" 
+
+                        <TextBox x:Name="PlayerFourNameTextBox" 
                              TextChanging="PlayerNameTextBox_TextChanging"                        
                              Style="{ThemeResource PlayerNameTextBoxStyle}" />
-                </StackPanel>
-            </Grid>
+                    </StackPanel>
+                </Grid>
 
-            <Button x:Name="startGameButton" 
+                <Button x:Name="startGameButton" 
                     Content="Start game" 
                     Visibility="Collapsed"
                     HorizontalAlignment="Center"
                     Margin="10"
                     Click="StartGameButton_Click" 
                     Grid.Row="2"/>
-            <ProgressRing  x:Name="startGameProgress" Grid.Row="2" Visibility="Collapsed" IsActive="True" />
-          
-        </Grid>
+                <ProgressRing  x:Name="startGameProgress" Grid.Row="2" Visibility="Collapsed" IsActive="True" />
 
-    </ScrollViewer>
+            </Grid>
+
+        </ScrollViewer>
+    </Grid>
+    
 </Page>

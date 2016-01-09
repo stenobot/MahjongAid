@@ -14,6 +14,7 @@ namespace MahjongScorer
         private int _timesDealerWon;
         private bool _inProgress;
         private Wind _prevailingWind;
+        private List<Wind> _prevailingWinds;
 
         private RuleSet _ruleSet;
 
@@ -99,6 +100,16 @@ namespace MahjongScorer
             {
                 if (_prevailingWind != value)
                     _prevailingWind = value;
+            }
+        }
+
+        public List<Wind> PrevailingWinds
+        {
+            get { return _prevailingWinds; }
+            set
+            {
+                if (_prevailingWinds != value)
+                    _prevailingWinds = value;
             }
         }
 

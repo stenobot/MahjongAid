@@ -6,13 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:MahjongScorer.Controls"
+    xmlns:converter="using:MahjongScorer.Converters"
     mc:Ignorable="d">
+    
     <Page.Resources>
         <Style TargetType="ComboBox">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,15,0,0" />
             <Setter Property="Width" Value="400" />
         </Style>
+        
+        <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
     </Page.Resources>
 
     <Page.Transitions>
@@ -29,6 +33,7 @@
 
         <VisualStateManager.VisualStateGroups>
 
+            <!-- Page Visual States -->
             <VisualStateGroup>
                 <VisualState x:Name="Small">
                     <VisualState.StateTriggers>
@@ -51,8 +56,97 @@
                 </VisualState>
             </VisualStateGroup>
 
+            <!-- Set UI Visual States -->
+            <VisualStateGroup>
+                <VisualState x:Name="NoPungsSelected" />
+                <VisualState x:Name="OnePungSelected">
+                    <VisualState.Setters>
+                        <Setter Target="pungOneCheckBoxes.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="TwoPungsSelected">
+                    <VisualState.Setters>
+                        <Setter Target="pungOneCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="pungTwoCheckBoxes.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ThreePungsSelected">
+                    <VisualState.Setters>
+                        <Setter Target="pungOneCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="pungTwoCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="pungThreeCheckBoxes.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="FourPungsSelected">
+                        <VisualState.Setters>
+                            <Setter Target="pungOneCheckBoxes.Visibility" Value="Visible" />
+                            <Setter Target="pungTwoCheckBoxes.Visibility" Value="Visible" />
+                            <Setter Target="pungThreeCheckBoxes.Visibility" Value="Visible" />
+                            <Setter Target="pungFourCheckBoxes.Visibility" Value="Visible" />
+                        </VisualState.Setters>
+                    </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup>
+                <VisualState x:Name="NoKongsSelected" />
+                <VisualState x:Name="OneKongSelected">
+                    <VisualState.Setters>
+                        <Setter Target="kongOneCheckBoxes.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="TwoKongsSelected">
+                    <VisualState.Setters>
+                        <Setter Target="kongOneCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="kongTwoCheckBoxes.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ThreeKongsSelected">
+                    <VisualState.Setters>
+                        <Setter Target="kongOneCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="kongTwoCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="kongThreeCheckBoxes.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="FourKongsSelected">
+                    <VisualState.Setters>
+                        <Setter Target="kongOneCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="kongTwoCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="kongThreeCheckBoxes.Visibility" Value="Visible" />
+                        <Setter Target="kongFourCheckBoxes.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup>
+                <VisualState x:Name="RegularLuckyWind" />
+                <VisualState x:Name="DoubleLuckyWind">
+                    <VisualState.Setters>
+                        <Setter Target="pungOneLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="pungTwoLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="pungThreeLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="pungFourLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="pungOneDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="pungTwoDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="pungThreeDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="pungFourDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="kongOneLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="kongTwoLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="kongThreeLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="kongFourLuckyRadioButton.Content" Value="Dragons" />
+                        <Setter Target="kongOneDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="kongTwoDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="kongThreeDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                        <Setter Target="kongFourDoubleLuckyRadioButton.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                
+            </VisualStateGroup>
+
         </VisualStateManager.VisualStateGroups>
 
+        <Image Source="/Assets/mahjong-parchment.jpg" 
+               Stretch="UniformToFill" />
+        
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <RelativePanel HorizontalAlignment="Center">
                            
@@ -145,12 +239,165 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Grid x:Name="pungCountGrid" Visibility="Collapsed" Width="400" Margin="25,10,0,0" HorizontalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="195" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
+                        <Grid x:Name="pungCountGrid" 
+                              Width="400" 
+                              Margin="25,10,0,0" 
+                              HorizontalAlignment="Center">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel x:Name="pungOneCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="0">
+                                <TextBlock Text="Pung 1:" 
+                                           Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="pungOneTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="pungOneConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="pungOneRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=pungOneTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="pungOneNormalRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked" 
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="pungOneLuckyRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="pungOneDoubleLuckyRadioButton" Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel x:Name="pungTwoCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="1">
+                                <TextBlock Text="Pung 2:" Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="pungTwoTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="pungTwoConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="pungTwoRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=pungTwoTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="pungTwoNormalRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="pungTwoLuckyRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="pungTwoDoubleLuckyRadioButton" 
+                                                     Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel x:Name="pungThreeCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="2">
+                                <TextBlock Text="Pung 3:" Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="pungThreeTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="pungThreeConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="pungThreeRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=pungThreeTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="pungThreeNormalRadioButton"
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="pungThreeLuckyRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="pungThreeDoubleLuckyRadioButton" 
+                                                     Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel x:Name="pungFourCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="3">
+                                <TextBlock Text="Pung 4:" Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="pungFourTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="pungFourConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="pungFourRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=pungFourTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="pungFourNormalRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="pungFourLuckyRadioButton"
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="pungFourDoubleLuckyRadioButton" Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </StackPanel>
+
                         </Grid>
 
                         <ComboBox x:Name="kongCountComboBox"
@@ -163,12 +410,168 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Grid x:Name="kongCountGrid" Visibility="Collapsed" Width="400" Margin="25,10,0,0" HorizontalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="185" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
+
+                        <Grid x:Name="kongCountGrid" 
+                              Width="400" 
+                              Margin="25,10,0,0" 
+                              HorizontalAlignment="Center">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel x:Name="kongOneCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="0">
+                                <TextBlock Text="Kong 1:" 
+                                           Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="kongOneTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="kongOneConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="kongOneRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=kongOneTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="kongOneNormalRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="kongOneLuckyRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="kongOneDoubleLuckyRadioButton" 
+                                                     Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel x:Name="kongTwoCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="1">
+                                <TextBlock Text="Kong 2:" Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="kongTwoTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="kongTwoConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="kongTwoRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=kongTwoTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="kongTwoNormalRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="kongTwoLuckyRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="kongTwoDoubleLuckyRadioButton" 
+                                                     Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel x:Name="kongThreeCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="2">
+                                <TextBlock Text="Kong 3:" Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="kongThreeTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="kongThreeConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="kongThreeRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=kongThreeTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="kongThreeNormalRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="kongThreeLuckyRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="kongThreeDoubleLuckyRadioButton" 
+                                                     Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel x:Name="kongFourCheckBoxes" 
+                                        Orientation="Horizontal" 
+                                        Visibility="Collapsed"
+                                        Grid.Row="3">
+                                <TextBlock Text="Kong 4:" Margin="0,4,15,0" />
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="kongFourTerminalsHonorsCheckBox" 
+                                                  Content="Terminals or honors" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Margin="0,0,15,0"/>
+                                        <CheckBox x:Name="kongFourConcealedCheckBox" 
+                                                  Checked="SetCheckBox_Checked"
+                                                  Unchecked="SetCheckBox_Unchecked"
+                                                  Content="Concealed" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="kongFourRadioButtonsStackPanel" 
+                                                Margin="0,0,0,8"
+                                                Visibility="{Binding ElementName=pungFourTerminalsHonorsCheckBox, Path=IsChecked, Converter={StaticResource ResourceKey=boolToVisibilityConverter}}">
+                                        <RadioButton x:Name="kongFourNormalRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Terminals or regular wind" />
+                                        <RadioButton x:Name="kongFourLuckyRadioButton" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Lucky wind or dragons" />
+                                        <RadioButton x:Name="kongFourDoubleLuckyRadioButton" 
+                                                     Visibility="Collapsed" 
+                                                     Checked="SetCheckBox_Checked"
+                                                     Unchecked="SetCheckBox_Unchecked"
+                                                     Content="Double lucky wind" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </StackPanel>
+
                         </Grid>
 
                     </StackPanel>

@@ -169,9 +169,12 @@ namespace MahjongScorer.Pages
             allHonors.Name = "All terminals or honors (double)";
             allHonors.Description = "there's a terminal or honor in every set or chow";
 
+
             // LUCKY SET - DOUBLE
             game.Rules.Add(luckySet = new Rule());
             // only show in list if at least one pung or kong has terminals/honors checked
+            // don't show in list - RETIRED
+            luckySet.ShowInList = false;
             luckySet.IsUncommon = false;
             luckySet.Double = 1;
             luckySet.Name = "Lucky set (double)";
@@ -180,6 +183,8 @@ namespace MahjongScorer.Pages
             // DOUBLE LUCKY SET - 2 DOUBLES
             game.Rules.Add(doubleLuckySet = new Rule());
             // only show in list if at least one pung or kong has terminals/honors checked
+            // don't show in list - RETIRED
+            doubleLuckySet.ShowInList = false;
             doubleLuckySet.IsUncommon = false;
             doubleLuckySet.Double = 2;
             doubleLuckySet.Name = "Double lucky set (2 doubles)";
@@ -214,7 +219,8 @@ namespace MahjongScorer.Pages
             // RIICHI - DOUBLE
             game.Rules.Add(riichi = new Rule());
             // always show in list
-            riichi.ShowInList = true;
+            // don't show in list - RETIRED
+            riichi.ShowInList = false; 
             riichi.IsUncommon = true;
             riichi.Double = 1;
             riichi.Name = "Riichi (double)";

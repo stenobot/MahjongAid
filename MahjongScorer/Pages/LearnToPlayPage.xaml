@@ -18,6 +18,10 @@
     </Page.Transitions>
 
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
+
+        <Image Source="/Assets/mahjong-parchment.jpg" 
+               Stretch="UniformToFill" />
+
         <Pivot>
 
             <PivotItem Header="Welcome to Mahjong!">
