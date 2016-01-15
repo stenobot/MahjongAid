@@ -228,11 +228,11 @@ namespace MahjongScorer.Pages
         {
             if (setType == "pung")
             {
-                pungFourTerminalsHonorsCheckBox.IsChecked = false;
-                pungFourNormalRadioButton.IsChecked = false;
-                pungFourLuckyRadioButton.IsChecked = true;
-                pungFourDoubleLuckyRadioButton.IsChecked = false;
                 pungFourConcealedCheckBox.IsChecked = false;
+                pungFourTerminalsHonorsCheckBox.IsChecked = false;
+                pungFourNormalRadioButton.IsChecked = true;
+                pungFourLuckyRadioButton.IsChecked = false;
+                pungFourDoubleLuckyRadioButton.IsChecked = false;              
 
                 if (upToSetNum < 4)
                 {
@@ -262,11 +262,11 @@ namespace MahjongScorer.Pages
                 }
             } else if (setType == "kong")
             {
-                kongFourTerminalsHonorsCheckBox.IsChecked = false;
-                kongFourNormalRadioButton.IsChecked = false;
-                kongFourLuckyRadioButton.IsChecked = true;
-                kongFourDoubleLuckyRadioButton.IsChecked = false;
                 kongFourConcealedCheckBox.IsChecked = false;
+                kongFourTerminalsHonorsCheckBox.IsChecked = false;
+                kongFourNormalRadioButton.IsChecked = true;
+                kongFourLuckyRadioButton.IsChecked = false;
+                kongFourDoubleLuckyRadioButton.IsChecked = false;
 
                 if (upToSetNum < 4)
                 {
@@ -1136,34 +1136,55 @@ namespace MahjongScorer.Pages
 
 
         #region "SCORE" METHODS
+
         /// <summary>
         /// Calculates scores for the different sets. We'll run this method twice: Once for Pungs, once for Kongs
         /// </summary>
         /// <param name="TerminalsHonorsSetCheckBoxes"></param>
         /// <param name="ConcealedSetCheckBoxes"></param>
         /// <param name="baseValue"></param>
-        private int SetScore(List<CheckBox> TerminalsHonorsSetCheckBoxes, List<CheckBox> ConcealedSetCheckBoxes, int baseValue)
+        private int SetsScore(ComboBox setsComboBox, List<CheckBox> TerminalsHonorsSetCheckBoxes, List<CheckBox> ConcealedSetCheckBoxes, int baseValue)
         {
+            int setsNum = setsComboBox.SelectedIndex;
+
             int finalSetsValue = 0;
+            int checkedTerminalsHonors = 0;
+            int checkedConcealed = 0;
 
             if (TerminalsHonorsSetCheckBoxes != null)
             {
                 foreach (CheckBox terminalsHonorsCheckBox in TerminalsHonorsSetCheckBoxes)
                 {
-                    // set the base value for this type of set
-                    int thisSetValue = baseValue;
-
-                    // if it's terminal or honors, double it
+                    // if it's terminal or honors
                     if (terminalsHonorsCheckBox.IsChecked == true)
-                        thisSetValue *= 2;
+                        checkedTerminalsHonors++;
 
-                    // if it's concealed, double it
+                    // if it's concealed
                     if (ConcealedSetCheckBoxes[TerminalsHonorsSetCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
-                        thisSetValue *= 2;
-
-                    // add the final value to the total round base score
-                    finalSetsValue += thisSetValue;
+                        checkedConcealed++;
                 }
+            }
+
+            // loop once for each set
+            for (int i = 0; i < setsNum; i++)
+            {
+                int thisSetValue = baseValue;
+
+                // apply terminals/honors check boxes if applicable
+                if (checkedTerminalsHonors > 0)
+                {
+                    thisSetValue *= 2;
+                    checkedTerminalsHonors--;
+                }
+
+                //apply concealed check boxes if applicable
+                if (checkedConcealed > 0)
+                {
+                    thisSetValue *= 2;
+                    checkedConcealed--;
+                }
+
+                finalSetsValue += thisSetValue;
             }
             return finalSetsValue;
         }
@@ -1195,7 +1216,7 @@ namespace MahjongScorer.Pages
                     setDoubles++;
 
                     // there can only be one, so no point continuing the loop
-                    return DoubleScore(baseScore, setDoubles);
+                    break;
                 }
             }
 
@@ -1329,10 +1350,10 @@ namespace MahjongScorer.Pages
 
             // PUNGS AND KONGS
             // check which pung check boxes are checked, and adjust the score
-            baseScore += SetScore(PungTerminalsHonorsCheckBoxes, PungConcealedCheckBoxes, ScoreValues.BASE_PUNG_VALUE);
+            baseScore += SetsScore(pungCountComboBox, PungTerminalsHonorsCheckBoxes, PungConcealedCheckBoxes, ScoreValues.BASE_PUNG_VALUE);
 
             // check which kong check boxes are checked, and adjust the score
-            baseScore += SetScore(KongTerminalsHonorsCheckBoxes, KongConcealedCheckBoxes, ScoreValues.BASE_KONG_VALUE);
+            baseScore += SetsScore(kongCountComboBox, KongTerminalsHonorsCheckBoxes, KongConcealedCheckBoxes, ScoreValues.BASE_KONG_VALUE);
 
             // APPLY SCORE VALUES AND DOUBLES
             baseScore = ApplySetDoubles(PungLuckyRadioButtons, PungDoubleLuckyRadioButtons, baseScore);
