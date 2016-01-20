@@ -124,8 +124,8 @@ namespace MahjongScorer.Pages
             KongNormalRadioButtons.Add(kongFourNormalRadioButton);
             KongLuckyRadioButtons.Add(kongOneLuckyRadioButton);
             KongLuckyRadioButtons.Add(kongTwoLuckyRadioButton);
-            KongLuckyRadioButtons.Add(kongThreeNormalRadioButton);
-            KongLuckyRadioButtons.Add(kongFourNormalRadioButton);
+            KongLuckyRadioButtons.Add(kongThreeLuckyRadioButton);
+            KongLuckyRadioButtons.Add(kongFourLuckyRadioButton);
             KongDoubleLuckyRadioButtons.Add(kongOneDoubleLuckyRadioButton);
             KongDoubleLuckyRadioButtons.Add(kongTwoDoubleLuckyRadioButton);
             KongDoubleLuckyRadioButtons.Add(kongThreeDoubleLuckyRadioButton);
@@ -1004,13 +1004,19 @@ namespace MahjongScorer.Pages
         /// </summary>
         private void ShowInProgressPlayerScores()
         {
+            int scoreAdjustment;
+
+            // get the rounded current  base score for this round
+            int currentBaseScore = CurrentBaseScore();
+
             InsertLineBreaks(_inProgressTips, 2);
 
             _inProgressTips.Insert(_inProgressTips.Length, "Score adjustments:");
             InsertLineBreaks(_inProgressTips, 1);
             foreach (Player player in game.Players)
             {
-                int scoreAdjustment = PlayerRoundScore(player, CurrentBaseScore());
+                scoreAdjustment = 0;
+                scoreAdjustment = PlayerRoundScore(player, currentBaseScore);
 
                 if (scoreAdjustment > 0)
                     _inProgressTips.Insert(_inProgressTips.Length, player.Name + ": +" + scoreAdjustment);
