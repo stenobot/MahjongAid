@@ -60,6 +60,8 @@ namespace MahjongScorer.Pages
         Set set3;
         Set set4;
 
+        bool setRadioButtonsShown;
+
         public EnterScoresPage()
         {
             this.InitializeComponent();
@@ -72,6 +74,8 @@ namespace MahjongScorer.Pages
         /// </summary>
         private void InitializeSetElementLists()
         {
+            setRadioButtonsShown = false;
+
             PungTerminalsHonorsCheckBoxes = new List<CheckBox>();
             PungConcealedCheckBoxes = new List<CheckBox>();
             KongTerminalsHonorsCheckBoxes = new List<CheckBox>();
@@ -220,12 +224,27 @@ namespace MahjongScorer.Pages
         /// <summary>
         /// manually reset check boxes and radio buttons, so we don't have hidden "checked" options
         /// The exception here are "Normal" radio buttons. these should always reset to "checked"
-        /// this helps us avoid having no radio button selected, and normal radio buttons have no value anyway
+        /// this helps us avoid having no radio button selected, and normal radio buttons have no additional score value anyway
         /// </summary>
         /// <param name="setType"></param>
         /// <param name="upToSetNum"></param>
         private void ResetSetCheckBoxes(string setType, int upToSetNum = 4)
         {
+            // first time fired, just check all normal radio butons 
+            if (!setRadioButtonsShown)
+            {
+                pungOneNormalRadioButton.IsChecked = true;
+                pungTwoNormalRadioButton.IsChecked = true;
+                pungThreeNormalRadioButton.IsChecked = true;
+                pungFourNormalRadioButton.IsChecked = true;
+                kongOneNormalRadioButton.IsChecked = true;
+                kongTwoNormalRadioButton.IsChecked = true;
+                kongThreeNormalRadioButton.IsChecked = true;
+                kongFourNormalRadioButton.IsChecked = true;
+
+                setRadioButtonsShown = true;
+            }
+
             if (setType == "pung")
             {
                 pungFourConcealedCheckBox.IsChecked = false;
@@ -239,8 +258,6 @@ namespace MahjongScorer.Pages
                     pungThreeConcealedCheckBox.IsChecked = false;
                     pungThreeTerminalsHonorsCheckBox.IsChecked = false;
                     pungThreeNormalRadioButton.IsChecked = true;
-                    pungThreeLuckyRadioButton.IsChecked = false;
-                    pungThreeDoubleLuckyRadioButton.IsChecked = false;
                 }
 
                 if (upToSetNum < 3)
@@ -248,8 +265,6 @@ namespace MahjongScorer.Pages
                     pungTwoConcealedCheckBox.IsChecked = false;
                     pungTwoTerminalsHonorsCheckBox.IsChecked = false;
                     pungTwoNormalRadioButton.IsChecked = true;
-                    pungTwoLuckyRadioButton.IsChecked = false;
-                    pungTwoDoubleLuckyRadioButton.IsChecked = false;
                 }
 
                 if (upToSetNum < 2)
@@ -257,24 +272,18 @@ namespace MahjongScorer.Pages
                     pungOneConcealedCheckBox.IsChecked = false;
                     pungOneTerminalsHonorsCheckBox.IsChecked = false;
                     pungOneNormalRadioButton.IsChecked = true;
-                    pungOneLuckyRadioButton.IsChecked = false;
-                    pungOneDoubleLuckyRadioButton.IsChecked = false;
                 }
             } else if (setType == "kong")
             {
                 kongFourConcealedCheckBox.IsChecked = false;
                 kongFourTerminalsHonorsCheckBox.IsChecked = false;
                 kongFourNormalRadioButton.IsChecked = true;
-                kongFourLuckyRadioButton.IsChecked = false;
-                kongFourDoubleLuckyRadioButton.IsChecked = false;
 
                 if (upToSetNum < 4)
                 {
                     kongThreeConcealedCheckBox.IsChecked = false;
                     kongThreeTerminalsHonorsCheckBox.IsChecked = false;
                     kongThreeNormalRadioButton.IsChecked = true;
-                    kongThreeLuckyRadioButton.IsChecked = false;
-                    kongThreeDoubleLuckyRadioButton.IsChecked = false;
                 }
 
                 if (upToSetNum < 3)
@@ -282,8 +291,6 @@ namespace MahjongScorer.Pages
                     kongTwoConcealedCheckBox.IsChecked = false;
                     kongTwoTerminalsHonorsCheckBox.IsChecked = false;
                     kongTwoNormalRadioButton.IsChecked = true;
-                    kongTwoLuckyRadioButton.IsChecked = false;
-                    kongTwoDoubleLuckyRadioButton.IsChecked = false;
                 }
 
                 if (upToSetNum < 2)
@@ -291,8 +298,6 @@ namespace MahjongScorer.Pages
                     kongOneConcealedCheckBox.IsChecked = false;
                     kongOneTerminalsHonorsCheckBox.IsChecked = false;
                     kongOneNormalRadioButton.IsChecked = true;
-                    kongOneLuckyRadioButton.IsChecked = false;
-                    kongOneDoubleLuckyRadioButton.IsChecked = false;
                 }
             }        
         }
@@ -421,78 +426,6 @@ namespace MahjongScorer.Pages
                         break;
                 }
             }
-            //clear all the children (in case selection changes)
-            //grid.Children.Clear();
-
-            // check if pung or kong, then set a new list
-            //if (setType == "pung")
-            //{
-            //    PungTerminalsHonorsCheckBoxes = new List<SetCheckBox>();
-            //    PungConcealedCheckBoxes = new List<SetCheckBox>();
-            //}
-            //else if (setType == "kong")
-            //{
-            //    KongTerminalsHonorsCheckBoxes = new List<SetCheckBox>();
-            //    KongConcealedCheckBoxes = new List<SetCheckBox>();
-            //}
-
-            // use the selected index of the combobox
-            //for (var i = 0; i < comboBox.SelectedIndex; i++)
-            //{
-            //    // create rows and add to the grid
-            //    RowDefinition rd = new RowDefinition();
-            //    grid.RowDefinitions.Insert(i, rd);
-
-            //    // create 2 check boxes and a textblock for each row
-            //    SetCheckBox terminalsHonorsCheckBox = new SetCheckBox();
-            //    SetCheckBox concealedCheckBox = new SetCheckBox();
-            //    TextBlock setNameTextBlock = new TextBlock();
-
-            //    // set the SetType property for each check box ("pung" or "kong")
-            //    terminalsHonorsCheckBox.SetType = setType;
-            //    concealedCheckBox.SetType = setType;
-
-            //    // not sure we need this property at all yet, JUST IN CASE!!!
-            //    //terminalsHonorsCheckBox.CheckBoxType = "terminalsHonors";
-            //    //concealedCheckBox.CheckBoxType = "concealed";
-
-            //    terminalsHonorsCheckBox.Checked += SetCheckBox_Checked;
-            //    concealedCheckBox.Checked += SetCheckBox_Checked;
-            //    terminalsHonorsCheckBox.Unchecked += SetCheckBox_Unchecked;
-            //    concealedCheckBox.Unchecked += SetCheckBox_Unchecked;
-
-            //    // set the UI text for each item
-            //    terminalsHonorsCheckBox.Content = "Terminals or honors";
-            //    concealedCheckBox.Content = "Concealed";
-            //    setNameTextBlock.Text = setType + " " + (i + 1) + ":";
-
-            //    // set some styling on the textblock
-            //    setNameTextBlock.VerticalAlignment = VerticalAlignment.Center;
-
-            //    // check again if pungs or kongs, add generated check boxes to appropriate lists
-            //    if (setType == "pung")
-            //    {
-            //        PungTerminalsHonorsCheckBoxes.Add(terminalsHonorsCheckBox);
-            //        PungConcealedCheckBoxes.Add(concealedCheckBox);
-            //    }
-            //    else if (setType == "kong")
-            //    {
-            //        KongTerminalsHonorsCheckBoxes.Add(terminalsHonorsCheckBox);
-            //        KongConcealedCheckBoxes.Add(concealedCheckBox);
-            //    }
-
-            //    // set each to appr. row and column
-            //    Grid.SetRow(setNameTextBlock, i);
-            //    Grid.SetRow(terminalsHonorsCheckBox, i);
-            //    Grid.SetColumn(terminalsHonorsCheckBox, 1);
-            //    Grid.SetRow(concealedCheckBox, i);
-            //    Grid.SetColumn(concealedCheckBox, 2);
-
-            //    // add each to the grid
-            //    grid.Children.Add(terminalsHonorsCheckBox);
-            //    grid.Children.Add(concealedCheckBox);
-            //    grid.Children.Add(setNameTextBlock);
-          //  }
         }
 
 
@@ -577,22 +510,6 @@ namespace MahjongScorer.Pages
                         else
                             rule.ShowInList = false;
                         break;
-
-                    //// lucky set - show if at least one pung or kong has terminals/honors checked
-                    //case 12:
-                    //    if (TerminalsHonorsPungsKongs() > 0)
-                    //        rule.ShowInList = true;
-                    //    else
-                    //        rule.ShowInList = false;
-                    //    break;
-
-                    //// double lucky set - show if at least one pung or kong has terminals/honors checked
-                    //case 13:
-                    //    if (TerminalsHonorsPungsKongs() > 0)
-                    //        rule.ShowInList = true;
-                    //    else
-                    //        rule.ShowInList = false;
-                    //    break;
 
                     // off the dead wall - show if there's at least one kong
                     case 14:
@@ -1990,8 +1907,6 @@ namespace MahjongScorer.Pages
             winnerComboBox.Visibility = Visibility.Visible;
 
             InitializeSetElementLists();
-
-           
 
             base.OnNavigatedTo(e);
 
