@@ -63,7 +63,7 @@ namespace MahjongScorer.Pages
             // read saved games list from Json data
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Game>));
 
-            var stream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("mahjong-data.json");
+            var stream = await ApplicationData.Current.RoamingFolder.OpenStreamForReadAsync("mahjong-data.json");
 
             // retrieve the list of game objects add assign to our new List
             SavedGamesList = (List<Game>)serializer.ReadObject(stream);
@@ -72,7 +72,7 @@ namespace MahjongScorer.Pages
             SavedGamesList.Add(game);
 
             // write saved games list back to storage
-            using (stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("mahjong-data.json", CreationCollisionOption.ReplaceExisting))
+            using (stream = await ApplicationData.Current.RoamingFolder.OpenStreamForWriteAsync("mahjong-data.json", CreationCollisionOption.ReplaceExisting))
             {
                 // pass game list into the serializer
                 serializer.WriteObject(stream, SavedGamesList);
@@ -86,7 +86,7 @@ namespace MahjongScorer.Pages
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Game>));
 
 
-            using (Stream stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("mahjong-data.json", CreationCollisionOption.ReplaceExisting))
+            using (Stream stream = await ApplicationData.Current.RoamingFolder.OpenStreamForWriteAsync("mahjong-data.json", CreationCollisionOption.ReplaceExisting))
             {
                 // pass game list into the serializer
                 serializer.WriteObject(stream, SavedGamesList);

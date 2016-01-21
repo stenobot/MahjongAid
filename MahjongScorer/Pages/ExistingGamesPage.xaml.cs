@@ -43,7 +43,7 @@ namespace MahjongScorer.Pages
 
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Game>));
 
-            Stream stream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("mahjong-data.json");
+            Stream stream = await ApplicationData.Current.RoamingFolder.OpenStreamForReadAsync("mahjong-data.json");
 
             // deserialize game data, cast to List of type Game, and assign it to our saved games List
             MasterSavedGamesList = (List<Game>)serializer.ReadObject(stream);
@@ -66,7 +66,7 @@ namespace MahjongScorer.Pages
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(List<Game>));
 
-            using (Stream stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("mahjong-data.json", CreationCollisionOption.ReplaceExisting))
+            using (Stream stream = await ApplicationData.Current.RoamingFolder.OpenStreamForWriteAsync("mahjong-data.json", CreationCollisionOption.ReplaceExisting))
             {
                 // pass game list into the serializer
                 serializer.WriteObject(stream, MasterSavedGamesList);
@@ -76,7 +76,14 @@ namespace MahjongScorer.Pages
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            await GetSavedGamesAsync();   
+            try
+            {
+                await GetSavedGamesAsync();
+            }
+            catch
+            {
+                VisualStateManager.GoToState(this, "NoPreviousGames", true);
+            }
         }
 
         

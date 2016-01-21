@@ -25,12 +25,27 @@
 
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="NoPreviousGames">
+                    <VisualState.Setters>
+                        <Setter Target="noGamesInProgressTextBlock.Visibility" Value="Visible" />
+                        <Setter Target="noGamesCompletedTextBlock.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Image Source="/Assets/mahjong-parchment.jpg" 
                Stretch="UniformToFill" />
         
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Width="400">
-                <TextBlock x:Name="deletedMessageTextBlock" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,10" Opacity="0" Foreground="{ThemeResource MahjongAccentColorBrush}" />
+                <TextBlock x:Name="deletedMessageTextBlock" 
+                           FontSize="15" 
+                           HorizontalAlignment="Left" 
+                           Margin="0,0,0,10" Opacity="0" 
+                           Foreground="{ThemeResource MahjongAccentColorBrush}" />
 
                 <StackPanel>
                     <TextBlock Text="GAMES IN PROGRESS" Style="{ThemeResource LargeHeaderStyle}" />
@@ -44,6 +59,12 @@
                             </BitmapIcon.RenderTransform>
                         </BitmapIcon>
                     </Grid>
+                    
+                    <TextBlock x:Name="noGamesInProgressTextBlock" 
+                               Margin="10" 
+                               TextWrapping="Wrap" 
+                               Visibility="Collapsed" 
+                               Text="No games in progress yet. Go back to the home screen to start a new game." />
 
                     <ListView x:Name="gamesInProgressListView" Margin="0,15" SelectionChanged="GamesInProgressListView_SelectionChanged">
                         <ListView.ItemTemplate>
@@ -91,6 +112,12 @@
                             </BitmapIcon.RenderTransform>
                         </BitmapIcon>
                     </Grid>
+
+                    <TextBlock x:Name="noGamesCompletedTextBlock" 
+                               Margin="10" 
+                               TextWrapping="Wrap" 
+                               Visibility="Collapsed" 
+                               Text="No games have been completed yet." />
 
                     <ListView x:Name="gamesCompletedListView" Margin="0,15" SelectionChanged="GamesCompletedListView_SelectionChanged">
                         <ListView.ItemTemplate>
