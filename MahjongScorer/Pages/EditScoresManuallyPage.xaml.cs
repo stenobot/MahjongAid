@@ -211,7 +211,7 @@ namespace MahjongScorer.Pages
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(StartPage), new DrillOutThemeAnimation());
+            Frame.Navigate(typeof(StartPage), new DrillInNavigationTransitionInfo());
         }
     }
 }
