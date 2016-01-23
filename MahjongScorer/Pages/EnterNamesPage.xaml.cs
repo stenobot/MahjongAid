@@ -139,10 +139,10 @@ namespace MahjongScorer.Pages
             else _playerFour.Name = sender.Text.ToUpper();
 
             // don't show the start game button unless each textbox has at least one character
-            if ((PlayerOneNameTextBox.Text.Count<char>() > 0) &&
-                (PlayerTwoNameTextBox.Text.Count<char>() > 0) &&
-                (PlayerThreeNameTextBox.Text.Count<char>() > 0) &&
-                (PlayerFourNameTextBox.Text.Count<char>() > 0))
+            if ((PlayerOneNameTextBox.Text.Count() > 0) &&
+                (PlayerTwoNameTextBox.Text.Count() > 0) &&
+                (PlayerThreeNameTextBox.Text.Count() > 0) &&
+                (PlayerFourNameTextBox.Text.Count() > 0))
                 startGameButton.Visibility = Visibility.Visible;
             else
                 startGameButton.Visibility = Visibility.Collapsed;

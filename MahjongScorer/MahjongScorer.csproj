@@ -154,6 +154,9 @@
     <Compile Include="DataModel\Enums.cs" />
     <Compile Include="Controls\Expander.cs" />
     <Compile Include="Controls\StringConstants.cs" />
+    <Compile Include="Pages\EditScoresManuallyPage.xaml.cs">
+      <DependentUpon>EditScoresManuallyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EnterNamesPage.xaml.cs">
       <DependentUpon>EnterNamesPage.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Pages\EditScoresManuallyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EnterNamesPage.xaml">
       <SubType>Designer</SubType>

@@ -193,7 +193,7 @@
             
         </ScrollViewer>
 
-        <CommandBar VerticalAlignment="Bottom">
+        <CommandBar VerticalAlignment="Bottom" Background="{ThemeResource MahjongAccentColorBrush}">
             <AppBarButton x:Name="roundSummariesAppBarButton" 
                           Visibility="Collapsed" 
                           Label="Summaries"

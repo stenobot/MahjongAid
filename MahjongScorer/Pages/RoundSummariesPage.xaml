@@ -17,12 +17,11 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid>
+    <Grid Background="{ThemeResource MahjongBackgroundBrush}">
         <Image Source="/Assets/mahjong-parchment.jpg" 
                Stretch="UniformToFill" />
         
-        <ScrollViewer Background="{ThemeResource MahjongBackgroundBrush}" 
-                  VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
 
             <Grid x:Name="roundSummariesGrid" 
               HorizontalAlignment="Center" 

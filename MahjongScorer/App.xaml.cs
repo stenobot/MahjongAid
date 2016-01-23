@@ -88,9 +88,9 @@ namespace MahjongScorer
             var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
 
             // set up our brushes
-            SolidColorBrush bkgColor = Current.Resources["MahjongBackgroundBrush"] as SolidColorBrush;
-            SolidColorBrush btnHoverColor = Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
-            SolidColorBrush btnPressedColor = Current.Resources["MahjongAccentColorBrush"] as SolidColorBrush;
+            SolidColorBrush bkgColor = Current.Resources["MahjongAccentColorBrush"] as SolidColorBrush;
+            SolidColorBrush btnHoverColor = Current.Resources["MahjongBackgroundBrush"] as SolidColorBrush;
+            SolidColorBrush btnPressedColor = Current.Resources["MahjongGrayBrush"] as SolidColorBrush;
 
 
             // override colors!

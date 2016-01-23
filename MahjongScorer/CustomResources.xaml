@@ -94,6 +94,13 @@
         <Setter Property="FontWeight" Value="ExtraBold" />
     </Style>
 
+    <Style x:Name="PlayerScoreTextBoxStyle" TargetType="TextBox">
+        <Setter Property="InputScope" Value="Number" />
+        <Setter Property="MaxLength" Value="5" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="FontWeight" Value="ExtraBold" />
+    </Style>
 
     
 

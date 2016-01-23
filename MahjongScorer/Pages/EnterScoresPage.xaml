@@ -665,16 +665,19 @@
 
                         </controls:Expander>
                     </StackPanel>
-
-
-
+                    
                     <Button x:Name="doneScoringButton" 
                             Style="{ThemeResource AccentColorButtonStyle}"
                             Visibility="Collapsed"
                             Width="400"
-                            Margin="0,30,0,0"
+                            Margin="0,30,0,10"
                             Click="DoneScoringButton_Click" 
                             Content="Done!" />
+                    
+                    <HyperlinkButton Content="Enter scores manually"
+                                     HorizontalAlignment="Center"
+                                     Margin="0,10,0,40"
+                                     Click="ScoreManuallyButton_Click" />
                 </StackPanel>
 
                 <Grid x:Name="inProgressTipsGrid" 
@@ -698,5 +701,9 @@
             </RelativePanel>
         </ScrollViewer>
 
+        <CommandBar VerticalAlignment="Bottom" Background="{ThemeResource MahjongAccentColorBrush}">
+            <AppBarButton Label="Home"
+                          Icon="Home" Click="HomeButton_Click" />
+        </CommandBar>
     </Grid>
 </Page>

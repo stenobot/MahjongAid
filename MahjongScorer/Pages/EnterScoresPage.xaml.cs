@@ -5,6 +5,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -1824,6 +1825,11 @@ namespace MahjongScorer.Pages
             await confirmDialog.ShowAsync();    
         }
 
+        private void ScoreManuallyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditScoresManuallyPage), game, new Windows.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo());
+        }
+
         private void RulesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // re-render the in progress text
@@ -1910,6 +1916,11 @@ namespace MahjongScorer.Pages
 
             base.OnNavigatedTo(e);
 
+        }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(StartPage), new DrillOutThemeAnimation());
         }
     }
 }
