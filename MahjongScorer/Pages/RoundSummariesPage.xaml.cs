@@ -30,8 +30,6 @@ namespace MahjongScorer.Pages
         }
 
 
-
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter is Game)
@@ -57,6 +55,7 @@ namespace MahjongScorer.Pages
                 RowDefinition rdTitle = new RowDefinition();
                 rdTitle.Height = titleRowHeight;
                 RowDefinition rdBody = new RowDefinition();
+                rdBody.Height = new GridLength(1, GridUnitType.Auto);
                 roundSummariesGrid.RowDefinitions.Insert(rowIndex, rdTitle);
                 roundSummariesGrid.RowDefinitions.Insert(rowIndex + 1, rdBody);
 
@@ -72,6 +71,7 @@ namespace MahjongScorer.Pages
                 tbTitle.Foreground = titleTextBrush;
                 tbTitle.FontFamily = shuiFont;
                 tbBody.TextWrapping = TextWrapping.WrapWholeWords;
+                tbBody.Margin = new Thickness(0, 10, 0, 20);
 
                 // add as children to grid
                 roundSummariesGrid.Children.Add(tbTitle);

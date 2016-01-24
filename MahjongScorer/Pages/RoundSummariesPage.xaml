@@ -24,9 +24,9 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
             <Grid x:Name="roundSummariesGrid" 
-              HorizontalAlignment="Center" 
-              Margin="0,25" 
-              Width="470" />
+                  HorizontalAlignment="Center" 
+                  Margin="0,25" 
+                  Width="470" />
 
         </ScrollViewer>
 
