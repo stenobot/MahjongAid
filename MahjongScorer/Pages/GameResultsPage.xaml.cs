@@ -137,7 +137,7 @@ namespace MahjongScorer.Pages
 
                     // calculate the round score for each round, for each player
                     // in a temporary int, start with starting score
-                    int roundScore = ScoreValues.STARTING_SCORE;
+                    int roundScore = game.StartingScore;
 
                     // calculate the round score by adding successive values in round scores list, 
                     // depending on which row we're rendering in

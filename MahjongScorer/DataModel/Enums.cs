@@ -7,11 +7,4 @@
         West,
         North
     }
-
-    public enum RuleSet
-    {
-        Japanese,
-        American
-    }
-
 }

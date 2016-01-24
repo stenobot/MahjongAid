@@ -53,6 +53,11 @@
     <GridLength x:Key="RoundSummariesTitleHeight">20</GridLength>
     <x:Double x:Key="MobileBreakpoint">832</x:Double>
 
+    <Style x:Name="MahjongComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,15,0,0" />
+        <Setter Property="Width" Value="400" />
+    </Style>
 
     <Style x:Name="LargeHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
         <Setter Property="Margin" Value="0,25,0,10" />

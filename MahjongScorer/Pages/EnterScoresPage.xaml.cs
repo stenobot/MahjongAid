@@ -953,11 +953,11 @@ namespace MahjongScorer.Pages
             game.CurrentRoundSummary = new StringBuilder();
 
             // Mahjong hands have a max or "limit" value. Enforce that here
-            if (finalBaseScore >= ScoreValues.MAX_ROUND_SCORE)
+            if (finalBaseScore == game.LimitValue)
             {
                 game.CurrentRoundSummary.Insert(game.CurrentRoundSummary.Length,
                     "This hand has reached the max limit of " +
-                    ScoreValues.MAX_ROUND_SCORE + ".");
+                    game.LimitValue + ".");
 
                 InsertLineBreaks(game.CurrentRoundSummary, 2);
             }
@@ -1268,9 +1268,10 @@ namespace MahjongScorer.Pages
         /// </summary>
         /// <returns>the current base score for the round</returns>
         private int CurrentBaseScore()
-        {   
+        {
             // set base value
-            int baseScore = ScoreValues.BASE_ROUND_SCORE;
+            //int baseScore = ScoreValues.BASE_ROUND_SCORE;
+            int baseScore = game.BaseValue;
 
             // PUNGS AND KONGS
             // check which pung check boxes are checked, and adjust the score
@@ -1293,8 +1294,12 @@ namespace MahjongScorer.Pages
 
             // ENFORCE LIMIT
             // Mahjong hands have a max or "limit" value. Enforce that here
-            if (baseScore > ScoreValues.MAX_ROUND_SCORE)
-                baseScore = ScoreValues.MAX_ROUND_SCORE;
+            // Limit value gets set when a game is created. "No limit" is the max value of an int, in which case we want to do nothing here
+            if (baseScore > game.LimitValue)
+            {
+                if (game.LimitValue != int.MaxValue)
+                    baseScore = game.LimitValue;
+            }
 
             return baseScore;
         }

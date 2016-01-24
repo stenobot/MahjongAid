@@ -123,14 +123,94 @@
                     </StackPanel>
                 </Grid>
 
-                <Button x:Name="startGameButton" 
-                    Content="Start game" 
-                    Visibility="Collapsed"
-                    HorizontalAlignment="Center"
-                    Margin="10"
-                    Click="StartGameButton_Click" 
-                    Grid.Row="2"/>
-                <ProgressRing  x:Name="startGameProgress" Grid.Row="2" Visibility="Collapsed" IsActive="True" />
+                <StackPanel x:Name="startGameStackPanel" 
+                            Grid.Row="2" 
+                            Visibility="Collapsed">
+
+                    <ComboBox x:Name="startingScoreComboBox"
+                              Style="{ThemeResource MahjongComboBoxStyle}"
+                              Header="Starting score for each player">
+
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="2000" />
+                                <TextBlock Text="(Normal rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="3000" />
+                                <TextBlock Text="(Variant rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+
+                    </ComboBox>
+
+                    <ComboBox x:Name="limitHandComboBox" 
+                              Style="{ThemeResource MahjongComboBoxStyle}"                                 
+                              Header="Limit value for a winning hand">
+
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="500" />
+                                <TextBlock Text="(Normal rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+                        
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="1000" />
+                                <TextBlock Text="(Tournament rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="2000" />
+                                <TextBlock Text="(Variant rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="No limit" />
+                                <TextBlock Text="(Taiwanese rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+
+                    <ComboBox x:Name="baseScoreComboBox" 
+                              Style="{ThemeResource MahjongComboBoxStyle}"
+                                  
+                              Header="Base score for a winning hand">
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="10" />
+                                <TextBlock Text="(Chinese rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="20" />
+                                <TextBlock Text="(British and Japanese rules)" Foreground="Gray" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+
+                    <Button x:Name="startGameButton" 
+                            Content="Start game" 
+                            HorizontalAlignment="Center"
+                            Margin="15"
+                            Click="StartGameButton_Click" />
+                    
+                </StackPanel>
+
+                <ProgressRing x:Name="startGameProgress" 
+                              Grid.Row="2" 
+                              Visibility="Collapsed" 
+                              IsActive="True" />
 
             </Grid>
 

@@ -2,12 +2,6 @@
 {
     public static class ScoreValues
     {
-        // add score values
-        public const int BASE_ROUND_SCORE = 20;
-        public const int MAX_ROUND_SCORE = 500;
-
-        public const int STARTING_SCORE = 2000;
-
         public const int SELF_DRAWN_SCORE = 2;
         public const int ONE_CHANCE_SCORE = 2;
         public const int LUCKY_PAIR_SCORE = 2;
@@ -24,8 +18,5 @@
         public const int X_ISLOSER_SELFDRAWN_DEALERWON = -2;
         public const int X_ISLOSER_ISDRAWNFROM = -4;
         public const int X_ISLOSER_ISDRAWNFROM_DEALERWON = -6;
-        
-        
-        
     }
 }

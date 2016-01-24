@@ -8,14 +8,8 @@
     xmlns:controls="using:MahjongScorer.Controls"
     xmlns:converter="using:MahjongScorer.Converters"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
-        <Style TargetType="ComboBox">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,15,0,0" />
-            <Setter Property="Width" Value="400" />
-        </Style>
-        
         <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
     </Page.Resources>
 
@@ -196,11 +190,13 @@
                         <ComboBox x:Name="winnerComboBox" 
                                   Visibility="Collapsed"
                                   SelectionChanged="WinnerComboBox_SelectionChanged"
+                                  Style="{ThemeResource MahjongComboBoxStyle}"
                                   Header="Who won this round?" />
 
                         <ComboBox x:Name="drawnFromComboBox"
                                   Visibility="Collapsed"
                                   SelectionChanged="DrawnFromComboBox_SelectionChanged"
+                                  Style="{ThemeResource MahjongComboBoxStyle}"
                                   Header="Who was the winning tile drawn from?" />
 
                    
@@ -231,8 +227,9 @@
                         </Grid>
 
                         <ComboBox x:Name="pungCountComboBox"
-                              SelectionChanged="pungCountComboBox_SelectionChanged"
-                              Header="How many pungs (sets of three)?">
+                                  SelectionChanged="pungCountComboBox_SelectionChanged"
+                                  Style="{ThemeResource MahjongComboBoxStyle}"
+                                  Header="How many pungs (sets of three)?">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Index}" />
@@ -401,9 +398,10 @@
                         </Grid>
 
                         <ComboBox x:Name="kongCountComboBox"
-                              SelectionChanged="kongCountComboBox_SelectionChanged"
-                              Visibility="Collapsed"
-                              Header=" How many kongs (sets of four)?">
+                                  SelectionChanged="kongCountComboBox_SelectionChanged"
+                                  Visibility="Collapsed"
+                                  Style="{ThemeResource MahjongComboBoxStyle}"
+                                  Header=" How many kongs (sets of four)?">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Index}" />

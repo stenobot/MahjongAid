@@ -52,6 +52,9 @@ namespace MahjongScorer.Pages
             //    }
             //};
 
+            startingScoreComboBox.SelectedIndex = 0;
+            limitHandComboBox.SelectedIndex = 0;
+            baseScoreComboBox.SelectedIndex = 1;
         }
 
 
@@ -106,14 +109,6 @@ namespace MahjongScorer.Pages
             game.Players.Add(_playerThree = new Player());
             game.Players.Add(_playerFour = new Player());
 
-            // initialize RoundScores list for each player
-            foreach (Player player in game.Players)
-            {
-                player.RoundScores = new List<int>();
-                player.TotalScore = ScoreValues.STARTING_SCORE;
-                player.IsGameWinner = false;
-            }
-
             // set starting winds and dealer
             _playerOne.CurrentWind = Wind.East;
             _playerOne.IsDealer = true;
@@ -124,6 +119,45 @@ namespace MahjongScorer.Pages
             _playerFour.CurrentWind = Wind.North;
             _playerFour.IsDealer = false;
 
+        }
+
+        private void SetStartingValues()
+        {
+            switch (startingScoreComboBox.SelectedIndex)
+            {
+                case 1:
+                    game.StartingScore = 3000;
+                    break;
+                case 0:
+                default:
+                    game.StartingScore = 2000;
+                    break;
+            }
+
+            switch (limitHandComboBox.SelectedIndex)
+            {
+                case 1: game.LimitValue = 1000;
+                    break;
+                case 2: game.LimitValue = 2000;
+                    break;
+                case 3: game.LimitValue = int.MaxValue;
+                    break;
+                case 0:
+                default:
+                    game.LimitValue = 500;
+                    break;
+            }
+
+            switch (baseScoreComboBox.SelectedIndex)
+            {
+                case 0:
+                    game.BaseValue = 10;
+                    break;
+                case 1:
+                default:
+                    game.BaseValue = 20;
+                    break;
+            }
         }
 
 
@@ -143,9 +177,9 @@ namespace MahjongScorer.Pages
                 (PlayerTwoNameTextBox.Text.Count() > 0) &&
                 (PlayerThreeNameTextBox.Text.Count() > 0) &&
                 (PlayerFourNameTextBox.Text.Count() > 0))
-                startGameButton.Visibility = Visibility.Visible;
+                startGameStackPanel.Visibility = Visibility.Visible;
             else
-                startGameButton.Visibility = Visibility.Collapsed;
+                startGameStackPanel.Visibility = Visibility.Collapsed;
         }
 
 
@@ -156,6 +190,26 @@ namespace MahjongScorer.Pages
 
             // set game property for save data display
             game.CurrentDealerName = _playerOne.Name;
+
+            SetStartingValues();
+
+            // set starting values for some Player properties
+            foreach (Player player in game.Players)
+            {
+                player.RoundScores = new List<int>();
+                player.TotalScore = game.StartingScore;
+                player.IsGameWinner = false;
+            }
+
+            // set starting values for some game properties
+            game.InProgress = true;
+            game.TimesDealerWon = 0;
+            game.PrevailingWind = Wind.East;
+            game.CurrentRound = 0;
+
+            // create List of prevailing winds to store in game instance
+            game.PrevailingWinds = new List<Wind>();
+            game.PrevailingWinds.Add(game.PrevailingWind);
 
             try
             {
@@ -168,15 +222,7 @@ namespace MahjongScorer.Pages
                 await InitializeSaveData();
             }
 
-            // set starting values for some game properties
-            game.InProgress = true;
-            game.TimesDealerWon = 0;
-            game.PrevailingWind = Wind.East;
-            game.CurrentRound = 0;
 
-            // create List of prevailing winds to store in game instance
-            game.PrevailingWinds = new List<Wind>();
-            game.PrevailingWinds.Add(game.PrevailingWind);
 
             // go to Game Results page and pass it the game object
             Frame.Navigate(typeof(GameResultsPage), game);

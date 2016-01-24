@@ -13,10 +13,13 @@ namespace MahjongScorer
         private int _currentRoundScore;
         private int _timesDealerWon;
         private bool _inProgress;
+
+        private int _baseValue;
+        private int _limitValue;
+        private int _startingScore;
+
         private Wind _prevailingWind;
         private List<Wind> _prevailingWinds;
-
-        private RuleSet _ruleSet;
 
         private StringBuilder _currentRoundSummary;
         private List<string> _roundSummaries;
@@ -72,7 +75,6 @@ namespace MahjongScorer
             }
         }
 
-
         public int TimesDealerWon
         {
             get { return _timesDealerWon; }
@@ -93,6 +95,36 @@ namespace MahjongScorer
             }
         }
 
+        public int BaseValue
+        {
+            get { return _baseValue; }
+            set
+            {
+                if (_baseValue != value)
+                    _baseValue = value;
+            }
+        }
+
+        public int LimitValue
+        {
+            get { return _limitValue; }
+            set
+            {
+                if (_limitValue != value)
+                    _limitValue = value;
+            }
+        }
+
+        public int StartingScore
+        {
+            get { return _startingScore; }
+            set
+            {
+                if (_startingScore != value)
+                    _startingScore = value;
+            }
+        }
+
         public Wind PrevailingWind
         {
             get { return _prevailingWind; }
@@ -110,16 +142,6 @@ namespace MahjongScorer
             {
                 if (_prevailingWinds != value)
                     _prevailingWinds = value;
-            }
-        }
-
-        public RuleSet RuleSet
-        {
-            get { return _ruleSet; }
-            set
-            {
-                if (_ruleSet != value)
-                    _ruleSet = value;
             }
         }
 
