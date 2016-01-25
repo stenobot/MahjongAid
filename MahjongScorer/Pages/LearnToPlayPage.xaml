@@ -1906,14 +1906,13 @@
 
 
 
-                        <TextBlock Text="Example Hands" 
+                        <TextBlock Text="An Example Hand" 
                                    Margin="0,20,0,5" 
                                    Foreground="{ThemeResource MahjongAccentColorBrush}" 
                                    FontWeight="SemiBold" 
                                    FontSize="22" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            Let's look at a couple winning hands and how they would be scored. 
                             In this first example, the winner went out with 2 pungs (sets of 3), 2 chows (runs), and a pair. 
                             Both pungs and both chows were concealed, the winning tile was for the pair, and it was drawn from another player's discard. 
                             The winner was not the dealer, but the player who discarded the winning tile was. 
@@ -2013,6 +2012,12 @@
                             Except the dealer has to pay for everybody, since they caughed up the winning tile. 
                             So, the dealer pays the winner 50 + 50 + 100 points. 
                         </TextBlock>
+
+                        <TextBlock Text="Another Example Hand" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             In this next example, the winner was the dealer, with 3 pungs, 1 chow, and a pair. 
