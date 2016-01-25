@@ -33,7 +33,7 @@
                         </TextBlock>
                         
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10"> 
-                            Mahjong's rules can be a bit complicated. 
+                            Playing Mahjong is simple, but the scoring rules can be a bit complicated. 
                             This app is meant to help with that. 
                             It calculates scores for each round, keeps track of everyone's scores, and teaches you how to play the game. 
                             The app uses a classical rule set (based on a book from the 1960s called 'A Mahjong Handbook') which is described in this app.  
@@ -490,13 +490,13 @@
                         </Grid>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Every round begins by stirring the tiles on the table and setting up the four walls. 
                             Shuffle the wind tiles back into the pile, then stack the tiles in 4 walls (17 tiles long, 2 tiles high) around the table, like so:
                         </TextBlock>
                         
                         <Image Source="/Assets/learn-to-play/four-walls-start.png" />
 
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
-                            Every round begins by stirring the tiles on the table and setting up the four walls. 
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">                            
                             The East player then rolls the two dice. 
                             Starting on the right side of the East wall, the dealer counts tiles the number rolled on the dice, counter-clockwise. 
                             For example, if they rolled a 7, they count 7 tiles along the top of the wall, and take the stack of 2 tiles, like so:
@@ -515,7 +515,7 @@
                             Then, they deal tiles in in groups of 4 around the table, starting with themself. 
                             They continue until each player has 12 tiles. 
                             Lastly, they take 2 more tiles for themself, and deal 1 additional tile to each other player. 
-                            (The dealer begins the game with an extra tile, which is their draw tile.)
+                            (The dealer begins the game with an extra tile, which is their first draw tile.)
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
@@ -588,8 +588,8 @@
                         </StackPanel>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            Pairs, on the other hand, are varied. 
-                            There are three types of pairs: A Chow (run of 3 tiles), a Pung (3 of the same tile), and a Kong (4 of the same tile).
+                            Sets, on the other hand, are varied. 
+                            There are three types of sets: A Chow (run of 3 tiles), a Pung (3 of the same tile), and a Kong (4 of the same tile).
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
@@ -757,13 +757,16 @@
                             Here are some reasons why parts of it might be revealed throughout the game. 
                             This is important, because concealed sets are worth more, and a concealed or partially-concealed hand earns extra points at the end of the round for the winner. 
                         </TextBlock>
+                        
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             If a player steals a discard to complete a pung, chow, or kong, that set must remain revealed for the rest of the round. 
                         </TextBlock>
+                        
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             If a player completes a Kong by drawing the tile, the Kong is technically concealed for scoring purposes, but they must reveal it to the other players. 
                             This is done by laying the Kong out with other revealed sets, but keeping the first and last tile concealed. 
                         </TextBlock>
+                        
                         <StackPanel Orientation="Horizontal">
                             <FontIcon FontFamily="Segoe UI Emoji"
                                       Glyph="&#x1F02B;" 
@@ -781,6 +784,11 @@
                                       Glyph="&#x1F02B;" 
                                       FontSize="30" />
                         </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Any time a player completes a Kong, they must draw a tile from the Dead Wall to account for the extra tile their hand now requires.
+                        </TextBlock>
+
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             If a winning player's hand is concealed, but their final Mahjong tile is stolen from another player's discard, then the winning hand is partially-concealed earning them 10 points. 
                             If they draw the winning tile from the wall, then the hand is fully concealed earning them a double.
