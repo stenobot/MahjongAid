@@ -29,19 +29,25 @@
                     <StackPanel MaxWidth="460">
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
                             Mahjong is a 4-player game that originated in China, and is now played around the world. 
-                            The rules vary greatly from country to country, region to region, even family to family.
+                            The rules can vary from country to country, region to region, even family to family.
                         </TextBlock>
+                        
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10"> 
                             Mahjong's rules can be a bit complicated. 
                             This app is meant to help with that. 
-                            It calculates scores for each round, keeps track of everyone's scores, and hopefully teaches you how to play the game. 
-                            It follows a scoring rule set that my family uses, which is described in this app.
-                            The rules are based on a book from the 1960s called A Mahjong Handbook, and are similar to standard Japanese Mahjong Rules circa 1965.  
-                            I've tried to make this app flexible enough to accommodate some rule variations.
+                            It calculates scores for each round, keeps track of everyone's scores, and teaches you how to play the game. 
+                            The app uses a classical rule set (based on a book from the 1960s called 'A Mahjong Handbook') which is described in this app.  
+                            But it's flexible enough to accommodate some rule variations, such as the starting score and the value of a limit hand (which can be adjusted when you begin a new game).
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10">
-                            Swipe over to learn more about how to play this version of Mahjong, and how to use this app to keep track of games and calculate scores.
+                            Mahjong Aid will keep track of ongoing and completed games. 
+                            When you save a game, you can load it from your Windows PC, tablet, or phone. 
+                            If you already know how to score and just want to use this app to keep track of games, you can enter your round scores manually.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,10">
+                            Swipe over to learn more about how to play Mahjong and how to use this app.
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -54,7 +60,7 @@
 
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            There are 44 tiles in this version of Mahjong, with 4 of each for a total of 176 tiles.
+                            There are 34 different tiles used in Mahjong, with 4 of each for a total of 136 tiles.
                         </TextBlock>
 
                         <TextBlock Text="WINDS" Style="{ThemeResource LargeHeaderStyle}" Margin="10,20,10,10" />
@@ -749,7 +755,7 @@
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             At the beginning of a round, a player's whole hand is concealed (hidden from everyone else). 
                             Here are some reasons why parts of it might be revealed throughout the game. 
-                            This is important, mostly because a concealed or partially-concealed hand earns points at the end of the round for the winner. 
+                            This is important, because concealed sets are worth more, and a concealed or partially-concealed hand earns extra points at the end of the round for the winner. 
                         </TextBlock>
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             If a player steals a discard to complete a pung, chow, or kong, that set must remain revealed for the rest of the round. 
@@ -790,9 +796,451 @@
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             Collecting sets and a pair is the normal way to go out and win a Mahjong round. 
                             But there are other, weirder ways to win. 
-                            There is often risk involved here, since you'd have to change which tiles you're collecting. 
+                            There's often risk involved here, since you'd have to change which tiles you're collecting. 
                             But they result in big points. 
-                            Here are some examples. 
+                            Here an example ofone such hand, called Kokushi musou (国士無双), aka "Thirteen Orphans". 
+                            It consists of one of each terminal and honor tile, plus one extra to make any pair.
+                        </TextBlock>
+
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F010;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F019;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F021;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F021;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                        </StackPanel>
+                        
+
+                        <TextBlock Text="Ending a Round" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            A round ends when a player either steals their winning tile or draws it from the wall, and calls "Mahjong!" 
+                            If two players both call Mahjong on the same discard tile, the one closest to the discarder wins the tie-breaker. 
+                            The winning hand is scored, the losers pay the winner, and then the tiles are stirred and another round begins.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            This app keeps track of a lot of details so you don't have to, such as who is dealing a given round, each players' lucky wind, and the round's prevailing wind. 
+                            Read on if you want to understand how it all works, or just use the app and ignore this stuff.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            If the dealer wins, they get to deal again. 
+                            If someone else wins, the person to the right deals the next round. 
+                            Since the dealer's Lucky Wind is always East, all the players' Lucky Winds rotate around the table counter-clockwise when the dealer changes. 
+                            East player becomes North, South becomes East, West becomes South, and North becomes West.
+                        </TextBlock>
+                        <Image Source="/Assets/learn-to-play/wind-rotation.png" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,30"> 
+                            there's also the Prevailing Wind to keep track of. 
+                            The game always begins with East as the Prevailing Wind, and it stays that way until dealer duty has made it around the table and the original dealer deals again. 
+                            At that point, Prevailing Wind changes from East to South (then West, then North). 
+                            For example: If the dealer doesn't win any of the first four rounds, Prevailing Wind would shift from East to South on the fifth round. 
+                            But if the dealer won the second round, the Prevailing Wind wouldn't change until the sixth round.
+                        </TextBlock>
+
+                        <TextBlock Text="Winning the Game" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            The game ends when every player has dealt 4 times, and the Prevailing Wind has been all four winds. 
+                            This will be a minimum of 16 rounds, though it's usually more, since dealer duty doesn't change if the dealer wins. 
+                            The player with the most points at the end wins the game. 
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+
+          
+            <PivotItem Header="Scoring">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel MaxWidth="460">
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Scoring a round is where things can get complicated. 
+                            It's also where this app can help the most. 
+                            I'll explain how it works here, but if you just enter your round info into this app's scoring calculator, it will do the hard work for you. 
+                        </TextBlock>
+
+                        <TextBlock Text="General Rules" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Each round ends with a base winning score of 20 points. 
+                            (20 is the default value, but you can change this when you begin a new game.) 
+                            Points are then added to that score based on certain conditions. 
+                            Once the base score of a winning hand is set, the score may get doubled one or more times. 
+                            For example, if the winner's pair is comprised of their Lucky Wind tile, that counts as one double. 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            If a winning score reaches the game's "limit hand" value, the scoring stops there. 
+                            The default limit value for this app is 500, but that can be changed when you begin a new game.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            After the final score is tallied, it's time to pay the winner. 
+                            If the winner is the dealer, they earn double. 
+                            If the winning tile was drawn from the dealer, the dealer pays double. 
+                            If the winning tile was self-drawn (meaning the winner drew it from the wall and not from another player's discard), the dealer pays for everybody.
+                        </TextBlock>
+
+                        <TextBlock Text="Pungs and Kongs" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Pungs (three of a kind) are worth 2 points. 
+                            If a pung is comprised of terminals or honors (see below), its worth is doubled. 
+                            If its concealed (meaning it was never laid down, because the owner didn't steal one of the times to complete it), it gets doubled. 
+                            So, a single pung can be worth 2, 4, or 8 points.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Kongs (four of a kind) are scored exactly like pungs, except their base worth is 8 points rather than 2. 
+                        </TextBlock>
+
+                        <TextBlock Text="Terminals and Honors" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Terminal tiles are the ones and nines of numbered tiles. Here are all of them:
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F007;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00F;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F010;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F018;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F019;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F021;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Honor tiles are the Winds and Dragons.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F000;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F001;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F002;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F003;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F004;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Terminals and honors in a winning hand can affect the score in various ways. 
+                            As mentioned above, they double the base value of a set. (A pung goes from 2 to 4, a kong from 4 to 16.) 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            They can also add points to your hand, or add "doubles", which double the value of your hand (see below). 
+                            A "Lucky Pair", for example, consists of a pair of dragons or winds (the winds must be the prevailing wind or your lucky wind) and adds 2 points to your score. 
+                            There's also a "Lucky Set", which follows the same rules and doubles your hand. 
+                            A "Double Lucky Set" is a pung or kong that is both the prevailing wind and your lucky wind. It doubles your score twice. 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            It's also possible to earn points for not having terminals or honors in your hand. 
+                            An "All Simples" hand means no terminals, honors, or dragons, and is worth a double. 
+                            The inverse of this is "All Terminals or Honors", where every run or set has a terminal or honor. It's also worth a double. 
+                        </TextBlock>
+
+                        <TextBlock Text="Points and Rounding" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Each winning hand starts with a base, minimum score. 
+                            (Normally this is 20 points, but it can vary.) 
+                            From there, points are added for sets (as mentioned above), and if certain conditions are met. 
+                            Here are those conditions. 
+                        </TextBlock>
+
+
+                        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Self-Drawn" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="2 points if the winning is drawn from the wall." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="One Chance" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="2 points if the winning hand needed one specific tile to win." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Lucky Pair" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="2 points if the winning pair is prevailing wind, lucky wind, or dragons" TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="Partially-Concealed" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="10 points if the entire hand is concealed except for the winning tile." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Next, the score is rounded to the nearest ten. 
+                            So, if the base score is 26, it becomes 30. 
+                            If it's 42, it gets rounded down to 40.
+                        </TextBlock>
+
+                        <TextBlock Text="Doubles" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            As mentioned earlier, meeting certain conditions can double your score. 
+                            You can have multiple "doubles" in a single hand, which will greatly increase the value. 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Here are all of the "doubles" this app recognizes. 
+                            Some are applied automatically, and some must be selected from a list when scoring the hand. 
+                        </TextBlock>
+                    
+                        
+                        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+
+                            <TextBlock Text="One Double" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="16" />
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Fully Concealed" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="The entire hand is concealed, including the winning tile." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="Worthless" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are no pungs or kongs, and no lucky pair." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="All Simples" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are no winds, terminals, or dragons." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="One to Nine Run" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are three chows with 1-9 in the same suit." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Three Concealed Pungs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are three concealed sets (pungs or kongs)." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="One Suit with Honors" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="All tiles are winds, dragons, and just one suit." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="All Honors" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There's a terminal or honor in every set or run." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="Lucky Set" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There's a pung or kong with the prevailing wind, lucky wind, or dragons." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Off the Dead Wall" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="The winning tile was drawn from the dead wall." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="Robbing a Kong" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="A player draws someone else's winning tile from the dead wall." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Bottom of the Sea" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="The winning tile was drawn and was the very last tile before the dead wall." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="All Pungs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are four sets (pungs or kongs) in the winning hand." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        
+
+                        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+
+                            <TextBlock Text="Two Doubles" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="16" />
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Double Lucky Set" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="A set (pung or kong) is both the lucky wind and the prevailing wind." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="All Pairs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="A special hand comprised of seven pairs." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Triple Pung" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are three sets (pungs or kongs) of the same number from different suits." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
+                                <TextBlock Width="120" Text="Little Three Dragons" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are two sets and one pair of dragons." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
+                                <TextBlock Width="120" Text="Three Kongs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
+                                <TextBlock Width="300" Text="There are three kongs (sets of four)." TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            In addition to the above, there is one condition called "One Suit, No Honors" that's worth a whopping 4 doubles, where all sets and the pair are in the same suit. 
+                            Scoring 4 doubles will usually reach the "limit" value mentioned above, but it's technically not a "limit hand". 
+                            We'll cover those next.
+                        </TextBlock>
+
+                        <TextBlock Text="Limit Hands" 
+                                   Margin="0,20,0,5" 
+                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="22" />
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            It's possible for a score to reach the round's "limit" (as mentioned above). 
+                            In addition to this, there are special hands called "limit hands" that automatically score the limit value for a round. 
+                            These tend to be special hands that are hard to collect. 
+                            Here are some examples of limit hands, though it's up to you which particular limit hands you want to allow. 
+                            (In this app, there is a simple "Limit hand" option to select when scoring a hand.)
                         </TextBlock>
 
                         <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}"
@@ -800,7 +1248,7 @@
                                    Text="Kokushi musou (国士無双), aka Thirteen Orphans" />
                         <TextBlock TextWrapping="WrapWholeWords" 
                                    Margin="0,5,0,10"> 
-                            This hand consists of one of each terminal and honor tile, plus one extra to make any pair. 
+                            This hand consists of one of each terminal and honor tile, plus one extra to make any pair.
                         </TextBlock>
 
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
@@ -1320,7 +1768,7 @@
                             This hand consists of all honor tiles. 
                             (It can also be collected as only pairs, no sets.)
                         </TextBlock>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
                             <FontIcon FontFamily="Segoe UI Emoji"
                                       Glyph="&#x1F006;" 
@@ -1448,115 +1896,206 @@
 
                         </StackPanel>
 
-                        <TextBlock Text="Ending a Round" 
+
+
+                        <TextBlock Text="Example Hands" 
                                    Margin="0,20,0,5" 
                                    Foreground="{ThemeResource MahjongAccentColorBrush}" 
                                    FontWeight="SemiBold" 
                                    FontSize="22" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            A round ends when a player either steals their winning tile or draws it, and calls "Mahjong!" 
-                            If two players both call Mahjong on the same discard tile, the one closest to the discarder wins the tie-breaker. 
-                            The winning hand is scored, the losers pay the winner, and then the tiles are stirred and another round begins.
+                            Let's look at a couple winning hands and how they would be scored. 
+                            In this first example, the winner went out with 2 pungs (sets of 3), 2 chows (runs), and a pair. 
+                            Both pungs and both chows were concealed, the winning tile was for the pair, and it was drawn from another player's discard. 
+                            The winner was not the dealer, but the player who discarded the winning tile was. 
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01B;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F005;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F013;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F014;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F015;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00B;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00C;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00D;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
+
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F006;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                        </StackPanel>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            We start with a base score of 20. 
+                            The first pung is a set of Three of Circles, which is worth 4: The minimum pung value of 2, doubled because it's concealed. 
+                            This brings the score to 24.
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            If the dealer wins, they get to deal again. 
-                            If they did not win, the dealer rotates counter-clockwise. 
-                            Since the dealer's Lucky Wind is always East, all the players' Lucky Winds rotate as well. 
-                            East player becomes North, South becomes East, West becomes South, and North becomes West.
-                        </TextBlock>
-                        <Image Source="/Assets/learn-to-play/wind-rotation.png" />
-
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,30"> 
-                            there's also the Prevailing Wind to keep track of. 
-                            The game always begins with East as the Prevailing Wind, and it stays that way until dealer duty has made it around the table and the original dealer deals again. 
-                            At that point, Prevailing Wind changes from East to South (then West, then North). 
-                            For example: If the dealer doesn't win any of the first four rounds, Prevailing Wind would shift from East to South on the fifth round. 
-                            But if the dealer won the second round, the Prevailing Wind wouldn't change until the sixth round.
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </PivotItem>
-
-          
-            <PivotItem Header="Scoring">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
-
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            Scoring a round is where things can get complicated. 
-                            It's also where this app can help the most. 
-                            I'll explain how it works here, but if you just enter your round info into this app's scoring calculator, it will do the hard work for you. 
-                        </TextBlock>
-
-                        <TextBlock Text="General Rules" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                   FontWeight="SemiBold" 
-                                   FontSize="22" />
-
-                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            Each round ends with a base winning score of 20 points. 
-                            Points are then added to that score based on certain conditions. 
-                            Once the base score is set, the score may get doubled one or more times. 
-                            For example, if the winner's pair is comprised of their Lucky Wind tile, that counts as one double. 
+                            The second pung is a set of Green Dragons. 
+                            This is worth the minimum value of 2, doubled because it's Honors, and doubled again because it was concealed. 
+                            24 + 8 = 32. 
                         </TextBlock>
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            After the final score is tallied, it's time to pay the winner. 
-                            If the winner is the dealer, 
+                            The chows aren't worth anything, but the pair is a Lucky Pair because it's comprised of White Dragons. 
+                            A Lucky Pair is worth 2 points, bringing the score to 34. 
                         </TextBlock>
-
-                        <TextBlock Text="Pungs and Kongs" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                   FontWeight="SemiBold" 
-                                   FontSize="22" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            Pungs (three of a kind) are worth 
+                            There are two more conditions that are met with this hand. 
+                            First, this is a "One Chance" hand. We know this because the winning tile was for the pair. 
+                            This adds another 2 points, bringing the score to 36. 
+                            This is also a "Partially-Concealed" hand, because everything was concealed except the pair. 
+                            This adds 10 points, bringing the score to 46. 
                         </TextBlock>
-
-                        <TextBlock Text="Terminals and Honors" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                   FontWeight="SemiBold" 
-                                   FontSize="22" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
-                            Terminal tiles are the ones and nines of numbered tiles. 
-                            Honor tiles are the Winds and Dragons. 
+                            Next, we round up to 50. 
+                            Since the winner was not the dealer, they earn 50 points from the two non-dealers, and 100 from the dealer, who always pays double. 
+                            Except the dealer has to pay for everybody, since they caughed up the winning tile. 
+                            So, the dealer pays the winner 50 + 50 + 100 points. 
                         </TextBlock>
 
-                        <TextBlock Text="Points and Doubles" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                   FontWeight="SemiBold" 
-                                   FontSize="22" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            In this next example, the winner was the dealer, with 3 pungs, 1 chow, and a pair. 
+                            Only 1 of the 3 pungs were concealed. The pair was also concealed, but the chow was not. 
+                            The winning tile came from the wall and completed one of the pungs. 
+                        </TextBlock>
 
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F014;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F014;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F014;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
 
-                        <TextBlock Text="Scoring an Example Hand" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                   FontWeight="SemiBold" 
-                                   FontSize="22" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00E;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00E;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F00E;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
 
-                        <TextBlock Text="Limit Hands" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                   FontWeight="SemiBold" 
-                                   FontSize="22" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F017;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F017;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F017;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
 
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01A;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01A;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01A;" 
+                                      Margin="0,0,10,0"
+                                      FontSize="25" />
 
-                    </StackPanel>
-                </ScrollViewer>
-            </PivotItem>
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01E;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                            <FontIcon FontFamily="Segoe UI Emoji"
+                                      Glyph="&#x1F01E;" 
+                                      Margin="0,0,5,0"
+                                      FontSize="25" />
+                        </StackPanel>
 
-            <PivotItem Header="Winning the Game">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
-                        <TextBlock Text="A bit about winning, coming soon" />
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            There were 3 pungs, only one of them concealed, so 2 + 2 + 4 gets added to our base score of 20 for 28 points. 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            This hand was not "One chance". 
+                            Since the winner completed a pung to win, they must have had two pairs, and could have completed either. 
+                            However, the hand was "Self-Drawn", since the winning tile came from the wall. 
+                            That's another 2 points, bringing us to 30.
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Notice that there are no terminals or honors in this hand. 
+                            This means it's "All Simples", which is worth a double. 
+                            We double the score of 30 (no need to round first) to 60. 
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
+                            Since the winner was also the dealer, they get double from everyone. 
+                            120 + 120 + 120 = 360 points.
+                        </TextBlock>
 
                     </StackPanel>
                 </ScrollViewer>
@@ -1566,7 +2105,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
                         <TextBlock TextWrapping="WrapWholeWords">
-                            Mahjong is an awesome game. It's also complicated. 
+                            Mahjong is a great game. It's also complicated. 
                             I've been playing for about 12 years, and I still get confused, especially when it comes time to score a hand.
                             <LineBreak />
                             <LineBreak />
@@ -1575,18 +2114,16 @@
                             At family gatherings, we bring out a notebook with games dating back years, and try to find a match with whichever four people we happen to have together at that time.
                             <LineBreak />
                             <LineBreak />
-                            I built this app to do two things: 
+                            I built this app to do 3 things: 
                             <LineBreak />
                             1.) Calculate scores quickly and easily
                             <LineBreak />
-                            2.) Keep track of ongoing games. 
+                            2.) Keep track of ongoing games
+                            <LineBreak />
+                            3.) Teach people how to play the game
                             <LineBreak />
                             <LineBreak />
-                            The scoring system used in this app is based on the rule system that my family uses. 
-                            It's one of many rule sets out there, but I tried to build this app to be flexible to rule variations.
-                            <LineBreak />
-                            <LineBreak />
-                            I really built this app for myself and my family, but I hope that you will find it useful as well. Enjoy!
+                            I really created this app for myself and my friends and family, but I hope that you will find it useful as well. Enjoy!
                         </TextBlock>
 
                     </StackPanel>

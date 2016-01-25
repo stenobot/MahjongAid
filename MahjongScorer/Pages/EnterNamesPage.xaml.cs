@@ -158,6 +158,13 @@ namespace MahjongScorer.Pages
                     game.BaseValue = 20;
                     break;
             }
+
+            // need to set the "Limit Hand" rule values here, as a special case
+            if (game.LimitValue != int.MaxValue)
+            {
+                game.Rules[game.Rules.Count - 1].Score = game.LimitValue;
+                game.Rules[game.Rules.Count - 1].Name = "Limit hand (" + game.LimitValue + " points)";
+            }
         }
 
 

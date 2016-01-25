@@ -15,6 +15,9 @@
             <SolidColorBrush x:Key="MahjongLightAccentColorBrush"
                              Color="{ThemeResource SystemAccentColor}"
                              Opacity=".6"/>
+            <SolidColorBrush x:Key="LearnToPlayGridVariationColor"
+                             Color="Wheat"
+                             Opacity=".1" />
             <SolidColorBrush x:Key="MahjongGrayBrush"
                              Color="Gray" />
             <SolidColorBrush x:Key="MahjongRedBrush"
@@ -26,6 +29,12 @@
         <ResourceDictionary x:Key="HighContrast">
             <SolidColorBrush x:Key="MahjongAccentColorBrush"
                              Color="#FF1a651d" />
+            <SolidColorBrush x:Key="MahjongLightAccentColorBrush"
+                             Color="{ThemeResource SystemAccentColor}"
+                             Opacity=".6"/>
+            <SolidColorBrush x:Key="LearnToPlayGridVariationColor"
+                             Color="Wheat"
+                             Opacity=".1" />
             <SolidColorBrush x:Key="MahjongGrayBrush"
                              Color="Gray" />
             <SolidColorBrush x:Key="MahjongRedBrush"
@@ -37,6 +46,12 @@
         <ResourceDictionary x:Key="Light">
             <SolidColorBrush x:Key="MahjongAccentColorBrush"
                              Color="#FF1a651d" />
+            <SolidColorBrush x:Key="MahjongLightAccentColorBrush"
+                             Color="{ThemeResource SystemAccentColor}"
+                             Opacity=".6"/>
+            <SolidColorBrush x:Key="LearnToPlayGridVariationColor"
+                             Color="Wheat"
+                             Opacity=".1" />
             <SolidColorBrush x:Key="MahjongGrayBrush"
                              Color="Gray" />
             <SolidColorBrush x:Key="MahjongRedBrush"

@@ -135,7 +135,7 @@ namespace MahjongScorer.Pages
             oneToNineRun.Name = "1-9 run (double)";
             oneToNineRun.Description = "there are 3 chows with 1-9 in same suit";
 
-            // THREE CONCEALED PUNGS - 1 DOUBLES
+            // THREE CONCEALED PUNGS - DOUBLE
             game.Rules.Add(threeConcealedPungs = new Rule());
             // never show in list, because we can always calculate this
             threeConcealedPungs.IsUncommon = true;
@@ -268,7 +268,7 @@ namespace MahjongScorer.Pages
             threeKongs.Name = "Three kongs (2 doubles)";
             threeKongs.Description = "there are three kongs";
 
-            // LIMIT HAND
+            // LIMIT HAND - We set the score and name here, but we'll reset them later for the case where the limit value is changed
             game.Rules.Add(limitHand = new Rule());
             // always show in the list
             limitHand.ShowInList = true;
