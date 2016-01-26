@@ -2070,11 +2070,11 @@
                                       Margin="0,0,5,0"
                                       FontSize="25" />
                             <FontIcon FontFamily="Segoe UI Emoji"
-                                      Glyph="&#x1F01A;" 
+                                      Glyph="&#x1F01B;" 
                                       Margin="0,0,5,0"
                                       FontSize="25" />
                             <FontIcon FontFamily="Segoe UI Emoji"
-                                      Glyph="&#x1F01A;" 
+                                      Glyph="&#x1F01C;" 
                                       Margin="0,0,10,0"
                                       FontSize="25" />
 
@@ -2117,28 +2117,28 @@
             <PivotItem Header="About this App">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel MaxWidth="460">
+                        
+                        <TextBlock Text="Mahjong Aid" Foreground="{ThemeResource MahjongAccentColorBrush}" />
+                        <TextBlock x:Name="aboutVersionNumberTextBlock" />
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10" >
+                            <TextBlock Text="Version" Margin="0,0,5,0" />
+                            <TextBlock Text="© 2016, Stenobot"/>
+                        </StackPanel>
                         <TextBlock TextWrapping="WrapWholeWords">
-                            Mahjong is a great game. It's also complicated. 
-                            I've been playing for about 12 years, and I still get confused, especially when it comes time to score a hand.
-                            <LineBreak />
-                            <LineBreak />
-                            Also, Mahjong games tend to go on for a long time. 
-                            One game goes on for many rounds. 
-                            At family gatherings, we bring out a notebook with games dating back years, and try to find a match with whichever four people we happen to have together at that time.
-                            <LineBreak />
-                            <LineBreak />
-                            I built this app to do 3 things: 
-                            <LineBreak />
-                            1.) Calculate scores quickly and easily
-                            <LineBreak />
-                            2.) Keep track of ongoing games
-                            <LineBreak />
-                            3.) Teach people how to play the game
-                            <LineBreak />
-                            <LineBreak />
-                            I really created this app for myself and my friends and family, but I hope that you will find it useful as well. Enjoy!
+                            Mahjong Aid was built by Andy Myers aka Stenobot, with many thanks to friends and family for helping to test it along the way.
                         </TextBlock>
-
+                        <HyperlinkButton 
+                            Margin="0,10,0,0" 
+                            Content="Music" 
+                            NavigateUri="http://stenobot.bandcamp.com" />
+                        <HyperlinkButton 
+                            Margin="0,2,0,0" 
+                            Content="Supercommuter" 
+                            NavigateUri="http://supercommuter.net" />
+                        <HyperlinkButton 
+                            Margin="0,2,0,0" 
+                            Content="Blog" 
+                            NavigateUri="http://stenobot.wordpress.com" />
                     </StackPanel>
                 </ScrollViewer>
             </PivotItem>

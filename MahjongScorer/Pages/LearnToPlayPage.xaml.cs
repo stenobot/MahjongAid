@@ -29,6 +29,12 @@ namespace MahjongScorer.Pages
 
             // show the system back button
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
+            // get the current version number
+            Windows.ApplicationModel.Package pkg = Windows.ApplicationModel.Package.Current;
+            Windows.ApplicationModel.PackageVersion version = pkg.Id.Version;
+            aboutVersionNumberTextBlock.Text += string.Format("{0}.{1}.{2}.{3}",
+                version.Major.ToString(), version.Minor.ToString(), version.Build.ToString(), version.Revision.ToString());
         }
     }
 }
