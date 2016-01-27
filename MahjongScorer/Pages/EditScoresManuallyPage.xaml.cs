@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -32,14 +23,62 @@ namespace MahjongScorer.Pages
         int p3Score = 0;
         int p4Score = 0;
 
-        //Player roundWinner = new Player();
-        List<Player> players;
-
-
         public EditScoresManuallyPage()
         {
             this.InitializeComponent();
         }
+
+
+        /// <summary>
+        /// Similar to EndRound() on EnterScoresPage, but slightly customized for manual entry of scores
+        /// </summary>
+        /// <param name="dealerWon">True if dealer won, false if not</param>
+        private void EndRound(bool dealerWon)
+        {
+            if (dealerWon)
+                // increment property tracking how many times the dealer won
+                game.TimesDealerWon++;
+            else // only change dealer and lucky wind if the dealer didn't win
+            {
+                // shift Winds and dealer counterclockwise around the table
+                foreach (Player player in game.Players)
+                {
+                    switch (player.CurrentWind)
+                    {
+                        case Wind.East:
+                            player.CurrentWind = Wind.North;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.North:
+                            player.CurrentWind = Wind.West;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.West:
+                            player.CurrentWind = Wind.South;
+                            player.IsDealer = false;
+                            break;
+                        case Wind.South:
+                            player.CurrentWind = Wind.East;
+                            player.IsDealer = true;
+                            // set name for save data display
+                            game.CurrentDealerName = player.Name;
+                            break;
+                    }
+                }
+
+                // if we've gone around the table once, prevailing wind changes
+                if ((game.CurrentRound - game.TimesDealerWon) % 4 == 0)
+                    game.PrevailingWind++;
+            }
+
+            // always add current prevailing wind to prevailing winds list (even if it doesn't change)
+            game.PrevailingWinds.Add(game.PrevailingWind);
+
+            game.LoadedFromSave = false;
+        }
+
+
+        #region CONTROL EVENTS
 
         private void PlayerScoreTextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
@@ -145,50 +184,12 @@ namespace MahjongScorer.Pages
             }
         }
 
-
-        private void EndRound(bool dealerWon)
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (dealerWon)
-                // increment property tracking how many times the dealer won
-                game.TimesDealerWon++;
-            else // only change dealer and lucky wind if the dealer didn't win
-            {
-                // shift Winds and dealer counterclockwise around the table
-                foreach (Player player in game.Players)
-                {
-                    switch (player.CurrentWind)
-                    {
-                        case Wind.East:
-                            player.CurrentWind = Wind.North;
-                            player.IsDealer = false;
-                            break;
-                        case Wind.North:
-                            player.CurrentWind = Wind.West;
-                            player.IsDealer = false;
-                            break;
-                        case Wind.West:
-                            player.CurrentWind = Wind.South;
-                            player.IsDealer = false;
-                            break;
-                        case Wind.South:
-                            player.CurrentWind = Wind.East;
-                            player.IsDealer = true;
-                            // set name for save data display
-                            game.CurrentDealerName = player.Name;
-                            break;
-                    }
-                }
-
-                // if we've gone around the table once, prevailing wind changes
-                if ((game.CurrentRound - game.TimesDealerWon) % 4 == 0)
-                    game.PrevailingWind++;
-            }
-
-            // always add current prevailing wind to prevailing winds list (even if it doesn't change)
-            game.PrevailingWinds.Add(game.PrevailingWind);
-
-            game.LoadedFromSave = false;
+            Frame.Navigate(typeof(StartPage), new DrillInNavigationTransitionInfo());
         }
+
+        #endregion
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -203,15 +204,8 @@ namespace MahjongScorer.Pages
                 playerOneNameTextBlock.Text = game.Players[0].Name;
                 playerTwoNameTextBlock.Text = game.Players[1].Name;
                 playerThreeNameTextBlock.Text = game.Players[2].Name;
-                playerFourNameTextBlock.Text = game.Players[3].Name;
-
-                
+                playerFourNameTextBlock.Text = game.Players[3].Name;                
             }
-        }
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(StartPage), new DrillInNavigationTransitionInfo());
-        }
+        }       
     }
 }
