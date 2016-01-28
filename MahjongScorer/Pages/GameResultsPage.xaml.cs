@@ -264,6 +264,8 @@ namespace MahjongScorer.Pages
                 roundSummaryGrid.Visibility = Visibility.Collapsed;
                 // hide the app bar button
                 roundSummariesAppBarButton.Visibility = Visibility.Visible;
+                //set the "Score next round" button text
+                scoreRoundButton.Content = "Score First Round";
             }
             else
             {
