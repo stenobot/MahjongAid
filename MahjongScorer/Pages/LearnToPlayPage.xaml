@@ -24,9 +24,10 @@
 
         <Pivot>
 
-            <PivotItem Header="Welcome to Mahjong!">
+            <PivotItem Header="Welcome to Mahjong!" Margin="0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
+                    
+                    <StackPanel MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
                             Mahjong is a 4-player game that originated in China, and is now played around the world. 
                             The rules can vary from country to country, region to region, even family to family.
@@ -53,11 +54,10 @@
                 </ScrollViewer>
             </PivotItem> 
                        
-            <PivotItem Header="Tile Glossary">
+            <PivotItem Header="Tile Glossary" Margin="0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                    <StackPanel Margin="0,10" MaxWidth="460">
-
+                    <StackPanel MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             There are 34 different tiles used in Mahjong, with 4 of each for a total of 136 tiles.
@@ -65,7 +65,7 @@
 
                         <TextBlock Text="WINDS" Style="{ThemeResource LargeHeaderStyle}" Margin="10,20,10,10" />
                         <Grid>
-                            <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                            <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"/>
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                             <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -76,33 +76,43 @@
                         </Grid>
 
                         <GridView SelectionMode="None">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="IsHitTestVisible" Value="False" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
+                            
                             <StackPanel Style="{StaticResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F000;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F000;" />
                                 <TextBlock Style="{StaticResource TileTextBlock}" 
-                                       Text="East Wind" />
+                                            Text="East Wind" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F001;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F001;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="South Wind" />
+                                           Text="South Wind" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F002;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F002;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="West Wind" />
+                                           Text="West Wind" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F003;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F003;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="North Wind" />
+                                           Text="North Wind" />
                             </StackPanel>
                         </GridView>
 
@@ -110,7 +120,7 @@
 
                         <TextBlock Text="DRAGONS" Style="{ThemeResource LargeHeaderStyle}" Margin="10,20,10,10" />
                         <Grid>
-                            <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                            <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"/>
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                             <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -121,26 +131,35 @@
                         </Grid>
 
                         <GridView SelectionMode="None">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="IsHitTestVisible" Value="False" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
+                            
                             <StackPanel Style="{StaticResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F004;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F004;" />
                                 <TextBlock Style="{StaticResource TileTextBlock}" 
-                                       Text="Red Dragon" />
+                                           Text="Red Dragon" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F005;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F005;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Green Dragon" />
+                                           Text="Green Dragon" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F006;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F006;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="White Dragon" />
+                                           Text="White Dragon" />
                             </StackPanel>
 
                         </GridView>
@@ -149,7 +168,7 @@
 
                         <TextBlock Text="CHARACTERS" Style="{ThemeResource LargeHeaderStyle}" Margin="10,20,10,10" />
                         <Grid>
-                            <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                            <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"/>
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                             <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -160,68 +179,83 @@
                         </Grid>
 
                         <GridView SelectionMode="None">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="IsHitTestVisible" Value="False" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
+                            
                             <StackPanel Style="{StaticResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F007;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F007;" />
                                 <TextBlock Style="{StaticResource TileTextBlock}" 
-                                       Text="One of Characters" />
+                                           Text="One of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F008;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F008;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Two of Characters" />
+                                           Text="Two of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F009;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F009;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Three of Characters" />
+                                           Text="Three of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F00A;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F00A;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Four of Characters" />
+                                           Text="Four of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F00B;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F00B;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Five of Characters" />
+                                           Text="Five of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F00C;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F00C;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Six of Characters" />
+                                           Text="Six of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F00D;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F00D;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Seven of Characters" />
+                                           Text="Seven of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F00E;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F00E;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Eight of Characters" />
+                                           Text="Eight of Characters" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F00F;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F00F;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Nine of Characters" />
+                                           Text="Nine of Characters" />
                             </StackPanel>
 
                         </GridView>
@@ -230,7 +264,7 @@
 
                         <TextBlock Text="BAMBOO" Style="{ThemeResource LargeHeaderStyle}" Margin="10,20,10,10" />
                         <Grid>
-                            <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                            <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"/>
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                             <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -241,68 +275,83 @@
                         </Grid>
 
                         <GridView SelectionMode="None">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="IsHitTestVisible" Value="False" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
+                            
                             <StackPanel Style="{StaticResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F010;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F010;" />
                                 <TextBlock Style="{StaticResource TileTextBlock}" 
-                                       Text="One of Bamboo" />
+                                           Text="One of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F011;" />
+                                          FontSize="50"
+                                          Glyph="&#x1F011;" />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Two of Bamboo" />
+                                           Text="Two of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F012;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F012;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Three of Bamboo" />
+                                           Text="Three of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F013;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F013;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Four of Bamboo" />
+                                           Text="Four of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F014;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F014;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Five of Bamboo" />
+                                           Text="Five of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F015;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F015;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Six of Bamboo" />
+                                           Text="Six of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F016;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F016;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Seven of Bamboo" />
+                                           Text="Seven of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F017;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F017;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Eight of Bamboo" />
+                                           Text="Eight of Bamboo" />
                             </StackPanel>
+                            
                             <StackPanel Style="{ThemeResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
-                                      FontSize="50"
-                                      Glyph="&#x1F018;"  />
+                                          FontSize="50"
+                                          Glyph="&#x1F018;"  />
                                 <TextBlock Style="{ThemeResource TileTextBlock}" 
-                                       Text="Nine of Bamboo" />
+                                           Text="Nine of Bamboo" />
                             </StackPanel>
 
                         </GridView>
@@ -311,7 +360,7 @@
 
                         <TextBlock Text="CIRCLES" Style="{ThemeResource LargeHeaderStyle}" Margin="10,20,10,10" />
                         <Grid>
-                            <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                            <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"/>
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                             <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                             <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -322,6 +371,12 @@
                         </Grid>
 
                         <GridView SelectionMode="None">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="IsHitTestVisible" Value="False" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
                             <StackPanel Style="{StaticResource TileStackPanel}">
                                 <FontIcon FontFamily="Segoe UI Emoji" 
                                       FontSize="50"
@@ -392,9 +447,9 @@
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem Header="Setting Up">
+            <PivotItem Header="Setting Up" Margin="0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
+                    <StackPanel MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                            To begin a game, you first need to choose each player's starting position. 
@@ -494,7 +549,7 @@
                             Shuffle the wind tiles back into the pile, then stack the tiles in 4 walls (17 tiles long, 2 tiles high) around the table, like so:
                         </TextBlock>
                         
-                        <Image Source="/Assets/learn-to-play/four-walls-start.png" />
+                        <Image Source="/Assets/learn-to-play/four-walls-start.png" MaxWidth="550" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">                            
                             The East player then rolls the two dice. 
@@ -502,14 +557,14 @@
                             For example, if they rolled a 7, they count 7 tiles along the top of the wall, and take the stack of 2 tiles, like so:
                         </TextBlock>
 
-                        <Image Source="/Assets/learn-to-play/four-walls-dice-roll.png" />
+                        <Image Source="/Assets/learn-to-play/four-walls-dice-roll.png" MaxWidth="550" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
                             This space marks where the dealing will begin (to the left), and where the Dead Wall is (to the right).
                             The dealer places the 2 tiles upside-down on top of the Dead Wall.
                         </TextBlock>
 
-                        <Image Source="/Assets/learn-to-play/dead-wall.png" />
+                        <Image Source="/Assets/learn-to-play/dead-wall.png" MaxWidth="528" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
                             Then, they deal tiles in in groups of 4 around the table, starting with themself. 
@@ -522,7 +577,7 @@
                             The table should look something like this:
                         </TextBlock>
 
-                        <Image Source="/Assets/learn-to-play/four-walls-tiles-dealt.png" />
+                        <Image Source="/Assets/learn-to-play/four-walls-tiles-dealt.png" MaxWidth="550" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10">
                             That's it! Each player has 13 tiles, and the dealer has 13 tiles plus their first draw tile.
@@ -533,9 +588,9 @@
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem Header="Playing a Round">
+            <PivotItem Header="Playing a Round" Margin="0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
+                    <StackPanel MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
 
                         <TextBlock Text="Round Flow" 
                                    Margin="0,10,0,5" 
@@ -556,7 +611,7 @@
                             Here's a game in progress:
                         </TextBlock>
 
-                        <Image Source="/Assets/learn-to-play/game-in-progress.png" />
+                        <Image Source="/Assets/learn-to-play/game-in-progress.png" MaxWidth="550" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             This game is on it's 3rd time around the table, so the dealer has just discarded their 3rd tile. 
@@ -894,7 +949,7 @@
                             Since the dealer's Lucky Wind is always East, all the players' Lucky Winds rotate around the table counter-clockwise when the dealer changes. 
                             East player becomes North, South becomes East, West becomes South, and North becomes West.
                         </TextBlock>
-                        <Image Source="/Assets/learn-to-play/wind-rotation.png" />
+                        <Image Source="/Assets/learn-to-play/wind-rotation.png" MaxWidth="440" />
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,0,0,30"> 
                             there's also the Prevailing Wind to keep track of. 
@@ -920,9 +975,9 @@
             </PivotItem>
 
           
-            <PivotItem Header="Scoring">
+            <PivotItem Header="Scoring" Margin="0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
+                    <StackPanel MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
 
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             Scoring a round is where things can get complicated. 
@@ -2114,9 +2169,9 @@
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem Header="About this App">
+            <PivotItem Header="About this App" Margin="0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel MaxWidth="460">
+                    <StackPanel MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
                         
                         <TextBlock Text="Mahjong Aid" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                         <TextBlock x:Name="aboutVersionNumberTextBlock" />

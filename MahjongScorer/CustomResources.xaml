@@ -9,6 +9,8 @@
 
     <ResourceDictionary.ThemeDictionaries>
         
+        <!-- BRUSHES -->
+        
         <ResourceDictionary x:Key="Default">
             <SolidColorBrush x:Key="MahjongAccentColorBrush"
                              Color="{ThemeResource SystemAccentColor}" />
@@ -62,50 +64,58 @@
         
     </ResourceDictionary.ThemeDictionaries>
 
+    
+    <!-- GENERAL VALUES -->
+    
     <x:Double x:Key="TestFontSize">26</x:Double>
     <FontFamily x:Key="ShuiFont">/Fonts/FONTSHUI.TTF#FONT SHUI</FontFamily>
     <GridLength x:Key="ScoresColumnWidth">88</GridLength>
     <GridLength x:Key="RoundSummariesTitleHeight">20</GridLength>
+    <x:Double x:Key="ContentMaxWidth">700</x:Double>
+    <Thickness x:Key="ContentMargin">20,15,20,20</Thickness>
     <x:Double x:Key="MobileBreakpoint">832</x:Double>
 
-    <Style x:Name="MahjongComboBoxStyle" TargetType="ComboBox">
+    
+    <!-- STYLES -->
+    
+    <Style x:Key="MahjongComboBoxStyle" TargetType="ComboBox">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,15,0,0" />
         <Setter Property="Width" Value="400" />
     </Style>
 
-    <Style x:Name="LargeHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+    <Style x:Key="LargeHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
         <Setter Property="Margin" Value="0,25,0,10" />
         <Setter Property="FontFamily" Value="{StaticResource ShuiFont}" />
         <Setter Property="Foreground" Value="{StaticResource MahjongAccentColorBrush}" />
         <Setter Property="FontSize" Value="16" />
     </Style>
 
-    <Style x:Name="SmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+    <Style x:Key="SmallHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
         <Setter Property="Margin" Value="0,25,0,10" />
         <Setter Property="FontFamily" Value="{StaticResource ShuiFont}" />
         <Setter Property="Foreground" Value="{StaticResource MahjongAccentColorBrush}" />
         <Setter Property="FontSize" Value="13" />
     </Style>
 
-    <Style x:Name="TileStackPanel" TargetType="StackPanel">
+    <Style x:Key="TileStackPanel" TargetType="StackPanel">
         <Setter Property="Margin" Value="10"/>
         <Setter Property="Height" Value="110" />
         <Setter Property="Width" Value="90" />
     </Style>
 
-    <Style x:Name="TileTextBlock" TargetType="TextBlock">
+    <Style x:Key="TileTextBlock" TargetType="TextBlock">
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="MaxLines" Value="2" />
         <Setter Property="TextWrapping" Value="WrapWholeWords" />
     </Style>
 
-    <Style x:Name="PlayerNameTextBlockStyle" TargetType="TextBlock">
+    <Style x:Key="PlayerNameTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="0,2,0,7" />
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
 
-    <Style x:Name="PlayerNameTextBoxStyle" TargetType="TextBox">
+    <Style x:Key="PlayerNameTextBoxStyle" TargetType="TextBox">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="MaxLength" Value="2" />
         <Setter Property="FontFamily" Value="{ThemeResource ShuiFont}" />
@@ -114,26 +124,23 @@
         <Setter Property="FontWeight" Value="ExtraBold" />
     </Style>
 
-    <Style x:Name="PlayerScoreTextBoxStyle" TargetType="TextBox">
-        <Setter Property="InputScope" Value="Number" />
+    <Style x:Key="PlayerScoreTextBoxStyle" TargetType="TextBox">
         <Setter Property="MaxLength" Value="5" />
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="FontWeight" Value="ExtraBold" />
     </Style>
 
-    
-
-    <Style x:Name="ScoresViewHeaderLineStyle" TargetType="Line">
-        <Setter Property="X2" Value="400" />
+    <Style x:Key="HeaderLineStyle" TargetType="Line">
         <Setter Property="Stroke" Value="{StaticResource MahjongAccentColorBrush}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="Grid.Row" Value="1" />
+        <Setter Property="StrokeThickness" Value="2" />
     </Style>
 
 
+    <!-- OVERRIDE TEMPLATES -->
+    
     <!-- override generic button style for start page -->
     <Style x:Key="FancyButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
@@ -247,7 +254,6 @@
 
                         </StackPanel>
 
-                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -256,7 +262,7 @@
 
 
     <!-- Default style for Windows.UI.Xaml.Controls.Button -->
-    <Style TargetType="Button" x:Name="AccentColorButtonStyle">
+    <Style x:Key="AccentColorButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{ThemeResource MahjongLightAccentColorBrush}" />
         <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
@@ -351,8 +357,8 @@
         </Setter>
     </Style>
 
-    
-    <!-- Styles for Expander control -->
+
+    <!-- EXPANDER CUSTOM CONTROL STYLES -->
 
     <Style x:Key="HeaderToggleButtonStyle" TargetType="ToggleButton">
         <Setter Property="Background" Value="Transparent" />
@@ -636,6 +642,7 @@
         </Setter>
     </Style>
 
+    
     <Style TargetType="controls:Expander">
         <Setter Property="ExpanderToggleButtonStyle" Value="{StaticResource HeaderToggleButtonStyle}" />
         <Setter Property="HeaderButtonStyle" Value="{StaticResource HeaderButtonStyle}" />

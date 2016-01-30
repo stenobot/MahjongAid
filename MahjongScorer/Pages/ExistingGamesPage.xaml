@@ -50,7 +50,7 @@
                 <StackPanel>
                     <TextBlock Text="GAMES IN PROGRESS" Style="{ThemeResource LargeHeaderStyle}" />
                     <Grid>
-                        <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                        <Line Style="{ThemeResource HeaderLineStyle}" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                         <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -103,7 +103,7 @@
                 <StackPanel>
                     <TextBlock Text="COMPLETED GAMES" Style="{ThemeResource LargeHeaderStyle}" />
                     <Grid>
-                        <Line Style="{ThemeResource ScoresViewHeaderLineStyle}" />
+                        <Line Style="{ThemeResource HeaderLineStyle}" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                         <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
