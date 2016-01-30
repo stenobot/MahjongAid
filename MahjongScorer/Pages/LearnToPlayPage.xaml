@@ -22,7 +22,7 @@
         <Image Source="/Assets/mahjong-parchment.jpg" 
                Stretch="UniformToFill" />
 
-        <Pivot>
+        <Pivot Margin="0,5,0,35">
 
             <PivotItem Header="Welcome to Mahjong!" Margin="0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -2205,5 +2205,9 @@
             </PivotItem>
         </Pivot>
 
+        <CommandBar VerticalAlignment="Bottom" Background="{ThemeResource MahjongAccentColorBrush}">
+            <AppBarButton Label="Home"
+                          Icon="Home" Click="HomeButton_Click" />
+        </CommandBar>
     </Grid>
 </Page>
