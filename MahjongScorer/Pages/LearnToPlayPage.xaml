@@ -1132,30 +1132,66 @@
                         </TextBlock>
 
 
-                        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Self-Drawn" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="2 points if the winning is drawn from the wall." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="One Chance" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="2 points if the winning hand needed one specific tile to win." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="0" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Self-Drawn" 
+                                           Grid.Row="0"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="2 points if the winning is drawn from the wall." 
+                                           Grid.Row="0" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Lucky Pair" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="2 points if the winning pair is prevailing wind, lucky wind, or dragons" TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <TextBlock Text="One Chance" 
+                                           Grid.Row="1"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="2 points if the winning hand needed one specific tile to win." 
+                                           Grid.Row="1" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="Partially-Concealed" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="10 points if the entire hand is concealed except for the winning tile." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="2" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Lucky Pair" 
+                                           Grid.Row="2"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="2 points if the winning pair is prevailing wind, lucky wind, or dragons." 
+                                           Grid.Row="2" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                        </StackPanel>
+                            <TextBlock Text="Partially-Concealed" 
+                                           Grid.Row="3"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="10 points if the entire hand is concealed except for the winning tile." 
+                                           Grid.Row="3" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
+                        </Grid>
 
+
+                  
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             Next, the score is rounded to the nearest ten. 
                             So, if the base score is 26, it becomes 30. 
@@ -1177,115 +1213,243 @@
                             Here are all of the "doubles" this app recognizes. 
                             Some are applied automatically, and some must be selected from a list when scoring the hand. 
                         </TextBlock>
-                    
-                        
-                        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
 
-                            <TextBlock Text="One Double" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                        <TextBlock Text="One Double" 
+                                   Margin="10,20,0,0" 
                                    FontWeight="SemiBold" 
                                    FontSize="16" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Fully Concealed" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="The entire hand is concealed, including the winning tile." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="Worthless" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are no pungs or kongs, and no lucky pair." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="All Simples" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are no winds, terminals, or dragons." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="0" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Fully Concealed" 
+                                           Grid.Row="0"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="The entire hand is concealed, including the winning tile." 
+                                           Grid.Row="0" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="One to Nine Run" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are three chows with 1-9 in the same suit." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <TextBlock Text="Worthless" 
+                                           Grid.Row="1"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are no pungs or kongs, and no lucky pair." 
+                                           Grid.Row="1" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Three Concealed Pungs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are three concealed sets (pungs or kongs)." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="2" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="All Simples" 
+                                           Grid.Row="2"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are no winds, terminals, or dragons." 
+                                           Grid.Row="2" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="One Suit with Honors" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="All tiles are winds, dragons, and just one suit." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <TextBlock Text="One to Nine Run" 
+                                           Grid.Row="3"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are three chows with 1-9 in the same suit." 
+                                           Grid.Row="3" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="All Honors" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There's a terminal or honor in every set or run." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="4" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Three Concealed Pungs" 
+                                           Grid.Row="4"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are three concealed sets (pungs or kongs)." 
+                                           Grid.Row="4" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="Lucky Set" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There's a pung or kong with the prevailing wind, lucky wind, or dragons." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <TextBlock Text="One Suit with Honors" 
+                                           Grid.Row="5"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="All tiles are winds, dragons, and just one suit." 
+                                           Grid.Row="5" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Off the Dead Wall" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="The winning tile was drawn from the dead wall." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="6" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="All Honors" 
+                                           Grid.Row="6"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There's a terminal or honor in every set or run." 
+                                           Grid.Row="6" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="Robbing a Kong" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="A player draws someone else's winning tile from the dead wall." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <TextBlock Text="Lucky Set" 
+                                           Grid.Row="7"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There's a pung or kong with the prevailing wind, lucky wind, or dragons." 
+                                           Grid.Row="7" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Bottom of the Sea" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="The winning tile was drawn and was the very last tile before the dead wall." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="8" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Off the Dead Wall" 
+                                           Grid.Row="8"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="The winning tile was drawn from the dead wall." 
+                                           Grid.Row="8" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="All Pungs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are four sets (pungs or kongs) in the winning hand." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <TextBlock Text="Robbing a Kong" 
+                                           Grid.Row="9"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="A player draws someone else's winning tile from the dead wall." 
+                                           Grid.Row="9" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                        </StackPanel>
+                            <Rectangle Grid.Row="10" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Bottom of the Sea" 
+                                           Grid.Row="10"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="The winning tile was drawn and was the very last tile before the dead wall." 
+                                           Grid.Row="10" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                        
+                            <TextBlock Text="All Pungs" 
+                                           Grid.Row="11"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are four sets (pungs or kongs) in the winning hand." 
+                                           Grid.Row="11" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
+                        </Grid>
 
-                        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0">
-
-                            <TextBlock Text="Two Doubles" 
-                                   Margin="0,20,0,5" 
-                                   Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                        <TextBlock Text="Two Doubles" 
+                                   Margin="10,20,0,0" 
                                    FontWeight="SemiBold" 
                                    FontSize="16" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Double Lucky Set" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="A set (pung or kong) is both the lucky wind and the prevailing wind." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="All Pairs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="A special hand comprised of seven pairs." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Triple Pung" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are three sets (pungs or kongs) of the same number from different suits." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="0" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Double Lucky Set" 
+                                           Grid.Row="0"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="A set (pung or kong) is both the lucky wind and the prevailing wind." 
+                                           Grid.Row="0" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5">
-                                <TextBlock Width="120" Text="Little Three Dragons" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are two sets and one pair of dragons." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <TextBlock Text="All Pairs" 
+                                           Grid.Row="1"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="A special hand comprised of seven pairs." 
+                                           Grid.Row="1" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Orientation="Horizontal" Height="50" Padding="5" Background="{ThemeResource LearnToPlayGridVariationColor}">
-                                <TextBlock Width="120" Text="Three Kongs" Foreground="{ThemeResource MahjongAccentColorBrush}" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Width="300" Text="There are three kongs (sets of four)." TextWrapping="WrapWholeWords" />
-                            </StackPanel>
+                            <Rectangle Grid.Row="2" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Triple Pung" 
+                                           Grid.Row="2"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are three sets (pungs or kongs) of the same number from different suits." 
+                                           Grid.Row="2" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
-                        </StackPanel>
+                            <TextBlock Text="Little Three Dragons" 
+                                           Grid.Row="3"
+                                           Margin="10,5" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are two sets and one pair of dragons." 
+                                           Grid.Row="3" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
 
+                            <Rectangle Grid.Row="4" Grid.ColumnSpan="2" 
+                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                            <TextBlock Text="Three Kongs" 
+                                           Grid.Row="4"
+                                           Margin="10,5"
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                           TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="There are three kongs (sets of four)." 
+                                           Grid.Row="4" Grid.Column="1" 
+                                           Margin="10,5"
+                                           TextWrapping="WrapWholeWords" />
+                        </Grid>
+                  
+                        
                         <TextBlock TextWrapping="WrapWholeWords" Margin="0,10"> 
                             In addition to the above, there is one condition called "One Suit, No Honors" that's worth a whopping 4 doubles, where all sets and the pair are in the same suit. 
                             Scoring 4 doubles will usually reach the "limit" value mentioned above, but it's technically not a "limit hand". 
