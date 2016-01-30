@@ -81,7 +81,7 @@
     <Style x:Key="MahjongComboBoxStyle" TargetType="ComboBox">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,15,0,0" />
-        <Setter Property="Width" Value="400" />
+        <Setter Property="MinWidth" Value="330" />
     </Style>
 
     <Style x:Key="LargeHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">

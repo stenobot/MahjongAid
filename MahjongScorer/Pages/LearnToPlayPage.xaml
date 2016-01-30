@@ -1146,48 +1146,48 @@
                             </Grid.RowDefinitions>
 
                             <Rectangle Grid.Row="0" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Self-Drawn" 
-                                           Grid.Row="0"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="0"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="2 points if the winning is drawn from the wall." 
-                                           Grid.Row="0" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="0" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="One Chance" 
-                                           Grid.Row="1"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="1"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="2 points if the winning hand needed one specific tile to win." 
-                                           Grid.Row="1" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="1" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="2" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Lucky Pair" 
-                                           Grid.Row="2"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="2"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="2 points if the winning pair is prevailing wind, lucky wind, or dragons." 
-                                           Grid.Row="2" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="2" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="Partially-Concealed" 
-                                           Grid.Row="3"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="3"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="10 points if the entire hand is concealed except for the winning tile." 
-                                           Grid.Row="3" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="3" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
                         </Grid>
 
 
@@ -1241,136 +1241,136 @@
                             </Grid.RowDefinitions>
 
                             <Rectangle Grid.Row="0" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Fully Concealed" 
-                                           Grid.Row="0"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="0"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="The entire hand is concealed, including the winning tile." 
-                                           Grid.Row="0" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="0" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="Worthless" 
-                                           Grid.Row="1"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="1"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are no pungs or kongs, and no lucky pair." 
-                                           Grid.Row="1" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="1" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="2" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="All Simples" 
-                                           Grid.Row="2"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="2"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are no winds, terminals, or dragons." 
-                                           Grid.Row="2" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="2" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="One to Nine Run" 
-                                           Grid.Row="3"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="3"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are three chows with 1-9 in the same suit." 
-                                           Grid.Row="3" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="3" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="4" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Three Concealed Pungs" 
-                                           Grid.Row="4"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="4"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are three concealed sets (pungs or kongs)." 
-                                           Grid.Row="4" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="4" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="One Suit with Honors" 
-                                           Grid.Row="5"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="5"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="All tiles are winds, dragons, and just one suit." 
-                                           Grid.Row="5" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="5" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="6" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="All Honors" 
-                                           Grid.Row="6"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="6"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There's a terminal or honor in every set or run." 
-                                           Grid.Row="6" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="6" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="Lucky Set" 
-                                           Grid.Row="7"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="7"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There's a pung or kong with the prevailing wind, lucky wind, or dragons." 
-                                           Grid.Row="7" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="7" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="8" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Off the Dead Wall" 
-                                           Grid.Row="8"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="8"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="The winning tile was drawn from the dead wall." 
-                                           Grid.Row="8" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="8" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="Robbing a Kong" 
-                                           Grid.Row="9"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="9"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="A player draws someone else's winning tile from the dead wall." 
-                                           Grid.Row="9" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="9" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="10" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Bottom of the Sea" 
-                                           Grid.Row="10"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="10"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="The winning tile was drawn and was the very last tile before the dead wall." 
-                                           Grid.Row="10" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="10" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="All Pungs" 
-                                           Grid.Row="11"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="11"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are four sets (pungs or kongs) in the winning hand." 
-                                           Grid.Row="11" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="11" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
                         </Grid>
 
                         <TextBlock Text="Two Doubles" 
@@ -1393,60 +1393,60 @@
                             </Grid.RowDefinitions>
 
                             <Rectangle Grid.Row="0" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Double Lucky Set" 
-                                           Grid.Row="0"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="0"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="A set (pung or kong) is both the lucky wind and the prevailing wind." 
-                                           Grid.Row="0" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="0" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="All Pairs" 
-                                           Grid.Row="1"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="1"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="A special hand comprised of seven pairs." 
-                                           Grid.Row="1" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="1" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="2" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Triple Pung" 
-                                           Grid.Row="2"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="2"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are three sets (pungs or kongs) of the same number from different suits." 
-                                           Grid.Row="2" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="2" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <TextBlock Text="Little Three Dragons" 
-                                           Grid.Row="3"
-                                           Margin="10,5" 
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="3"
+                                       Margin="10,5" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are two sets and one pair of dragons." 
-                                           Grid.Row="3" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="3" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
 
                             <Rectangle Grid.Row="4" Grid.ColumnSpan="2" 
-                                           Fill="{ThemeResource LearnToPlayGridVariationColor}" />
+                                       Fill="{ThemeResource LearnToPlayGridVariationColor}" />
                             <TextBlock Text="Three Kongs" 
-                                           Grid.Row="4"
-                                           Margin="10,5"
-                                           Foreground="{ThemeResource MahjongAccentColorBrush}" 
-                                           TextWrapping="WrapWholeWords"/>
+                                       Grid.Row="4"
+                                       Margin="10,5"
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                                       TextWrapping="WrapWholeWords"/>
                             <TextBlock Text="There are three kongs (sets of four)." 
-                                           Grid.Row="4" Grid.Column="1" 
-                                           Margin="10,5"
-                                           TextWrapping="WrapWholeWords" />
+                                       Grid.Row="4" Grid.Column="1" 
+                                       Margin="10,5"
+                                       TextWrapping="WrapWholeWords" />
                         </Grid>
                   
                         
