@@ -40,7 +40,7 @@
                Stretch="UniformToFill" />
         
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Width="400">
+            <StackPanel MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
                 <TextBlock x:Name="deletedMessageTextBlock" 
                            FontSize="15" 
                            HorizontalAlignment="Left" 
@@ -50,7 +50,7 @@
                 <StackPanel>
                     <TextBlock Text="GAMES IN PROGRESS" Style="{ThemeResource LargeHeaderStyle}" />
                     <Grid>
-                        <Line Style="{ThemeResource HeaderLineStyle}" />
+                        <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                         <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -66,7 +66,10 @@
                                Visibility="Collapsed" 
                                Text="No games in progress yet. Go back to the home screen to start a new game." />
 
-                    <ListView x:Name="gamesInProgressListView" Margin="0,15" SelectionChanged="GamesInProgressListView_SelectionChanged">
+                    <ListView x:Name="gamesInProgressListView" 
+                              Margin="20,15" 
+                              MaxWidth="430"
+                              SelectionChanged="GamesInProgressListView_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="0,5">
@@ -93,9 +96,16 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <StackPanel x:Name="gamesInProgressButtons" Visibility="Collapsed" Orientation="Horizontal">
-                        <Button x:Name="loadGameInProgressButton" Click="LoadGameButton_Click" Content="Load" Margin="0,0,15,0" />
-                        <Button x:Name="deleteGameInProgressButton" Click="DeleteGameButton_Click" Content="Delete" />
+                    <StackPanel x:Name="gamesInProgressButtons" 
+                                HorizontalAlignment="Center"
+                                Visibility="Collapsed" 
+                                Orientation="Horizontal">
+                        <Button x:Name="loadGameInProgressButton" 
+                                Click="LoadGameButton_Click" 
+                                Content="Load" 
+                                Margin="0,0,15,0" />
+                        <Button x:Name="deleteGameInProgressButton" 
+                                Click="DeleteGameButton_Click" Content="Delete" />
                     </StackPanel>
                 </StackPanel>
 
@@ -103,7 +113,7 @@
                 <StackPanel>
                     <TextBlock Text="COMPLETED GAMES" Style="{ThemeResource LargeHeaderStyle}" />
                     <Grid>
-                        <Line Style="{ThemeResource HeaderLineStyle}" />
+                        <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Left" />
                         <BitmapIcon UriSource="/Assets/divider-line-middle.png" Width="42" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" HorizontalAlignment="Center" />
                         <BitmapIcon UriSource="/Assets/divider-line-edge.png" Width="65" Height="20" Foreground="{ThemeResource MahjongAccentColorBrush}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right">
@@ -119,7 +129,10 @@
                                Visibility="Collapsed" 
                                Text="No games have been completed yet." />
 
-                    <ListView x:Name="gamesCompletedListView" Margin="0,15" SelectionChanged="GamesCompletedListView_SelectionChanged">
+                    <ListView x:Name="gamesCompletedListView" 
+                              Margin="20,15" 
+                              MaxWidth="430"
+                              SelectionChanged="GamesCompletedListView_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="0,5">
@@ -146,9 +159,17 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <StackPanel x:Name="gamesCompletedButtons" Visibility="Collapsed" Orientation="Horizontal">
-                        <Button x:Name="loadGameCompletedButton" Click="LoadGameButton_Click"  Content="Load" Margin="0,0,15,0" />
-                        <Button x:Name="deleteGameCompletedButton" Click="DeleteGameButton_Click"  Content="Delete" />
+                    <StackPanel x:Name="gamesCompletedButtons" 
+                                HorizontalAlignment="Center"
+                                Visibility="Collapsed" 
+                                Orientation="Horizontal">
+                        <Button x:Name="loadGameCompletedButton" 
+                                Click="LoadGameButton_Click"  
+                                Content="Load" 
+                                Margin="0,0,15,0" />
+                        <Button x:Name="deleteGameCompletedButton" 
+                                Click="DeleteGameButton_Click" 
+                                Content="Delete" />
                     </StackPanel>
                 </StackPanel>
 

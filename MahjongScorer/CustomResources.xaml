@@ -73,7 +73,7 @@
     <GridLength x:Key="RoundSummariesTitleHeight">20</GridLength>
     <x:Double x:Key="ContentMaxWidth">700</x:Double>
     <Thickness x:Key="ContentMargin">20,15,20,20</Thickness>
-    <x:Double x:Key="MobileBreakpoint">832</x:Double>
+    <x:Double x:Key="MobileBreakpoint">945</x:Double>
 
     
     <!-- STYLES -->
