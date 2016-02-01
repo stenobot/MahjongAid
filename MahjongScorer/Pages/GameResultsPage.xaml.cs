@@ -59,10 +59,11 @@ namespace MahjongScorer.Pages
                 scoresGrid.RowDefinitions.Insert(round + lineRowsAdded, scoresRd);
 
                 // if the prevailing wind changes, we need to add a row for a separator line
-                // this can't happen before round 5
-                if (round > 3)
+                // this can only happen after round 5
+                // also need to add line on very first round
+                if (round == 0 || round > 3)
                 {
-                    if (game.PrevailingWinds[round] != game.PrevailingWinds[round - 1])
+                    if (round == 0 || (game.PrevailingWinds[round] != game.PrevailingWinds[round - 1]))
                     {
                         lineRowsAdded++;
                         roundPerPrevWind = 1;
