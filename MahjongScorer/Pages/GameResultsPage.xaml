@@ -37,6 +37,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="roundSummaryGrid.(RelativePanel.Below)" Value="scoresStackPanel" />
+                        <Setter Target="roundSummaryGrid.(RelativePanel.AlignHorizontalCenterWith)" Value="scoresStackPanel" />
                         <Setter Target="windColumnDefScoresGrid.Width" Value="0" />
                         <Setter Target="windColumnDefNamesRow.Width" Value="0" />
                     </VisualState.Setters>
@@ -44,10 +45,11 @@
                 
                 <VisualState x:Name="Medium">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600" />
+                        <AdaptiveTrigger MinWindowWidth="560" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="roundSummaryGrid.(RelativePanel.Below)" Value="scoresStackPanel" />                       
+                        <Setter Target="roundSummaryGrid.(RelativePanel.Below)" Value="scoresStackPanel" />
+                        <Setter Target="roundSummaryGrid.(RelativePanel.AlignHorizontalCenterWith)" Value="scoresStackPanel" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -69,7 +71,7 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,35">
 
-            <RelativePanel HorizontalAlignment="Center" Margin="{ThemeResource ContentMargin}">
+            <RelativePanel HorizontalAlignment="Center">
 
                 <StackPanel x:Name="scoresStackPanel"
                             HorizontalAlignment="Center" >
@@ -135,7 +137,7 @@
 
                     </Grid>
 
-                    <Grid x:Name="scoresGrid" Margin="12,5,0,0" >
+                    <Grid x:Name="scoresGrid" Margin="0,5,0,0" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="windColumnDefScoresGrid" Width="45" />
                             <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
@@ -172,14 +174,7 @@
                                    Foreground="{StaticResource MahjongAccentColorBrush}"
                                    TextWrapping="WrapWholeWords"
                                    Text="The game has ended!" />
-                        <Button Content="Start New Game" 
-                                Margin="0,10,0,0" 
-                                Click="StartNewGame_Click" />
                     </StackPanel>
-
-
-                   
-                    
 
                     <TextBlock x:Name="roundSummaryTitleTextBlock" 
                                Text="ROUND SUMMARY" 

@@ -384,12 +384,6 @@ namespace MahjongScorer.Pages
             Frame.Navigate(typeof(RoundSummariesPage), game, new DrillInNavigationTransitionInfo());
         }
 
-        private void StartNewGame_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(StartPage));
-        }
-
-
         private void LearnToPlayButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(LearnToPlayPage), new DrillInNavigationTransitionInfo());
