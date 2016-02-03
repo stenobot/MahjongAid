@@ -23,14 +23,14 @@
         
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <Grid x:Name="enterNamesGrid" MaxWidth="{ThemeResource ContentMaxWidth}" Margin="{ThemeResource ContentMargin}">
+            <Grid x:Name="enterNamesGrid" MaxWidth="{ThemeResource ContentMaxWidth}" Margin="0,15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <StackPanel>
+                <StackPanel Margin="20,0">
                     <TextBlock Text="PLAYER INITIALS" Style="{ThemeResource LargeHeaderStyle}" />
                     <Grid>
                         <Line Style="{ThemeResource HeaderLineStyle}" Width="700" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />

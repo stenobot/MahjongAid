@@ -110,6 +110,12 @@
         <Setter Property="TextWrapping" Value="WrapWholeWords" />
     </Style>
 
+    <Style x:Key="SetCheckBoxTitleTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Margin" Value="12,5,7,0" />
+        <Setter Property="Foreground" Value="{ThemeResource MahjongGrayBrush}" />
+    </Style>
+
     <Style x:Key="PlayerNameTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="0,2,0,7" />
         <Setter Property="TextAlignment" Value="Center" />

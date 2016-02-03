@@ -20,17 +20,15 @@
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
         <Image Source="/Assets/mahjong-parchment.jpg" 
                Stretch="UniformToFill" />
-        
+
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
             <Grid x:Name="roundSummariesGrid" 
                   HorizontalAlignment="Center" 
-                  Margin="0,25" 
-                  Width="470" />
+                  Margin="{ThemeResource ContentMargin}" 
+                  MaxWidth="{ThemeResource ContentMaxWidth}" />
 
         </ScrollViewer>
 
     </Grid>
-
-   
 </Page>

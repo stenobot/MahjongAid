@@ -81,7 +81,7 @@
                                Foreground="{ThemeResource MahjongAccentColorBrush}" />
 
                     <Grid x:Name="nextDealerWindGrid" 
-                          Margin="0,15,0,0" 
+                          Margin="8,15,0,0" 
                           HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -160,6 +160,7 @@
 
                 <Grid x:Name="roundSummaryGrid" 
                       Width="330"
+                      Margin="0,0,0,20"
                       HorizontalAlignment="Center" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
