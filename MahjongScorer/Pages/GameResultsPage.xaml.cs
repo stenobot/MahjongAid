@@ -278,14 +278,8 @@ namespace MahjongScorer.Pages
                     // the game is over
                     game.InProgress = false;
 
-                    // don't show the score next round button
-                    scoreRoundButton.Visibility = Visibility.Collapsed;
-
-                    // don't show next round info
-                    nextDealerWindGrid.Visibility = Visibility.Collapsed;
-
                     // show game over UI
-                    gameOverStackPanel.Visibility = Visibility.Visible;
+                    VisualStateManager.GoToState(this, "GameOver", true);
 
                     // calculate the winner
                     foreach (Player player in game.Players)
@@ -306,6 +300,8 @@ namespace MahjongScorer.Pages
                 }
                 else // the game is in progress
                 {
+                    VisualStateManager.GoToState(this, "GameInProgress", true);
+
                     //set the "Score next round" button text
                     scoreRoundButton.Content = "Score Round " + (game.CurrentRound + 1);
                 }

@@ -68,12 +68,13 @@
 
                     <ListView x:Name="gamesInProgressListView" 
                               Margin="20,15" 
-                              MaxWidth="430"
+                              MaxWidth="400"
                               SelectionChanged="GamesInProgressListView_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="0,5">
                                     <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Players:" Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
@@ -81,8 +82,10 @@
                                         <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
-                                        <TextBlock Text=" - started on" Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding DateCreated}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Started on:" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding DateCreated}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Round:" Margin="0,0,5,0" />
@@ -90,6 +93,9 @@
                                         <TextBlock Text="," Margin="0,0,5,0" />
                                         <TextBlock Text="Dealer:" Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding CurrentDealerName}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
+                                        <TextBlock Text="," Margin="0,0,5,0" />
+                                        <TextBlock Text="Prevailing Wind:" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding PrevailingWind}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -131,7 +137,7 @@
 
                     <ListView x:Name="gamesCompletedListView" 
                               Margin="20,15" 
-                              MaxWidth="430"
+                              MaxWidth="400"
                               SelectionChanged="GamesCompletedListView_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -144,6 +150,7 @@
                                         <TextBlock Text="{Binding CurrentRound}" Foreground="{ThemeResource MahjongAccentColorBrush}" />                                      
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Players:" Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding Players[0].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding Players[1].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
@@ -151,8 +158,10 @@
                                         <TextBlock Text="{Binding Players[2].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                         <TextBlock Text="," Margin="0,0,5,0" />
                                         <TextBlock Text="{Binding Players[3].Name}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
-                                        <TextBlock Text=" - started on" Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding DateCreated}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Started on:" Margin="0,0,5,0" />
+                                        <TextBlock Text="{Binding DateCreated}" Foreground="{ThemeResource MahjongAccentColorBrush}" />
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
