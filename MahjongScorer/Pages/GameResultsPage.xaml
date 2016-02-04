@@ -36,8 +36,8 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="roundSummaryGrid.(RelativePanel.Below)" Value="scoresStackPanel" />
-                        <Setter Target="roundSummaryGrid.(RelativePanel.AlignHorizontalCenterWith)" Value="scoresStackPanel" />
+                        <Setter Target="roundSummaryGrid.(RelativePanel.Below)" Value="scoresContainerGrid" />
+                        <Setter Target="roundSummaryGrid.(RelativePanel.AlignHorizontalCenterWith)" Value="scoresContainerGrid" />
                         <Setter Target="windColumnDefScoresGrid.Width" Value="0" />
                         <Setter Target="windColumnDefNamesRow.Width" Value="0" />
                     </VisualState.Setters>
@@ -48,8 +48,8 @@
                         <AdaptiveTrigger MinWindowWidth="560" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="roundSummaryGrid.(RelativePanel.Below)" Value="scoresStackPanel" />
-                        <Setter Target="roundSummaryGrid.(RelativePanel.AlignHorizontalCenterWith)" Value="scoresStackPanel" />
+                        <Setter Target="roundSummaryGrid.(RelativePanel.Below)" Value="scoresContainerGrid" />
+                        <Setter Target="roundSummaryGrid.(RelativePanel.AlignHorizontalCenterWith)" Value="scoresContainerGrid" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -58,7 +58,7 @@
                         <AdaptiveTrigger MinWindowWidth="{ThemeResource MobileBreakpoint}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="roundSummaryGrid.(RelativePanel.RightOf)" Value="scoresStackPanel" />
+                        <Setter Target="roundSummaryGrid.(RelativePanel.RightOf)" Value="scoresContainerGrid" />
                         <Setter Target="roundSummaryGrid.Margin" Value="65,0,0,0" />
                     </VisualState.Setters>
                 </VisualState>
@@ -77,6 +77,27 @@
                 
             </VisualStateGroup>
 
+            <VisualStateGroup>
+                <VisualState x:Name="ScoresLoading">
+                    <VisualState.Setters>
+                        <Setter Target="scoresLoadingProgress.Visibility" Value="Visible" />
+                        <Setter Target="scoresStackPanel.Opacity" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="ScoresLoaded">
+                    <VisualState.Setters>
+                        <Setter Target="scoresLoadingProgress.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                    <Storyboard>
+                        <DoubleAnimation From="0" To="1" 
+                             Duration="0:0:.5" 
+                             Storyboard.TargetName="scoresStackPanel" 
+                             Storyboard.TargetProperty="Opacity" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+
         </VisualStateManager.VisualStateGroups>
 
         <Image Source="/Assets/mahjong-parchment.jpg" 
@@ -86,90 +107,104 @@
 
             <RelativePanel HorizontalAlignment="Center">
 
-                <StackPanel x:Name="scoresStackPanel"
+                <Grid x:Name="scoresContainerGrid">
+                    
+                    <ProgressRing x:Name="scoresLoadingProgress" 
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Width="60"
+                              Height="60"
+                              IsActive="True"/>
+
+                    <StackPanel x:Name="scoresStackPanel" Opacity="0"
                             HorizontalAlignment="Center" >
-                    <TextBlock x:Name="savedMessageTextBlock" 
+
+                        <TextBlock x:Name="savedMessageTextBlock" 
                                FontSize="15" 
                                HorizontalAlignment="Left" 
                                Foreground="{ThemeResource MahjongAccentColorBrush}" />
 
-                    <Grid x:Name="nextDealerWindGrid" 
+                        <Grid x:Name="nextDealerWindGrid" 
                           Margin="8,15,0,0" 
                           HorizontalAlignment="Left">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Dealer:" 
-                                       Margin="0,0,5,0"/>
-                            <TextBlock x:Name="nextDealerTextBlock" 
-                                       Foreground="{ThemeResource MahjongAccentColorBrush}" />
-                        </StackPanel>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Horizontal" 
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Dealer:" 
+                                       Margin="0,0,5,0"/>
+                                <TextBlock x:Name="nextDealerTextBlock" 
+                                       Foreground="{ThemeResource MahjongAccentColorBrush}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" 
                                     Margin="0,5,0,0" 
                                     Grid.Row="1">
-                            <TextBlock Text="Prevailing Wind:" 
+                                <TextBlock Text="Prevailing Wind:" 
                                        Margin="0,0,5,0"/>
-                            <TextBlock x:Name="nextPrevailingWindTextBlock" 
+                                <TextBlock x:Name="nextPrevailingWindTextBlock" 
                                        Foreground="{ThemeResource MahjongAccentColorBrush}" />
-                        </StackPanel>
-                    </Grid>
+                            </StackPanel>
+                        </Grid>
 
 
-                    <Grid Margin="0,20,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="windColumnDefNamesRow" Width="45" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                        </Grid.ColumnDefinitions>
+                        <Grid Margin="0,20,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="windColumnDefNamesRow" Width="45" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                            </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="1">
-                            <TextBlock x:Name="playerOneNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerOneWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
-                        </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock x:Name="playerOneNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
+                                <TextBlock x:Name="playerOneWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                            </StackPanel>
 
-                        <StackPanel Grid.Column="2">
-                            <TextBlock x:Name="playerTwoNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerTwoWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
-                        </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock x:Name="playerTwoNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
+                                <TextBlock x:Name="playerTwoWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                            </StackPanel>
 
-                        <StackPanel Grid.Column="3">
-                            <TextBlock x:Name="playerThreeNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerThreeWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
-                        </StackPanel>
+                            <StackPanel Grid.Column="3">
+                                <TextBlock x:Name="playerThreeNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
+                                <TextBlock x:Name="playerThreeWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                            </StackPanel>
 
-                        <StackPanel Grid.Column="4">
-                            <TextBlock x:Name="playerFourNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
-                            <TextBlock x:Name="playerFourWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
-                        </StackPanel>
+                            <StackPanel Grid.Column="4">
+                                <TextBlock x:Name="playerFourNameTextBlock" FontFamily="{StaticResource ShuiFont}" TextAlignment="Center" />
+                                <TextBlock x:Name="playerFourWindTextBlock" TextAlignment="Center" FontWeight="Normal" FontSize="12" Foreground="{ThemeResource MahjongGrayBrush}"/>
+                            </StackPanel>
 
-                    </Grid>
+                        </Grid>
 
-                    <Grid x:Name="scoresGrid" Margin="0,5,0,0" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="windColumnDefScoresGrid" Width="45" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                            <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
-                        </Grid.ColumnDefinitions>
+                        <Grid x:Name="scoresGrid" Margin="0,5,0,0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="windColumnDefScoresGrid" Width="45" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                                <ColumnDefinition Width="{StaticResource ScoresColumnWidth}" />
+                            </Grid.ColumnDefinitions>
 
-                    </Grid>
+                        </Grid>
 
-                    <Button x:Name="scoreRoundButton"
+                        <Button x:Name="scoreRoundButton"
                             Style="{ThemeResource AccentColorButtonStyle}"
                             Width="320"
                             Content="Score first round"
                             HorizontalAlignment="Center"
                             Click="ScoreButton_Click"
                             Margin="0,25" />
-                   
-                </StackPanel>
+
+                    </StackPanel>
+
+                </Grid>
+       
+                
 
                 <Grid x:Name="roundSummaryGrid" 
                       Width="330"

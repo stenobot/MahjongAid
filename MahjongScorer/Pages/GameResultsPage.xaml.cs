@@ -41,7 +41,7 @@ namespace MahjongScorer.Pages
         /// <summary>
         /// Create a new row in the Grid and show the new score values
         /// </summary>
-        private void RenderRoundScores()
+        private async Task RenderRoundScores()
         {
             // always clear grid first to avoid conflicts when loading a different game
             scoresGrid.Children.Clear();
@@ -236,6 +236,9 @@ namespace MahjongScorer.Pages
             {
                 game = e.Parameter as Game;
 
+                // hide main scores UI, show loading progress ring
+                VisualStateManager.GoToState(this, "ScoresLoading", true);
+
                 // check whether game is in progress, or over, and change UI based on that
                 DetermineInProgressStatus();
             }   
@@ -248,11 +251,20 @@ namespace MahjongScorer.Pages
                 // save the game so it's state is set if the user leaves and reloads the save data later
                 await SaveGameAsync();
 
-                // show the scores
-                RenderRoundScores();
+                // render the scores Grid
+                await RenderRoundScores();
+
+                // wait half a second, so this doesn't happen too quickly
+                await Task.Delay(500);
+
+                // show the saved game message
+                savedMessageTextBlock.Opacity = 1;
+                FadeOutMessage.Begin();
+
+                // fade in the scores Grid
+                VisualStateManager.GoToState(this, "ScoresLoaded", true);
             }
           
-
             base.OnNavigatedTo(e);
         }
 
@@ -370,8 +382,7 @@ namespace MahjongScorer.Pages
                     savedMessageTextBlock.Text = "Saved game loaded";
                 }
 
-                savedMessageTextBlock.Opacity = 1;
-                FadeOutMessage.Begin();
+                
             }
         }
 

@@ -677,7 +677,7 @@
                     <Button x:Name="doneScoringButton" 
                             Style="{ThemeResource AccentColorButtonStyle}"
                             Visibility="Collapsed"
-                            Width="360"
+                            Width="320"
                             Margin="0,30,0,10"
                             Click="DoneScoringButton_Click" 
                             Content="Done!" />
@@ -689,7 +689,6 @@
                 </StackPanel>
 
                 <Grid x:Name="inProgressTipsGrid"
-                      Width="360"
                       Visibility="Collapsed"
                       HorizontalAlignment="Center"  >
                     <Grid.RowDefinitions>
