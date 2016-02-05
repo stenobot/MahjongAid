@@ -41,7 +41,7 @@ namespace MahjongScorer.Pages
         /// <summary>
         /// Create a new row in the Grid and show the new score values
         /// </summary>
-        private async Task RenderRoundScores()
+        private void RenderRoundScores()
         {
             // always clear grid first to avoid conflicts when loading a different game
             scoresGrid.Children.Clear();
@@ -165,21 +165,6 @@ namespace MahjongScorer.Pages
                         roundAdjustmentTextBlock.Text = "+" + roundAdjustmentTextBlock.Text;
                     }                                       
                 }
-
-                //// create line separator when prevailing wind changes
-                //if (game.PrevailingWind == Wind.East)
-                //{
-                //    // create a grid row for line
-                //    scoresGrid.RowDefinitions.Insert(roundRow + 1, rd);
-
-                //    // create line
-                //    Line line = new Line();
-                //    line.Stroke = roundWinnerTextBrush;
-                //    line.X2 = 320;
-                //    line.HorizontalAlignment = HorizontalAlignment.Center;
-                //    line.StrokeThickness = 1;
-                //}
-
             }
         }
 
@@ -252,19 +237,19 @@ namespace MahjongScorer.Pages
                 await SaveGameAsync();
 
                 // render the scores Grid
-                await RenderRoundScores();
+                RenderRoundScores();
 
                 // wait half a second, so this doesn't happen too quickly
                 await Task.Delay(500);
 
                 // show the saved game message
                 savedMessageTextBlock.Opacity = 1;
-                FadeOutMessage.Begin();
-
-                // fade in the scores Grid
-                VisualStateManager.GoToState(this, "ScoresLoaded", true);
+                FadeOutMessage.Begin();              
             }
-          
+
+            // fade in the scores Grid
+            VisualStateManager.GoToState(this, "ScoresLoaded", true);
+
             base.OnNavigatedTo(e);
         }
 
