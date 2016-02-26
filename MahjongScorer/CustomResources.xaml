@@ -26,6 +26,9 @@
                              Color="DarkSalmon" />
             <SolidColorBrush x:Key="MahjongBackgroundBrush"
                              Color="#FF161616" />
+            <SolidColorBrush x:Key="MahjongHelpOverlayBackgroundBrush"
+                             Color="Black"
+                             Opacity=".9"/>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="HighContrast">
@@ -43,6 +46,8 @@
                              Color="DarkSalmon" />
             <SolidColorBrush x:Key="MahjongBackgroundBrush"
                              Color="#FF161616" />
+            <SolidColorBrush x:Key="MahjongHelpOverlayBackgroundBrush"
+                             Color="Black"/>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Light">
@@ -60,6 +65,9 @@
                              Color="DarkSalmon" />
             <SolidColorBrush x:Key="MahjongBackgroundBrush"
                              Color="#FF161616" />
+            <SolidColorBrush x:Key="MahjongHelpOverlayBackgroundBrush"
+                             Color="Black"
+                             Opacity=".9"/>
         </ResourceDictionary>
         
     </ResourceDictionary.ThemeDictionaries>

@@ -6,213 +6,40 @@ namespace MahjongScorer
 {
     public class Game
     {
-        private DateTime _dateCreated;
-        private Guid _guid;
+        public DateTime DateCreated { get; set; }
 
-        private int _currentRound;
-        private int _currentRoundScore;
-        private int _timesDealerWon;
-        private bool _inProgress;
+        public Guid Guid { get; set; }
 
-        private int _baseValue;
-        private int _limitValue;
-        private int _startingScore;
+        public int CurrentRound { get; set; }
 
-        private Wind _prevailingWind;
-        private List<Wind> _prevailingWinds;
+        public int TimesDealerWon { get; set; }
 
-        private StringBuilder _currentRoundSummary;
-        private List<string> _roundSummaries;
-        
-        private List<Player> _players;
+        public bool InProgress { get; set; }
 
-        private List<Rule> _rules;
+        public int BaseValue { get; set; }
 
-        // using these only for save data lists
-        private string _currentDealerName;
-        private string _winnerName;
+        public int LimitValue { get; set; }
 
-        private bool _loadedFromSave;
+        public int StartingScore { get; set; }
 
+        public int ReignOfTerrorLimit { get; set; }
 
-        public DateTime DateCreated
-        {
-            get { return _dateCreated; }
-            set
-            {
-                if (_dateCreated != value)
-                    _dateCreated = value;
-            }
-        }
+        public Wind PrevailingWind { get; set; }
 
-        public Guid Guid
-        {
-            get { return _guid; }
-            set
-            {
-                if (_guid != value)
-                    _guid = value;
-            }
-        }
+        public List<Wind> PrevailingWinds { get; set; }
 
-        public int CurrentRound
-        {
-            get { return _currentRound; }
-            set
-            {
-                if (_currentRound != value)
-                    _currentRound = value;
-            }
-        }
+        public StringBuilder CurrentRoundSummary { get; set; }
 
-        public int CurrentRoundScore
-        {
-            get { return _currentRoundScore; }
-            set
-            {
-                if (_currentRoundScore != value)
-                    _currentRoundScore = value;
-            }
-        }
+        public List<string> RoundSummaries { get; set; }
 
-        public int TimesDealerWon
-        {
-            get { return _timesDealerWon; }
-            set
-            {
-                if (_timesDealerWon != value)
-                    _timesDealerWon = value;
-            }
-        }
+        public List<Player> Players { get; set; }
 
-        public bool InProgress
-        {
-            get { return _inProgress; }
-            set
-            {
-                if (_inProgress != value)
-                    _inProgress = value;
-            }
-        }
+        public List<Rule> Rules { get; set; }
 
-        public int BaseValue
-        {
-            get { return _baseValue; }
-            set
-            {
-                if (_baseValue != value)
-                    _baseValue = value;
-            }
-        }
+        public string CurrentDealerName { get; set; }
 
-        public int LimitValue
-        {
-            get { return _limitValue; }
-            set
-            {
-                if (_limitValue != value)
-                    _limitValue = value;
-            }
-        }
+        public string WinnerName { get; set; }
 
-        public int StartingScore
-        {
-            get { return _startingScore; }
-            set
-            {
-                if (_startingScore != value)
-                    _startingScore = value;
-            }
-        }
-
-        public Wind PrevailingWind
-        {
-            get { return _prevailingWind; }
-            set
-            {
-                if (_prevailingWind != value)
-                    _prevailingWind = value;
-            }
-        }
-
-        public List<Wind> PrevailingWinds
-        {
-            get { return _prevailingWinds; }
-            set
-            {
-                if (_prevailingWinds != value)
-                    _prevailingWinds = value;
-            }
-        }
-
-        public StringBuilder CurrentRoundSummary
-        {
-            get { return _currentRoundSummary; }
-            set
-            {
-                if (_currentRoundSummary != value)
-                    _currentRoundSummary = value;
-            }
-        }
-
-        public List<string> RoundSummaries
-        {
-            get { return _roundSummaries; }
-            set
-            {
-                if (_roundSummaries != value)
-                    _roundSummaries = value;
-            }
-        }
-
-        public List<Player> Players
-        {
-            get { return _players; }
-            set
-            {
-                if (_players != value)
-                    _players = value;
-            }
-        }
-
-        public List<Rule> Rules
-        {
-            get { return _rules; }
-            set
-            {
-                if (_rules != value)
-                    _rules = value;
-            }
-        }
-
-        public string CurrentDealerName
-        {
-            get { return _currentDealerName; }
-            set
-            {
-                if (_currentDealerName != value)
-                    _currentDealerName = value;
-            }
-        }
-
-        public string WinnerName
-        {
-            get { return _winnerName; }
-            set
-            {
-                if (_winnerName != value)
-                    _winnerName = value;
-            }
-        }
-
-        public bool LoadedFromSave
-        {
-            get { return _loadedFromSave; }
-            set
-            {
-                if (_loadedFromSave != value)
-                    _loadedFromSave = value;
-            }
-        }
+        public bool LoadedFromSave { get; set; }
     }
 }

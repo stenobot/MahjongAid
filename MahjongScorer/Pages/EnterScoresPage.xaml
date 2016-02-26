@@ -11,6 +11,18 @@
 
     <Page.Resources>
         <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+
+        <Storyboard x:Name="FadeInHelpOverlay" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="helpOverlayControl"
+                                           Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation From="0" To="1" 
+                             Duration="0:0:.2" 
+                             Storyboard.TargetName="helpOverlayControl" 
+                             Storyboard.TargetProperty="Opacity" />
+        </Storyboard>
     </Page.Resources>
 
     <Page.Transitions>
@@ -193,14 +205,46 @@
                         <ComboBox x:Name="winnerComboBox" 
                                   Visibility="Collapsed"
                                   SelectionChanged="WinnerComboBox_SelectionChanged"
-                                  Style="{ThemeResource MahjongComboBoxStyle}"
-                                  Header="Who won this round?" />
+                                  Style="{ThemeResource MahjongComboBoxStyle}">
+                            <ComboBox.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Who won this round?" 
+                                           Margin="0,0,10,0" />
+                                    <Button x:Name="winnerHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"  
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                        <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                            <SymbolIcon.RenderTransform>
+                                                <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                            </SymbolIcon.RenderTransform>
+                                        </SymbolIcon>
+                                    </Button>
+                                </StackPanel>
+                            </ComboBox.Header>
+                        </ComboBox>
 
                         <ComboBox x:Name="drawnFromComboBox"
                                   Visibility="Collapsed"
                                   SelectionChanged="DrawnFromComboBox_SelectionChanged"
-                                  Style="{ThemeResource MahjongComboBoxStyle}"
-                                  Header="Who was the winning tile drawn from?" />
+                                  Style="{ThemeResource MahjongComboBoxStyle}">
+                            <ComboBox.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Who was the winning tile drawn from?" 
+                                           Margin="0,0,10,0" />
+                                    <Button x:Name="drawnFromHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"  
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                        <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                            <SymbolIcon.RenderTransform>
+                                                <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                            </SymbolIcon.RenderTransform>
+                                        </SymbolIcon>
+                                    </Button>
+                                </StackPanel>
+                            </ComboBox.Header>
+                        </ComboBox>
 
                    
                     </StackPanel>
@@ -232,8 +276,23 @@
 
                         <ComboBox x:Name="pungCountComboBox"
                                   SelectionChanged="pungCountComboBox_SelectionChanged"
-                                  Style="{ThemeResource MahjongComboBoxStyle}"
-                                  Header="How many pungs (sets of three)?">
+                                  Style="{ThemeResource MahjongComboBoxStyle}">
+                            <ComboBox.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="How many pungs (sets of three)?" 
+                                           Margin="0,0,10,0" />
+                                    <Button x:Name="pungCountHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"  
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                        <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                            <SymbolIcon.RenderTransform>
+                                                <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                            </SymbolIcon.RenderTransform>
+                                        </SymbolIcon>
+                                    </Button>
+                                </StackPanel>
+                            </ComboBox.Header>
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Index}" />
@@ -406,8 +465,23 @@
                         <ComboBox x:Name="kongCountComboBox"
                                   SelectionChanged="kongCountComboBox_SelectionChanged"
                                   Visibility="Collapsed"
-                                  Style="{ThemeResource MahjongComboBoxStyle}"
-                                  Header=" How many kongs (sets of four)?">
+                                  Style="{ThemeResource MahjongComboBoxStyle}">
+                            <ComboBox.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="How many kongs (sets of four)?" 
+                                           Margin="0,0,10,0" />
+                                    <Button x:Name="kongCountHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"  
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                        <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                            <SymbolIcon.RenderTransform>
+                                                <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                            </SymbolIcon.RenderTransform>
+                                        </SymbolIcon>
+                                    </Button>
+                                </StackPanel>
+                            </ComboBox.Header>
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Index}" />
@@ -707,6 +781,9 @@
 
             </RelativePanel>
         </ScrollViewer>
+
+        <controls:HelpOverlay x:Name="helpOverlayControl" 
+                              Visibility="Collapsed" />
 
         <CommandBar VerticalAlignment="Bottom" Background="{ThemeResource MahjongAccentColorBrush}">
             <AppBarButton Label="Home"

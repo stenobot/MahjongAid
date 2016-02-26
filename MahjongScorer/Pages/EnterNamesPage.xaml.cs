@@ -98,7 +98,7 @@ namespace MahjongScorer.Pages
 
 
         /// <summary>
-        /// Add Player objects for teh four players to the game.Players list
+        /// Add Player objects for the four players to the game.Players list
         /// </summary>
         private void InitializePlayers()
         {
@@ -109,16 +109,21 @@ namespace MahjongScorer.Pages
             game.Players.Add(_playerThree = new Player());
             game.Players.Add(_playerFour = new Player());
 
-            // set starting winds and dealer
-            _playerOne.CurrentWind = Wind.East;
-            _playerOne.IsDealer = true;
-            _playerTwo.CurrentWind = Wind.South;
-            _playerTwo.IsDealer = false;
-            _playerThree.CurrentWind = Wind.West;
-            _playerThree.IsDealer = false;
-            _playerFour.CurrentWind = Wind.North;
-            _playerFour.IsDealer = false;
+            // initialize dealer status for each player
+            foreach (Player player in game.Players)
+            {
+                player.IsDealer = false;
+                player.ConsecutiveWinsAsDealer = 0;
+            }
 
+            // player one always starts as dealer
+            _playerOne.IsDealer = true;
+
+            // set starting winds
+            _playerOne.CurrentWind = Wind.East;
+            _playerTwo.CurrentWind = Wind.South;
+            _playerThree.CurrentWind = Wind.West;
+            _playerFour.CurrentWind = Wind.North;
         }
 
         private void SetStartingValues()
@@ -136,7 +141,8 @@ namespace MahjongScorer.Pages
 
             switch (limitHandComboBox.SelectedIndex)
             {
-                case 1: game.LimitValue = 1000;
+                case 1:
+                    game.LimitValue = 1000;
                     break;
                 case 2: game.LimitValue = 2000;
                     break;
@@ -159,7 +165,24 @@ namespace MahjongScorer.Pages
                     break;
             }
 
-            // need to set the "Limit Hand" rule values here, as a special case
+            switch (reignOfTerrorComboBox.SelectedIndex)
+            {
+                case 0:
+                    game.ReignOfTerrorLimit = 0;
+                    break;
+                case 1:
+                    game.ReignOfTerrorLimit = 6;
+                    break;
+                case 2:
+                    game.ReignOfTerrorLimit = 8;
+                    break;
+                default:
+                    game.ReignOfTerrorLimit = 0;
+                    break;
+            }
+
+
+            // need to set the "Limit Hand" rule values here
             if (game.LimitValue != int.MaxValue)
             {
                 game.Rules[game.Rules.Count - 1].Score = game.LimitValue;
@@ -187,6 +210,36 @@ namespace MahjongScorer.Pages
                 startGameStackPanel.Visibility = Visibility.Visible;
             else
                 startGameStackPanel.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            switch (btn.Name)
+            {
+                case "startingScoreHelpButton":
+                    helpOverlayControl.Title = "Starting Score";
+                    helpOverlayControl.Body = "Each player starts the game with a certain amount of points. As the game progresses, they'll earn points from other players when they win a round. When they lose a round, they'll have to pay the winner in some circumstances (such as if they discarded the winning tile).";
+                    break;
+                case "limitValueHelpButton":
+                    helpOverlayControl.Title = "Limit Value";
+                    helpOverlayControl.Body = "If a player wins a round with a normal hand that has a huge amount of points, it will max out at the limit value chosen here. Or, if a player goes out with a special Limit Hand (such as Thirteen Orphans), they'll earn the limit value. If No Limit is selected here, a normal hand will have no limit and a special Limit Hand will be worth 500.";
+                    break;
+                case "baseScoreHelpButton":
+                    helpOverlayControl.Title = "Base Score";
+                    helpOverlayControl.Body = "The base score is the minimum amount of points a player earns when they win a round. for example: If the base score is 20, the winner's base score will be 20 points plus any additional points or doubles for sets and special conditions. The final score gets rounded to the nearest 10, then other players must pay that score depending on who dealt and who discarded the winning tile.";
+                    break;
+                case "reignOfTerrorHelpButton":
+                    helpOverlayControl.Title = "Reign of Terror";
+                    helpOverlayControl.Body = "Reign of terror is a special rule that limits the number of rounds a dealer can win in a row. If a player reaches this limit, they'll earn a Limit Hand, and dealer duty will automatically advance to the next player in line.";
+                    break;
+                default:
+                    break;
+            }
+
+            if (helpOverlayControl.Visibility != Visibility.Visible)
+                FadeInHelpOverlay.Begin();
         }
 
 

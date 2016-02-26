@@ -1,0 +1,49 @@
+﻿<UserControl
+    x:Class="MahjongScorer.Controls.HelpOverlay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MahjongScorer.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Width="320" 
+          Height="320"
+          Background="{ThemeResource MahjongHelpOverlayBackgroundBrush}" >
+        
+        <!-- Stroke around the box; Top and Left line set to 3 b/c of weird rendering bug -->
+        <Line VerticalAlignment="Top" 
+                  Stroke="{ThemeResource MahjongAccentColorBrush}" 
+                  StrokeThickness="3"
+                  X2="320" />
+        <Line VerticalAlignment="Bottom" 
+                  Stroke="{ThemeResource MahjongAccentColorBrush}" 
+                  StrokeThickness="2"
+                  X2="320" />
+        <Line HorizontalAlignment="Left"
+                  Stroke="{ThemeResource MahjongAccentColorBrush}" 
+                  StrokeThickness="3"
+                  Y2="320" />
+        <Line HorizontalAlignment="Right"
+                  Stroke="{ThemeResource MahjongAccentColorBrush}" 
+                  StrokeThickness="2"
+                  Y2="320" />
+
+        <StackPanel Margin="25, 25">
+            <TextBlock Foreground="{ThemeResource MahjongAccentColorBrush}" 
+                       Text="{Binding Title, Mode=TwoWay}"
+                       Margin="0,0,0,10" />
+            <TextBlock Text="{Binding Body, Mode=TwoWay}"
+                       TextWrapping="WrapWholeWords" />
+        </StackPanel>
+
+        <Button Style="{ThemeResource AccentColorButtonStyle}" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    Margin="15" 
+                    Content="Close" 
+                    Click="CloseButton_Click" />
+    </Grid>
+</UserControl>

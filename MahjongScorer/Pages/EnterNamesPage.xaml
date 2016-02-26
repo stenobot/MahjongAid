@@ -5,6 +5,7 @@
     xmlns:local="using:MahjongScorer.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:MahjongScorer.Controls"
     mc:Ignorable="d">
 
     <Page.Transitions>
@@ -17,10 +18,25 @@
         </TransitionCollection>
     </Page.Transitions>
 
+    <Page.Resources>
+      
+        <Storyboard x:Name="FadeInHelpOverlay" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="helpOverlayControl"
+                                           Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation From="0" To="1" 
+                             Duration="0:0:.2" 
+                             Storyboard.TargetName="helpOverlayControl" 
+                             Storyboard.TargetProperty="Opacity" />
+        </Storyboard>
+    </Page.Resources>
+
     <Grid Background="{ThemeResource MahjongBackgroundBrush}">
         <Image Source="/Assets/mahjong-parchment.jpg" 
                Stretch="UniformToFill" />
-        
+
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
             <Grid x:Name="enterNamesGrid" MaxWidth="{ThemeResource ContentMaxWidth}" Margin="0,15">
@@ -124,8 +140,24 @@
                             Visibility="Collapsed">
 
                     <ComboBox x:Name="startingScoreComboBox"
-                              Style="{ThemeResource MahjongComboBoxStyle}"
-                              Header="Starting score for each player">
+                              Style="{ThemeResource MahjongComboBoxStyle}">
+
+                        <ComboBox.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Starting score for each player" 
+                                           Margin="0,0,10,0" />
+                                <Button x:Name="startingScoreHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                    <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                        <SymbolIcon.RenderTransform>
+                                            <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                        </SymbolIcon.RenderTransform>
+                                    </SymbolIcon>
+                                </Button>
+                            </StackPanel>
+                        </ComboBox.Header>
 
                         <ComboBoxItem>
                             <StackPanel Orientation="Horizontal">
@@ -144,8 +176,24 @@
                     </ComboBox>
 
                     <ComboBox x:Name="limitHandComboBox" 
-                              Style="{ThemeResource MahjongComboBoxStyle}"                                 
-                              Header="Limit value for a winning hand">
+                              Style="{ThemeResource MahjongComboBoxStyle}">
+
+                        <ComboBox.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Limit value for a winning hand" 
+                                           Margin="0,0,10,0" />
+                                <Button x:Name="limitValueHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"  
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                    <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                        <SymbolIcon.RenderTransform>
+                                            <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                        </SymbolIcon.RenderTransform>
+                                    </SymbolIcon>
+                                </Button>
+                            </StackPanel>
+                        </ComboBox.Header>
 
                         <ComboBoxItem>
                             <StackPanel Orientation="Horizontal">
@@ -153,7 +201,7 @@
                                 <TextBlock Text="(Normal rules)" Foreground="Gray" Margin="5,0,0,0" />
                             </StackPanel>
                         </ComboBoxItem>
-                        
+
                         <ComboBoxItem>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="1000" />
@@ -177,9 +225,25 @@
                     </ComboBox>
 
                     <ComboBox x:Name="baseScoreComboBox" 
-                              Style="{ThemeResource MahjongComboBoxStyle}"
-                                  
-                              Header="Base score for a winning hand">
+                              Style="{ThemeResource MahjongComboBoxStyle}">
+
+                        <ComboBox.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Base score for a winning hand" 
+                                           Margin="0,0,10,0" />
+                                <Button x:Name="baseScoreHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"  
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                    <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                        <SymbolIcon.RenderTransform>
+                                            <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                        </SymbolIcon.RenderTransform>
+                                    </SymbolIcon>
+                                </Button>
+                            </StackPanel>
+                        </ComboBox.Header>
+
                         <ComboBoxItem>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="10" />
@@ -195,12 +259,47 @@
                         </ComboBoxItem>
                     </ComboBox>
 
+                    <ComboBox x:Name="reignOfTerrorComboBox" 
+                              Style="{ThemeResource MahjongComboBoxStyle}">
+
+                        <ComboBox.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Reign of terror (limit hand)" 
+                                           Margin="0,0,10,0" />
+                                <Button x:Name="reignOfTerrorHelpButton" 
+                                        Style="{ThemeResource AccentColorButtonStyle}"  
+                                        Width="23" Height="23" Padding="0"
+                                        Click="HelpButton_Click">
+                                    <SymbolIcon Symbol="Help" RenderTransformOrigin="0.5,0.5" >
+                                        <SymbolIcon.RenderTransform>
+                                            <CompositeTransform ScaleX="0.5" ScaleY="0.5"/>
+                                        </SymbolIcon.RenderTransform>
+                                    </SymbolIcon>
+                                </Button>
+                            </StackPanel>
+                        </ComboBox.Header>
+
+                        <ComboBoxItem>
+                            Off
+                        </ComboBoxItem>
+
+                        <ComboBoxItem>
+                            6 wins in a row
+                        </ComboBoxItem>
+
+                        <ComboBoxItem IsSelected="True">
+                            8 wins in a row
+                        </ComboBoxItem>
+                    </ComboBox>
+
                     <Button x:Name="startGameButton" 
+                            Style="{ThemeResource AccentColorButtonStyle}"
+                            Width="330"
+                            Margin="0,25"
                             Content="Start game" 
                             HorizontalAlignment="Center"
-                            Margin="15"
                             Click="StartGameButton_Click" />
-                    
+
                 </StackPanel>
 
                 <ProgressRing x:Name="startGameProgress" 
@@ -211,6 +310,10 @@
             </Grid>
 
         </ScrollViewer>
+
+        <controls:HelpOverlay x:Name="helpOverlayControl" 
+                              Visibility="Collapsed" />
+
     </Grid>
     
 </Page>

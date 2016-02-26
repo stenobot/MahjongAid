@@ -134,18 +134,24 @@
 
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Dealer:" 
-                                       Margin="0,0,5,0"/>
+                                           Margin="0,0,5,0"/>
                                 <TextBlock x:Name="nextDealerTextBlock" 
-                                       Foreground="{ThemeResource MahjongAccentColorBrush}" />
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" 
-                                    Margin="0,5,0,0" 
-                                    Grid.Row="1">
+                                        Margin="0,5,0,0" 
+                                        Grid.Row="1">
                                 <TextBlock Text="Prevailing Wind:" 
-                                       Margin="0,0,5,0"/>
+                                           Margin="0,0,5,0"/>
                                 <TextBlock x:Name="nextPrevailingWindTextBlock" 
-                                       Foreground="{ThemeResource MahjongAccentColorBrush}" />
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}"
+                                           Margin="0,0,15,0"/>
+
+                                <TextBlock Text="Limit value:" 
+                                           Margin="0,0,5,0"/>
+                                <TextBlock x:Name="limitValueTextBlock" 
+                                           Foreground="{ThemeResource MahjongAccentColorBrush}" />
                             </StackPanel>
                         </Grid>
 

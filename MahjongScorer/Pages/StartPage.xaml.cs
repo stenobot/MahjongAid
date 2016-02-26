@@ -42,8 +42,7 @@ namespace MahjongScorer.Pages
         private Rule allPungs; //20, never show, 2 doubles
         private Rule littleThreeDragons; //21, sometimes show, 2 doubles
         private Rule threeKongs; //22, never show, 2 doubles
-        private Rule limitHand; //23, always show, 500pts
-        
+        private Rule limitHand; //23, always show, 500pts        
 
         public StartPage()
         {
@@ -268,7 +267,8 @@ namespace MahjongScorer.Pages
             threeKongs.Name = "Three kongs (2 doubles)";
             threeKongs.Description = "there are three kongs";
 
-            // LIMIT HAND - We set the score and name here, but we'll reset them later for the case where the limit value is changed
+            // LIMIT HAND - We set the score and name here, but we'll reset them later for the case where the limit value is set
+            // NOTE: Limit hand MUST be the last item in the Rules list!!!
             game.Rules.Add(limitHand = new Rule());
             // always show in the list
             limitHand.ShowInList = true;

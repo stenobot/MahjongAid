@@ -206,6 +206,11 @@ namespace MahjongScorer.Pages
         {
             nextDealerTextBlock.Text = game.CurrentDealerName;
             nextPrevailingWindTextBlock.Text = game.PrevailingWind.ToString();
+
+            if (game.LimitValue == int.MaxValue)
+                limitValueTextBlock.Text = "No limit";
+            else
+                limitValueTextBlock.Text = game.LimitValue.ToString();
         }
 
         /// <summary>
@@ -289,7 +294,7 @@ namespace MahjongScorer.Pages
                             // set winner name (so we can show it in save data)
                             game.WinnerName = player.Name;
                             // set text in new UI declaring the winner
-                            gameOverTextBlock.Text = "The game is over. " + player.Name + " wins with a total score of " + player.TotalScore + "!";
+                            gameOverTextBlock.Text = "The game is over. " + player.Name + " wins!";
                         }
                         else
                             player.IsGameWinner = false;
