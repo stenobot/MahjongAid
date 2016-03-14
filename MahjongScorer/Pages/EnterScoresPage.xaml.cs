@@ -231,7 +231,7 @@ namespace MahjongScorer.Pages
         /// <param name="upToSetNum"></param>
         private void ResetSetCheckBoxes(string setType, int upToSetNum = 4)
         {
-            // first time fired, just check all normal radio butons 
+            // first time fired, just check all normal radio buttons 
             if (!setRadioButtonsShown)
             {
                 pungOneNormalRadioButton.IsChecked = true;
@@ -250,9 +250,7 @@ namespace MahjongScorer.Pages
             {
                 pungFourConcealedCheckBox.IsChecked = false;
                 pungFourTerminalsHonorsCheckBox.IsChecked = false;
-                pungFourNormalRadioButton.IsChecked = true;
-                pungFourLuckyRadioButton.IsChecked = false;
-                pungFourDoubleLuckyRadioButton.IsChecked = false;              
+                pungFourNormalRadioButton.IsChecked = true;             
 
                 if (upToSetNum < 4)
                 {
@@ -1101,76 +1099,55 @@ namespace MahjongScorer.Pages
         /// <summary>
         /// Calculates scores for the different sets. We'll run this method twice: Once for Pungs, once for Kongs
         /// </summary>
-        /// <param name="TerminalsHonorsSetCheckBoxes"></param>
-        /// <param name="ConcealedSetCheckBoxes"></param>
+        /// <param name="TerminalsHonorsCheckBoxes"></param>
+        /// <param name="ConcealedCheckBoxes"></param>
         /// <param name="baseValue"></param>
-        private int SetsScore(ComboBox setsComboBox, List<CheckBox> TerminalsHonorsSetCheckBoxes, List<CheckBox> ConcealedSetCheckBoxes, int baseValue)
+        private int SetsScore(ComboBox setsComboBox, List<CheckBox> TerminalsHonorsCheckBoxes, List<CheckBox> ConcealedCheckBoxes, int baseValue)
         {
             int setsNum = setsComboBox.SelectedIndex;
-
             int finalSetsValue = 0;
-            int checkedTerminalsHonors = 0;
-            int checkedConcealed = 0;
 
-            if (TerminalsHonorsSetCheckBoxes != null)
-            {
-                foreach (CheckBox terminalsHonorsCheckBox in TerminalsHonorsSetCheckBoxes)
-                {
-                    // if it's terminal or honors
-                    if (terminalsHonorsCheckBox.IsChecked == true)
-                        checkedTerminalsHonors++;
-
-                    // if it's concealed
-                    if (ConcealedSetCheckBoxes[TerminalsHonorsSetCheckBoxes.IndexOf(terminalsHonorsCheckBox)].IsChecked == true)
-                        checkedConcealed++;
-                }
-            }
-
-            // loop once for each set
             for (int i = 0; i < setsNum; i++)
             {
                 int thisSetValue = baseValue;
 
-                // apply terminals/honors check boxes if applicable
-                if (checkedTerminalsHonors > 0)
-                {
+                if (TerminalsHonorsCheckBoxes[i].IsChecked == true)
                     thisSetValue *= 2;
-                    checkedTerminalsHonors--;
-                }
 
-                //apply concealed check boxes if applicable
-                if (checkedConcealed > 0)
-                {
+                if (ConcealedCheckBoxes[i].IsChecked == true)
                     thisSetValue *= 2;
-                    checkedConcealed--;
-                }
 
                 finalSetsValue += thisSetValue;
             }
+
             return finalSetsValue;
         }
 
         /// <summary>
         /// Calculate the doubles for a group of sets (pungs or kongs) based on which radio buttons are selected, 
+        /// double checks that outer terminals/honors check box is also checked
         /// and applies doubles to the base score
         /// </summary>
         /// <param name="LuckyRadioButtons"></param>
         /// <param name="DoubleLuckyRadioButtons"></param>
+        /// /// <param name="TerminalsHonorsCheckBoxes"></param>
         /// <param name="baseScore"></param>
         /// <returns>base score doubled the calculated number of times</returns>
-        private int ApplySetDoubles(List<RadioButton> LuckyRadioButtons, List<RadioButton> DoubleLuckyRadioButtons, int baseScore)
+        private int ApplySetDoubles(List<RadioButton> LuckyRadioButtons, List<RadioButton> DoubleLuckyRadioButtons, List<CheckBox>TerminalsHonorsCheckBoxes, int baseScore)
         {
             int setDoubles = 0;
 
             foreach (RadioButton luckyRadioButton in LuckyRadioButtons)
             {
-                if (luckyRadioButton.IsChecked == true)
+                if ((luckyRadioButton.IsChecked == true) && 
+                    (TerminalsHonorsCheckBoxes[LuckyRadioButtons.IndexOf(luckyRadioButton)].IsChecked == true))
                     setDoubles++;
             }
 
             foreach (RadioButton doubleLuckyRadioButton in DoubleLuckyRadioButtons)
             {
-                if (doubleLuckyRadioButton.IsChecked == true)
+                if ((doubleLuckyRadioButton.IsChecked == true) &&
+                    (TerminalsHonorsCheckBoxes[DoubleLuckyRadioButtons.IndexOf(doubleLuckyRadioButton)].IsChecked == true))
                 {
                     // increment twice for double lucky set
                     setDoubles++;
@@ -1318,10 +1295,10 @@ namespace MahjongScorer.Pages
             baseScore += SetsScore(kongCountComboBox, KongTerminalsHonorsCheckBoxes, KongConcealedCheckBoxes, ScoreValues.BASE_KONG_VALUE);
 
             // APPLY SCORE VALUES AND DOUBLES
-            baseScore = ApplySetDoubles(PungLuckyRadioButtons, PungDoubleLuckyRadioButtons, baseScore);
-            baseScore = ApplySetDoubles(KongLuckyRadioButtons, KongDoubleLuckyRadioButtons, baseScore);
             baseScore = ApplySelectedRuleValues(baseScore);
             baseScore = ApplySelfDrawnPoints(baseScore);
+            baseScore = ApplySetDoubles(PungLuckyRadioButtons, PungDoubleLuckyRadioButtons, PungTerminalsHonorsCheckBoxes, baseScore);
+            baseScore = ApplySetDoubles(KongLuckyRadioButtons, KongDoubleLuckyRadioButtons, KongTerminalsHonorsCheckBoxes, baseScore);
             baseScore = ApplySelectedRuleDoubles(baseScore);
             baseScore = ApplyAutomaticRuleDoubles(baseScore);
 
