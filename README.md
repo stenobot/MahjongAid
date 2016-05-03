@@ -1,30 +1,23 @@
 # Mahjong Aid
-An app that tracks ongoing Mahjong games, calculates scores for each round, and teaches you how to play!
+Mahjong Aid is an app that tracks ongoing Mahjong games, calculates scores for each round, and teaches you how to play!
 
-This is a Windows 10 universal app, built in C# and XAML. You can read about how I built this app here:
+This is a Windows 10 universal app, built in C# and XAML. It works great across phone and desktop, and it's available today for free in the Windows Store. You can read about how I built this app here:
 
 http://stenobot.wordpress.com
 
-Start a new game...
-
-![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen1.png)
+![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen6.png)
  
 
-Enter player initials...
-
-![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen2.png)
- 
-Then enter scoring conditions for each round.
-
-![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen3.png)
+![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen7.png)
  
 
-The app will keep track of your game info.
-
-![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen4.png)
+![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen8.png)
  
 
-If you pick up the same game later, just load the save data!
+![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen9.png)
+ 
 
-![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen5.png)
+![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen10.png)
+
+![alt tag](https://raw.githubusercontent.com/stenobot/MahjongAid/master/screenshots/screen11.png)
  
